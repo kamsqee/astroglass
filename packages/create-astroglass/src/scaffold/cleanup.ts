@@ -42,16 +42,6 @@ export async function cleanup(
     }
   }
 
-  // 3. Remove themeRegistry.ts (CLI-only, not needed at runtime)
-  const registryFile = join(projectPath, 'src/config/themeRegistry.ts');
-  if (existsSync(registryFile)) {
-    if (dryRun) {
-      console.log(`  [dry-run] Would remove: src/config/themeRegistry.ts`);
-    } else {
-      await rm(registryFile, { force: true });
-    }
-  }
-
   // 4. Clean empty directories recursively
   await removeEmptyDirs(projectPath, dryRun);
 }
