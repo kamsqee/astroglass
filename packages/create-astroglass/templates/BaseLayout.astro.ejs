@@ -91,10 +91,13 @@ const activeTheme = <%= hasGlass ? "currentHeader === 2 ? 'nordic' : " : "" %>'<
   </head>
   <body class="bg-base-100 text-base-content min-h-screen">
     {showHeader && (
+<% if (themes.length === 1) { %>
+      <<%= themes[0].headerComponent %> />
+<% } else { %>
 <% themes.forEach((theme, i) => { %>
       <%= i === 0 ? '' : ':' %> currentHeader === <%= theme.version %> ? <<%= theme.headerComponent %> />
 <% }) %>
-<% if (themes.length > 1) { %>      : null
+      : null
 <% } %>
     )}
     
