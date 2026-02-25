@@ -1,5 +1,0 @@
-/* Callout.css */
-
-/* Ensure content inside callout respects formatting but overrides colors */
-.c-callout__content :global(p) { margin: 0; }
-.c-callout__content :global(a) { text-decoration: underline; font-weight: 600; }

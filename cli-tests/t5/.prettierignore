@@ -1,7 +1,0 @@
-dist
-.astro
-node_modules
-.wrangler
-.netlify
-pnpm-lock.yaml
-public/search
