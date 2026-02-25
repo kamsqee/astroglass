@@ -5,7 +5,9 @@
     "**/*"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "packages",
+    "cli-tests"
   ],
   "compilerOptions": {
     "jsx": "react-jsx",
