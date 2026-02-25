@@ -1,0 +1,31 @@
+{
+  "name": "react",
+  "description": "React UI primitives (button, avatar, tabs, cards, etc.)",
+  "files": [
+    "src/components/ui/button.tsx",
+    "src/components/ui/avatar.tsx",
+    "src/components/ui/tabs.tsx",
+    "src/components/ui/card.tsx",
+    "src/components/ui/badge.tsx",
+    "src/components/ui/label.tsx",
+    "src/components/ui/input.tsx",
+    "src/components/ui/textarea.tsx",
+    "src/components/ui/progress.tsx",
+    "src/components/ui/UserAvatar.tsx",
+    "src/components/ui/diagrams/",
+    "src/lib/utils.ts"
+  ],
+  "localeFiles": [],
+  "packages": [
+    "react",
+    "@astrojs/react",
+    "clsx",
+    "tailwind-merge",
+    "class-variance-authority",
+    "@radix-ui/react-slot",
+    "@radix-ui/react-avatar",
+    "@radix-ui/react-tabs"
+  ],
+  "configPatches": {},
+  "reactRequired": true
+}

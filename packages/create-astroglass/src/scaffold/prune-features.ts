@@ -16,7 +16,7 @@ interface ModuleManifest {
   packages: string[];
 }
 
-const ALL_FEATURES = ['blog', 'docs', 'dashboard'];
+const ALL_FEATURES = ['blog', 'docs', 'dashboard', 'react'];
 
 export async function pruneFeatures(
   projectPath: string,
