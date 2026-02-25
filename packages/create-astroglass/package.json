@@ -16,7 +16,11 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm --out-dir dist --clean",
     "dev": "tsup src/index.ts --format esm --out-dir dist --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:generate": "npx tsx test/generate-matrix.ts",
+    "test:run": "bash test/run-tests.sh",
+    "test:report": "npx tsx test/report.ts",
+    "test": "pnpm build && pnpm test:generate && pnpm test:run && pnpm test:report"
   },
   "dependencies": {
     "@clack/prompts": "^0.9.1",
@@ -33,6 +37,7 @@
     "@types/gradient-string": "^1.1.6",
     "@types/node": "^22.0.0",
     "tsup": "^8.3.0",
+    "tsx": "^4.19.0",
     "typescript": "^5.7.0"
   },
   "keywords": [
