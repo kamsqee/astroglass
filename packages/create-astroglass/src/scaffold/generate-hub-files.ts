@@ -14,14 +14,15 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const TEMPLATES_DIR = join(__dirname, '../templates');
 
-/** Mapping of header version numbers to component names */
+/** Mapping of header version numbers to component names.
+ *  headerComponent must match the import alias created in BaseLayout.astro.ejs */
 const HEADER_MAP: Record<string, { headerComponent: string; version: number }> = {
-  liquid:  { headerComponent: 'Header',        version: 1 },
-  glass:   { headerComponent: 'HeaderGlass',   version: 2 },
-  neo:     { headerComponent: 'HeaderDefault',  version: 3 },
-  luxury:  { headerComponent: 'HeaderLuxury',  version: 4 },
-  minimal: { headerComponent: 'HeaderMinimal', version: 5 },
-  aurora:  { headerComponent: 'HeaderAurora',  version: 3 },
+  liquid:  { headerComponent: 'Header',         version: 1 },
+  glass:   { headerComponent: 'HeaderGlass',    version: 2 },
+  neo:     { headerComponent: 'HeaderNeo',      version: 3 },
+  luxury:  { headerComponent: 'HeaderLuxury',   version: 4 },
+  minimal: { headerComponent: 'HeaderMinimal',  version: 5 },
+  aurora:  { headerComponent: 'HeaderAurora',   version: 6 },
 };
 
 interface HubResult {
@@ -98,6 +99,7 @@ export async function generateHubFiles(
 
   // Templates to render
   const TEMPLATE_MAP: Record<string, string> = {
+    'BaseLayout.astro.ejs':    'src/layouts/BaseLayout.astro',
     'global.css.ejs':          'src/styles/global.css',
     '_themes.css.ejs':         'src/styles/_themes.css',
     'astro.config.mjs.ejs':    'astro.config.mjs',

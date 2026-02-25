@@ -19,7 +19,7 @@ export interface Props {
   title: string;
   description: string;
   showHeader?: boolean;
-  headerVersion?: <%= themes.map((_, i) => i + 1).join(' | ') %>;
+  headerVersion?: <%= themes.map(t => t.version).join(' | ') %>;
   ogImage?: string;
 }
 
@@ -92,7 +92,7 @@ const activeTheme = <%= hasGlass ? "currentHeader === 2 ? 'nordic' : " : "" %>'<
   <body class="bg-base-100 text-base-content min-h-screen">
     {showHeader && (
 <% themes.forEach((theme, i) => { %>
-      <%= i === 0 ? '' : ':' %> currentHeader === <%= i + 1 %> ? <<%= theme.headerComponent %> />
+      <%= i === 0 ? '' : ':' %> currentHeader === <%= theme.version %> ? <<%= theme.headerComponent %> />
 <% }) %>
 <% if (themes.length > 1) { %>      : null
 <% } %>
