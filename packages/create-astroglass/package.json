@@ -1,6 +1,6 @@
 {
   "name": "create-astroglass",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Scaffold a new Astroglass project with your choice of themes, palettes, languages, and features.",
   "type": "module",
   "bin": {
