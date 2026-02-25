@@ -109,7 +109,7 @@ for row in $(node -e "
 
   (
     START=$(date +%s)
-    if (cd "$DIR" && pnpm install --reporter=silent > "$LOG_DIR/install.log" 2>&1); then
+    if (cd "$DIR" && npm install --loglevel=error > "$LOG_DIR/install.log" 2>&1); then
       echo "  ✓ install: $ID ($(( $(date +%s) - START ))s)"
       echo "PASS" > "$LOG_DIR/install.status"
     else
@@ -152,7 +152,7 @@ for row in $(node -e "
 
   (
     START=$(date +%s)
-    if (cd "$DIR" && pnpm build > "$LOG_DIR/build.log" 2>&1); then
+    if (cd "$DIR" && npm run build > "$LOG_DIR/build.log" 2>&1); then
       echo "  ✓ build: $ID ($(( $(date +%s) - START ))s)"
       echo "PASS" > "$LOG_DIR/build.status"
     else
