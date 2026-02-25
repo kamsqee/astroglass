@@ -28,7 +28,7 @@ export async function pruneFeatures(
 
   for (const feature of unselected) {
     // Load module manifest
-    const manifestPath = join(__dirname, '../../modules', `${feature}.json`);
+    const manifestPath = join(__dirname, '../modules', `${feature}.json`);
 
     if (!existsSync(manifestPath)) continue;
 
