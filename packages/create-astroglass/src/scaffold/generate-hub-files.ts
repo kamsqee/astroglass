@@ -12,7 +12,7 @@ import {
 } from '../prompts/shared.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const TEMPLATES_DIR = join(__dirname, '../../templates');
+const TEMPLATES_DIR = join(__dirname, '../templates');
 
 /** Mapping of header version numbers to component names */
 const HEADER_MAP: Record<string, { headerComponent: string; version: number }> = {

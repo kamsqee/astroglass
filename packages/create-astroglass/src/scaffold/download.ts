@@ -15,7 +15,8 @@ export async function downloadTemplate(
     return targetPath;
   }
 
-  const { dir } = await gigetDownload('github:kamsqee/astroglass', targetPath, {
+  const { dir } = await gigetDownload('github:kamsqee/astroglass', {
+    dir: targetPath,
     force: false,
     forceClean: false,
   });

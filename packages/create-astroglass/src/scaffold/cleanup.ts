@@ -79,7 +79,7 @@ async function removeEmptyDirs(dir: string, dryRun: boolean): Promise<boolean> {
     if (dryRun) {
       console.log(`  [dry-run] Would remove empty dir: ${dir}`);
     } else {
-      await rm(dir);
+      await rm(dir, { recursive: true });
     }
     return true;
   }
