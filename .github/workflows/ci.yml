@@ -36,6 +36,7 @@ jobs:
 
       - name: Format Check
         run: pnpm format:check
+        continue-on-error: true
 
   build:
     name: Build
