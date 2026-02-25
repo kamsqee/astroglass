@@ -1,0 +1,111 @@
+---
+/**
+ * Docs TOC Mobile Component
+ * 
+ * Floating table of contents for mobile devices.
+ * Appears when user taps the "Contents" button in bottom bar.
+ */
+
+import { getLocaleFromUrl, useTranslations } from '../../utils/i18n';
+
+export interface Props {
+  headings: Array<{ depth: number; slug: string; text: string }>;
+}
+
+const { headings } = Astro.props;
+
+// Filter to only h2 and h3 for cleaner mobile view
+const filteredHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<div id="mobile-toc" class="docs-toc-mobile">
+  <div class="flex items-center justify-between mb-4">
+    <h4 class="font-bold text-sm opacity-60">{t('docs.onThisPage')}</h4>
+    <button 
+      type="button" 
+      id="close-mobile-toc"
+      class="p-2 -mr-2 opacity-60 hover:opacity-100"
+      aria-label="Close table of contents"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+  
+  <nav>
+    <ul class="space-y-1">
+      {filteredHeadings.map((h) => (
+        <li>
+          <a 
+            href={`#${h.slug}`}
+            class:list={[
+              'block py-2 px-3 rounded-lg text-sm transition-colors',
+              'hover:bg-base-content/5',
+              h.depth === 3 && 'pl-6 text-xs opacity-70'
+            ]}
+            data-toc-link
+            data-slug={h.slug}
+          >
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<script>
+  function initMobileTOC() {
+    const toc = document.getElementById('mobile-toc');
+    const closeBtn = document.getElementById('close-mobile-toc');
+    
+    if (!toc || !closeBtn) return;
+    
+    // Close on button click
+    closeBtn.addEventListener('click', () => {
+      toc.classList.remove('is-open');
+    });
+    
+    // Close on link click
+    toc.querySelectorAll('[data-toc-link]').forEach((link) => {
+      link.addEventListener('click', () => {
+        toc.classList.remove('is-open');
+      });
+    });
+    
+    // Close on outside tap
+    document.addEventListener('click', (e) => {
+      if (toc.classList.contains('is-open') && !toc.contains(e.target as Node)) {
+        const bottomBarBtn = document.querySelector('[data-action="openTOC"]');
+        if (bottomBarBtn && !bottomBarBtn.contains(e.target as Node)) {
+          toc.classList.remove('is-open');
+        }
+      }
+    });
+    
+    // Scrollspy for active link
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          toc.querySelectorAll('[data-toc-link]').forEach((link) => {
+            const isActive = link.getAttribute('data-slug') === id;
+            link.classList.toggle('bg-accent/10', isActive);
+            link.classList.toggle('text-accent', isActive);
+          });
+        }
+      });
+    }, { rootMargin: '-100px 0px -66% 0px' });
+    
+    document.querySelectorAll('h2[id], h3[id]').forEach((h) => {
+      observer.observe(h);
+    });
+  }
+  
+  initMobileTOC();
+  document.addEventListener('astro:after-swap', initMobileTOC);
+</script>

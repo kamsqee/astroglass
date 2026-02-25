@@ -1,0 +1,45 @@
+---
+title: "Sections de la Page d'Accueil"
+description: "Sections spécialisées utilisées sur la page d'accueil principale."
+order: 2
+---
+
+# Sections de la Page d'Accueil
+
+Le point d'entrée principal du modèle (`src/pages/index.astro`) utilise plusieurs sections spécialisées conçues pour mettre en valeur les fonctionnalités du modèle. Elles se trouvent dans `src/components/sections/landing/`.
+
+## Bande de Statistiques (Stats Strip)
+
+`src/components/sections/landing/StatsStrip.astro`
+
+Une bande horizontale qui affiche des indicateurs clés sur votre projet (par exemple, "6 Thèmes", "66+ Composants").
+
+- **Fonctionnalités** : Nombres qui s'incrémentent de manière animée lorsqu'ils apparaissent à l'écran.
+- **Configuration** : Modifiez le tableau `stats` dans le frontmatter du composant ou utilisez `src/locales/{lang}/landing.json` pour les libellés.
+
+## Présentation du Modèle (Template Showcase)
+
+`src/components/sections/landing/TemplateShowcase.astro`
+
+Une disposition de type "Bento grid" qui offre une navigation visuelle vers différentes parties du modèle (Thèmes, Composants, Blog, Docs, etc.).
+
+- **Fonctionnalités** : Effets de survol, cartes glassmorphism, disposition en grille réactive.
+- **Contenu** : Géré via `src/locales/{lang}/landing.json` sous `landing.showcase`.
+
+## FAQ Accueil
+
+`src/components/sections/landing/FAQHome.astro`
+
+Une section FAQ légère, de style accordéon, conçue pour la page d'accueil.
+
+- **Fonctionnalités** : Animations douces d'expansion/réduction, attributs ARIA accessibles.
+- **Contenu** : Les questions et réponses sont stockées dans `src/locales/{lang}/landing.json` sous `landing.faq`.
+
+## Comment ça Marche
+
+`src/components/sections/landing/HowItWorks.astro`
+
+Une visualisation en 3 étapes du processus (par exemple, Cloner -> Personnaliser -> Déployer).
+
+- **Fonctionnalités** : Étapes numérotées avec icônes et arrière-plans dégradés.
+- **Contenu** : Texte des étapes dans `src/locales/{lang}/landing.json`.

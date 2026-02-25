@@ -1,0 +1,29 @@
+{
+  "company": "AstroGlass",
+  "tagline": "现代 Web 的精美模板",
+
+  "copyright": "© 2026 AstroGlass",
+  "allRightsReserved": "保留所有权利",
+  "backToTop": "回到顶部",
+  "links": {
+    "product": "产品",
+    "features": "特性",
+    "pricing": "定价",
+    "demos": "演示",
+    "company": "项目",
+    "about": "关于",
+    "blog": "博客",
+    "contact": "联系我们",
+    "resources": "资源",
+    "docs": "文档",
+    "faq": "常见问题",
+    "support": "支持",
+    "terms": "服务条款",
+    "privacy": "隐私政策"
+  },
+  "social": {
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "discord": "Discord"
+  }
+}

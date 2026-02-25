@@ -1,0 +1,47 @@
+---
+title: Развёртывание на Cloudflare
+description: Развертывание AstroGlass на Cloudflare Pages.
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+Проект оптимизирован для развёртывания на **Cloudflare Pages**.
+
+## Предварительные требования
+
+- Аккаунт [Cloudflare](https://dash.cloudflare.com/).
+- **Node.js** v20+ установлен локально.
+- **Wrangler** CLI установлен (`npm install -g wrangler`).
+
+## Способы развёртывания
+
+### Вариант 1: Интеграция с GitHub
+
+<Steps>
+1. **Загрузите код на GitHub**.
+2. **Подключите Cloudflare Pages**: Dashboard > Workers & Pages > Create Application > Pages > Connect to Git.
+3. **Выберите репозиторий** и ветку.
+4. **Настройте сборку**:
+   - Framework Preset: Astro
+   - Build command: `pnpm run build`
+   - Build output directory: `dist`
+5. **Сохраните и разверните**.
+</Steps>
+
+### Вариант 2: Wrangler CLI
+
+<Steps>
+1. **Войдите в Wrangler**
+   ```bash frame="terminal"
+   npx wrangler login
+   ```
+2. **Соберите и разверните**
+   ```bash frame="terminal"
+   pnpm run deploy
+   ```
+</Steps>
+
+<Callout type="warning" title="Индексация поиска">
+  Скрипт `build` автоматически генерирует поисковый индекс Fuse.js. Убедитесь, что сборка завершается успешно.
+</Callout>

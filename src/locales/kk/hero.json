@@ -1,0 +1,31 @@
+{
+  "title": "Сіз қолданатын бастапқы үлгі.",
+  "subtitle": "6 тақырып, 66+ компонент, 7 тіл, құжаттама. Тегін және ашық көзді.",
+  "cta": "Тақырыптарды көру",
+  "secondaryCta": "Құжаттарды оқу",
+  "liveBadge": "Тегін & Ашық көзді · Astro 5.0",
+  "digitalExperience": "Цифрлық тәжірибе",
+  "watchReel": "Іс жүзінде көру",
+  "glassCard": {
+    "title": "Liquid компоненттері",
+    "desc": "Жоғары деңгейлі цифрлық тәжірибелер үшін әдемі безендірілген блоктар."
+  },
+  "visionary": "Болашақты көрген дизайн",
+  "trustedBy": "Қолданылған технологиялар",
+  "scrollToExplore": "Көру үшін төмен айналдырыңыз",
+  "tryItNow": "Қазір көріңіз",
+  "dontTakeOurWord": "Сөзімізге сенбеңіз, өзіңіз көріңіз.",
+  "startBuilding": "Жасауды бастау",
+  "viewFullDemo": "Толық демоны көру",
+  "interactivePreview": "Интерактивті шолу",
+  "faster": "ТЕЗІРЕК.",
+  "buildFaster": "Тезірек жасаңыз.",
+  "shippingVelocity": "Жобаны іске қосуды 10 есе жылдамдатады",
+  "readyToBuild": "Жасауға дайынсыз ба?",
+  "askLeaders": "Stripe, Linear, Vercel-ден сұрап көріңіз.",
+  "cloneCommand": "npx degit kamsqee/astroglass my-site",
+  "readyIn": "2 минутта дайын болады",
+  "terminal": {
+    "label": "Терминал"
+  }
+}

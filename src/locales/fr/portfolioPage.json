@@ -1,0 +1,89 @@
+{
+  "pageTitle": "Nos Travaux",
+  "pageSubtitle": "Une collection soigneusement sélectionnée d'expériences numériques conçues avec précision, profondeur et interaction fluide.",
+  "backToHome": "Retour à l'Accueil",
+  "filterAll": "Tous",
+  "viewDetails": "Voir les Détails",
+  "closeDetails": "Fermer",
+  "theChallenge": "Le Défi",
+  "theSolution": "La Solution",
+  "theImpact": "L'Impact",
+  "techStackLabel": "Stack Technique",
+  "startProject": "Démarrer Votre Projet",
+  "startProjectSub": "Prêt à donner vie à votre vision ?",
+  "comingSoon": "Cette page de portfolio sera bientôt disponible.",
+  "projects": {
+    "p1": {
+      "title": "Écosystème Numérique",
+      "description": "Solution complète pour les startups modernes à forte croissance.",
+      "longDescription": "Une plateforme numérique full-stack qui unifie l'engagement client, l'analyse et les opérations dans une interface unique et fluide. Conçu pour les scale-ups exigeant de la clarté à grande vitesse.",
+      "category": "Application Web",
+      "challenge": "Le client devait consolider 12 outils distincts en une seule plateforme cohérente sans sacrifier la fonctionnalité spécialisée de chacun.",
+      "solution": "Nous avons conçu un système de micro-frontends modulaire avec synchronisation des données en temps réel, enveloppé dans une interface utilisateur organique qui rend les flux de travail complexes sans effort.",
+      "impact": "Réduction des frais généraux opérationnels de 60 % et augmentation de la vélocité de l'équipe de 3x au cours du premier trimestre de déploiement.",
+      "techStack": ["React", "Node.js", "GraphQL", "Redis", "AWS"],
+      "metric": "3x",
+      "metricLabel": "Livraison plus rapide"
+    },
+    "p2": {
+      "title": "Tableau de Bord Liquid",
+      "description": "Analyse de données avec une exploration immersive profonde.",
+      "longDescription": "Un tableau de bord d'analyse qui transforme les données brutes en visualisations fluides et interactives. Les utilisateurs naviguent dans les ensembles de données comme des explorateurs cartographiant un nouveau territoire.",
+      "category": "Tableau de Bord",
+      "challenge": "Les tableaux de bord traditionnels submergeaient les utilisateurs de graphiques statiques. Le client voulait que l'exploration des données soit intuitive et engageante.",
+      "solution": "Nous avons conçu des visualisations fluides avec des mises en page adaptatives qui réagissent au comportement de l'utilisateur et font remonter proactivement les informations (insights).",
+      "impact": "L'engagement des utilisateurs pour l'analyse a augmenté de 240 % et le temps moyen d'obtention de résultats est passé de 15 minutes à moins de 3 minutes.",
+      "techStack": ["Vue.js", "D3.js", "Python", "PostgreSQL", "Docker"],
+      "metric": "50K+",
+      "metricLabel": "Utilisateurs actifs"
+    },
+    "p3": {
+      "title": "Mobile Glassic",
+      "description": "Définir la prochaine génération d'interfaces mobiles.",
+      "longDescription": "Une expérience pensée pour le mobile qui repousse les limites de l'expérience d'une application native. La profondeur, la transparence et le mouvement se conjuguent pour créer une interface qui respire.",
+      "category": "Mobile",
+      "challenge": "L'application existante semblait dépassée et maladroite. Les utilisateurs abandonnaient lors de l'intégration (onboarding) parce que l'interface était trop complexe pour un usage occasionnel.",
+      "solution": "Nous avons reconstruit toute l'expérience utilisateur (UX) avec un système de design de glassmorphism, un retour haptique et une divulgation progressive pour simplifier sans appauvrir l'outil.",
+      "impact": "La note de l'App Store est passée de 3,2 à 4,9 étoiles, et les taux de complétion de l'intégration ont augmenté de 85 %.",
+      "techStack": ["Swift", "SwiftUI", "Firebase", "Lottie", "CoreData"],
+      "metric": "4.9★",
+      "metricLabel": "Note App Store"
+    },
+    "p4": {
+      "title": "Web Quantique",
+      "description": "Brouiller les frontières entre la réalité et l'interface.",
+      "longDescription": "Une plateforme web expérimentale qui utilise des animations avancées et le design spatial pour créer des expériences en 3D sur un écran 2D.",
+      "category": "Image de marque",
+      "challenge": "La marque voulait une présence numérique premium et immersive,  aussi premium que leurs espaces de vente physiques, mais accessible par navigateur.",
+      "solution": "Nous avons exploité WebGL, un système d'animation au défilement pour une expérience web spatiale qui réagit à l'orientation des appareils et à la proximité de l'utilisateur.",
+      "impact": "L'engagement a explosé de +200 %, la durée de la session a triplé et le site a gagné 3 prix Awwwards.",
+      "techStack": ["Three.js", "GSAP", "WebGL", "Astro", "Cloudflare"],
+      "metric": "200%",
+      "metricLabel": "Hausse de l'engagement"
+    },
+    "p5": {
+      "title": "Flux Neural",
+      "description": "Automatisation des tâches des équipes de création grâce à l'IA.",
+      "longDescription": "Une plateforme intelligente qui apprend et automatise les transferts répétitifs (handoffs), les révisions et la gestion des actifs.",
+      "category": "Application Web",
+      "challenge": "Les agences créatives perdaient près de 30% d'heures facturables dans des tâches de gestion, de versions de fichiers et leurs validations respectives.",
+      "solution": "Une couche d'IA prédisant les dépendances de tâches en validant les tâches routinères grâce aux IA et une UI claire et peu distrayante.",
+      "impact": "Récupération d'une moyenne de 12 heures par semaine, et livraison des projets raccourcie de 40 %.",
+      "techStack": ["Next.js", "OpenAI", "Prisma", "Supabase", "Vercel"],
+      "metric": "40%",
+      "metricLabel": "Livraison plus rapide"
+    },
+    "p6": {
+      "title": "Commerce Prisme",
+      "description": "Le e-commerce nouvelle géneration et son exploration de produit poussée.",
+      "longDescription": "Une plateforme e-commerce headless où les produits prennent vie en 3D, AR, et des vitrines adaptatives et personnalisées en temps réel.",
+      "category": "Tableau de Bord",
+      "challenge": "Les conversions étaient bloquées à 2.1 %. Les utilisateurs n'arrivaient pas à avoir la confiance adéquate pour acheter.",
+      "solution": "Nous avons inclu du WebXR pour montrer le produit en AR et une caisse de paiement fluide (one-tap checkout).",
+      "impact": "Saut massif à 5.8% de conversion avec une augmentation de +35% du panier moyen et un taux de retour des produits réduits de moitié.",
+      "techStack": ["Remix", "Shopify Hydrogen", "Three.js", "Stripe", "Edge Functions"],
+      "metric": "176%",
+      "metricLabel": "Hausse des conversions"
+    }
+  }
+}

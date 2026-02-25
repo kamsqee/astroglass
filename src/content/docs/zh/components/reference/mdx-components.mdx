@@ -1,0 +1,164 @@
+---
+title: "MDX 扩展组件"
+description: "可供于在编写文档时使用的自定义 MDX 扩展组件。"
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+import Badge from '../../../../../components/mdx/Badge.astro';
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+
+这是一个为所有的文档页面提供支持的自定义 MDX 组件库。它们已经被自动注册并内置到了文档渲染流水线中，开箱即用。
+
+## Callout (提示框)
+
+可使用提示框组件来着重突出强调某些关键重要的信息。
+
+```mdx
+<Callout type="info" title="信息提示">
+  这是一个提供信息的提示框。
+</Callout>
+
+<Callout type="warning" title="警告注意">
+  在进行此项操作时请务必小心。
+</Callout>
+
+<Callout type="tip" title="贴士建议">
+  这里有一条能对您有所帮助的建议。
+</Callout>
+```
+
+**支持类型 (Types)**: `info`, `warning`, `tip`, `error`
+
+---
+
+## Badge (徽章标记)
+
+用于展示版本号信息或是状态指示标识。
+
+```mdx
+<Badge text="全新功能" variant="success" />
+<Badge text="实验性功能" variant="warning" />
+<Badge text="已经废弃" variant="error" />
+```
+
+**组件参数 (Props)**:
+| 属性名 | 数据类型 | 描述说明 |
+|------|------|-------------|
+| `text` | `string` | 徽章内的标签文本 |
+| `variant` | `'success' \| 'warning' \| 'error' \| 'info'` | 徽章的色彩风格变体 |
+
+---
+
+## Steps (分步向导)
+
+通过将其包裹在一个有序列表外侧，可呈现出分步骤的向导操作指南说明。
+
+```mdx
+<Steps>
+1. **第一步操作**
+   
+   关于此处这第一步的描述说明。
+
+2. **第二步操作**
+   
+   关于这一项第二步的详情描述。
+</Steps>
+```
+
+---
+
+## FileTree (文件树状图)
+
+用以呈现出一个层级结构化的文件目录与文件夹结构图。
+
+```mdx
+<FileTree>
+- src/
+  - components/
+  - pages/
+    - index.astro
+    - **[theme].astro**
+- package.json
+</FileTree>
+```
+
+带有 `**` 标记的加粗项字符将被着重高亮显示突出。请使用 `-` 来表示每一级的列表项。
+
+---
+
+## CardGrid & LinkCard (卡片网格与链接卡片)
+
+把带有跳转链接功能的卡片放置于一个具有响应式效果的网格矩阵内并将其展示出来。
+
+```mdx
+<CardGrid>
+  <LinkCard
+    title="快速上手指南"
+    description="助您在数分钟内快速完成项目的配置初始化与搭建。"
+    href="/docs/zh/getting-started/installation"
+  />
+  <LinkCard
+    title="外观主题系统"
+    description="学习并了解有关平台的外观主题系统设定。"
+    href="/docs/zh/core-concepts/theming"
+  />
+</CardGrid>
+```
+
+**LinkCard 参数 (Props)**:
+| 属性名 | 数据类型 | 描述说明 |
+|------|------|-------------|
+| `title` | `string` | 卡片的标题文案 |
+| `description` | `string` | 归属于该卡片的详情描述 |
+| `href` | `string` | 该卡片指向的跳转链接目的地地址 |
+
+---
+
+## CodeTabs (代码块多标签页切换)
+
+用于显示囊括了对应多种不同的软件包管理器（如 NPM、Yarn）或者针对各大不同编程语言的可切换式带有标题选项卡控制的多重代码片段区块。
+
+```mdx
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash
+pnpm install
+​```
+```bash
+npm install
+​```
+```bash
+yarn install
+​```
+</CodeTabs>
+```
+
+**组件参数 (Props)**:
+| 属性名 | 数据类型 | 描述说明 |
+|------|------|-------------|
+| `labels` | `string[]` | 那些显示在每一个相应代码块上方的标签页文字标题数组 |
+
+<Callout type="info" title="有关代码块排版的须知事项">
+  请把您的每一个代码块作为子节点直属于该组件。请确保代码块元素的数量能够并且必须跟配置参数里数组元素内设定的数量相吻合对应。
+</Callout>
+
+---
+
+## PropsTable (属性参考表格)
+
+用一张已经预先排好版设计好外观格式样式的表格将给定组件的各个属性规范 (props) 及有关文档呈列展示说明。
+
+```mdx
+<PropsTable component="Hero" />
+```
+
+---
+
+## ApiMethod (API 函数方法解析)
+
+用于为一个特定的编程函数体或应用层面使用的方法的调用签名撰写对应详尽解析文案。
+
+```mdx
+<ApiMethod name="useTranslations" params="locale: Locale" returns="(key: string) => string" />
+```

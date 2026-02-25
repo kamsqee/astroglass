@@ -1,0 +1,44 @@
+{
+  "title": "Obras Seleccionadas",
+  "subtitle": "Un escaparate visual de claridad, profundidad e interacción fluida.",
+  "badge": "Portafolio",
+  "gallery": "Galería",
+  "featured": "Proyecto Destacado",
+  "caseStudies": "Casos de Estudio",
+  "impactTitle": "Impacto Real, Resultados Reales",
+  "impactSubtitle": "Cada proyecto cuenta una historia. Esto es lo que hemos logrado juntos.",
+  "scrollHint": "Desplázate para explorar",
+  "gridHint": "Pasa el cursor para explorar cada proyecto",
+  "viewCaseStudy": "Ver Caso de Estudio",
+  "themeGallery": {
+    "subtitle": "Descubrir",
+    "title": "Temas Incluidos",
+    "desc": "Echa un vistazo a los temas preconstruidos que obtienes con la plantilla. Todo es personalizable.",
+    "viewDemo": "Ver Demo",
+    "free": "Limpio y Básico",
+    "premium": "Rico y Avanzado",
+    "sections": "secciones"
+  },
+  "categories": {
+    "webapp": "Aplicación Web",
+    "dashboard": "Panel de Control",
+    "mobile": "Móvil",
+    "branding": "Marca"
+  },
+  "metrics": {
+    "faster": "Tiempo de carga más rápido",
+    "users": "Usuarios activos",
+    "rating": "Calificación en App Store",
+    "growth": "Crecimiento de ingresos"
+  },
+  "p1Title": "Ecosistema Digital",
+  "p1Desc": "Solución integral para startups modernas de alto crecimiento.",
+  "p2Title": "Panel de Control Líquido",
+  "p2Desc": "Análisis de datos con profunda exploración inmersiva.",
+  "p3Title": "Móvil Clásico (Glassic)",
+  "p3Desc": "Definiendo la próxima generación de interfaces móviles.",
+  "p4Title": "Web Cuántica",
+  "p4Desc": "Desdibujando las líneas entre la realidad y la interfaz.",
+  "viewProject": "Ver Proyecto",
+  "allWork": "Todos los Trabajos"
+}

@@ -1,0 +1,63 @@
+---
+title: "Portfolio Page"
+description: "A full-featured, filtering-enabled portfolio page available for every theme."
+order: 1
+---
+
+# Portfolio Page
+
+New in **AstroGlass**, the Portfolio Page is a dedicated, dynamic route that provides a rich showcase for your projects. It features category filtering, detailed project views, and a design that adapts to your active theme.
+
+## Architecture
+
+The portfolio page is served at `/[theme]/portfolio` (e.g., `/liquid/portfolio`, `/glass/portfolio`). It uses a dynamic routing strategy similar to the main theme pages.
+
+### File Structure
+
+- **Route**: `src/pages/[theme]/portfolio.astro` - The dynamic route handler.
+- **Components**: `src/components/pages/portfolio/{theme}/` - Theme-specific modular section implementations (e.g., `PortfolioHeroLiquid.astro`, `PortfolioGridLiquid.astro`).
+- **Content**: `src/locales/{lang}/portfolioPage.json` - All text content, project data, and categories.
+
+## Customization
+
+Unlike the specific landing page sections, the Portfolio Page is entirely data-driven via localization files. This makes it easy to add projects without touching the code.
+
+### Managing Projects
+
+Edit `src/locales/en/portfolioPage.json` to manage your projects.
+
+```json title="src/locales/en/portfolioPage.json"
+{
+  "projects": {
+    "p1": {
+      "title": "Project Name",
+      "description": "Short description for the card.",
+      "longDescription": "longer description for the detail view...",
+      "category": "webapp",
+      "techStack": ["React", "Node.js"],
+      "color": "from-violet-500 to-fuchsia-500"
+    }
+  }
+}
+```
+
+### Categories
+
+Categories are defined in the same JSON file and used for filtering.
+
+```json
+{
+  "filterAll": "All",
+  "categoryLabels": {
+    "webapp": "Web App",
+    "mobile": "Mobile App"
+  }
+}
+```
+
+## Features
+
+- **Dynamic Filtering**: Client-side filtering by category with smooth animations.
+- **Detail View**: Expandable details panel for each project showing "Challenge", "Solution", and "Impact".
+- **Theme Adaptation**: Automatically uses the correct header, footer, and styling for the active theme.
+- **Responsive**: Fully responsive layout that works on mobile, tablet, and desktop.

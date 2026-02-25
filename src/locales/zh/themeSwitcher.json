@@ -1,0 +1,22 @@
+{
+  "label": "主题",
+  "hint": "滑动探索",
+  "categories": {
+    "light": "浅色",
+    "dark": "深色",
+    "colorful": "彩色"
+  },
+  "themes": {
+    "azure": "蔚蓝",
+    "nordic": "北欧",
+    "solaris": "索拉里斯",
+    "abyss": "深渊",
+    "neonoir": "霓虹",
+    "synthwave": "合成器",
+    "evergreen": "常青",
+    "rose": "玫瑰",
+    "aquatica": "水域",
+    "monochrome": "单色",
+    "default": "默认"
+  }
+}

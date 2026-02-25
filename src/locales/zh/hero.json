@@ -1,0 +1,31 @@
+{
+  "title": "助你快速发布的启动模板。",
+  "subtitle": "6款主题，66+组件，7款语言，文档。免费且开源。",
+  "cta": "探索主题",
+  "secondaryCta": "阅读文档",
+  "liveBadge": "免费与开源 · Astro 5.0",
+  "digitalExperience": "数字体验",
+  "watchReel": "观看演示",
+  "glassCard": {
+    "title": "Liquid 组件",
+    "desc": "为高端数字体验而精心设计的组件模块。"
+  },
+  "visionary": "远见卓识的设计",
+  "trustedBy": "构建技术",
+  "scrollToExplore": "向下滚动以探索",
+  "tryItNow": "立即体验",
+  "dontTakeOurWord": "不要只听我们说。",
+  "startBuilding": "开始构建",
+  "viewFullDemo": "查看完整演示",
+  "interactivePreview": "交互式预览",
+  "faster": "全速前进。",
+  "buildFaster": "构建更快。",
+  "shippingVelocity": "10倍的发布速度",
+  "readyToBuild": "准备好开始了吗？",
+  "askLeaders": "问问 Stripe、Linear、Vercel 就知道了。",
+  "cloneCommand": "npx degit kamsqee/astroglass my-site",
+  "readyIn": "只需2分钟即可就绪",
+  "terminal": {
+    "label": "终端"
+  }
+}

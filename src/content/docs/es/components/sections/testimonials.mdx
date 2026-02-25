@@ -1,0 +1,37 @@
+---
+title: "Sección Testimonios"
+description: "Secciones de testimonios de clientes para cada tema."
+order: 7
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La sección Testimonios muestra pruebas sociales y reseñas de clientes.
+
+## Variantes de tema
+
+| Tema | Componente | Estilo |
+|-------|-----------|-------|
+| **Liquid** | `TestimonialLiquid.astro` | Tarjetas de testimonios fluidas |
+| **Glass** | `TestimonialGlass.astro` | Tarjetas de citas en vidrio esmerilado |
+| **Neo** | `TestimonialNeo.astro` | Testimonios audaces y de alto contraste |
+| **Luxury** | `TestimonialLuxury.astro` | Reseñas elegantes con acentos dorados |
+| **Minimal** | `TestimonialMinimal.astro` | Diseño de citas limpio y minimalista |
+| **Aurora** | `TestimonialAurora.astro` | Testimonios con fondo degradado |
+
+Todas las variantes se encuentran en `src/components/sections/testimonial/`.
+
+## Fuente de contenido
+
+Los datos de los testimonios se cargan desde `src/locales/{lang}/testimonial.json` a través de `useTranslations()`. El JSON suele contener nombres de los revisores, cargos, citas e información de los avatares.
+
+<Callout type="info" title="Sin propiedades">
+  Los componentes de testimonios no aceptan propiedades externas. Para cambiar el texto de las citas, los nombres o la estructura, edite `src/locales/{lang}/testimonial.json`.
+</Callout>
+
+## Personalización
+
+Para personalizar:
+1. Edite `src/components/sections/testimonial/Testimonial{Theme}.astro`.
+2. Ajuste los estilos en `src/styles/components/testimonial/`.
+3. Cambie el contenido en `src/locales/{lang}/testimonial.json`.

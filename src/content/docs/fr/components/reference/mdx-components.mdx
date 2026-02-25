@@ -1,0 +1,164 @@
+---
+title: "Composants MDX"
+description: "Composants MDX personnalisés disponibles pour une utilisation dans la documentation."
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+import Badge from '../../../../../components/mdx/Badge.astro';
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+
+Une bibliothèque de composants MDX personnalisés disponibles sur toutes les pages de documentation. Ceux-ci sont automatiquement enregistrés dans le pipeline de rendu de la documentation.
+
+## Callout (Message d'Alerte)
+
+Utilisez les "callouts" pour mettre en évidence des informations importantes.
+
+```mdx
+<Callout type="info" title="Info">
+  Ceci est un message d'information.
+</Callout>
+
+<Callout type="warning" title="Avertissement">
+  Soyez prudent avec cette opération.
+</Callout>
+
+<Callout type="tip" title="Astuce">
+  Voici une suggestion utile.
+</Callout>
+```
+
+**Types** : `info`, `warning`, `tip`, `error`
+
+---
+
+## Badge
+
+Affichez des indicateurs de version ou de statut.
+
+```mdx
+<Badge text="Nouveau" variant="success" />
+<Badge text="Expérimental" variant="warning" />
+<Badge text="Obsolète" variant="error" />
+```
+
+**Props (Propriétés)** :
+| Propriété | Type | Description |
+|------|------|-------------|
+| `text` | `string` | Libellé du badge |
+| `variant` | `'success' \| 'warning' \| 'error' \| 'info'` | Variante de couleur |
+
+---
+
+## Steps (Étapes)
+
+Enveloppez des listes ordonnées pour des instructions étape par étape.
+
+```mdx
+<Steps>
+1. **Première étape**
+   
+   Description de la première étape.
+
+2. **Deuxième étape**
+   
+   Description de la deuxième étape.
+</Steps>
+```
+
+---
+
+## FileTree (Arborescence de Fichiers)
+
+Affichez les structures de fichiers et de répertoires.
+
+```mdx
+<FileTree>
+- src/
+  - components/
+  - pages/
+    - index.astro
+    - **[theme].astro**
+- package.json
+</FileTree>
+```
+
+Les éléments en gras avec `**` sont mis en évidence. Utilisez `-` pour les éléments de liste.
+
+---
+
+## CardGrid & LinkCard (Grille de Cartes & Carte Lien)
+
+Affichez des cartes liées dans une grille réactive.
+
+```mdx
+<CardGrid>
+  <LinkCard
+    title="Bien Commencer"
+    description="Configurez votre projet en quelques minutes."
+    href="/docs/fr/getting-started/installation"
+  />
+  <LinkCard
+    title="Thèmes"
+    description="Apprenez-en plus sur le système de thèmes."
+    href="/docs/fr/core-concepts/theming"
+  />
+</CardGrid>
+```
+
+**Props de LinkCard** :
+| Propriété | Type | Description |
+|------|------|-------------|
+| `title` | `string` | Titre de la carte |
+| `description` | `string` | Description de la carte |
+| `href` | `string` | Destination du lien |
+
+---
+
+## CodeTabs (Onglets de Code)
+
+Affichez des blocs de code sous forme d'onglets pour plusieurs gestionnaires de paquets ou langages.
+
+```mdx
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash
+pnpm install
+​```
+```bash
+npm install
+​```
+```bash
+yarn install
+​```
+</CodeTabs>
+```
+
+**Props** :
+| Propriété | Type | Description |
+|------|------|-------------|
+| `labels` | `string[]` | Étiquettes d'onglets affichées au-dessus de chaque bloc de code |
+
+<Callout type="info" title="Blocs de Code">
+  Placez chaque bloc de code comme enfant direct. Le nombre de blocs de code doit correspondre au nombre d'étiquettes.
+</Callout>
+
+---
+
+## PropsTable (Tableau des Propriétés)
+
+Affichez la documentation des propriétés (props) d'un composant dans un tableau formaté.
+
+```mdx
+<PropsTable component="Hero" />
+```
+
+---
+
+## ApiMethod (Méthode API)
+
+Documentez la signature d'une fonction ou d'une méthode.
+
+```mdx
+<ApiMethod name="useTranslations" params="locale: Locale" returns="(key: string) => string" />
+```

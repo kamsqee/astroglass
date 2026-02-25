@@ -1,0 +1,41 @@
+---
+title: "Navbar / Header"
+description: "Theme-specific navigation bar components."
+order: 11
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+The Navbar (Header) component appears at the top of every theme page. Each theme has its own unique header design with different navigation patterns, mobile menu implementations, and visual styles.
+
+## Theme Variants
+
+| Theme | Component | Style |
+|-------|-----------|-------|
+| **Liquid** | `HeaderLiquid.astro` | Transparent header with blur backdrop |
+| **Glass** | `HeaderGlass.astro` | Frosted glass navigation bar |
+| **Neo** | `HeaderNeo.astro` | Bold, high-contrast header |
+| **Luxury** | `HeaderLuxury.astro` | Premium header with gold accents |
+| **Minimal** | `HeaderMinimal.astro` | Clean, minimalist navigation |
+| **Aurora** | `HeaderAurora.astro` | Gradient-accent header |
+
+All variants are located at `src/components/layout/header/`.
+
+## Features
+
+Each header variant typically includes:
+- **Desktop Navigation**: Horizontal nav with dropdown menus
+- **Mobile Navigation**: Hamburger menu with slide-in drawer
+- **Theme Switcher**: Integrated theme selector component
+- **Language Switcher**: Locale selector with flag icons
+- **Logo**: Brand logo component
+
+## Navigation Configuration
+
+Navigation links are configured in `src/config/navigation.ts` (including the Luxury theme's extended navigation).
+
+Navigation labels are translated via `src/locales/{lang}/nav.json`.
+
+<Callout type="info" title="No Props">
+  Header components take no external props. Navigation items are defined in config files and labels are loaded from locale JSON.
+</Callout>

@@ -1,0 +1,118 @@
+---
+title: Routing & Internationalization
+description: Understand how pages and languages work in AstroGlass.
+order: 4
+---
+
+import FileTree from '../../../../components/mdx/FileTree.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import Steps from '../../../../components/mdx/Steps.astro';
+
+AstroGlass uses Astro's file-based routing system combined with a custom internationalization (i18n) strategy.
+
+## Page Routing
+
+Pages are located in `src/pages/`. The folder structure determines the URL path.
+
+For localized pages, we use separate directories:
+
+<FileTree>
+- src/
+  - pages/
+    - **[...lang]/**       — Dynamic Locale Routing
+      - **index.astro**      — Homepage (All Languages)
+      - **[theme].astro**    — Dynamic theme demo pages (e.g., /liquid, /ru/glass)
+      - **[theme]/portfolio.astro** — Dynamic portfolio pages
+      - blog/                — Blog pages
+      - docs/                — Documentation pages
+      - privacy.astro        — Privacy Policy
+      - terms.astro          — Terms of Service
+    - 404.astro            — /404 Error page
+    - about.astro          — /about (Unlocalized)
+</FileTree>
+
+### Theme Demo Routing
+
+Theme pages are generated dynamically from the theme registry. Adding a theme to `src/config/themes.ts` with `enabled: true` automatically creates a route at `/{themeId}`.
+
+## Documentation Routing
+
+Documentation pages live in `src/content/docs/[lang]/`:
+
+<FileTree>
+- src/
+  - content/
+    - docs/
+      - en/
+      - ru/
+      - fr/
+      - es/
+      - ja/
+      - zh/
+      - kk/
+</FileTree>
+
+The URL for documentation is automatically generated based on the file path, e.g., `/docs/en/getting-started/introduction`.
+
+## Internationalization (i18n)
+
+Translations are handled in two ways:
+1.  **Dynamic Page Routing**: A centralized `src/pages/[...lang]/` directory handles all route permutations dynamically via `getStaticPaths()`.
+2.  **UI Strings**: Centralized JSON files in `src/locales/`.
+
+### UI Translations
+
+Common strings (nav items, buttons, section text, etc.) are stored as JSON files organized by section:
+
+```
+src/locales/
+├── en/
+├── ru/
+├── fr/
+├── es/
+├── ja/
+├── zh/
+└── kk/
+```
+
+Use the `useTranslations` helper in components:
+
+```astro title="Component.astro"
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<p>{t('hero.title')}</p>
+<p>{t('pricing.tier2Name')}</p>
+```
+
+Translation keys support dot notation for nested values. The `common.json` keys are spread at the root level, while other files are namespaced by their filename (e.g., `hero.title`, `pricing.plans`).
+
+### Adding a New Language
+
+<Steps>
+1. **Register the locale**
+
+   Add an entry to `src/config/locales.ts` with `enabled: true`.
+
+2. **Create translation files**
+
+   Create `src/locales/{code}/` directory with JSON files matching the English structure.
+
+3. **Create documentation content**
+
+   Create `src/content/docs/{code}/` with translated MDX files.
+   (e.g., `src/content/docs/fr/getting-started/introduction.mdx`)
+
+4. **Create blog content**
+
+   Create `src/content/blog/{code}/` with translated Markdown/MDX files.
+   (e.g., `src/content/blog/fr/my-post.md`)
+</Steps>
+
+<Callout type="info" title="Automatic Discovery">
+  The i18n system uses Vite's `import.meta.glob` to automatically discover all JSON files in `src/locales/`. No manual imports are needed — just create the files and they're available via `useTranslations()`.
+</Callout>

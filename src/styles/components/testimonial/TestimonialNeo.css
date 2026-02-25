@@ -1,0 +1,66 @@
+/* TestimonialNeo.css */
+
+.c-testimonial-neo__track {
+  perspective: 1200px;
+}
+
+.c-testimonial-neo__card {
+  width: 90%;
+  max-width: 600px;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0.3;
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), opacity 600ms ease;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.c-testimonial-neo__content {
+  transition: border-color 600ms ease, background-color 600ms ease;
+}
+
+/* Position based on offset from active */
+.c-testimonial-neo__card.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  z-index: 10;
+}
+
+.c-testimonial-neo__card.prev {
+  transform: translate(-120%, -50%) scale(0.85) rotateY(15deg);
+  opacity: 0.5;
+  z-index: 5;
+}
+
+.c-testimonial-neo__card.next {
+  transform: translate(20%, -50%) scale(0.85) rotateY(-15deg);
+  opacity: 0.5;
+  z-index: 5;
+}
+
+.c-testimonial-neo__card.far {
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.c-testimonial-neo__card.active .c-testimonial-neo__content {
+  border-color: hsl(var(--a) / 0.3);
+}
+
+.c-testimonial-neo__dot {
+  position: relative;
+}
+
+.c-testimonial-neo__dot-btn.active .c-testimonial-neo__dot {
+  background: hsl(var(--a));
+  transform: scale(1.4);
+}
+
+@media (max-width: 1023px) {
+  .c-testimonial-neo__card.prev,
+  .c-testimonial-neo__card.next {
+    opacity: 0;
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,54 @@
+---
+title: Кастомизация
+description: Как настроить стили, темы и конфигурацию.
+order: 2
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass использует **Tailwind CSS v4** для стилизации через плагин `@tailwindcss/vite`. Отдельного файла `tailwind.config.mjs` нет — вся настройка происходит через CSS.
+
+## Обзор стилизации
+
+Глобальные стили и CSS-переменные определены в `src/styles/global.css`. Тематические переопределения находятся в `src/styles/_themes.css`.
+
+<FileTree>
+- src/
+  - styles/
+    - **global.css** — Базовые стили, шрифты, CSS-переменные
+    - **_themes.css** — Цветовые переопределения для каждой темы
+    - **_animations.css** — Общие анимации
+    - **_forms.css** — Стили форм
+    - components/ — Стили отдельных компонентов
+</FileTree>
+
+## Система цветов
+
+Проект использует CSS-переменные с HSL-значениями:
+
+```css title="global.css"
+:root {
+  --p: 260 80% 60%;   /* Основной */
+  --s: 310 80% 60%;   /* Вторичный */
+  --a: 190 90% 60%;   /* Акцент */
+  --b1: 220 20% 10%;  /* Фон */
+  --bc: 220 20% 90%;  /* Текст */
+}
+```
+
+<Callout type="tip" title="Изменение цветов">
+  Для изменения цветовой схемы обновите HSL-значения в `global.css`. Для тематических переопределений используйте `[data-theme="..."]` селекторы в `_themes.css`.
+</Callout>
+
+## Кастомизация компонентов
+
+Каждая тема имеет свои варианты компонентов (например, `HeroLiquid.astro`, `HeroGlass.astro`). Для настройки секции:
+
+1. Перейдите в `src/components/sections/{section}/`.
+2. Отредактируйте файл нужной темы (например, `HeroGlass.astro`).
+3. CSS компонентов находится в `src/styles/components/{section}/`.
+
+<Callout type="info" title="Без внешних пропсов">
+  Секции не принимают текстовые пропсы. Весь контент управляется ключами перевода через `useTranslations()`. Для изменения текста редактируйте JSON-файлы в `src/locales/{lang}/`.
+</Callout>

@@ -1,0 +1,134 @@
+---
+title: "Sistema de Temas"
+description: "Comprenda la arquitectura central del sistema de tematización dinámica, incluidas las variables CSS, el registro de temas y el renderizado de variantes."
+order: 1
+category: core-concepts
+tags: ["theming", "design-system", "css"]
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass presenta un sistema de temas dinámicos altamente flexible construido sobre **Tailwind CSS v4** y la **arquitectura de componentes de Astro**.
+
+## Visión General de la Arquitectura
+
+El sistema de temas consta de tres capas principales:
+
+1. **Registro de Temas**: Definiciones para cada tema en `src/config/themes.ts`.
+2. **Propiedades Personalizadas de CSS**: Variables que reconocen el tema definidas en `src/styles/_themes.css`.
+3. **Representación Dinámica**: La página `[theme].astro` renderiza dinámicamente la variante correcta del componente para cada sección.
+
+## Registro de Temas
+
+Cada tema se registra en `src/config/themes.ts`. Esto centraliza los metadatos de los temas y los hace disponibles para toda la aplicación.
+
+<FileTree>
+- src/
+  - config/
+    - themes.ts
+</FileTree>
+
+Cada definición de tema incluye:
+
+```typescript
+export const themes: ThemeDefinition[] = [
+  {
+    id: 'liquid',
+    name: 'Liquid',
+    color: 'from-blue-500 to-cyan-400',  // Clases de gradiente de Tailwind
+    icon: '💧',
+    sections: ['Header', 'Hero', 'About', 'Features', 'Portfolio', 'Pricing', 'Testimonial', 'FAQ', 'CTA', 'Contact', 'Footer'],
+    enabled: true,
+    premium: false,
+    description: 'Diseño orgánico y fluido con animaciones suaves',
+  },
+  // Glass, Neo, Luxury, Minimal, Aurora...
+];
+```
+
+## Variables CSS
+
+Los colores y los efectos específicos del tema se controlan mediante propiedades personalizadas CSS. Las variables se limitan a un atributo `data-theme` en la etiqueta `<html>` o `<body>`.
+
+```css
+/* src/styles/_themes.css */
+[data-theme="liquid"] {
+  --p: 260 80% 60%;    /* Primario */
+  --s: 310 80% 60%;    /* Secundario */
+  --a: 190 90% 60%;    /* Acento */
+  --b1: 220 20% 10%;   /* Fondo base */
+  --bc: 220 20% 90%;   /* Contenido base (texto) */
+}
+```
+
+Los componentes las consumen a través de `hsl(var(--p))` o utilidades de Tailwind:
+
+```html
+<div class="bg-[hsl(var(--p))] text-[hsl(var(--bc))]">
+  Contenido Tematizado
+</div>
+```
+
+<Callout type="warning" title="Convención de Nombres">
+  Las variables usan nombres cortos (`--p`, `--s`, `--a`, `--b1`, `--bc`, `--er`, `--su`) para mantenerse consistentes con la convención de nomenclatura inspirada en DaisyUI que se utiliza a lo largo de todo el proyecto.
+</Callout>
+
+## Representación Dinámica de Componentes
+
+Las páginas de temas se renderizan mediante `src/pages/[theme].astro`. Este archivo utiliza un **mapa de componentes** para seleccionar dinámicamente la variante correcta para cada sección:
+
+```astro title="[theme].astro"
+---
+const componentMap = {
+  liquid: {
+    Header: HeaderLiquid,
+    Hero: HeroLiquid,
+    About: AboutLiquid,
+    Features: FeaturesLiquid,
+    // ... las 12+ secciones
+  },
+  glass: { /* ... */ },
+  neo: { /* ... */ },
+  luxury: { /* ... */ },
+  minimal: { /* ... */ },
+  aurora: { /* ... */ },
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Header />
+<components.Hero />
+<components.About />
+<!-- ... -->
+```
+
+<Callout type="info">
+  Cada variante de sección es un componente autónomo de Astro. Se usa `useTranslations()` de forma interna para todo el texto — no se necesitan propiedades externas (props). Esto permite que cada tema pueda tener estructuras HTML completamente diferentes a la vez que se mantiene una API uniforme.
+</Callout>
+
+## Creación de un Nuevo Tema
+
+<Steps>
+1. **Añadir la Definición del Tema**
+   
+   Añada el objeto de definición del tema a `src/config/themes.ts`.
+
+2. **Definir Variables CSS**
+   
+   Defina las variables CSS del nuevo tema en `src/styles/_themes.css`.
+
+3. **Crear Componentes de la Sección**
+   
+   Cree nuevas variantes específicas del tema del componente para cada sección cruzada de base, por ej., `src/components/sections/hero/HeroMiTema.astro`.
+
+4. **Registrarlo en el Mapa de Componentes**
+   
+   Agregue los componentes del nuevo tema al registro de `componentMap` que está adentro de `src/pages/[theme].astro`.
+
+5. **Añadir Traducciones**
+   
+   Añade y actualiza en listado cualquier cadena para que esta sea una de nueva entrada en la traducción local de este archivo respectivo y añada dentro su representación nueva localizada correspondiente JSON para `src/locales/`.
+</Steps> 

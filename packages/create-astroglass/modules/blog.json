@@ -1,0 +1,24 @@
+{
+  "name": "blog",
+  "description": "MDX-powered blog with RSS feed, tags, and reading time",
+  "files": [
+    "src/content/blog/",
+    "src/pages/[...lang]/blog/index.astro",
+    "src/pages/[...lang]/blog/[slug].astro",
+    "src/pages/[...lang]/blog/rss.xml.js",
+    "src/styles/components/blog/ArticleProse.css",
+    "src/styles/components/blog/BlogCard.css",
+    "src/styles/components/blog/BlogHero.css",
+    "src/styles/components/blog/NewsletterCTA.css",
+    "src/styles/components/blog/PostHero.css",
+    "src/styles/components/blog/ShareBar.css",
+    "src/styles/components/blog/TableOfContents.css"
+  ],
+  "packages": [
+    "@astrojs/mdx"
+  ],
+  "configPatches": {
+    "astro.config.mjs": ["mdx() integration"]
+  },
+  "reactRequired": false
+}

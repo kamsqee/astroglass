@@ -1,0 +1,45 @@
+---
+/**
+ * Neo Portfolio — Bottom CTA
+ * CTA with decorative line and editorial styling.
+ */
+interface Props {
+  startProjectLabel: string;
+  startProjectSubLabel: string;
+  backToHomeLabel: string;
+  contactHref: string;
+  homeHref: string;
+}
+
+const { startProjectLabel, startProjectSubLabel, backToHomeLabel, contactHref, homeHref } = Astro.props;
+---
+
+<section class="relative py-20 sm:py-28 px-4 overflow-hidden">
+  <div class="c-portfolio-page-neo__cta-glow"></div>
+
+  <div class="relative z-10 text-center max-w-2xl mx-auto">
+    <!-- Decorative Line -->
+    <div class="c-portfolio-page-neo__line mb-16"></div>
+
+    <h2 class="text-3xl sm:text-4xl md:text-6xl font-black text-base-content mb-4 tracking-tighter">
+      {startProjectLabel}
+    </h2>
+    <p class="text-base-content/75 text-lg mb-10 font-light">
+      {startProjectSubLabel}
+    </p>
+
+    <div class="flex flex-col items-center gap-6">
+      <a href={contactHref} class="group relative py-4 px-12 border border-base-content/10 bg-base-content/[0.02] hover:bg-accent/10 hover:border-accent/30 rounded-full transition-all duration-700">
+        <span class="text-sm font-black tracking-[0.3em] uppercase text-base-content group-hover:text-accent transition-colors duration-500">
+          {startProjectLabel}
+        </span>
+      </a>
+      <a href={homeHref} class="inline-flex items-center gap-2 text-base-content/80 font-light text-sm hover:text-accent transition-colors duration-300">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+        </svg>
+        {backToHomeLabel}
+      </a>
+    </div>
+  </div>
+</section>

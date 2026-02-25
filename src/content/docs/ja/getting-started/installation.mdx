@@ -1,0 +1,45 @@
+---
+title: "インストール"
+description: "新しい AstroGlass プロジェクトをセットアップする方法。"
+order: 2
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+始めるのは簡単です。リポジトリをクローンして、依存関係をインストールするだけです。
+
+## 前提条件
+
+- Node.js v20.0.0 以上
+- pnpm v8+ (推奨) または npm/yarn
+
+## クイックスタート
+
+<Steps>
+1. **リポジトリをクローンする**
+   
+   ```bash frame="terminal"
+   git clone https://github.com/kamsqee/astroglass.git my-project
+   ```
+
+2. **ディレクトリに移動する**
+
+   ```bash frame="terminal"
+   cd my-project
+   ```
+
+3. **依存関係をインストールする**
+
+   ```bash frame="terminal"
+   pnpm install
+   ```
+
+4. **開発用サーバーを起動する**
+
+   ```bash frame="terminal"
+   pnpm dev
+   ```
+
+</Steps>
+
+`http://localhost:4321` にアクセスして、新しいサイトを確認してください。

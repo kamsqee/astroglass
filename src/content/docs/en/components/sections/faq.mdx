@@ -1,0 +1,37 @@
+---
+title: "FAQ Section"
+description: "Frequently asked questions sections with accordion UI for each theme."
+order: 8
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+The FAQ section displays common questions and answers in an accordion format.
+
+## Theme Variants
+
+| Theme | Component | Style |
+|-------|-----------|-------|
+| **Liquid** | `FAQLiquid.astro` | Smooth animated accordions |
+| **Glass** | `FAQGlass.astro` | Frosted glass accordions |
+| **Neo** | `FAQNeo.astro` | Bold, high-contrast Q&A |
+| **Luxury** | `FAQLuxury.astro` | Elegant accordions with gold accents |
+| **Minimal** | `FAQMinimal.astro` | Clean, simple accordions |
+| **Aurora** | `FAQAurora.astro` | Gradient background FAQ cards |
+
+All variants are located at `src/components/sections/faq/`.
+
+## Content Source
+
+FAQ items are loaded from `src/locales/{lang}/faq.json` via `useTranslations()`. The JSON structure typically contains an array of question-answer pairs.
+
+<Callout type="info" title="No Props">
+  FAQ components take no external props. To add, remove, or edit FAQ items, update `src/locales/{lang}/faq.json`.
+</Callout>
+
+## Customizing
+
+To customize:
+1. Edit `src/components/sections/faq/FAQ{Theme}.astro`.
+2. Adjust styles in `src/styles/components/faq/`.
+3. Change content in `src/locales/{lang}/faq.json`.

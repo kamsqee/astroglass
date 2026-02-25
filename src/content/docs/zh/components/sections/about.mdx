@@ -1,0 +1,37 @@
+---
+title: "关于我们 (About) 区块"
+description: "为各类主题设计，用于介绍公司实况或产品详情的区块部分。"
+order: 3
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+About (关于我们) 这一区块被用于为访客引荐、介绍讲述属于您公司与产品的品牌故事。每一种主题均具有并提供了一套带有不同视觉效果元素且独树一帜的布局设计体系。
+
+## 各大主题变体
+
+| 主题风格 | 对应组件 | 样式描述 |
+|-------|-----------|-------|
+| **Liquid** | `AboutLiquid.astro` | 具有流体灵动布局与具备有机形态特质背景 |
+| **Glass** | `AboutGlass.astro` | 含有深刻景深透视感官的磨砂质感毛玻璃面板 |
+| **Neo** | `AboutNeo.astro` | 粗犷张扬的标志性巨大加粗排版以及高对比度设计卡片 |
+| **Luxury** | `AboutLuxury.astro` | 搭配以金色细节作为点缀的高贵典雅排版设计的布局 |
+| **Minimal** | `AboutMinimal.astro` | 纯净极简且重心倾向聚焦于内容的纯粹设计语言 |
+| **Aurora** | `AboutAurora.astro` | 携带着几何结构体造型的这梦幻极光渐变网格背景 |
+
+所有上述提及的各主题变体均可在于 `src/components/sections/about/` 路径内寻得。
+
+## 内容数据读取来源
+
+关于我们 (About) 这一部分所展示的文案文本是通过 `useTranslations()` 获取并加载于 `src/locales/{lang}/about.json` 里的。
+
+<Callout type="info" title="不接受外部属性传参 (No Props)">
+  About 相关的各种组件不支持亦不可接受任何形式外部所传入的 Props 属性传参请求。若是需要变更、编辑关于我们这一块的展出文案内容，请移步前往修改对应的 `src/locales/{lang}/about.json` 此文件。
+</Callout>
+
+## 进行自定义修改配置
+
+如果需要进行自定义：
+1. 请编辑修改位于 `src/components/sections/about/About{Theme}.astro` 内的文件。
+2. 可以在 `src/styles/components/about/` 里随心所欲畅快调试组件的外观及样式设计表现效果。
+3. 请将对于展示内容的变更信息修改在对应的 `src/locales/{lang}/about.json` 之中。

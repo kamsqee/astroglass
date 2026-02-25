@@ -1,0 +1,92 @@
+---
+title: プロジェクトの構造
+description: AstroGlass のコードベースの構成の概要。
+order: 3
+---
+
+import ProjectStructureGraph from '../../../../components/ui/diagrams/ProjectStructureGraph';
+
+AstroGlass は、いくつかの重要な組織的パターンを伴う標準の Astro プロジェクト構造に従っています。
+
+<ProjectStructureGraph client:only="react" />
+
+## 主要なディレクトリ
+
+### `src/components/pages/`
+
+動的ルーティング用のフルページコンポーネント（ポートフォリオページなど）が含まれます。ページタイプごとに整理されています：
+
+```
+pages/
+├── portfolio/
+│   ├── aurora/
+│   │   ├── PortfolioHeroAurora.astro
+│   │   ├── ...
+│   ├── liquid/
+│   │   ├── PortfolioHeroLiquid.astro
+│   │   ├── PortfolioGridLiquid.astro
+│   │   ├── PortfolioModalLiquid.astro
+│   │   ├── PortfolioCTALiquid.astro
+│   │   └── ...
+│   └── ...
+```
+
+### `src/components/sections/`
+
+すべてのページセクションコンポーネントが含まれ、セクションタイプごとに整理されています。各セクションには、テーマごとに1つのバリアントを持つサブディレクトリがあります：
+
+```
+sections/
+├── hero/
+│   ├── HeroLiquid.astro
+│   ├── HeroGlass.astro
+│   ├── HeroNeo.astro
+│   ├── HeroLuxury.astro
+│   ├── HeroMinimal.astro
+│   └── HeroAurora.astro
+├── about/
+├── features/
+├── portfolio/
+├── pricing/
+├── testimonial/
+├── faq/
+├── cta/
+├── contact/
+└── footer/
+```
+
+### `src/components/layout/header/`
+
+テーマ固有のヘッダー/ナビゲーションバーコンポーネント（例： `HeaderGlass.astro`、`HeaderLuxury.astro`）。
+
+### `src/components/ui/`
+
+再利用可能な UI プリミティブ要素： `Button`、`Card`、`Badge`、`Avatar`、`Input`、`Tabs`、`Charts`、`ThemeSwitcher`、`LanguageSwitcher`、および `Search`。
+
+### `src/config/`
+
+中央設定（構成）ファイル群：
+- `themes.ts` — テーマレジストリ（ID、名前、有効状態、セクションリスト）
+- `locales.ts` — サポートされている言語とそのメタデータ
+- `navigation.ts` — サイトのメインナビゲーション構造
+- `docs.ts` — ドキュメントのサイドバー設定とバージョン管理
+
+### `src/content/`
+
+ドキュメントとブログ投稿のための Astro コレクション（Content Collections）。`docs/[lang]/` 内の構造がドキュメントの URL パスを決定します。
+
+### `src/locales/`
+
+言語コードごとに整理された JSON 翻訳ファイル。各ファイルはページセクション（例：`hero.json`、`pricing.json`、`contact.json`）に対応しています。
+
+### `src/pages/`
+
+ファイルベースのルーティング。`[theme].astro` の動的ルートは、有効な各テーマのページを生成します。`[...lang]` ディレクトリパターンは、アーキテクチャ全体にわたるローカライズされたページバリアントを処理します。
+
+### `src/styles/`
+
+グローバル CSS、テーマのオーバーライド（`_themes.css`）、アニメーションのキーフレーム、および `components/` 内のコンポーネント固有のスタイルシート。
+
+### `src/utils/`
+
+i18n 翻訳（`i18n.ts`）、ロケール検出（`locale-utils.ts`）、ドキュメントナビゲーション（`docs-nav.ts`）のためのユーティリティ関数。

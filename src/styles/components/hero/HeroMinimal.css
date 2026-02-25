@@ -1,0 +1,38 @@
+/* HeroMinimal.css — Scroll-driven storytelling hero */
+
+.hero-minimal-stage {
+  position: relative;
+}
+
+.hero-minimal-word {
+  background: linear-gradient(135deg, hsl(var(--bc)) 0%, hsl(var(--bc) / 0.5) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-minimal-sticky-cta.visible {
+  transform: translateY(0);
+}
+
+.hero-minimal-progress-dot.active {
+  background: hsl(var(--a));
+  transform: scale(1.5);
+}
+
+/* Smooth scroll for the whole container */
+.hero-minimal-container {
+  scroll-behavior: smooth;
+}
+
+/* Stage transitions */
+.hero-minimal-stage > div {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.hero-minimal-stage.in-view > div {
+  opacity: 1;
+  transform: translateY(0);
+}

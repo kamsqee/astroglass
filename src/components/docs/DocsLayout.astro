@@ -1,0 +1,266 @@
+---
+/**
+ * Docs Layout Component
+ * Single unified layout with improved mobile experience.
+ * Includes Scrollspy, Mobile Drawer, and Glassmorphism polish.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { buildDocsNav, SIDEBAR_LABELS } from '../../utils/docs-nav';
+import { useTranslations } from '../../utils/i18n';
+import DocsSearch from './DocsSearch.astro';
+import DocsProgress from './DocsProgress.astro';
+import DocsBottomBar from './DocsBottomBar.astro';
+import DocsTOCMobile from './DocsTOCMobile.astro';
+import SearchDialog from '../ui/search/SearchDialog';
+import HighlightScript from '../ui/search/HighlightScript.astro';
+
+import '../../styles/components/docs/DocsLayout.css';
+
+interface Props {
+  doc: any;
+  headings: any[];
+  locale: string;
+  isFallback?: boolean;
+}
+
+const { doc, headings, locale, isFallback = false } = Astro.props;
+const t = useTranslations(locale);
+const sections = await buildDocsNav(locale);
+
+// Generate generic section -> localized label map
+const sectionLabels: Record<string, string> = {};
+Object.entries(SIDEBAR_LABELS).forEach(([key, labels]) => {
+  // Map internal keys (e.g. 'components-ui')
+  sectionLabels[key] = labels[locale];
+  
+  // Also map display variants if needed or map fallback keys
+  // For now, simpler mapping in SearchDialog is to look up by sectionKey
+});
+
+const searchLabels = {
+  placeholder: t('docs.searchPlaceholder') || 'Search documentation...',
+  noResults: t('docs.noResults') || 'No results found',
+  recentSearches: t('docs.recentSearches') || 'Recent',
+  quickLinks: t('docs.quickLinks') || 'Quick Links',
+  gettingStarted: t('docs.gettingStarted') || 'Getting Started',
+  components: t('docs.components') || 'Components',
+  themes: t('docs.themes') || 'Themes',
+  clear: t('docs.clear') || 'Clear',
+  didYouMean: t('docs.didYouMean') || 'Did you mean?',
+  loading: t('docs.loading') || 'Loading...',
+  footerSearch: t('docs.footerSearch') || 'Search docs',
+  footerNavigate: t('docs.footerNavigate') || 'Navigate',
+  footerSelect: t('docs.footerSelect') || 'Select',
+  footerClose: t('docs.footerClose') || 'Close',
+  remove: t('docs.remove') || 'Remove',
+  esc: t('docs.esc') || 'Esc',
+};
+---
+
+<BaseLayout title={`${doc.data.title} | Docs`} description={doc.data.description}>
+  <DocsProgress />
+  <HighlightScript />
+  <SearchDialog client:only="react" locale={locale} labels={searchLabels} sectionLabels={sectionLabels} />
+  
+  <div class="c-docs-layout__container docs-container min-h-screen" style="padding-top: var(--nav-offset, 4rem)">
+    
+    {/* Mobile Header Bar */}
+    {/* Mobile Header Bar - REMOVED (Moved to Bottom Bar) */}
+
+    {/* Mobile Drawer Overlay */}
+    <div id="mobile-drawer-overlay" class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm opacity-0 invisible transition-all duration-300 lg:hidden"></div>
+
+    {/* Mobile Drawer */}
+    <div id="mobile-drawer" class="fixed top-0 left-0 bottom-0 w-[300px] z-[101] bg-base-100 transform -translate-x-full transition-transform duration-300 ease-out lg:hidden flex flex-col shadow-2xl">
+      <div class="p-4 border-b border-base-content/10 flex items-center justify-between">
+        <span class="font-bold text-lg">{t('docs.navigation') || 'Navigation'}</span>
+        <button id="close-drawer-btn" class="p-2 rounded-lg hover:bg-base-content/10 transition-colors">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <nav class="flex-1 overflow-y-auto p-4 space-y-6">
+        {sections.map(section => (
+          <div>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-base-content/75 mb-3 px-2">{section.title}</h3>
+            <ul class="space-y-1">
+              {section.items.map(item => {
+                const isActive = Astro.url.pathname.includes(item.href);
+                return (
+                  <li>
+                    <a 
+                      href={item.href} 
+                      class={`block py-2.5 px-3 rounded-lg text-sm transition-colors ${isActive ? 'bg-accent/10 text-accent font-medium' : 'text-base-content/70 hover:bg-base-content/5'}`}
+                      data-drawer-link
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </nav>
+    </div>
+
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+      <div class="lg:grid lg:grid-cols-[260px_1fr_240px] lg:gap-12">
+        
+        {/* Desktop Sidebar */}
+        <aside class="hidden lg:block py-10 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto c-docs-layout__no-scrollbar">
+          <div class="mb-6"><DocsSearch locale={locale} /></div>
+          <nav class="space-y-8">
+            {sections.map(section => (
+              <div>
+                <h3 class="font-bold text-xs uppercase tracking-wider text-base-content/75 mb-3 px-3">
+                  {section.title}
+                </h3>
+                <ul class="space-y-0.5">
+                  {section.items.map(item => {
+                    const isActive = Astro.url.pathname === item.href || Astro.url.pathname === item.href + '/';
+                    return (
+                      <li>
+                        <a 
+                          href={item.href}
+                          class:list={[
+                            "block px-3 py-1.5 rounded-lg text-sm transition-all duration-200",
+                            isActive
+                              ? "bg-accent/10 text-accent font-medium translate-x-1"
+                              : "text-base-content/75 hover:text-base-content hover:bg-base-content/5 hover:translate-x-1"
+                          ]}
+                        >
+                          {item.title}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </nav>
+        </aside>
+
+        {/* Main Content - SCOPED FOR DOCS SEARCH */}
+        <main class="py-10 min-w-0">
+          {isFallback && (
+            <div class="mb-8 p-4 rounded-xl bg-warning/10 border border-warning/20 text-warning flex items-center gap-3">
+              <span class="text-xl">⚠️</span>
+              <div>
+                <p class="font-bold text-sm">{t('docs.translationMissing') || 'Translation Missing'}</p>
+                <p class="text-xs opacity-80">{t('docs.showingEnglish') || 'Showing English version.'}</p>
+              </div>
+            </div>
+          )}
+
+          <header class="mb-10 border-b border-base-content/5 pb-10">
+            <div class="text-xs font-bold text-accent uppercase tracking-wider mb-3">{doc.data.order ? `Part ${doc.data.order}` : t('docs.guide') || 'Guide'}</div>
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-base-content mb-4 tracking-tight">{doc.data.title}</h1>
+            {doc.data.description && (
+              <p class="text-lg sm:text-xl text-base-content/75 leading-relaxed">{doc.data.description}</p>
+            )}
+          </header>
+
+          <article class="prose prose-lg c-docs-layout__prose max-w-none">
+            <slot />
+          </article>
+          
+          <div class="mt-16 pt-8 border-t border-base-content/5 flex flex-col sm:flex-row justify-between gap-4 text-sm text-base-content/75">
+            {doc.data.lastUpdated && <span>Updated: {new Date(doc.data.lastUpdated).toLocaleDateString()}</span>}
+            {doc.data.lastUpdated && <span>Updated: {new Date(doc.data.lastUpdated).toLocaleDateString()}</span>}
+            <!-- Edit link removed -->
+          </div>
+        </main>
+
+        {/* Desktop TOC */}
+        <aside class="hidden lg:block py-10 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto">
+          <h4 class="font-bold text-xs uppercase tracking-wider text-base-content/75 mb-4 px-2">{t('docs.onThisPage') || 'On this page'}</h4>
+          <ul class="space-y-1 text-sm text-base-content/75" id="toc-list">
+            {headings.map(h => (
+              <li style={`padding-left: ${(h.depth - 2) * 0.75}rem`}>
+                <a 
+                  href={`#${h.slug}`} 
+                  class="toc-link block py-1 px-2 rounded hover:text-accent hover:bg-base-content/5 transition-colors border-l-2 border-transparent"
+                  data-slug={h.slug}
+                >
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
+      </div>
+    </div>
+    
+    <!-- Mobile TOC -->
+    <DocsTOCMobile headings={headings} />
+    
+    <!-- Mobile Bottom Bar -->
+    <DocsBottomBar currentPath={Astro.url.pathname} locale={locale} />
+  </div>
+</BaseLayout>
+
+<script>
+  function initDocsLayout() {
+    // Mobile Drawer Logic
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const closeBtn = document.getElementById('close-drawer-btn');
+    const drawer = document.getElementById('mobile-drawer');
+    const overlay = document.getElementById('mobile-drawer-overlay');
+    const drawerLinks = document.querySelectorAll('[data-drawer-link]');
+
+    function openDrawer() {
+      drawer?.classList.remove('-translate-x-full');
+      overlay?.classList.remove('opacity-0', 'invisible');
+      overlay?.classList.add('opacity-100', 'visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer?.classList.add('-translate-x-full');
+      overlay?.classList.add('opacity-0', 'invisible');
+      overlay?.classList.remove('opacity-100', 'visible');
+      document.body.style.overflow = '';
+    }
+
+    menuBtn?.addEventListener('click', openDrawer);
+    closeBtn?.addEventListener('click', closeDrawer);
+    overlay?.addEventListener('click', closeDrawer);
+    
+    // Close drawer when clicking a link
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(closeDrawer, 100);
+      });
+    });
+
+    // Mobile Search Button (Removed from top bar, logic handled in BottomBar)
+    // const mobileSearchBtn = document.getElementById('mobile-search-btn');
+    // ... logic moved to DocsBottomBar
+
+    // TOC Scrollspy Logic
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        const link = document.querySelector(`.toc-link[data-slug="${id}"]`);
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.toc-link').forEach(l => {
+            l.classList.remove('text-accent', 'border-accent', 'bg-accent/5');
+          });
+          link?.classList.add('text-accent', 'border-accent', 'bg-accent/5');
+        }
+      });
+    }, { rootMargin: '-100px 0px -66% 0px' });
+
+    document.querySelectorAll('h2[id], h3[id]').forEach((h) => {
+      observer.observe(h);
+    });
+
+    // Copy Code Logic
+    // REMOVED: Expressive Code handles copy buttons natively now.
+
+  }
+
+  initDocsLayout();
+  document.addEventListener('astro:after-swap', initDocsLayout);
+</script>

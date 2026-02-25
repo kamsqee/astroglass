@@ -1,0 +1,31 @@
+{
+  "title": "Идеальный старт на Astro.",
+  "subtitle": "6 тем, 7 языков, компоненты, блог и документация. Бесплатно.",
+  "cta": "Все шаблоны",
+  "secondaryCta": "Документация",
+  "liveBadge": "Бесплатно и с открытым кодом",
+  "digitalExperience": "Цифровое Впечатление",
+  "watchReel": "Смотреть в действии",
+  "glassCard": {
+    "title": "Astro Glass Компоненты",
+    "desc": "Прекрасно созданные блоки для премиальных цифровых интерфейсов."
+  },
+  "visionary": "Инновационный Дизайн",
+  "trustedBy": "Нам доверяют",
+  "scrollToExplore": "Листайте вниз",
+  "tryItNow": "Попробуйте сейчас",
+  "dontTakeOurWord": "Не верьте на слово.",
+  "startBuilding": "Начать",
+  "viewFullDemo": "Полное демо",
+  "faster": "БЫСТРЕЕ.",
+  "buildFaster": "Создавайте быстрее.",
+  "shippingVelocity": "Ускорьте запуск в 10 раз",
+  "readyToBuild": "Готовы создавать?",
+  "askLeaders": "Спросите у Stripe, Linear, Vercel.",
+  "cloneCommand": "npx degit kamsqee/astroglass my-site",
+  "readyIn": "Готово за 2 минуты",
+  "terminal": {
+    "label": "Терминал"
+  },
+  "interactivePreview": "Интерактивное превью"
+}

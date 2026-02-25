@@ -1,0 +1,47 @@
+---
+title: "Cards"
+description: "Glassmorphic cards for features and blogs."
+order: 2
+---
+
+import { Card } from '../../../../../components/ui/card.tsx';
+
+Cards are the fundamental building block of the glass design system.
+
+## Variants
+
+We support multiple card styles via the `variant` prop.
+
+| Variant | Description | Visual Style |
+| :--- | :--- | :--- |
+| `glass` | Standard frosted glass | Blur + Border |
+| `solid` | Opaque background | High contrast |
+| `outline` | Border only | Minimalist |
+
+## Live Examples
+
+<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 not-prose my-8">
+  <Card variant="glass" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Glass Card</h3>
+    <p className="text-sm opacity-80">Standard frosted glass effect with blur and subtle border.</p>
+  </Card>
+
+  <Card variant="solid" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Solid Card</h3>
+    <p className="text-sm opacity-80">Opaque background for high contrast.</p>
+  </Card>
+
+  <Card variant="outline" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Outline Card</h3>
+    <p className="text-sm opacity-80">Minimalist border-only style.</p>
+  </Card>
+</div>
+
+## Code Usage
+
+```tsx
+<Card variant="glass" className="p-6">
+  <h3>Glass Card</h3>
+  <p>This creates a beautiful depth effect.</p>
+</Card>
+```

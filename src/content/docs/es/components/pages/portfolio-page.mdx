@@ -1,0 +1,63 @@
+---
+title: "Página de Portafolio"
+description: "Una página de portafolio completa, con filtrado habilitado y disponible para cada tema."
+order: 1
+---
+
+# Página de Portafolio
+
+Como novedad en **AstroGlass**, la Página de Portafolio es una ruta dinámica y dedicada que proporciona una rica exhibición de tus proyectos. Cuenta con un filtrado por categorías, vistas detalladas de los proyectos y un diseño que se adapta a tu tema activo.
+
+## Arquitectura
+
+La página de portafolio se sirve en `/[theme]/portfolio` (ej., `/liquid/portfolio`, `/glass/portfolio`). Utiliza una estrategia de enrutamiento dinámico similar a las páginas principales de los temas.
+
+### Estructura de Archivos
+
+- **Ruta**: `src/pages/[theme]/portfolio.astro` - El manejador de ruta dinámica.
+- **Componentes**: `src/components/pages/portfolio/{theme}/` - Implementaciones de secciones modulares específicas para cada tema (ej., `PortfolioHeroLiquid.astro`, `PortfolioGridLiquid.astro`).
+- **Contenido**: `src/locales/{lang}/portfolioPage.json` - Todo el contenido de texto, datos del proyecto y categorías.
+
+## Personalización
+
+A diferencia de las secciones específicas de la página de inicio, la Página de Portafolio está manejada completamente por datos mediante archivos de localización. Esto facilita añadir proyectos sin tocar el código.
+
+### Gestionar Proyectos
+
+Edita `src/locales/es/portfolioPage.json` para gestionar tus proyectos.
+
+```json title="src/locales/es/portfolioPage.json"
+{
+  "projects": {
+    "p1": {
+      "title": "Nombre del Proyecto",
+      "description": "Breve descripción para la tarjeta.",
+      "longDescription": "descripción más larga para la vista de detalle...",
+      "category": "webapp",
+      "techStack": ["React", "Node.js"],
+      "color": "from-violet-500 to-fuchsia-500"
+    }
+  }
+}
+```
+
+### Categorías
+
+Las categorías se definen en el mismo archivo JSON y se usan para el filtrado.
+
+```json
+{
+  "filterAll": "Todo",
+  "categoryLabels": {
+    "webapp": "Aplicación Web",
+    "mobile": "Aplicación Móvil"
+  }
+}
+```
+
+## Características
+
+- **Filtrado Dinámico**: Filtrado del lado del cliente por categoría con animaciones suaves.
+- **Vista Detallada**: Panel de detalles expandible para cada proyecto que muestra el "Desafío", la "Solución" y el "Impacto".
+- **Adaptación al Tema**: Utiliza automáticamente el encabezado, el pie de página y los estilos correctos para el tema activo.
+- **Responsivo**: Diseño completamente adaptable que funciona en teléfonos móviles, tabletas y PC de escritorio.

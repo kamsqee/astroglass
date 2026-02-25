@@ -1,0 +1,510 @@
+[
+  {
+    "url": "/fr/docs/getting-started",
+    "locale": "fr",
+    "title": "Démarrer avec AstroGlass",
+    "description": "Découvrez comment configurer et personnaliser votre modèle Astro avec des thèmes, l'internationalisation et le déploiement sur le cloud.",
+    "section": "Getting Started",
+    "sectionIcon": "⚡",
+    "sectionOrder": 1,
+    "headings": [
+      "Prérequis",
+      "Installation",
+      "Structure du Projet",
+      "Choisir un Thème",
+      "Prochaines Étapes"
+    ],
+    "content": "Bienvenue dans le Modèle AstroGlass ! Ce guide vous accompagnera pour configurer votre environnement de développement et personnaliser le modèle pour répondre à vos besoins. Prérequis Avant de commencer, assurez-vous d'avoir installé ce qui suit : - Node.js v20 ou supérieur - pnpm (recommandé) ou npm - Un éditeur de code (VS Code recommandé) Nous recommandons d'utiliser pnpm pour une gestion de paquets plus rapide et économe en espace disque. Installation Cloner le dépôt Tout d'abord, clonez le dépôt du modèle sur votre machine locale : Installer les dépendances Installez les dépendances du projet en utilisant votre gestionnaire de paquets préféré : Démarrer le serveur de développement Lancez le serveur de développement pour voir votre modèle en action : Votre site devrait maintenant fonctionner sur 🎉 Structure du Projet Voici un aperçu de la structure des dossiers du projet : - src/ - components/ - sections/ - hero/ - HeroLiquid.astro - HeroGlass.astro - HeroNeo.astro - ... - features/ - pricing/ - about/ - portfolio/ - ... - layout/ - header/ - ui/ - docs/ - mdx/ - config/ - themes.ts - locales.ts - docs.ts - navigation.ts - content/ - docs/ - en/ - ru/ - blog/ - locales/ - en/ - ru/ - pages/ - index.astro - [theme].astro - docs/ - blog/ - styles/ - global.css - _themes.css - components/ - public/ - astro.config.mjs - package.json Choisir un Thème Le modèle est livré avec 6 superbes thèmes prêts à l'emploi : | Thème | Description | |-------|-------------| | Liquid | Animations fluides, arrière-plans dégradés | | Glass | Effets de glassmorphism, panneaux dépolis | | Neo | Typographie audacieuse, fort contraste | | Luxury | Élégants accents dorés, sensation premium | | Minimal | Épuré, ciblé, sans distraction | | Aurora | Dégradés immersifs, structure géométrique | Pour changer de thème, accédez simplement au sélecteur de thème dans l'en-tête ou visitez directement les pages de démonstration des thèmes (par ex., , , ). Prochaines Étapes Maintenant que votre environ",
+    "order": 1
+  },
+  {
+    "url": "/fr/docs/getting-started/introduction",
+    "locale": "fr",
+    "title": "Introduction",
+    "description": "Bienvenue dans la documentation AstroGlass.",
+    "section": "Getting Started",
+    "sectionIcon": "⚡",
+    "sectionOrder": 1,
+    "headings": [
+      "Pourquoi AstroGlass ?",
+      "Qu'est-ce qui est Inclus ?"
+    ],
+    "content": "AstroGlass est un thème Astro premium conçu pour les startups et les créateurs qui souhaitent se démarquer. Il présente un système de conception Glassmorphism unique, construit sur Tailwind CSS v4. Pourquoi AstroGlass ? - Design Premium : 6 variantes de thèmes complètes avec des effets de profondeur et de flou. - Performance Hybride : Contenu généré statiquement avec des capacités côté serveur. - Expérience Développeur : Collections de contenu typées et configuration facile. - Entièrement i18n : Prise en charge intégrée de 7 langues, facilement extensible. Qu'est-ce qui est Inclus ? Le modèle est livré avec 6 thèmes entièrement conçus, chacun proposant plus de 12 sections de page (Héros, À propos, Fonctionnalités, Tarification, Témoignages, FAQ, CTA, Contact, En-tête, Pied de page, plus de nouvelles sections pour la Landing Page), une page Portfolio dédiée, une page 404 personnalisée, ainsi qu'un système de blog et une documentation complète.",
+    "order": 1
+  },
+  {
+    "url": "/fr/docs/getting-started/installation",
+    "locale": "fr",
+    "title": "Installation",
+    "description": "Comment configurer votre nouveau projet AstroGlass.",
+    "section": "Getting Started",
+    "sectionIcon": "⚡",
+    "sectionOrder": 1,
+    "headings": [
+      "Prérequis",
+      "Démarrage Rapide"
+    ],
+    "content": "Démarrer est facile. Clonez le dépôt et installez les dépendances. Prérequis - Node.js v20.0.0 ou supérieur - pnpm v8+ (recommandé) ou npm/yarn Démarrage Rapide 1. Cloner le dépôt 2. Entrer dans le répertoire 3. Installer les dépendances 4. Démarrer le serveur de développement Visitez pour voir votre nouveau site.",
+    "order": 2
+  },
+  {
+    "url": "/fr/docs/getting-started/configuration",
+    "locale": "fr",
+    "title": "Configuration",
+    "description": "Personnalisez AstroGlass pour correspondre à votre marque.",
+    "section": "Getting Started",
+    "sectionIcon": "⚡",
+    "sectionOrder": 1,
+    "headings": [
+      "Fichiers de Configuration",
+      "Stylisation avec Tailwind CSS v4",
+      "Configuration du Thème",
+      "Configuration Régionale (Locales)"
+    ],
+    "content": "AstroGlass est configuré via des fichiers dans et des propriétés personnalisées CSS standard. Fichiers de Configuration - src/ - config/ - themes.ts — Définitions des thèmes (nom, couleurs, sections, indicateur premium) - locales.ts — Langues prises en charge et métadonnées locales - navigation.ts — Structure de navigation principale du site - docs.ts — Configuration de la barre latérale de la documentation et de la version Stylisation avec Tailwind CSS v4 Ce projet utilise Tailwind CSS v4 via le plugin . Il n'y a pas de fichier — toute la configuration se fait via CSS. Les couleurs et les variables de thème sont définies comme des propriétés personnalisées CSS dans et : Pour modifier la palette de couleurs du site, mettez à jour les valeurs HSL dans . Les surcharges spécifiques au thème se trouvent dans en utilisant les sélecteurs . Configuration du Thème Chaque thème est enregistré dans . Cela centralise toutes les métadonnées du thème : Configuration Régionale (Locales) Les langues sont gérées dans . Pour ajouter une nouvelle langue, ajoutez une entrée et définissez :",
+    "order": 3
+  },
+  {
+    "url": "/fr/docs/components/pages/portfolio-page",
+    "locale": "fr",
+    "title": "Page Portfolio",
+    "description": "Une page portfolio complète, avec filtrage, disponible pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Architecture",
+      "Personnalisation",
+      "Fonctionnalités"
+    ],
+    "content": "Page Portfolio Nouveau dans AstroGlass, la page Portfolio est une route dynamique dédiée qui offre une présentation riche de vos projets. Elle propose un filtrage par catégorie, des vues détaillées des projets et un design qui s'adapte à votre thème actif. Architecture La page portfolio est servie à l'adresse (par exemple, , ). Elle utilise une stratégie de routage dynamique similaire aux pages de thèmes principales. Structure des Fichiers - Route : - Le gestionnaire de route dynamique. - Composants : - Implémentations de sections modulaires spécifiques au thème (par exemple, , ). - Contenu : - Tout le contenu textuel, les données des projets et les catégories. Personnalisation Contrairement aux sections spécifiques de la page d'accueil, la Page Portfolio est entièrement pilotée par les données via les fichiers de localisation. Cela facilite l'ajout de projets sans avoir à toucher au code. Gestion des Projets Modifiez pour gérer vos projets. Catégories Les catégories sont définies dans le même fichier JSON et utilisées pour le filtrage. Fonctionnalités - Filtrage Dynamique : Filtrage côté client par catégorie avec des animations fluides. - Vue Détaillée : Panneau de détails extensible pour chaque projet affichant le \"Défi\" (Challenge), la \"Solution\" et l'\"Impact\". - Adaptation au Thème : Utilise automatiquement le bon en-tête, pied de page et style pour le thème actif. - Réactif : Disposition entièrement réactive qui fonctionne sur mobile, tablette et ordinateur de bureau.",
+    "order": 1
+  },
+  {
+    "url": "/fr/docs/components/reference/api-reference",
+    "locale": "fr",
+    "title": "Référence de l'API",
+    "description": "Référence API technique pour les composants et utilitaires AstroGlass.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "`useTranslations(locale)`",
+      "`getLocaleFromUrl(url)`",
+      "`buildNavLinks(locale, section)`",
+      "`getEnabledThemes()`",
+      "`getThemeById(id)`",
+      "Type : `ThemeDefinition`",
+      "Type : `LocaleConfig`",
+      "Thèmes Disponibles"
+    ],
+    "content": "Référence détaillée des fonctions clés, des types et des objets de configuration utilisés dans AstroGlass. Renvoie une fonction de récupération de traduction pour les paramètres régionaux (locale) donnés. Module : Signature : Paramètres : | Paramètre | Type | Description | |-----------|------|-------------| | | () | Le code de la langue pour laquelle charger les traductions. | Retours : Une fonction qui résout une clé en notation pointillée vers sa valeur traduite. Si la clé n'est pas trouvée, elle renvoie la clé elle-même et consigne un avertissement en mode développement. Utilisation : Comportement Clé : - Les clés de sont réparties au niveau racine (par exemple, ) - Tous les autres fichiers sont espacés par nom de fichier (par exemple, , ) - Les clés manquantes renvoient la chaîne de la clé en production, et génèrent des avertissements en développement --- Extrait le code de la langue à partir de l'URL actuelle. Module : Signature : Renvoie le préfixe de la langue à partir du chemin de l'URL, avec la valeur par défaut si aucun n'est trouvé. --- Génère des liens de navigation pour la barre latérale de la documentation. Module : Signature : Renvoie un tableau d'objets de lien de navigation utilisés par le composant de la barre latérale de la documentation. --- Renvoie toutes les définitions de thèmes activées. Module : Signature : --- Renvoie une définition de thème spécifique par son identifiant (ID). Module : Signature : --- Type : Type : Thèmes Disponibles | ID | Nom | Icône | |----|------|------| | | Liquid | 💧 | | | Glass | 🪟 | | | Neo | ⚡ | | | Luxury | 👑 | | | Minimal | ✨ | | | Aurora | 🌌 |",
+    "order": 1
+  },
+  {
+    "url": "/fr/docs/components/sections/overview",
+    "locale": "fr",
+    "title": "Aperçu des composants de section",
+    "description": "Un aperçu de tous les composants de section disponibles dans AstroGlass.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Sections disponibles",
+      "Comment ça fonctionne",
+      "Structure des fichiers"
+    ],
+    "content": "Les composants de section sont les éléments de base de chaque page de thème. Chaque page de thème est composée de 12+ sections, chacune ayant une variante dédiée par thème. Sections disponibles Comment ça fonctionne Chaque section comporte 6 variantes de thème — une pour chaque thème (Liquid, Glass, Neo, Luxury, Minimal, Aurora). La page dynamique située sous utilise une carte de composants pour afficher la bonne variante : Les composants de section n'acceptent aucune prop. Tout le contenu textuel est chargé en interne via depuis . Pour modifier le contenu de n'importe quelle section, modifiez le fichier JSON de la langue correspondante. Structure des fichiers Chaque section suit un modèle de répertoire cohérent : Le CSS pour chaque section se trouve dans .",
+    "order": 1
+  },
+  {
+    "url": "/fr/docs/components/pages/landing",
+    "locale": "fr",
+    "title": "Sections de la Page d'Accueil",
+    "description": "Sections spécialisées utilisées sur la page d'accueil principale.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Bande de Statistiques (Stats Strip)",
+      "Présentation du Modèle (Template Showcase)",
+      "FAQ Accueil",
+      "Comment ça Marche"
+    ],
+    "content": "Sections de la Page d'Accueil Le point d'entrée principal du modèle () utilise plusieurs sections spécialisées conçues pour mettre en valeur les fonctionnalités du modèle. Elles se trouvent dans . Bande de Statistiques (Stats Strip) Une bande horizontale qui affiche des indicateurs clés sur votre projet (par exemple, \"6 Thèmes\", \"66+ Composants\"). - Fonctionnalités : Nombres qui s'incrémentent de manière animée lorsqu'ils apparaissent à l'écran. - Configuration : Modifiez le tableau dans le frontmatter du composant ou utilisez pour les libellés. Présentation du Modèle (Template Showcase) Une disposition de type \"Bento grid\" qui offre une navigation visuelle vers différentes parties du modèle (Thèmes, Composants, Blog, Docs, etc.). - Fonctionnalités : Effets de survol, cartes glassmorphism, disposition en grille réactive. - Contenu : Géré via sous . FAQ Accueil Une section FAQ légère, de style accordéon, conçue pour la page d'accueil. - Fonctionnalités : Animations douces d'expansion/réduction, attributs ARIA accessibles. - Contenu : Les questions et réponses sont stockées dans sous . Comment ça Marche Une visualisation en 3 étapes du processus (par exemple, Cloner -> Personnaliser -> Déployer). - Fonctionnalités : Étapes numérotées avec icônes et arrière-plans dégradés. - Contenu : Texte des étapes dans .",
+    "order": 2
+  },
+  {
+    "url": "/fr/docs/components/reference/mdx-components",
+    "locale": "fr",
+    "title": "Composants MDX",
+    "description": "Composants MDX personnalisés disponibles pour une utilisation dans la documentation.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Callout (Message d'Alerte)",
+      "Badge",
+      "Steps (Étapes)",
+      "FileTree (Arborescence de Fichiers)",
+      "CardGrid & LinkCard (Grille de Cartes & Carte Lien)",
+      "CodeTabs (Onglets de Code)",
+      "PropsTable (Tableau des Propriétés)",
+      "ApiMethod (Méthode API)"
+    ],
+    "content": "Une bibliothèque de composants MDX personnalisés disponibles sur toutes les pages de documentation. Ceux-ci sont automatiquement enregistrés dans le pipeline de rendu de la documentation. Callout (Message d'Alerte) Utilisez les \"callouts\" pour mettre en évidence des informations importantes. Types : , , , --- Badge Affichez des indicateurs de version ou de statut. Props (Propriétés) : | Propriété | Type | Description | |------|------|-------------| | | | Libellé du badge | | | | Variante de couleur | --- Steps (Étapes) Enveloppez des listes ordonnées pour des instructions étape par étape. --- FileTree (Arborescence de Fichiers) Affichez les structures de fichiers et de répertoires. Les éléments en gras avec sont mis en évidence. Utilisez pour les éléments de liste. --- CardGrid & LinkCard (Grille de Cartes & Carte Lien) Affichez des cartes liées dans une grille réactive. Props de LinkCard : | Propriété | Type | Description | |------|------|-------------| | | | Titre de la carte | | | | Description de la carte | | | | Destination du lien | --- CodeTabs (Onglets de Code) Affichez des blocs de code sous forme d'onglets pour plusieurs gestionnaires de paquets ou langages. bash pnpm install ​bash npm install ​bash yarn install ​ Props : | Propriété | Type | Description | |------|------|-------------| | | | Étiquettes d'onglets affichées au-dessus de chaque bloc de code | Placez chaque bloc de code comme enfant direct. Le nombre de blocs de code doit correspondre au nombre d'étiquettes. --- PropsTable (Tableau des Propriétés) Affichez la documentation des propriétés (props) d'un composant dans un tableau formaté. --- ApiMethod (Méthode API) Documentez la signature d'une fonction ou d'une méthode.",
+    "order": 2
+  },
+  {
+    "url": "/fr/docs/components/sections/hero",
+    "locale": "fr",
+    "title": "Section Héros (Hero)",
+    "description": "Sections héros plein écran pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de Thème",
+      "Comment ça marche",
+      "Personnaliser un Héros"
+    ],
+    "content": "La section Héros (Hero) est la première chose que les visiteurs voient. Chaque thème possède son propre design de héros unique avec des animations personnalisées, des arrière-plans et une disposition spécifique. Variantes de Thème | Thème | Composant | Design | |-------|-----------|--------| | Liquid | | Formes SVG animées liquides, texte en dégradé | | Glass | | Carte de héros en verre dépoli avec arrière-plans flous | | Neo | | Typographie audacieuse, contraste élevé | | Luxury | | Accents dorés, disposition premium | | Minimal | | Épuré, centré, sans distraction | | Aurora | | Maillage dégradé, éléments géométriques | Toutes les variantes se trouvent dans . Comment ça marche Chaque variante de Héros est un composant Astro autonome qui : 1. Importe et initialise pour la langue actuelle. 2. Rend (render) sa propre structure HTML unique avec un CSS spécifique au thème. 3. Charge les clés de traduction comme , , et depuis . Les composants Hero ne prennent aucune propriété externe. Pour modifier le titre d'accroche, le sous-titre ou le texte du CTA, modifiez (ou le fichier de langue approprié). Personnaliser un Héros Pour personnaliser le composant Héros d'un thème spécifique : 1. Ouvrez . 2. Modifiez la structure HTML, les classes ou les animations selon vos besoins. 3. Pour les modifications CSS, éditez . 4. Pour les modifications de texte, éditez .",
+    "order": 2
+  },
+  {
+    "url": "/fr/docs/components/ui/cards",
+    "locale": "fr",
+    "title": "Cartes (Cards)",
+    "description": "Cartes avec effet glassmorphism pour les fonctionnalités et les blogs.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes",
+      "Exemples en Direct",
+      "Utilisation du Code"
+    ],
+    "content": "Les cartes sont l'élément constitutif fondamental du système de design en verre (glass design). Variantes Nous prenons en charge plusieurs styles de cartes via la propriété (prop) . | Variante | Description | Style Visuel | | :--- | :--- | :--- | | | Verre dépoli standard | Flou + Bordure | | | Arrière-plan opaque | Contraste élevé | | | Bordure uniquement | Minimaliste | Exemples en Direct Carte en Verre (Glass) Effet verre dépoli standard avec un flou et une bordure subtile. Carte Pleine (Solid) Arrière-plan opaque pour un contraste élevé. Carte Contour (Outline) Style minimaliste uniquement avec une bordure. Utilisation du Code",
+    "order": 2
+  },
+  {
+    "url": "/fr/docs/components/pages/404",
+    "locale": "fr",
+    "title": "Page 404",
+    "description": "Page d'erreur adaptative au thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Architecture",
+      "Fonctionnalités",
+      "Utilisation"
+    ],
+    "content": "Page 404 AstroGlass inclut une page d'erreur 404 sophistiquée qui s'adapte automatiquement au thème sélectionné par l'utilisateur. Architecture Située dans . La page utilise des variables CSS définies dans pour afficher des effets visuels 404 standards (particules flottantes, orbes lumineux, cartes en verre) qui correspondent à la palette de couleurs active. Fonctionnalités - Adaptative au Thème : Si un utilisateur navigue avec le thème \"Luxury\" et rencontre une page 404, la page d'erreur sera Or/Noir. S'il est sur \"Neo\", elle sera Noir/Cyan. - Arrière-plan Interactif : Présente des éléments animés comme des particules flottantes et des formes changeantes. - Localisation : Messages entièrement traduits via (clés commençant par ). Utilisation Cette page est automatiquement servie par Astro (et la plupart des plateformes de déploiement comme Cloudflare/Vercel) lorsqu'un utilisateur demande une route inexistante. Aucune configuration n'est requise.",
+    "order": 3
+  },
+  {
+    "url": "/fr/docs/components/sections/about",
+    "locale": "fr",
+    "title": "Section À propos (About)",
+    "description": "Sections de présentation de l'entreprise ou du produit pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de Thème",
+      "Source du Contenu",
+      "Personnalisation"
+    ],
+    "content": "La section À propos (About) présente votre entreprise, votre produit ou votre histoire. Chaque thème offre une disposition unique avec des éléments visuels différents. Variantes de Thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | Arrière-plans de formes organiques et disposition fluide | | Glass | | Panneaux en verre dépoli avec effet de profondeur | | Neo | | Typographie audacieuse et cartes à contraste élevé | | Luxury | | Disposition élégante avec des touches dorées | | Minimal | | Design épuré, axé sur le contenu | | Aurora | | Maillage de dégradés avec une structure géométrique | Toutes les variantes se trouvent dans . Source du Contenu Le texte de la section À propos est chargé depuis via . Les composants About ne prennent aucune propriété externe. Pour modifier le contenu, mettez à jour . Personnalisation Pour personnaliser : 1. Modifiez . 2. Ajustez les styles dans . 3. Changez le contenu dans .",
+    "order": 3
+  },
+  {
+    "url": "/fr/docs/components/sections/features",
+    "locale": "fr",
+    "title": "Section Fonctionnalités (Features)",
+    "description": "Sections de présentation des fonctionnalités pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de Thème",
+      "Source du Contenu",
+      "Personnalisation"
+    ],
+    "content": "La section Fonctionnalités (Features) met en évidence les avantages du produit ou du service. Chaque thème offre une disposition unique — des grilles de cartes aux listes animées. Variantes de Thème | Thème | Composant | Disposition | |-------|-----------|--------| | Liquid | | Cartes de fonctionnalités animées avec des effets de survol liquides | | Glass | | Cartes de fonctionnalités en verre dépoli | | Neo | | Disposition en grille audacieuse avec des bords nets | | Luxury | | Grille élégante avec des reflets dorés | | Minimal | | Format de liste épuré et simple | | Aurora | | Fond en maillage dégradé avec grille de cartes | Toutes les variantes se trouvent dans . Source du Contenu Les données des fonctionnalités sont chargées depuis via . La structure JSON contient généralement : Les composants Features ne prennent aucune propriété externe. Pour modifier les éléments, les titres ou les descriptions des fonctionnalités, mettez à jour . Personnalisation Pour personnaliser : 1. Modifiez la variante du thème dans . 2. Ajustez les styles dans . 3. Changez le contenu dans .",
+    "order": 4
+  },
+  {
+    "url": "/fr/docs/components/sections/portfolio",
+    "locale": "fr",
+    "title": "Section Portefeuille (Portfolio)",
+    "description": "Sections de présentation de projets pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de thème",
+      "Source du contenu",
+      "Personnalisation"
+    ],
+    "content": "La section Portefeuille (Portfolio) présente des projets, des études de cas ou des exemples de travaux. Chaque thème propose une disposition de galerie unique. Variantes de thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | Grille fluide avec des animations au survol | | Glass | | Cartes de projet en verre givré | | Neo | | Disposition en maçonnerie audacieuse | | Luxury | | Présentations de projets élégantes | | Minimal | | Grille de projets simple et épurée | | Aurora | | Galerie sur fond dégradé | Toutes les variantes se trouvent dans . Source du contenu Les éléments du portefeuille sont chargés à partir de via . Les composants du portefeuille n'acceptent aucune prop externe. Pour modifier les titres, les descriptions ou les images des projets, mettez à jour . Personnalisation Pour personnaliser : 1. Modifiez . 2. Ajustez les styles dans . 3. Modifiez le contenu dans .",
+    "order": 5
+  },
+  {
+    "url": "/fr/docs/components/sections/pricing",
+    "locale": "fr",
+    "title": "Section Tarification (Pricing)",
+    "description": "Sections de tableau de prix pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de thème",
+      "Source du contenu",
+      "Personnalisation"
+    ],
+    "content": "La section Tarification (Pricing) affiche les forfaits et les niveaux de produits. Chaque thème a son propre traitement visuel. Variantes de thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | Disposition de cartes fluides avec des accents dégradés | | Glass | | Cartes de tarification en verre givré | | Neo | | Grille de tarification à fort contraste | | Luxury | | Tarification avec accents dorés et sensation premium | | Minimal | | Liste de prix simple et épurée | | Aurora | | Cartes de tarification sur fond dégradé | Toutes les variantes se trouvent dans . Source du contenu Les données de tarification sont chargées à partir de via . Le JSON contient les noms des forfaits, les descriptions, les prix, les fonctionnalités et le texte de l'appel à l'action. Les composants de tarification n'acceptent aucune prop externe. Pour modifier les forfaits, les prix ou les fonctionnalités, mettez à jour . Personnalisation Pour personnaliser : 1. Modifiez . 2. Ajustez les styles dans . 3. Modifiez le contenu dans .",
+    "order": 6
+  },
+  {
+    "url": "/fr/docs/components/sections/testimonials",
+    "locale": "fr",
+    "title": "Section Témoignages (Testimonials)",
+    "description": "Sections de témoignages de clients pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de thème",
+      "Source du contenu",
+      "Personnalisation"
+    ],
+    "content": "La section Témoignages (Testimonials) affiche des preuves sociales et des avis de clients. Variantes de thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | Cartes de témoignages fluides | | Glass | | Cartes de citations en verre givré | | Neo | | Témoignages audacieux et à fort contraste | | Luxury | | Avis élégants avec des accents dorés | | Minimal | | Disposition des citations épurée et minimaliste | | Aurora | | Témoignages sur fond dégradé | Toutes les variantes se trouvent dans . Source du contenu Les données de témoignages sont chargées depuis via . Le format JSON contient généralement les noms des personnes, leurs titres, les citations et les informations sur les avatars. Les composants de témoignages n'acceptent aucune prop externe. Pour modifier le texte de la citation, les noms ou la structure, éditez . Personnalisation Pour personnaliser : 1. Modifiez . 2. Ajustez les styles dans . 3. Modifiez le contenu dans .",
+    "order": 7
+  },
+  {
+    "url": "/fr/docs/components/sections/faq",
+    "locale": "fr",
+    "title": "Section FAQ",
+    "description": "Sections des questions fréquemment posées (FAQ) avec interface en accordéon pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de Thème",
+      "Source du Contenu",
+      "Personnalisation"
+    ],
+    "content": "La section FAQ (Foire Aux Questions) affiche les questions et réponses courantes dans un format en accordéon. Variantes de Thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | Accordéons fluides et animés | | Glass | | Accordéons en verre dépoli | | Neo | | Questions-Réponses audacieuses, à contraste élevé | | Luxury | | Accordéons élégants avec des touches dorées | | Minimal | | Accordéons épurés et simples | | Aurora | | Cartes FAQ sur fond dégradé | Toutes les variantes se trouvent dans . Source du Contenu Les éléments de la FAQ sont chargés depuis via . La structure JSON contient généralement un tableau (array) de paires question-réponse. Les composants FAQ ne prennent aucune propriété externe. Pour ajouter, supprimer ou modifier des éléments de la FAQ, mettez à jour . Personnalisation Pour personnaliser : 1. Modifiez . 2. Ajustez les styles dans . 3. Changez le contenu dans .",
+    "order": 8
+  },
+  {
+    "url": "/fr/docs/components/sections/cta",
+    "locale": "fr",
+    "title": "Section Appel à l'Action (CTA)",
+    "description": "Sections d'appel à l'action pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de Thème",
+      "Source du Contenu",
+      "Personnalisation"
+    ],
+    "content": "La section Appel à l'action (Call to Action ou CTA) encourage les visiteurs à passer à l'étape suivante : s'inscrire, obtenir une démonstration ou explorer davantage. Variantes de Thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | Arrière-plan liquide animé avec CTA en dégradé | | Glass | | Carte CTA en verre dépoli | | Neo | | CTA audacieux, style terminal | | Luxury | | CTA premium aux accents dorés | | Minimal | | CTA épuré et centré | | Aurora | | CTA sur fond maillé dégradé | Toutes les variantes se trouvent dans . Source du Contenu Les données du CTA sont chargées depuis via . Les composants CTA ne prennent aucune propriété externe. Pour modifier le texte du CTA ou les libellés des boutons, modifiez . Personnalisation Pour personnaliser : 1. Modifiez . 2. Ajustez les styles dans . 3. Changez le contenu dans .",
+    "order": 9
+  },
+  {
+    "url": "/fr/docs/components/sections/contact",
+    "locale": "fr",
+    "title": "Section Contact",
+    "description": "Sections de formulaire de contact avec validation Valibot pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de Thème",
+      "Validation",
+      "Source du Contenu"
+    ],
+    "content": "La section Contact fournit des formulaires de contact validés. Chaque thème possède son propre style visuel, mais ils partagent tous la même logique de validation basée sur Valibot. Variantes de Thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | Design de formulaire fluide avec des touches de dégradé | | Glass | | Carte de formulaire en verre dépoli | | Neo | | Formulaire audacieux, à contraste élevé | | Luxury | | Formulaire premium avec des détails dorés | | Minimal | | Formulaire de contact épuré et simple | | Aurora | | Formulaire sur fond dégradé | Toutes les variantes se trouvent dans . Validation Les formulaires de contact utilisent Valibot pour une validation légère et typée, côté client et côté serveur. - La validation côté client fournit un retour instantané sur l'interface utilisateur. - Le schéma partagé se trouve dans . - Les messages d'erreur de validation sont entièrement traduits via . Consultez le Guide des Formulaires et Validation pour plus de détails. Source du Contenu Le contenu du formulaire de contact et les messages de validation sont chargés depuis . Les composants Contact ne prennent aucune propriété externe. Pour modifier les libellés du formulaire ou les messages de validation, mettez à jour .",
+    "order": 10
+  },
+  {
+    "url": "/fr/docs/components/sections/navbar",
+    "locale": "fr",
+    "title": "Barre de navigation (Navbar / Header)",
+    "description": "Composants de barre de navigation spécifiques au thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de thème",
+      "Fonctionnalités",
+      "Configuration de la navigation"
+    ],
+    "content": "Le composant de barre de navigation (Header) apparaît en haut de chaque page de thème. Chaque thème possède son propre design d'en-tête avec des modèles de navigation différents, des implémentations de menus mobiles et des styles visuels. Variantes de thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | En-tête transparent avec toile de fond floue | | Glass | | Barre de navigation en verre givré | | Neo | | En-tête audacieux et à fort contraste | | Luxury | | En-tête premium avec des accents dorés | | Minimal | | Navigation épurée et minimaliste | | Aurora | | En-tête avec un accent dégradé | Toutes les variantes se trouvent dans . Fonctionnalités Chaque variante d'en-tête comprend généralement : - Navigation sur bureau : Navigation horizontale avec des menus déroulants - Navigation sur mobile : Menu hamburger avec un tiroir latéral - Sélecteur de thème : Composant sélecteur de thème intégré - Sélecteur de langue : Sélecteur de langue avec des drapeaux - Logo : Composant de logo de la marque Configuration de la navigation Les liens de navigation sont configurés dans (y compris la navigation étendue du thème Luxury). Les étiquettes de navigation sont traduites via . Les composants d'en-tête n'acceptent aucune prop externe. Les éléments de navigation sont définis dans les fichiers de configuration et les étiquettes sont chargées à partir des fichiers JSON locaux.",
+    "order": 11
+  },
+  {
+    "url": "/fr/docs/components/sections/footer",
+    "locale": "fr",
+    "title": "Section Pied de page (Footer)",
+    "description": "Sections du pied de page du site pour chaque thème.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variantes de Thème",
+      "Source du Contenu"
+    ],
+    "content": "La section Pied de page (Footer) apparaît au bas de chaque page du thème. Chaque thème fournit sa propre variante de pied de page avec des liens de navigation, des icônes de réseaux sociaux et l'image de marque. Variantes de Thème | Thème | Composant | Style | |-------|-----------|-------| | Liquid | | Pied de page fluide en dégradé | | Glass | | Pied de page en verre dépoli | | Neo | | Pied de page audacieux, à contraste élevé | | Luxury | | Pied de page premium avec des touches dorées | | Minimal | | Pied de page épuré et simple | | Aurora | | Pied de page en maillage dégradé | Toutes les variantes se trouvent dans . Source du Contenu Le texte et les liens du pied de page sont chargés depuis et via . Les composants Footer ne prennent aucune propriété externe. Pour modifier les liens ou le texte du pied de page, mettez à jour .",
+    "order": 12
+  },
+  {
+    "url": "/fr/docs/core-concepts/theming",
+    "locale": "fr",
+    "title": "Système de Thèmes",
+    "description": "Comprendre l'architecture centrale du système de thèmes dynamique, y compris les variables CSS, le registre des thèmes et le rendu des variantes.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "Aperçu de l'Architecture",
+      "Registre des Thèmes",
+      "Variables CSS",
+      "Rendu Dynamique des Composants",
+      "Créer un Nouveau Thème"
+    ],
+    "content": "AstroGlass se caractérise par un système de thèmes dynamique hautement flexible, construit sur Tailwind CSS v4 et l'architecture des composants d'Astro. Aperçu de l'Architecture Le système de thèmes se compose de trois couches principales : 1. Registre des Thèmes : Définitions pour chaque thème dans . 2. Propriétés Personnalisées CSS : Variables sensibles aux thèmes définies dans . 3. Rendu Dynamique : La page rend dynamiquement la variante correcte du composant pour chaque section. Registre des Thèmes Chaque thème est enregistré dans . Cela centralise les métadonnées du thème et les rend disponibles pour l'ensemble de l'application. - src/ - config/ - themes.ts Chaque définition de thème comprend : Variables CSS Les couleurs et les effets spécifiques aux thèmes sont contrôlés par des propriétés personnalisées CSS. Les variables sont limitées à un attribut sur la balise ou . Les composants les consomment via ou les utilitaires Tailwind : Les variables utilisent des noms courts (, , , , , , ) pour rester cohérentes avec la convention de nommage inspirée de DaisyUI utilisée dans tout le projet. Rendu Dynamique des Composants Les pages de thèmes sont générées par . Ce fichier utilise une carte de composants pour sélectionner dynamiquement la variante correcte pour chaque section : Chaque variante de section est un composant Astro autonome. Il utilise en interne pour tout le texte — aucune prop externe n'est nécessaire. Cela permet à chaque thème d'avoir des structures HTML complètement différentes tout en maintenant une API uniforme. Créer un Nouveau Thème 1. Ajouter la Définition du Thème Ajoutez l'objet de définition du thème à . 2. Définir les Variables CSS Définissez les variables CSS du nouveau thème dans . 3. Créer des Composants de Section Créez des variantes de composants spécifiques au thème pour chaque section, par ex., . 4. Enregistrer dans la Carte des Composants Ajoutez les composants du nouveau thème au dans . 5. Ajouter des Traductions Ajoutez toute nouv",
+    "order": 1
+  },
+  {
+    "url": "/fr/docs/core-concepts/customization",
+    "locale": "fr",
+    "title": "Personnalisation",
+    "description": "Comment personnaliser les styles, les thèmes et la configuration.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "Aperçu du Style",
+      "Système de Couleurs",
+      "Ajouter des Polices Personnalisées",
+      "Personnalisation des Composants"
+    ],
+    "content": "AstroGlass utilise Tailwind CSS v4 pour le style via le plugin . Il n'y a pas de fichier distinct — toute la personnalisation s'effectue via CSS. Aperçu du Style Les styles globaux et les variables CSS sont définis dans . Ce fichier gère : - Les réinitialisations de base (resets) - Les polices personnalisées (Inter & JetBrains Mono) - Les variables CSS pour les thèmes (valeurs de couleur HSL) Les surcharges spécifiques aux thèmes se trouvent dans . - src/ - styles/ - global.css — Styles de base, polices, variables CSS racines - themes.css — Surcharges de couleurs par thème - animations.css — Images clés d'animation partagées - _forms.css — Styles des formulaires - components/ — Styles spécifiques aux composants (héros, tarification, etc.) Système de Couleurs Le projet utilise un système de couleurs basé sur des variables CSS. Les couleurs sont définies comme des valeurs HSL (sans l'enveloppe ), ce qui permet à la syntaxe du modificateur d'opacité de Tailwind de fonctionner correctement. Les composants consomment ces variables via des classes utilitaires Tailwind ou : Pour modifier la palette de couleurs du site, mettez à jour les valeurs HSL dans . Pour les surcharges spécifiques aux thèmes (mode clair/sombre, couleurs par thème), utilisez les sélecteurs dans . Ajouter des Polices Personnalisées 1. Placez les fichiers de polices dans ou importez depuis Google Fonts dans . 2. Définissez les règles dans . 3. Mettez à jour les variables CSS font-family ou les utilitaires Tailwind selon vos besoins. Personnalisation des Composants Chaque thème possède ses propres variantes de composants (par ex., , ). Pour personnaliser une section spécifique : 1. Accédez à (par ex., ). 2. Modifiez directement le fichier spécifique au thème (par ex., ). 3. Le CSS spécifique au composant se trouve dans . Les composants de section n'acceptent pas de props de texte. Tout le contenu est géré par des clés de traduction via . Pour modifier le texte, éditez les fichiers JSON dans .",
+    "order": 2
+  },
+  {
+    "url": "/fr/docs/core-concepts/project-structure",
+    "locale": "fr",
+    "title": "Structure du Projet",
+    "description": "Aperçu de l'organisation du code source d'AstroGlass.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "Répertoires Clés"
+    ],
+    "content": "AstroGlass suit une structure de projet Astro standard avec quelques modèles d'organisation clés. Répertoires Clés Contient des composants pleine page pour les routes dynamiques, tels que la Page Portfolio. Organisé par type de page : Contient tous les composants de section de page, organisés par type de section. Chaque section possède un sous-répertoire avec une variante par thème : Composants d'en-tête/barre de navigation spécifiques au thème (par ex., , ). Primitives d'interface utilisateur réutilisables : , , , , , , , , , et . Fichiers de configuration centraux : - — Registre des thèmes (ID, noms, statut d'activation, listes de sections) - — Langues prises en charge et leurs métadonnées - — Structure de navigation principale du site - — Configuration de la barre latérale de la documentation et gestion des versions Collections de Contenu Astro pour la documentation et les articles de blog. La structure à l'intérieur de détermine les chemins URL pour la documentation. Fichiers de traduction JSON organisés par code de langue. Chaque fichier correspond à une section de page (par ex., , , ). Routage basé sur les fichiers. La route dynamique génère des pages pour chaque thème activé. Les modèles de répertoire gèrent les variantes de pages localisées sur l'ensemble de l'architecture. CSS global, surcharges de thème (), images clés d'animation, et feuilles de style spécifiques aux composants dans . Fonctions utilitaires pour les traductions i18n (), la détection de la langue (), et la navigation dans la documentation ().",
+    "order": 3
+  },
+  {
+    "url": "/fr/docs/core-concepts/routing-i18n",
+    "locale": "fr",
+    "title": "Routage & Internationalisation",
+    "description": "Comprendre comment fonctionnent les pages et les langues dans AstroGlass.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "Routage de Page",
+      "Routage de la Documentation",
+      "Internationalisation (i18n)"
+    ],
+    "content": "AstroGlass utilise le système de routage basé sur les fichiers d'Astro combiné à une stratégie de personnalisation internationale (i18n). Routage de Page Les pages sont situées dans . La structure des dossiers détermine le chemin de l'URL. Pour les pages localisées, nous utilisons des répertoires distincts : - src/ - pages/ - [...lang]/ — Routage Dynamique de Langue - index.astro — Page d'accueil (Toutes Langues) - [theme].astro — Pages de démo dynamiques des thèmes (par ex., /liquid, /fr/glass) - [theme]/portfolio.astro — Pages dynamiques du portfolio - blog/ — Pages du blog - docs/ — Pages de la documentation - privacy.astro — Politique de Confidentialité - terms.astro — Conditions d'Utilisation - 404.astro — Page d'erreur /404 - about.astro — /about (Non localisé) Routage des Démos de Thèmes Les pages de thèmes sont générées dynamiquement à partir du registre des thèmes. L'ajout d'un thème à avec crée automatiquement une route vers . Routage de la Documentation Les pages de documentation se trouvent dans : - src/ - content/ - docs/ - en/ - ru/ - fr/ - es/ - ja/ - zh/ - kk/ L'URL de la documentation est automatiquement générée en fonction du chemin du fichier, par ex., . Internationalisation (i18n) Les traductions sont gérées de deux manières : 1. Routage de Page Dynamique : Un répertoire centralisé gère dynamiquement toutes les permutations de routes via . 2. Chaînes de l'Interface Utilisateur (UI) : Fichiers JSON centralisés dans . Traductions de l'Interface Utilisateur (UI) Les chaînes communes (éléments de navigation, boutons, texte de section, etc.) sont stockées sous forme de fichiers JSON organisés par section : Utilisez l'assistant dans les composants : Les clés de traduction supportent la notation par points pour les valeurs imbriquées. Les clés de sont distribuées au niveau racine, tandis que les autres fichiers sont espacés par leur nom de fichier (par ex., , ). Ajouter une Nouvelle Langue 1. Enregistrer la langue Ajoutez une entrée à avec . 2. Créer le",
+    "order": 4
+  },
+  {
+    "url": "/fr/docs/core-concepts/glassmorphism",
+    "locale": "fr",
+    "title": "Glassmorphism",
+    "description": "Comprendre la philosophie de conception derrière AstroGlass.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "La Recette",
+      "Utilisation Pratique",
+      "Variations de Thèmes"
+    ],
+    "content": "AstroGlass met en œuvre une approche moderne du glassmorphism — en créant des interfaces qui semblent superposées, transparentes et premium. La Recette L'effet glassmorphism est obtenu grâce à quatre propriétés CSS clés fonctionnant ensemble : 1. Flou d'Arrière-plan : Nous utilisons pour l'effet dépoli. 2. Translucidité : Les couleurs d'arrière-plan utilisent des canaux alpha (par ex., ). 3. Bordures : De subtiles bordures de 1px () définissent les bords. 4. Ombres : Des ombres douces et colorées créent de la profondeur et de l'élévation. Cette combinaison crée un sentiment de hiérarchie et de modernité. Utilisation Pratique Dans les composants AstroGlass, vous verrez ce modèle appliqué comme des classes utilitaires Tailwind : Pour les thèmes sombres, l'effet est souvent superposé avec des arrière-plans dégradés : Variations de Thèmes Chaque thème dans AstroGlass interprète le glassmorphism différemment : | Thème | Style de Verre | |-------|-------------| | Liquid | Formes organiques avec des arrière-plans fluides en blob | | Glass | Panneaux dépolis classiques avec de la profondeur | | Neo | Contraste audacieux avec des bords nets | | Luxury | Translucidité teintée d'or avec des ombres premium | | Minimal | Transparence subtile, à peine présente | | Aurora | Arrière-plans en maille dégradée avec structure géométrique | L'intensité du flou, de l'opacité et des effets de bordure peut être ajustée par thème via les variables CSS dans . Recherchez , , et les propriétés personnalisées associées.",
+    "order": 5
+  },
+  {
+    "url": "/fr/docs/deployment/cloudflare",
+    "locale": "fr",
+    "title": "Déploiement Cloudflare",
+    "description": "Déployez votre site AstroGlass sur Cloudflare Pages.",
+    "section": "Deployment",
+    "sectionIcon": "🚀",
+    "sectionOrder": 5,
+    "headings": [
+      "Prérequis",
+      "Méthodes de Déploiement",
+      "Indexation de la Recherche",
+      "Dépannage"
+    ],
+    "content": "Ce projet est optimisé pour un déploiement sur Cloudflare Pages. Il inclut l'adaptateur nécessaire et la configuration prête à l'emploi. Prérequis - Un compte Cloudflare. - Node.js v20+ installé localement. - La CLI Wrangler installée (). Méthodes de Déploiement Vous pouvez déployer en utilisant l'intégration GitHub (recommandée) ou via l'interface en ligne de commande (CLI). Option 1 : Intégration GitHub 1. Poussez votre code sur GitHub Assurez-vous que votre projet se trouve dans un dépôt GitHub. 2. Connectez-vous à Cloudflare Pages Allez dans le tableau de bord Cloudflare > Workers & Pages > Créer une application > Pages > Se connecter à Git. 3. Sélectionnez le Dépôt Choisissez votre dépôt et votre branche. 4. Configurez les Paramètres de Build Utilisez les paramètres suivants : - Framework Preset : Astro - Build command : - Build output directory : Le script exécute automatiquement , ce qui génère l'index de recherche Fuse.js. Assurez-vous que cela se termine avec succès, sinon la recherche ne fonctionnera pas sur le site déployé. 5. Enregistrez et Déployez Option 2 : CLI Wrangler Vous pouvez également déployer directement depuis votre terminal. 1. Connectez-vous à Wrangler 2. Compilez et Déployez Exécutez le script de déploiement défini dans : Cette commande exécute : . Indexation de la Recherche Le projet utilise Fuse.js pour la recherche. Cela nécessite une étape au moment du build pour générer l'index du contenu. Le script dans gère cela automatiquement : Si la recherche ne fonctionne pas sur votre site déployé, assurez-vous que l'étape d'indexation s'est déroulée avec succès. Dépannage Le Déploiement Échoue Vérifiez les journaux de build (build logs). Les problèmes courants incluent des erreurs TypeScript ou des dépendances manquantes. La Recherche ne Fonctionne pas Si la recherche ne renvoie aucun résultat, vérifiez si le répertoire contient les fichiers , , etc. Ceux-ci sont générés pendant le build par .",
+    "order": 1
+  },
+  {
+    "url": "/fr/docs/deployment/netlify",
+    "locale": "fr",
+    "title": "Déploiement Netlify",
+    "description": "Déployez votre site AstroGlass sur Netlify.",
+    "section": "Deployment",
+    "sectionIcon": "🚀",
+    "sectionOrder": 5,
+    "headings": [
+      "Prérequis",
+      "Méthodes de Déploiement"
+    ],
+    "content": "AstroGlass peut être déployé sur Netlify avec une configuration minimale. Prérequis - Un compte Netlify. - Node.js v20+ installé localement. - La CLI Netlify installée (). Méthodes de Déploiement Option 1 : Intégration GitHub (Recommandée) 1. Poussez votre code sur GitHub Assurez-vous que votre projet se trouve dans un dépôt GitHub. 2. Importez vers Netlify Allez sur app.netlify.com > Add new site (Ajouter un nouveau site) > Import an existing project (Importer un projet existant). 3. Configurez les Paramètres de Build Utilisez les paramètres suivants : - Build Command : - Publish Directory : 4. Déployez Cliquez sur \"Deploy site\" et attendez que la compilation (build) se termine. Option 2 : Déploiement via CLI 1. Connectez-vous à Netlify 2. Déployez L'index de recherche est généré automatiquement pendant l'exécution de . Assurez-vous que l'étape de génération se termine avec succès pour que la recherche fonctionne sur le site déployé.",
+    "order": 2
+  },
+  {
+    "url": "/fr/docs/deployment/vercel",
+    "locale": "fr",
+    "title": "Déploiement Vercel",
+    "description": "Déployez votre site AstroGlass sur Vercel.",
+    "section": "Deployment",
+    "sectionIcon": "🚀",
+    "sectionOrder": 5,
+    "headings": [
+      "Prérequis",
+      "Méthodes de Déploiement"
+    ],
+    "content": "AstroGlass peut être déployé sur Vercel avec une configuration minimale. Prérequis - Un compte Vercel. - Node.js v20+ installé localement. - La CLI Vercel installée (). Méthodes de Déploiement Option 1 : Intégration GitHub (Recommandée) 1. Poussez votre code sur GitHub Assurez-vous que votre projet se trouve dans un dépôt GitHub. 2. Importez vers Vercel Allez sur vercel.com/new et importez votre dépôt GitHub. 3. Configurez les Paramètres de Build Vercel devrait détecter automatiquement Astro. Si ce n'est pas le cas, utilisez : - Framework Preset : Astro - Build Command : - Output Directory : 4. Déployez Cliquez sur \"Deploy\" (Déployer) et attendez que la compilation (build) se termine. Option 2 : Déploiement via CLI 1. Connectez-vous à Vercel 2. Déployez L'index de recherche est généré automatiquement pendant l'exécution de . Assurez-vous que l'étape de génération se termine avec succès pour que la recherche fonctionne sur le site déployé.",
+    "order": 3
+  },
+  {
+    "url": "/fr/docs/guides/forms-and-validation",
+    "locale": "fr",
+    "title": "Formulaires & Validation",
+    "description": "Apprenez à créer des formulaires sécurisés et validés à l'aide de Valibot et Astro Actions.",
+    "section": "Documentation",
+    "sectionIcon": "📄",
+    "sectionOrder": 99,
+    "headings": [
+      "Démarrage rapide",
+      "Styles adaptés au thème",
+      "Personnalisation des règles de validation",
+      "Internationalisation (i18n)"
+    ],
+    "content": "Ce modèle utilise Valibot pour une validation légère et typée côté client et côté serveur. Nous avons conçu une approche hybride qui vous offre : 1. Commentaires instantanés de l'interface utilisateur : En utilisant un minuscule script côté client. 2. Sécurité côté serveur : En utilisant le même schéma dans les Astro Actions (facultatif mais recommandé). Démarrage rapide Pour ajouter un nouveau formulaire validé : 1. Définir des règles spécifiques (Facultatif) Si vous avez besoin de règles personnalisées au-delà de partagé, créez un nouveau schéma dans . 2. Ajouter le formulaire à votre composant Copiez ce modèle. La clé réside dans le nommage strict des entrées et dans la gestion de la classe . Styles adaptés au thème Nous avons mis en place un système CSS qui adapte automatiquement les styles de validation à votre thème actif (Liquid, Glass, Minimal, etc.). Il vous suffit de basculer les classes ou sur vos entrées. | Classe | Effet | | :--- | :--- | | | Ajoute une bordure/lueur Rouge (couleur ). | | | Ajoute une bordure Verte (couleur ). | | | Un petit texte d'aide stylisé qui apparaît en glissant. | Exemple d'utilisation Personnalisation des règles de validation Éditez pour modifier les règles du formulaire de contact par défaut. Internationalisation (i18n) Les messages de validation sont entièrement traduits. Les clés se trouvent dans : - (sous l'objet ) - Lors de l'initialisation du schéma côté client, vous devez passer une fonction de traduction ou une carte de recherche, comme on peut le voir dans .",
+    "order": 99
+  }
+]

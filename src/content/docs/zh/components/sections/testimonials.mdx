@@ -1,0 +1,37 @@
+---
+title: "用户感言 (Testimonials) 区块"
+description: "各大主题所配备的用以展现使用者真实心声与信赖评级内容的用户口碑区块。"
+order: 7
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+用户感言 (Testimonials) 区块承担着用以对外集中彰显各方使用方反馈评论、成功经验以及建立起值得新进用户所依靠相信信任社会证明价值重担之责。
+
+## 变体及其风格特色
+
+| 主题风格 | 对应组件 | 风格描述 |
+|-------|-----------|-------|
+| **Liquid** | `TestimonialLiquid.astro` | 拥有着富有平滑动态水流质感的评论滑动展现形态 |
+| **Glass** | `TestimonialGlass.astro` | 富有磨砂毛玻璃视效的语录半透半隐透光引句显示板件 |
+| **Neo** | `TestimonialNeo.astro` | 张狂惹眼附有强烈颜色碰撞的反差极高重口黑粗极显眼大段引用评述字块 |
+| **Luxury** | `TestimonialLuxury.astro` | 以贵金属色泽镶金设计风格强调出高贵使用者非凡品位之尊尚反馈版 |
+| **Minimal** | `TestimonialMinimal.astro` | 完全褪尽表面所有额外多余繁文缛节修容只留下直白无华核心信息字句展板 |
+| **Aurora** | `TestimonialAurora.astro` | 语录版件下方有着幻变多姿犹如美丽极光特效渲染铺排出的动态渐褪网格底层展现 |
+
+上述所有呈现不同效果的具体实作模板都收藏安置于 `src/components/sections/testimonial/` 这个路境内中获取。
+
+## 内容文案等具体来源
+
+本部分展现出所有相关信息内容（包含发声人名头及他们其本身评价本身）等皆全是由系统调用 `useTranslations()` 该工具依就按照针对相应的由读取调出之 `src/locales/{lang}/testimonial.json` 内部对应的数据，这些文件多数容留保管包括评论者的姓名资料信息、人物职责头衔身位称谓、所作点评具体陈述原文，另外附带着配发展示本人用户头像及个人识别特征文件资源链接线索等等。
+
+<Callout type="info" title="无Props配置 (No Props)">
+  各类 Testimonials 变种内部均舍弃调用接收外部的外部 props 等内容资源请求，要想要变更内部各个语句及署名的表现内容请从对应去修改配置文件来变更：`src/locales/{lang}/testimonial.json`。
+</Callout>
+
+## 定制和调整
+
+定制步骤如下指引进行：
+1. 于内部编辑或重整 `src/components/sections/testimonial/Testimonial{Theme}.astro` 中代码架构等。
+2. 对于色彩或呈现版面，去对调控管理所有关于视觉元素的指令 `src/styles/components/testimonial/` 相关附属文件调整。
+3. 若单纯为文本及内容则仅只需处理：`src/locales/{lang}/testimonial.json`。

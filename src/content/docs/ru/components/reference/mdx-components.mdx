@@ -1,0 +1,90 @@
+---
+title: "MDX-компоненты"
+description: "Кастомные MDX-компоненты для документации."
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+import Badge from '../../../../../components/mdx/Badge.astro';
+
+Библиотека кастомных MDX-компонентов, доступных на всех страницах документации.
+
+## Callout
+
+Выделяйте важную информацию:
+
+```mdx
+<Callout type="info" title="Информация">
+  Информационное сообщение.
+</Callout>
+```
+
+**Типы**: `info`, `warning`, `tip`, `error`
+
+---
+
+## Badge
+
+Индикаторы статуса:
+
+```mdx
+<Badge text="Новое" variant="success" />
+<Badge text="Экспериментальное" variant="warning" />
+```
+
+---
+
+## Steps
+
+Обёртка для пошаговых инструкций:
+
+```mdx
+<Steps>
+1. **Первый шаг** — описание.
+2. **Второй шаг** — описание.
+</Steps>
+```
+
+---
+
+## FileTree
+
+Отображение структуры файлов:
+
+```mdx
+<FileTree>
+- src/
+  - components/
+  - pages/
+    - **[theme].astro**
+</FileTree>
+```
+
+---
+
+## CardGrid и LinkCard
+
+Карточки в адаптивной сетке:
+
+```mdx
+<CardGrid>
+  <LinkCard title="Начало работы" description="Настройте проект за минуты." href="/docs/en/getting-started/installation" />
+</CardGrid>
+```
+
+---
+
+## CodeTabs
+
+Табы с блоками кода:
+
+```mdx
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash
+pnpm install
+​```
+```bash
+npm install
+​```
+</CodeTabs>
+```

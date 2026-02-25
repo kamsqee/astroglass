@@ -1,0 +1,30 @@
+---
+title: "フッター (Footer) セクション"
+description: "各テーマのサイト フッター セクション。"
+order: 12
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Footer (フッター) セクションは、すべてのテーマ ページの下部に表示されます。各テーマには、ナビゲーション リンク、ソーシャル アイコン、およびブランド表示を含む、独自のフッター バリアントが提供されています。
+
+## テーマのバリアント
+
+| テーマ | コンポーネント | スタイル |
+|-------|-----------|-------|
+| **Liquid** | `FooterLiquid.astro` | 流動的なグラデーション フッター |
+| **Glass** | `FooterGlass.astro` | すりガラスのフッター |
+| **Neo** | `FooterNeo.astro` | 大胆でハイコントラストなフッター |
+| **Luxury** | `FooterLuxury.astro` | ゴールドのアクセントが効いたプレミアム フッター |
+| **Minimal** | `FooterMinimal.astro` | クリーンでシンプルなフッター |
+| **Aurora** | `FooterAurora.astro` | グラデーション メッシュ フッター |
+
+すべてのバリアントは `src/components/sections/footer/` に配置されています。
+
+## コンテンツのソース
+
+フッターのテキストとリンクは、`useTranslations()` を介して `src/locales/{lang}/footer.json` と `src/locales/{lang}/nav.json` から読み込まれます。
+
+<Callout type="info" title="プロパティ (Props) なし">
+  Footer コンポーネントは外部からのプロパティ (Props) を受け取りません。フッターのリンクやテキストを編集するには、`src/locales/{lang}/footer.json` を更新してください。
+</Callout>

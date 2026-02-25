@@ -1,0 +1,29 @@
+{
+  "company": "AstroGlass",
+  "tagline": "Заманауи вебке арналған әдемі үлгілер",
+
+  "copyright": "© 2026 AstroGlass",
+  "allRightsReserved": "Барлық құқықтар қорғалған",
+  "backToTop": "Жоғарыға қайту",
+  "links": {
+    "product": "Өнім",
+    "features": "Мүмкіндіктер",
+    "pricing": "Бағалар",
+    "demos": "Демо нұсқалар",
+    "company": "Жоба",
+    "about": "Біз туралы",
+    "blog": "Блог",
+    "contact": "Байланыс",
+    "resources": "Ресурстар",
+    "docs": "Құжаттама",
+    "faq": "ЖҚС",
+    "support": "Қолдау",
+    "terms": "Пайдалану шарттары",
+    "privacy": "Құпиялық саясаты"
+  },
+  "social": {
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "discord": "Discord"
+  }
+}

@@ -1,0 +1,37 @@
+---
+title: "Section Appel à l'Action (CTA)"
+description: "Sections d'appel à l'action pour chaque thème."
+order: 9
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La section Appel à l'action (Call to Action ou CTA) encourage les visiteurs à passer à l'étape suivante : s'inscrire, obtenir une démonstration ou explorer davantage.
+
+## Variantes de Thème
+
+| Thème | Composant | Style |
+|-------|-----------|-------|
+| **Liquid** | `CTALiquid.astro` | Arrière-plan liquide animé avec CTA en dégradé |
+| **Glass** | `CTAGlass.astro` | Carte CTA en verre dépoli |
+| **Neo** | `CTANeo.astro` | CTA audacieux, style terminal |
+| **Luxury** | `CTALuxury.astro` | CTA premium aux accents dorés |
+| **Minimal** | `CTAMinimal.astro` | CTA épuré et centré |
+| **Aurora** | `CTAAurora.astro` | CTA sur fond maillé dégradé |
+
+Toutes les variantes se trouvent dans `src/components/sections/cta/`.
+
+## Source du Contenu
+
+Les données du CTA sont chargées depuis `src/locales/{lang}/cta.json` via `useTranslations()`.
+
+<Callout type="info" title="Pas de Propriétés (Props)">
+  Les composants CTA ne prennent aucune propriété externe. Pour modifier le texte du CTA ou les libellés des boutons, modifiez `src/locales/{lang}/cta.json`.
+</Callout>
+
+## Personnalisation
+
+Pour personnaliser :
+1. Modifiez `src/components/sections/cta/CTA{Theme}.astro`.
+2. Ajustez les styles dans `src/styles/components/cta/`.
+3. Changez le contenu dans `src/locales/{lang}/cta.json`.

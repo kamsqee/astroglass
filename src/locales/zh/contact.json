@@ -1,0 +1,165 @@
+{
+  "eyebrow": "联系我们",
+  "title": "来谈谈吧",
+  "subtitle": "我们随时准备为您提供帮助。如有任何疑问，请随时联系我们。",
+  "supportTeam": "技术支持团队",
+  "onlineNow": "当前在线 · 通常会立即回复",
+  "botWelcome": "您好！👋 我在这里为您服务。请问今天有什么可以帮您的？",
+  "messageSent": "消息已发送！我们会尽快与您取得联系。",
+  "secureInfo": "🔒 您的隐私信息绝对安全，绝不会被泄露",
+  "intents": {
+    "sales": "销售咨询",
+    "salesDesc": "定价方案、产品演示、企业定制",
+    "support": "帮助支持",
+    "supportDesc": "技术疑难、Bug反馈、使用问题",
+    "partnership": "合作伙伴",
+    "partnershipDesc": "系统集成、业务合作",
+    "other": "其他问题",
+    "otherDesc": "其他所有事宜"
+  },
+  "form": {
+    "name": "您的姓名",
+    "email": "工作邮箱",
+    "company": "所在公司",
+    "message": "请问我们需要怎么帮您？",
+    "topic": "主题分类",
+    "send": "发送消息",
+    "sending": "正在发送...",
+    "success": "发送成功！我们会在 24 小时内向您回复。",
+    "privacy": "完成点击即代表您已同意我们的",
+    "privacyPolicy": "隐私权政策声明"
+  },
+  "placeholders": {
+    "typeMessage": "请输入您的消息内容...",
+    "yourEmail": "your@email.com",
+    "emailAddress": "邮箱地址",
+    "johnSmith": "约翰·斯密斯",
+    "acmeInc": "极客风范联合公司",
+    "tellUs": "请告诉我们有关您的项目细节或者是遇到的问题...",
+    "selectTopic": "请选择一项咨询主题...",
+    "yourMessage": "在此输入..."
+  },
+  "topics": {
+    "general": "常规问询",
+    "sales": "购买咨询",
+    "salesQuestion": "销售答疑",
+    "support": "技术售后",
+    "partnership": "商业合作"
+  },
+  "chat": {
+    "askName": "太棒了！请问怎么称呼您？",
+    "askEmail": "很高兴遇见您，{name}！请留个收取邮件的邮箱以便联系好吗？",
+    "askMessage": "非常完美！接下来可以大概说说您遇到了哪方面的难题或者需要什么帮助吗？",
+    "thanks": "十分感谢！🎉 我们已经成功接收到了您的消息啦，几个小时内就会有人专门给您回复邮件的！"
+  },
+  "wizard": {
+    "step1": "选择大类",
+    "step2": "补充细节",
+    "step3": "确认联系方式",
+    "continue": "下一步继续 →",
+    "back": "← 退后一步",
+    "steps": {
+      "topic": "选择主题",
+      "details": "补充细节",
+      "send": "确定发送"
+    },
+    "actions": {
+      "change": "更改项",
+      "continue": "进入下一步",
+      "back": "← 返回重新修改细节",
+      "restart": "再发送别的问题"
+    },
+    "fields": {
+      "companyName": "公司抬头",
+      "teamSize": "人员规模",
+      "budget": "预算资金范围",
+      "issueType": "问题分类",
+      "severity": "严重紧急程度",
+      "accountEmail": "系统登入注册账户",
+      "yourRole": "您的职位",
+      "partnershipType": "合作业务类型",
+      "topic": "归类划分"
+    },
+    "placeholders": {
+      "acme": "阿卡姆合众公司",
+      "partnerCorp": "天下无敌企划网",
+      "role": "例如：BD 市场拓展总监",
+      "topic": "您想说点什么事？",
+      "accountEmail": "系统里的注册主帐号邮箱",
+      "teamSize": "1-10|11-50|51-200|破 200 号人",
+      "budget": "1,000 美金以内|$1k-$5k 左右|$5k-$20k 区间|妥妥的 $20k 以上大单",
+      "issueType": "系统报错 Bug|许愿个新功能|只是问个事|其他杂项",
+      "severity": "无关痛痒|有点影响|非常不好受|崩溃了",
+      "partnershipType": "API 对接|贴牌分销售卖|CPS 分工推广|其他新姿势",
+      "select": "请先选定一个项目..."
+    },
+    "teams": {
+      "sales": "商业营销组",
+      "support": "技术攻城组",
+      "partnership": "外部商务组",
+      "default": "相关部门小组"
+    },
+    "successMsg": "消息成功投递。我们的专属负责{team}不久就会将有价值的回复传达给您。"
+  },
+  "contactUs": "取得联系",
+  "howCanWeHelp": "有什么可以帮您的？",
+  "card": {
+    "swipeHint": "直接滑动或者是使用两边箭头切换阅读",
+    "prev": "返回上一个",
+    "next": "向右展示下一个",
+    "submit": "立即呈交",
+    "step": "当前进程"
+  },
+  "split": {
+    "whyTitle": "为什么要勾搭我们？",
+    "reason1": "获得量身定制的一对一演示呈现",
+    "reason2": "大集团企业的内部架构解决方案规划",
+    "reason3": "遇到阻碍获取专业技术帮助和指引",
+    "reason4": "寻找和商讨携手创造更多双边价值的新合作机会",
+    "trusted": "已被全球超过 10,000 个顶级工作团队采用",
+    "response": "均摊回复速度 ＜ 4 小时内"
+  },
+  "salesEyebrow": "接洽销售团队",
+  "salesTitle": "让我们一起去干点了不起的大事业吧",
+  "salesSubtitle": "把表格填好并交给我们，我们的智囊团队将会在哪怕是很忙的时候也绝不超过 24 个滴答小时的时间单位内光速出现给您反馈。我们在此正是要致力于辅助保障您的辉煌之路一路畅达的根本之因。",
+  "subtitleLuxury": "聆听是我们的荣幸",
+  "benefits": {
+    "response24h": "必于廿四时辰内有回响",
+    "response24hDesc": "由全天候的人工审查小组做接应反馈保障服务池的顺畅处理水准",
+    "dedicatedSupport": "专精专属的一对一管家式应对支援小组群",
+    "dedicatedSupportDesc": "提供直接精确到人对人的老手对口帮助而非模板冷文返回",
+    "security": "世界五百强巨头同级别之堡垒防范等级环境",
+    "securityDesc": "具有通过 SOC 2 Type II 等级严苛审计报告 以及遵循保障欧盟 GDPR 原则规范约束红线"
+  },
+  "trustedBy": "承蒙各大顶级互联网领军旗手青睐",
+  "successTitle": "您的心声已送达！",
+  "successTitleLuxury": "十分感谢您的联络！",
+  "successDesc": "我们承诺绝不超过 24 小时便必定答复您。",
+  "successDescLuxury": "您应该在不久的将来立刻就会瞧见相关的通知或邮件的回复提示消息出现。",
+  "secure": "严密守卫着",
+  "noSpam": "绝无垃圾广告叨扰",
+  "emailLabel": "电子邮件",
+  "officeLabel": "坐标总部",
+  "officeLocation": "美国加州 · 旧金山湾区",
+  "name": "称呼",
+  "email": "邮件地址",
+  "scaleLabel": "项目的庞大度量级预估",
+  "scale": {
+    "sm": "非常迷你 (＜ 1,000 名使用者)",
+    "md": "普通适中 (大概在 1,000 ~ 100,000 这个区间上下波动的使用者基数)",
+    "lg": "相当地庞大 (具有着能承载约莫在 10,000 到极限的约在十万号使用者范围之间同时承受高承载环境能力级别)",
+    "xl": "具有海量数据处理以及辐射全地球各地使用者的天级跨国巨无霸级 （承载并大于十万在线使用者的可怕挑战量级规模）"
+  },
+  "message": "描述信息框",
+  "messagePlaceholder": "尽管告诉我们就有关那件庞大无比计划里面一切细节吧...",
+  "send": "确认完毕发送",
+  "validation": {
+    "nameShort": "称呼怎么着也起码得有着最基本 2 个连着的字母或是汉字构成吧",
+    "nameLong": "哎呀！这名起得这真是过分长了些，都装填不下了！",
+    "emailInvalid": "务必务必！输入检查确认为是能够正常收信接发件有效存在的真实标准电邮信箱地址",
+    "messageShort": "稍微多写俩字嘛？既然要帮忙怎么着也得敲个有大约等于能让人领会意思的 10 余字叙事结构吧",
+    "messageLong": "好长一大段洋洋洒洒，可是超出系统负荷接受度太多了",
+    "required": "必填红点哦。请完成这一处的填空",
+    "submitError": "碰到了完全没想到的奇奇怪怪问题给阻拦了发送执行进度。再按点一次重试下可以嘛。"
+  }
+}

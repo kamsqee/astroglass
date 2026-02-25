@@ -1,0 +1,40 @@
+---
+title: "お問い合わせ (Contact) セクション"
+description: "各テーマ用の Valibot バリデーションを備えたお問い合わせフォーム セクション。"
+order: 10
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Contact (コンタクト) セクションは、バリデーション (検証) 機能付きのお問い合わせフォームを提供します。各テーマには独自の視覚的スタイルがありますが、すべて同じ Valibot ベースのバリデーション ロジックを共有しています。
+
+## テーマのバリアント
+
+| テーマ | コンポーネント | スタイル |
+|-------|-----------|-------|
+| **Liquid** | `ContactLiquid.astro` | グラデーションのアクセントを効かせた流動的なフォーム デザイン |
+| **Glass** | `ContactGlass.astro` | すりガラスのフォーム カード |
+| **Neo** | `ContactNeo.astro` | 大胆でハイコントラストなフォーム |
+| **Luxury** | `ContactLuxury.astro` | ゴールドのディテールを持つプレミアムなフォーム |
+| **Minimal** | `ContactMinimal.astro` | クリーンでシンプルなお問い合わせフォーム |
+| **Aurora** | `ContactAurora.astro` | グラデーション背景のフォーム |
+
+すべてのバリアントは `src/components/sections/contact/` に配置されています。
+
+## バリデーション
+
+お問い合わせフォームでは、クライアント側とサーバー側の両方で、軽量で型安全 (Type-safe) なバリデーションを実行するために **Valibot** を使用しています。
+
+- クライアント側のバリデーションは、即座に UI フィードバックを提供します。
+- 共有スキーマは `src/lib/schemas/contact.ts` に配置されています。
+- バリデーションのエラー メッセージは、`src/locales/{lang}/contact.json` を通じて完全に翻訳されます。
+
+詳細については、[フォームとバリデーション ガイド](/docs/ja/guides/forms-and-validation) を参照してください。
+
+## コンテンツのソース
+
+お問い合わせのコンテンツとバリデーション メッセージは、`src/locales/{lang}/contact.json` から読み込まれます。
+
+<Callout type="info" title="プロパティ (Props) なし">
+  Contact コンポーネントは外部からのプロパティ (Props) を受け取りません。フォームのラベルやバリデーション メッセージを編集するには、`src/locales/{lang}/contact.json` を更新してください。
+</Callout>

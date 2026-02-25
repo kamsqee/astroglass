@@ -1,0 +1,113 @@
+---
+title: フォームとバリデーション
+description: ValibotとAstro Actionsを使用して、安全で検証済みのフォームを構築する方法を学びます。
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+このテンプレートでは、クライアント側とサーバー側の両方で軽量で型安全なバリデーションを提供するために **Valibot** を使用しています。以下を提供するハイブリッドなアプローチを設計しました。
+1.  **瞬時のUIフィードバック**: 非常に小さなクライアントサイドスクリプトを使用。
+2.  **サーバーサイドセキュリティ**: Astro Actionsで*同じ*スキーマを使用（オプションですが推奨されます）。
+
+## クイックスタート
+
+新しく検証済みのフォームを追加するには：
+
+<Steps>
+1. **特定のルールを定義する（オプション）**
+   
+   共有の `ContactSchema` 以外のカスタムルールが必要な場合は、`src/lib/schemas/` に新しいスキーマを作成してください。
+
+2. **コンポーネントにフォームを追加する**
+   
+   このパターンをコピーします。入力フィールドの厳密な命名と、`.input-error` クラスの処理が重要です。
+
+   ```astro title="Component.astro"
+   ---
+   import { createContactSchema } from '../../lib/schemas/contact';
+   // ... import文
+   ---
+
+   <form class="my-form" novalidate>
+     <div class="form-control">
+       <input type="email" name="email" required />
+     </div>
+     <button type="submit">送信</button>
+   </form>
+
+   <script>
+     import { safeParse } from 'valibot';
+     import { createContactSchema } from '../../lib/schemas/contact';
+
+     const form = document.querySelector('.my-form');
+     // 翻訳関数（または識別子）とオプションを渡す
+     const schema = createContactSchema(key => key, { companyRequired: true });
+
+     form.addEventListener('submit', (e) => {
+       e.preventDefault();
+       const formData = new FormData(form);
+       const data = Object.fromEntries(formData);
+       
+       // スキーマを使用してパースする
+       const result = safeParse(schema, data);
+
+       if (!result.success) {
+         // エラー処理（例: 赤枠を表示する）
+         console.log(result.issues);
+       }
+     });
+   </script>
+   ```
+</Steps>
+
+## テーマ対応のスタイル
+
+バリデーションスタイルを現在のアクティブなテーマ（Liquid、Glass、Minimalなど）に自動的に適応させるCSSシステムを構築しました。
+
+入力フィールドに `input-error` または `input-success` クラスを切り替えるだけです。
+
+| クラス | 効果 |
+| :--- | :--- |
+| `input-error` | **赤色** の枠線/光沢（`--er` カラー）を追加します。 |
+| `input-success`| **緑色** の枠線（`--su` カラー）を追加します。 |
+| `error-message`| スライドインするスタイリングされたヘルパーテキスト。 |
+
+### 使用例
+```javascript
+// エラー状態を追加
+input.classList.add('input-error');
+
+// エラー状態を削除
+input.classList.remove('input-error');
+```
+
+## バリデーションルールのカスタマイズ
+
+デフォルトのお問い合わせフォームのルールを変更するには、`src/lib/schemas/contact.ts` を編集します。
+
+```typescript
+// pipe() を使用した最新の Valibot v1 構文
+export const createContactSchema = (t, options = {}) => object({
+  name: pipe(
+    string(),
+    minLength(2, t('validation.nameShort'))
+  ),
+  message: pipe(
+    string(),
+    minLength(10, t('validation.messageShort')),
+    maxLength(1000)
+  ),
+  // 条件付きバリデーション
+  company: options.companyRequired 
+    ? pipe(string(), minLength(1))
+    : optional(string())
+});
+```
+
+## 国際化 (i18n)
+
+バリデーションメッセージは完全に翻訳されます。キーは以下の場所にあります：
+-   `src/locales/en/contact.json` (`validation` オブジェクトの下)
+-   `src/locales/ru/contact.json`
+
+クライアントでスキーマを初期化する際、`ContactGlass.astro` にあるように、翻訳関数 `t` または検索マップを渡す必要があります。

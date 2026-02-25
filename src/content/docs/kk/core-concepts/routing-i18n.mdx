@@ -1,0 +1,118 @@
+---
+title: Маршрутизация және Интернационализация (i18n)
+description: AstroGlass-та беттер мен тілдердің қалай жұмыс істейтінін түсіну.
+order: 4
+---
+
+import FileTree from '../../../../components/mdx/FileTree.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import Steps from '../../../../components/mdx/Steps.astro';
+
+AstroGlass Astro-ның файлға негізделген маршрутизация жүйесін реттелмелі интернационализация (i18n) стратегиясымен біріктіріп пайдаланады.
+
+## Беттерді маршруттау
+
+Беттер `src/pages/` ішінде орналасқан. Папка құрылымы URL жолын анықтайды.
+
+Оқшауланған беттер үшін біз бөлек каталогтарды пайдаланамыз:
+
+<FileTree>
+- src/
+  - pages/
+    - **[...lang]/**       — Динамикалық локаль маршрутизациясы
+      - **index.astro**      — Басты бет (Барлық тілдер)
+      - **[theme].astro**    — Динамикалық тақырып деңгейіндегі демо беттері (мысалы, /liquid, /kk/glass)
+      - **[theme]/portfolio.astro** — Динамикалық портфолио беттері
+      - blog/                — Блог беттері
+      - docs/                — Құжаттама беттері
+      - privacy.astro        — Құпиялылық саясаты
+      - terms.astro          — Қызмет көрсету шарттары
+    - 404.astro            — /404 Қателік беті
+    - about.astro          — /about (Аударылмаған)
+</FileTree>
+
+### Тақырыптарды көрсету (Demo) маршрутизациясы
+
+Тақырып беттері тақырыптар тізілімінен динамикалық түрде құрылады. `src/config/themes.ts` файлына `enabled: true` параметрімен тақырып қосу автоматты түрде `/{themeId}` мекенжайын жасайды.
+
+## Құжаттама маршрутизациясы
+
+Құжаттама беттері `src/content/docs/[lang]/` ішінде орналасқан:
+
+<FileTree>
+- src/
+  - content/
+    - docs/
+      - en/
+      - ru/
+      - fr/
+      - es/
+      - ja/
+      - zh/
+      - kk/
+</FileTree>
+
+Құжаттамаға арналған URL автоматты түрде файл жолы негізінде құрылады, мысалы, `/docs/kk/getting-started/introduction`.
+
+## Интернационализация (i18n)
+
+Аудармалар екі жолмен өңделеді:
+1.  **Динамикалық бетті маршруттау**: Орталықтандырылған `src/pages/[...lang]/` каталогы `getStaticPaths()` арқылы барлық маршрут алмастыруларын динамикалық түрде өңдейді.
+2.  **UI Мәтіндері**: `src/locales/` ішіндегі орталықтандырылған JSON файлдары.
+
+### UI аудармалары
+
+Жалпы мәтіндер (навигация элементтері, батырмалар, секция мәтіні т.б.) секция бойынша ұйымдастырылған JSON файлдары ретінде сақталады:
+
+```
+src/locales/
+├── en/
+├── ru/
+├── fr/
+├── es/
+├── ja/
+├── zh/
+└── kk/
+```
+
+Компоненттерде `useTranslations` көмекшісін пайдаланыңыз:
+
+```astro title="Component.astro"
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<p>{t('hero.title')}</p>
+<p>{t('pricing.tier2Name')}</p>
+```
+
+Аударма кілттері ұяшықталған мәндер үшін нүктелі белгілеуді (dot notation) қолдайды. `common.json` кілттері түбірлік деңгейде орналасса, ал басқа файлдар файл атауы бойынша ажыратылады (мысалы, `hero.title`, `pricing.plans`).
+
+### Жаңа тіл қосу
+
+<Steps>
+1. **Локальді тіркеу (локль)**
+
+   `src/config/locales.ts` файлына `enabled: true` етіп жазба қосыңыз.
+
+2. **Аударма файлдарын жасау**
+
+   Ағылшын тілінің құрылымына сәйкес келетін JSON файлдары бар `src/locales/{code}/` каталогын жасаңыз.
+
+3. **Құжаттама мазмұнын құру**
+
+   Аударылған MDX файлдарымен бірге `src/content/docs/{code}/` құрыңыз.
+   (мысалы, `src/content/docs/kk/getting-started/introduction.mdx`)
+
+4. **Блог мазмұнын құру**
+
+   Аударылған Markdown/MDX файлдарымен бірге `src/content/blog/{code}/` құрыңыз.
+   (мысалы, `src/content/blog/kk/my-post.md`)
+</Steps>
+
+<Callout type="info" title="Автоматты табу">
+  i18n жүйесі `src/locales/` ішіндегі барлық JSON файлдарын автоматты түрде табу үшін Vite-тің `import.meta.glob` функциясын пайдаланады. Қолмен импорттаудың қажеті жоқ — файлдарды жасасаңыз, олар `useTranslations()` арқылы қолжетімді болады.
+</Callout>

@@ -1,0 +1,45 @@
+---
+title: "ランディング ページ セクション"
+description: "メインのランディング ページで使用される専用のセクション。"
+order: 2
+---
+
+# ランディング ページ セクション
+
+テンプレートのメイン エントリ ポイント (`src/pages/index.astro`) は、テンプレートの機能を見せるために設計された、いくつかの専用セクションを使用します。これらは `src/components/sections/landing/` に配置されています。
+
+## Stats Strip (統計ストリップ)
+
+`src/components/sections/landing/StatsStrip.astro`
+
+プロジェクトに関する重要な指標を示す水平方向のストリップ (例:「6 テーマ」「66+ コンポーネント」)。
+
+- **機能**: スクロールして表示領域に入った時にカウントアップするアニメーション付きの数字。
+- **構成**: コンポーネントの処理ブロック (フロントマター) の `stats` 配列を編集するか、ラベルの表示には `src/locales/{lang}/landing.json` を使用します。
+
+## テンプレート ショーケース
+
+`src/components/sections/landing/TemplateShowcase.astro`
+
+テンプレート内の異なる部分 (テーマ、コンポーネント、ブログ、ドキュメントなど) への視覚的なナビゲーションを提供する「Bento grid (弁当箱グリッド)」スタイルのレイアウト。
+
+- **機能**: ホバー効果、グラスモーフィズムカード、レスポンシブなグリッド レイアウト。
+- **コンテンツ**: `src/locales/{lang}/landing.json` の `landing.showcase` を介して管理されます。
+
+## FAQ ホーム
+
+`src/components/sections/landing/FAQHome.astro`
+
+ランディング ページ向けに設計された軽量なアコーディオン スタイルの FAQ セクション。
+
+- **機能**: 滑らかな展開/折りたたみの表示状態遷移アニメーション、アクセス可能な ARIA 属性。
+- **コンテンツ**: 質問と回答は `src/locales/{lang}/landing.json` 内の `landing.faq` に格納されています。
+
+## 仕組み (How It Works)
+
+`src/components/sections/landing/HowItWorks.astro`
+
+ワークフローの 3 つの段階（クローン -> カスタマイズ -> デプロイ）を視覚化したものです。
+
+- **機能**: アイコンとグラデーション背景を備えた番号付きのステップ。
+- **コンテンツ**: 手順のテキストは `src/locales/{lang}/landing.json` に配置されています。

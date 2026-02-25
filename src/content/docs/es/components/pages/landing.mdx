@@ -1,0 +1,45 @@
+---
+title: "Secciones de la Página de Inicio"
+description: "Secciones especializadas usadas en la página de inicio principal."
+order: 2
+---
+
+# Secciones de la Página de Inicio
+
+El punto de entrada principal de la plantilla (`src/pages/index.astro`) utiliza varias secciones especializadas diseñadas para mostrar las características de la plantilla. Estas se encuentran en `src/components/sections/landing/`.
+
+## Tira de Estadísticas (Stats Strip)
+
+`src/components/sections/landing/StatsStrip.astro`
+
+Una tira horizontal que muestra métricas clave sobre tu proyecto (por ejemplo, "6 Temas", "66+ Componentes").
+
+- **Características**: Números que cuentan de forma animada cuando se desplazan a la vista.
+- **Configuración**: Edita la matriz `stats` en el frontmatter del componente o usa `src/locales/{lang}/landing.json` para las etiquetas.
+
+## Demostración de la Plantilla (Template Showcase)
+
+`src/components/sections/landing/TemplateShowcase.astro`
+
+Un diseño de estilo "cuadrícula Bento" que proporciona navegación visual a diferentes partes de la plantilla (Temas, Componentes, Blog, Docs, etc.).
+
+- **Características**: Efectos al pasar el mouse (hover), tarjetas glassmorphism, diseño de cuadrícula responsivo.
+- **Contenido**: Gestionado mediante `src/locales/{lang}/landing.json` dentro de `landing.showcase`.
+
+## Inicio de Preguntas Frecuentes (FAQ Home)
+
+`src/components/sections/landing/FAQHome.astro`
+
+Una sección de preguntas frecuentes liviana, tipo acordeón, diseñada para la página de inicio.
+
+- **Características**: Animaciones suaves de expansión/colapso, atributos ARIA accesibles.
+- **Contenido**: Las preguntas y respuestas se guardan en `src/locales/{lang}/landing.json` dentro de `landing.faq`.
+
+## Cómo Funciona (How It Works)
+
+`src/components/sections/landing/HowItWorks.astro`
+
+Una visualización en 3 pasos del flujo de trabajo (por ejemplo, Clonar -> Personalizar -> Desplegar).
+
+- **Características**: Pasos numerados con íconos y fondos degradados.
+- **Contenido**: Texto de los pasos en `src/locales/{lang}/landing.json`.

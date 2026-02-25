@@ -1,0 +1,118 @@
+---
+title: Routage & Internationalisation
+description: Comprendre comment fonctionnent les pages et les langues dans AstroGlass.
+order: 4
+---
+
+import FileTree from '../../../../components/mdx/FileTree.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import Steps from '../../../../components/mdx/Steps.astro';
+
+AstroGlass utilise le système de routage basé sur les fichiers d'Astro combiné à une stratégie de personnalisation internationale (i18n).
+
+## Routage de Page
+
+Les pages sont situées dans `src/pages/`. La structure des dossiers détermine le chemin de l'URL.
+
+Pour les pages localisées, nous utilisons des répertoires distincts :
+
+<FileTree>
+- src/
+  - pages/
+    - **[...lang]/**       — Routage Dynamique de Langue
+      - **index.astro**      — Page d'accueil (Toutes Langues)
+      - **[theme].astro**    — Pages de démo dynamiques des thèmes (par ex., /liquid, /fr/glass)
+      - **[theme]/portfolio.astro** — Pages dynamiques du portfolio
+      - blog/                — Pages du blog
+      - docs/                — Pages de la documentation
+      - privacy.astro        — Politique de Confidentialité
+      - terms.astro          — Conditions d'Utilisation
+    - 404.astro            — Page d'erreur /404
+    - about.astro          — /about (Non localisé)
+</FileTree>
+
+### Routage des Démos de Thèmes
+
+Les pages de thèmes sont générées dynamiquement à partir du registre des thèmes. L'ajout d'un thème à `src/config/themes.ts` avec `enabled: true` crée automatiquement une route vers `/{themeId}`.
+
+## Routage de la Documentation
+
+Les pages de documentation se trouvent dans `src/content/docs/[lang]/` :
+
+<FileTree>
+- src/
+  - content/
+    - docs/
+      - en/
+      - ru/
+      - fr/
+      - es/
+      - ja/
+      - zh/
+      - kk/
+</FileTree>
+
+L'URL de la documentation est automatiquement générée en fonction du chemin du fichier, par ex., `/docs/fr/getting-started/introduction`.
+
+## Internationalisation (i18n)
+
+Les traductions sont gérées de deux manières :
+1.  **Routage de Page Dynamique** : Un répertoire centralisé `src/pages/[...lang]/` gère dynamiquement toutes les permutations de routes via `getStaticPaths()`.
+2.  **Chaînes de l'Interface Utilisateur (UI)** : Fichiers JSON centralisés dans `src/locales/`.
+
+### Traductions de l'Interface Utilisateur (UI)
+
+Les chaînes communes (éléments de navigation, boutons, texte de section, etc.) sont stockées sous forme de fichiers JSON organisés par section :
+
+```
+src/locales/
+├── en/
+├── ru/
+├── fr/
+├── es/
+├── ja/
+├── zh/
+└── kk/
+```
+
+Utilisez l'assistant `useTranslations` dans les composants :
+
+```astro title="Component.astro"
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<p>{t('hero.title')}</p>
+<p>{t('pricing.tier2Name')}</p>
+```
+
+Les clés de traduction supportent la notation par points pour les valeurs imbriquées. Les clés de `common.json` sont distribuées au niveau racine, tandis que les autres fichiers sont espacés par leur nom de fichier (par ex., `hero.title`, `pricing.plans`).
+
+### Ajouter une Nouvelle Langue
+
+<Steps>
+1. **Enregistrer la langue**
+
+   Ajoutez une entrée à `src/config/locales.ts` avec `enabled: true`.
+
+2. **Créer les fichiers de traduction**
+
+   Créez le répertoire `src/locales/{code}/` avec des fichiers JSON correspondant à la structure anglaise.
+
+3. **Créer le contenu de la documentation**
+
+   Créez `src/content/docs/{code}/` avec les fichiers MDX traduits.
+   (par ex., `src/content/docs/fr/getting-started/introduction.mdx`)
+
+4. **Créer le contenu du blog**
+
+   Créez `src/content/blog/{code}/` avec les fichiers Markdown/MDX traduits.
+   (par ex., `src/content/blog/fr/mon-article.md`)
+</Steps>
+
+<Callout type="info" title="Découverte Automatique">
+  Le système i18n utilise `import.meta.glob` de Vite pour découvrir automatiquement tous les fichiers JSON dans `src/locales/`. Aucune importation manuelle n'est nécessaire — il suffit de créer les fichiers et ils sont disponibles via `useTranslations()`.
+</Callout>

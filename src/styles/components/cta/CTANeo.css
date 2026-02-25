@@ -1,0 +1,37 @@
+/* -------------------------------------------------------------------------- */
+/*                                CARD & FLOAT                                */
+/* -------------------------------------------------------------------------- */
+
+.cta-neo-card {
+  animation: cta-float 6s ease-in-out infinite;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@keyframes cta-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.cta-neo-card:hover {
+  animation-play-state: paused;
+  border-color: hsl(var(--a) / 0.2);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                   BUTTON                                   */
+/* -------------------------------------------------------------------------- */
+
+.cta-neo-primary {
+  background: linear-gradient(135deg, hsl(var(--a)) 0%, hsl(var(--a) / 0.9) 100%);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               ACCESSIBILITY                                */
+/* -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-neo-card {
+    animation: none;
+  }
+}

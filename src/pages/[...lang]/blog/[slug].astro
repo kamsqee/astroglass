@@ -1,0 +1,175 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostHero from '../../../components/blog/PostHero.astro';
+import TableOfContents from '../../../components/blog/TableOfContents.astro';
+import ArticleProse from '../../../components/blog/ArticleProse.astro';
+import ShareBar from '../../../components/blog/ShareBar.astro';
+import PostNavigation from '../../../components/blog/PostNavigation.astro';
+import RelatedPosts from '../../../components/blog/RelatedPosts.astro';
+import NewsletterCTA from '../../../components/blog/NewsletterCTA.astro';
+import FooterLiquid from '../../../components/sections/footer/FooterLiquid.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const { getEnabledLocaleCodes, defaultLocale } = await import('../../../config/locales');
+  const langs = getEnabledLocaleCodes();
+  const paths: Array<{ params: { lang: string | undefined; slug: string }; props: { post: (typeof posts)[number]; prevPost?: { slug: string; title: string }; nextPost?: { slug: string; title: string }; allPosts: (typeof posts)[number][]; locale: string } }> = [];
+
+  for (const lang of langs) {
+    const langPosts = posts
+      .filter(post => post.slug.startsWith(`${lang}/`) && !post.data.draft)
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+    langPosts.forEach((post, i) => {
+      paths.push({
+        params: { 
+          lang: lang === defaultLocale ? undefined : lang,
+          slug: post.slug.replace(`${lang}/`, '') 
+        },
+        props: {
+          post,
+          prevPost: langPosts[i + 1] ? { slug: langPosts[i + 1].slug.replace(`${lang}/`, ''), title: langPosts[i + 1].data.title } : undefined,
+          nextPost: langPosts[i - 1] ? { slug: langPosts[i - 1].slug.replace(`${lang}/`, ''), title: langPosts[i - 1].data.title } : undefined,
+          allPosts: langPosts,
+          locale: lang
+        },
+      });
+    });
+  }
+  return paths;
+}
+
+const { post, prevPost, nextPost, allPosts, locale } = Astro.props;
+const { Content, headings } = await post.render();
+
+// Find related posts (share the most tags)
+const currentTags = new Set(post.data.tags);
+const relatedPosts = allPosts
+  .filter((p: any) => p.slug !== post.slug)
+  .map((p: any) => ({
+    post: p,
+    score: p.data.tags.filter((t: string) => currentTags.has(t)).length,
+  }))
+  .filter(({ score }: any) => score > 0)
+  .sort((a: any, b: any) => b.score - a.score)
+  .slice(0, 3)
+  .map(({ post }: any) => post);
+
+const postUrl = new URL(Astro.url.pathname, Astro.site || 'https://astroglass.pages.dev').href;
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  {/* Cinematic post hero */}
+  <PostHero post={post} />
+
+  {/* Main content area */}
+  <div class="post-page">
+    <div class="post-page__layout">
+      {/* TOC sidebar (desktop) / accordion (mobile) */}
+      {headings.length > 0 && (
+        <aside class="post-page__sidebar">
+          <TableOfContents headings={headings} />
+        </aside>
+      )}
+
+      {/* Article body */}
+      <div class="post-page__main">
+        <ArticleProse>
+          <Content />
+        </ArticleProse>
+
+        <div class="post-page__share">
+          <ShareBar title={post.data.title} url={postUrl} />
+        </div>
+      </div>
+    </div>
+
+    {/* Post navigation */}
+    <div class="post-page__nav">
+      <PostNavigation prevPost={prevPost} nextPost={nextPost} />
+    </div>
+
+    {/* Related posts */}
+    {relatedPosts.length > 0 && (
+      <div class="post-page__related">
+        <RelatedPosts posts={relatedPosts} />
+      </div>
+    )}
+
+    {/* Newsletter */}
+    <div class="post-page__newsletter">
+      <NewsletterCTA />
+    </div>
+  </div>
+
+  <FooterLiquid />
+</BaseLayout>
+
+<style>
+  .post-page {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+  }
+
+  .post-page__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .post-page__sidebar {
+    order: -1;
+  }
+
+  .post-page__main {
+    min-width: 0;
+  }
+
+  .post-page__share {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid hsl(var(--bc) / 0.06);
+  }
+
+  .post-page__nav {
+    margin-top: 3rem;
+  }
+
+  .post-page__related {
+    margin-top: 3rem;
+  }
+
+  .post-page__newsletter {
+    margin-top: 4rem;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 1024px) {
+    .post-page__layout {
+      flex-direction: row;
+      gap: 3.5rem;
+    }
+
+    .post-page__sidebar {
+      flex-shrink: 0;
+      width: 220px;
+      order: 0;
+    }
+
+    .post-page__main {
+      flex: 1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .post-page {
+      padding: 0 2rem 4rem;
+    }
+  }
+</style>

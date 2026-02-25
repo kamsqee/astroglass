@@ -1,0 +1,96 @@
+---
+/**
+ * HighlightScript.astro
+ * Handles highlighting of search terms on the destination page.
+ * Checks for ?q=... or ?highlight=... query params.
+ */
+---
+<script is:inline>
+  (function() {
+    function highlightOnLoad() {
+      const params = new URLSearchParams(window.location.search);
+      const query = params.get('q') || params.get('highlight');
+      if (!query || query.length < 2) return;
+
+      // Small delay to ensure content is rendered
+      setTimeout(function() {
+        const article = document.querySelector('article') || document.querySelector('.prose') || document.querySelector('main');
+        if (!article) return;
+
+        const words = query.toLowerCase().split(/\s+/).filter(w => w.length >= 2);
+        const queryLower = query.toLowerCase();
+        let matchEl = null;
+
+        // Strategy 1: Find exact match in headings
+        const headings = article.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        for (let i = 0; i < headings.length; i++) {
+          const h = headings[i];
+          const text = (h.textContent || '').toLowerCase();
+          if (text.includes(queryLower)) {
+            matchEl = h;
+            break;
+          }
+        }
+
+        // Strategy 2: Find word matches in headings
+        if (!matchEl) {
+          for (let i = 0; i < headings.length; i++) {
+            const h = headings[i];
+            const text = (h.textContent || '').toLowerCase();
+            const hasMatch = words.some(word => text.includes(word));
+            if (hasMatch) {
+              matchEl = h;
+              break;
+            }
+          }
+        }
+
+        // Strategy 3: Find in any text content
+        if (!matchEl) {
+          const walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT);
+          while (walker.nextNode()) {
+            const text = (walker.currentNode.textContent || '').toLowerCase();
+            const hasMatch = words.some(word => text.includes(word));
+            if (hasMatch) {
+              // Get the parent element
+              matchEl = walker.currentNode.parentElement;
+              break;
+            }
+          }
+        }
+
+        // Highlight and Scroll
+        if (matchEl) {
+          // Scroll into view
+          matchEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          
+          // Apply highlight effect using CSS highlight API or simple marking
+          // For simplicity/robustness, we'll use a visual flash effect on the block
+          // instead of destructive DOM modification (wrapping text nodes) which can break other scripts
+          
+          const originalTransition = matchEl.style.transition;
+          const originalBg = matchEl.style.backgroundColor;
+          const originalRadius = matchEl.style.borderRadius;
+          
+          matchEl.style.transition = 'background-color 0.5s ease';
+          matchEl.style.backgroundColor = 'rgba(255, 255, 0, 0.3)'; // Yellow highlight
+          matchEl.style.borderRadius = '4px';
+          
+          setTimeout(() => {
+            matchEl.style.backgroundColor = 'rgba(255, 255, 0, 0)';
+            
+            setTimeout(() => {
+              matchEl.style.transition = originalTransition;
+              matchEl.style.backgroundColor = originalBg;
+              matchEl.style.borderRadius = originalRadius;
+            }, 500);
+          }, 2000);
+        }
+      }, 100);
+    }
+
+    // Run on load and after View Transitions (if used)
+    document.addEventListener('astro:page-load', highlightOnLoad);
+    document.addEventListener('DOMContentLoaded', highlightOnLoad);
+  })();
+</script>

@@ -1,0 +1,38 @@
+{
+  "title": "Politique de Confidentialité",
+  "lastUpdated": "Dernière mise à jour : Février 2026",
+  "description": "Découvrez comment nous collectons, utilisons et protégeons vos données chez Astroglass.",
+  "sections": {
+    "intro": {
+      "content": "Bienvenue chez Astroglass. Nous respectons votre vie privée et nous nous engageons à protéger vos données personnelles. Cette politique de confidentialité vous informera de la manière dont nous prenons soin de vos données personnelles lorsque vous visitez notre site web, de vos droits en matière de confidentialité et de la manière dont la loi vous protège."
+    },
+    "collection": {
+      "title": "Les informations que nous collectons",
+      "content": "Nous pouvons collecter, utiliser, stocker et transférer différents types de données personnelles vous concernant, que nous avons regroupées comme suit : Données d'identité, Données de contact, Données techniques et Données d'utilisation. Nous ne collectons aucune Catégorie Spéciale de Données Personnelles vous concernant."
+    },
+    "usage": {
+      "title": "Comment nous utilisons vos informations",
+      "content": "Nous n'utiliserons vos données personnelles que lorsque la loi nous y autorise. Le plus souvent, nous utiliserons vos données personnelles dans les circonstances suivantes : Lorsque nous devons exécuter le contrat que nous sommes sur le point de conclure ou que nous avons conclu avec vous. Lorsque cela est nécessaire pour nos intérêts légitimes (ou ceux d'un tiers) et que vos intérêts et droits fondamentaux ne prévalent pas sur ces intérêts."
+    },
+    "sharing": {
+      "title": "Divulgation de vos données personnelles",
+      "content": "Nous pouvons partager vos données personnelles avec les parties indiquées ci-dessous aux fins énoncées dans le tableau ci-dessus. Des tiers internes, des tiers externes (tels que Cloudflare), et des tiers à qui nous pouvons choisir de vendre, de transférer ou de fusionner des parties de notre entreprise ou de nos actifs."
+    },
+    "security": {
+      "title": "Sécurité des données",
+      "content": "Nous avons mis en place des mesures de sécurité appropriées pour empêcher que vos données personnelles ne soient accidentellement perdues, utilisées ou consultées de manière non autorisée, modifiées ou divulguées. De plus, nous limitons l'accès à vos données personnelles à ces employés, agents, sous-traitants et autres tiers qui ont un besoin commercial d'en prendre connaissance."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "content": "Vous pouvez configurer votre navigateur pour qu'il refuse tout ou partie des cookies de navigation, ou pour qu'il vous alerte lorsque des sites web installent ou accèdent à des cookies. Si vous désactivez ou refusez les cookies, veuillez noter que certaines parties de ce site web peuvent devenir inaccessibles ou ne pas fonctionner correctement."
+    },
+    "rights": {
+      "title": "Vos droits légaux",
+      "content": "Dans certaines circonstances, vous avez des droits en vertu des lois sur la protection des données en ce qui concerne vos données personnelles, y compris le droit de demander l'accès, la correction, l'effacement, la restriction, le transfert, de vous opposer au traitement, à la portabilité des données et (lorsque le motif légitime de traitement est le consentement) de retirer votre consentement."
+    },
+    "contact": {
+      "title": "Nous contacter",
+      "content": "Si vous avez des questions sur cette politique de confidentialité ou sur nos pratiques de confidentialité, veuillez nous contacter à l'adresse : support@example.com."
+    }
+  }
+}

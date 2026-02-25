@@ -1,0 +1,134 @@
+---
+title: "主题系统 (Theming System)"
+description: "了解动态主题系统的核心架构，包括 CSS 变量、主题注册表以及组件变体的渲染方式。"
+order: 1
+category: core-concepts
+tags: ["theming", "design-system", "css"]
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass 拥有一个建立在 **Tailwind CSS v4** 和 **Astro 组件架构**之上的、具备高度灵活性的动态主题系统。
+
+## 架构概览
+
+主题系统由三个主要层级构成：
+
+1. **主题注册表 (Theme Registry)**：在 `src/config/themes.ts` 中针对各主题的定义。
+2. **CSS 自定义属性 (CSS Custom Properties)**：在 `src/styles/_themes.css` 中定义的感知主题变量。
+3. **动态渲染 (Dynamic Rendering)**：`[theme].astro` 页面为每一个区块动态渲染出其对应的组件变体。
+
+## 主题注册表
+
+每一个主题都在 `src/config/themes.ts` 注册。此举能集中化管理主题的元数据，并使其能够在整个应用中被全局调用。
+
+<FileTree>
+- src/
+  - config/
+    - themes.ts
+</FileTree>
+
+各个主题的定义皆包含：
+
+```typescript
+export const themes: ThemeDefinition[] = [
+  {
+    id: 'liquid',
+    name: 'Liquid',
+    color: 'from-blue-500 to-cyan-400',  // Tailwind 渐变类
+    icon: '💧',
+    sections: ['Header', 'Hero', 'About', 'Features', 'Portfolio', 'Pricing', 'Testimonial', 'FAQ', 'CTA', 'Contact', 'Footer'],
+    enabled: true,
+    premium: false,
+    description: '带有平滑动画的有机流体设计',
+  },
+  // Glass, Neo, Luxury, Minimal, Aurora...
+];
+```
+
+## CSS 变量
+
+特定主题的色彩以及特效均经由 CSS 自定义属性来进行控制。变量的作用域会绑定到包裹在 `<html>` 或 `<body>` HTML 标签上的一个带有 `data-theme` 的属性上。
+
+```css
+/* src/styles/_themes.css */
+[data-theme="liquid"] {
+  --p: 260 80% 60%;    /* 主色 (Primary) */
+  --s: 310 80% 60%;    /* 辅色 (Secondary) */
+  --a: 190 90% 60%;    /* 点缀色 (Accent) */
+  --b1: 220 20% 10%;   /* 基础背景色 (Base background) */
+  --bc: 220 20% 90%;   /* 基础正文内容色 (Base content / text) */
+}
+```
+
+各个组件借着类似 `hsl(var(--p))` 或直接调用 Tailwind 的实用类来对它们进行使用：
+
+```html
+<div class="bg-[hsl(var(--p))] text-[hsl(var(--bc))]">
+  呈现主题效果的内容 (Themed Content)
+</div>
+```
+
+<Callout type="warning" title="命名规范 (Naming Convention)">
+  这些变量皆使用了缩写命名法（如同 `--p`, `--s`, `--a`, `--b1`, `--bc`, `--er`, `--su`），这样做是为了和项目中其他受到 DaisyUI 启发的命名体系及规范时刻保持匹配及一致。
+</Callout>
+
+## 动态组件渲染
+
+所有的主题页面都是由 `src/pages/[theme].astro` 负责执行渲染的。该文件在内部通过使用一份 **“组件映射表 (component map)”** 来为页面上的各个区块动态选取出它那正确对应的主题变体：
+
+```astro title="[theme].astro"
+---
+const componentMap = {
+  liquid: {
+    Header: HeaderLiquid,
+    Hero: HeroLiquid,
+    About: AboutLiquid,
+    Features: FeaturesLiquid,
+    // ... 全部 12+ 个区段
+  },
+  glass: { /* ... */ },
+  neo: { /* ... */ },
+  luxury: { /* ... */ },
+  minimal: { /* ... */ },
+  aurora: { /* ... */ },
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Header />
+<components.Hero />
+<components.About />
+<!-- ... -->
+```
+
+<Callout type="info">
+  各个独立的区块变体本身全都是自成一体、高度内聚封装的 Astro 组件。其内部所有有关于渲染出文本的内容都会向内自我闭环地对 `useTranslations()` 借调完成翻译转换 — 因此对外全都不需要也不需再传任何属于文字这块的外部参数 (Props) 了。这也允许每一个各不同主题的皮肤款式变体间在对外仍共同保持着具有非常统一齐整化 API 接口的基础上，内部彼此却还可以拥有着结构截然相异千差万殊的各种底层 HTML 结构体系。
+</Callout>
+
+## 打造创建一个全新主题
+
+<Steps>
+1. **添加主题定义**
+   
+   向 `src/config/themes.ts` 内部添加关于该主题配置的定义对象。
+
+2. **定义系统 CSS 相关参数变量**
+   
+   在 `src/styles/_themes.css` 去拟定这套全新主题的独有 CSS 参数化变量指标。
+
+3. **创建所属此页块模块的组件**
+   
+   为您该新添主题里的用于各种页面各呈现部分打造那些个全新独此具备这只专属于这新设主题的独立全新组件块各变种组别变体，举个例说像是创建出如：`src/components/sections/hero/HeroMyTheme.astro` 这样的东西。
+
+4. **注册加入入列进组件地图大映射总管理注册表中**
+   
+   去向在位处于 `src/pages/[theme].astro` 当内部所挂配置统筹的那大项 `componentMap` 地图字典表当中去，把属于该这方新出土主题下那些组件们全部一一做个挂载追加给全统全给配置注册上去。
+
+5. **增加关联相涉之对应翻译项**
+   
+   在 `src/locales/` 里边这些各类涉及带有关各类新翻译添加上的去 JSON 文件档记录库里面补入任何与之牵涉相关的最新被作了多语言本地化语言文新化项翻译的系统配置大字符对应条列项册明。
+</Steps> 

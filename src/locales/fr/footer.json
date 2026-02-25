@@ -1,0 +1,29 @@
+{
+  "company": "AstroGlass",
+  "tagline": "De superbes modèles pour le web moderne",
+
+  "copyright": "© 2026 AstroGlass",
+  "allRightsReserved": "Tous droits réservés",
+  "backToTop": "Retour en haut",
+  "links": {
+    "product": "Produit",
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs",
+    "demos": "Démos",
+    "company": "Projet",
+    "about": "À propos",
+    "blog": "Blog",
+    "contact": "Contact",
+    "resources": "Ressources",
+    "docs": "Documentation",
+    "faq": "FAQ",
+    "support": "Support",
+    "terms": "Conditions d'utilisation",
+    "privacy": "Politique de confidentialité"
+  },
+  "social": {
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "discord": "Discord"
+  }
+}

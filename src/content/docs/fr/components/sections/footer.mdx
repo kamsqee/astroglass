@@ -1,0 +1,30 @@
+---
+title: "Section Pied de page (Footer)"
+description: "Sections du pied de page du site pour chaque thème."
+order: 12
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La section Pied de page (Footer) apparaît au bas de chaque page du thème. Chaque thème fournit sa propre variante de pied de page avec des liens de navigation, des icônes de réseaux sociaux et l'image de marque.
+
+## Variantes de Thème
+
+| Thème | Composant | Style |
+|-------|-----------|-------|
+| **Liquid** | `FooterLiquid.astro` | Pied de page fluide en dégradé |
+| **Glass** | `FooterGlass.astro` | Pied de page en verre dépoli |
+| **Neo** | `FooterNeo.astro` | Pied de page audacieux, à contraste élevé |
+| **Luxury** | `FooterLuxury.astro` | Pied de page premium avec des touches dorées |
+| **Minimal** | `FooterMinimal.astro` | Pied de page épuré et simple |
+| **Aurora** | `FooterAurora.astro` | Pied de page en maillage dégradé |
+
+Toutes les variantes se trouvent dans `src/components/sections/footer/`.
+
+## Source du Contenu
+
+Le texte et les liens du pied de page sont chargés depuis `src/locales/{lang}/footer.json` et `src/locales/{lang}/nav.json` via `useTranslations()`.
+
+<Callout type="info" title="Pas de Propriétés (Props)">
+  Les composants Footer ne prennent aucune propriété externe. Pour modifier les liens ou le texte du pied de page, mettez à jour `src/locales/{lang}/footer.json`.
+</Callout>

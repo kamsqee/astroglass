@@ -1,0 +1,165 @@
+{
+  "eyebrow": "Ponte en Contacto",
+  "title": "Hablemos",
+  "subtitle": "Estamos aquí para ayudar. Contáctanos en cualquier momento.",
+  "supportTeam": "Equipo de Soporte",
+  "onlineNow": "En línea ahora · Suele responder al instante",
+  "botWelcome": "¡Hola! 👋 Estoy aquí para ayudar. ¿En qué te puedo ayudar hoy?",
+  "messageSent": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
+  "secureInfo": "🔒 Tu información es segura y nunca se comparte",
+  "intents": {
+    "sales": "Consulta de ventas",
+    "salesDesc": "Precios, demostraciones, empresa",
+    "support": "Soporte",
+    "supportDesc": "Ayuda técnica, errores, problemas",
+    "partnership": "Asociación",
+    "partnershipDesc": "Integraciones, colaboraciones",
+    "other": "Otro",
+    "otherDesc": "Todo lo demás"
+  },
+  "form": {
+    "name": "Tu nombre",
+    "email": "Correo de trabajo",
+    "company": "Empresa",
+    "message": "¿Cómo podemos ayudar?",
+    "topic": "Tema",
+    "send": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado! Te responderemos en un plazo de 24 horas.",
+    "privacy": "Al hacer clic, aceptas nuestra",
+    "privacyPolicy": "Política de Privacidad"
+  },
+  "placeholders": {
+    "typeMessage": "Escribe tu mensaje...",
+    "yourEmail": "tu@correo.com",
+    "emailAddress": "Dirección de correo electrónico",
+    "johnSmith": "Juan Pérez",
+    "acmeInc": "Acme Inc.",
+    "tellUs": "Cuéntanos sobre tu proyecto o pregunta...",
+    "selectTopic": "Selecciona un tema...",
+    "yourMessage": "Tu mensaje..."
+  },
+  "topics": {
+    "general": "Consulta general",
+    "sales": "Ventas",
+    "salesQuestion": "Pregunta de ventas",
+    "support": "Soporte Técnico",
+    "partnership": "Asociación"
+  },
+  "chat": {
+    "askName": "¡Genial! ¿Cuál es tu nombre?",
+    "askEmail": "¡Encantado de conocerte, {name}! ¿Cuál es el mejor correo electrónico para contactarte?",
+    "askMessage": "¡Perfecto! Ahora cuéntame un poco sobre en qué necesitas ayuda.",
+    "thanks": "¡Muchas gracias! 🎉 Hemos recibido tu mensaje y te responderemos en unas pocas horas."
+  },
+  "wizard": {
+    "step1": "Tema",
+    "step2": "Detalles",
+    "step3": "Contacto",
+    "continue": "Continuar →",
+    "back": "← Atrás",
+    "steps": {
+      "topic": "Elegir Tema",
+      "details": "Detalles",
+      "send": "Enviar"
+    },
+    "actions": {
+      "change": "Cambiar",
+      "continue": "Continuar",
+      "back": "← Volver a detalles",
+      "restart": "Enviar otro mensaje"
+    },
+    "fields": {
+      "companyName": "Nombre de la Empresa",
+      "teamSize": "Tamaño del Equipo",
+      "budget": "Rango de Presupuesto",
+      "issueType": "Tipo de Problema",
+      "severity": "Gravedad",
+      "accountEmail": "Correo de la Cuenta",
+      "yourRole": "Tu Rol",
+      "partnershipType": "Tipo de Asociación",
+      "topic": "Tema"
+    },
+    "placeholders": {
+      "acme": "Acme Inc.",
+      "partnerCorp": "Empresa Socia",
+      "role": "ej., Gerente de Desarrollo",
+      "topic": "¿De qué se trata esto?",
+      "accountEmail": "El correo de tu cuenta",
+      "teamSize": "1-10|11-50|51-200|200+",
+      "budget": "Menos de $1k|$1k-$5k|$5k-$20k|$20k+",
+      "issueType": "Error|Petición de Función|Pregunta|Otro",
+      "severity": "Baja|Media|Alta|Crítica",
+      "partnershipType": "Integración|Revendedor|Afiliado|Otro",
+      "select": "Seleccionar..."
+    },
+    "teams": {
+      "sales": "equipo de ventas",
+      "support": "equipo de soporte",
+      "partnership": "equipo de asociaciones",
+      "default": "equipo"
+    },
+    "successMsg": "Gracias por contactarnos. Nuestro {team} se pondrá en contacto contigo pronto."
+  },
+  "contactUs": "Contáctanos",
+  "howCanWeHelp": "¿Cómo podemos ayudar?",
+  "card": {
+    "swipeHint": "Desliza o usa las flechas",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "submit": "Enviar",
+    "step": "Paso"
+  },
+  "split": {
+    "whyTitle": "¿Por qué contactar?",
+    "reason1": "Obtén demostraciones personalizadas",
+    "reason2": "Discute soluciones empresariales",
+    "reason3": "Soporte técnico y orientación",
+    "reason4": "Oportunidades de asociación",
+    "trusted": "Confiable para más de 10,000 equipos",
+    "response": "Respuesta promedio < 4 horas"
+  },
+  "salesEyebrow": "Contactar Ventas",
+  "salesTitle": "Construyamos algo grande juntos",
+  "salesSubtitle": "Completa el formulario y nuestro equipo te responderá en un plazo de 24 horas. Estamos aquí para ayudarte a tener éxito.",
+  "subtitleLuxury": "Nos encantaría saber de ti",
+  "benefits": {
+    "response24h": "Respuesta dentro de 24 horas",
+    "response24hDesc": "Nuestro equipo supervisa las consultas las 24 horas",
+    "dedicatedSupport": "Equipo de soporte dedicado",
+    "dedicatedSupportDesc": "Obtén ayuda personalizada de nuestros expertos",
+    "security": "Seguridad de nivel empresarial",
+    "securityDesc": "Certificado SOC 2 Tipo II, compatible con GDPR"
+  },
+  "trustedBy": "Confiable para los líderes de la industria",
+  "successTitle": "¡Mensaje Enviado!",
+  "successTitleLuxury": "¡Gracias por contactarnos!",
+  "successDesc": "Nos pondremos en contacto en un plazo de 24 horas.",
+  "successDescLuxury": "Nos pondremos en contacto pronto.",
+  "secure": "Seguro",
+  "noSpam": "Sin spam",
+  "emailLabel": "Correo",
+  "officeLabel": "Oficina",
+  "officeLocation": "San Francisco, CA",
+  "name": "Nombre",
+  "email": "Correo Electrónico",
+  "scaleLabel": "Escala del Proyecto",
+  "scale": {
+    "sm": "Pequeño (< 1k usuarios)",
+    "md": "Mediano (1k-10k usuarios)",
+    "lg": "Grande (10k-100k usuarios)",
+    "xl": "Global (100k+ usuarios)"
+  },
+  "message": "Mensaje",
+  "messagePlaceholder": "Cuéntanos sobre tu proyecto...",
+  "send": "Enviar Mensaje",
+  "validation": {
+    "nameShort": "El nombre debe tener al menos 2 caracteres",
+    "nameLong": "El nombre es demasiado largo",
+    "emailInvalid": "Por favor, introduce una dirección de correo válida",
+    "messageShort": "El mensaje debe tener al menos 10 caracteres",
+    "messageLong": "El mensaje es demasiado largo",
+    "required": "Este campo es obligatorio",
+    "submitError": "Algo salió mal. Por favor, inténtalo de nuevo."
+  }
+}

@@ -1,0 +1,93 @@
+---
+title: Cloudflare 部署
+description: 将您的 AstroGlass 站点部署到 Cloudflare Pages。
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+本项目已针对 **Cloudflare Pages** 部署进行了优化，内置了必要的适配器和配置。
+
+## 前置条件
+
+- 一个 [Cloudflare](https://dash.cloudflare.com/) 账号。
+- 本地安装 **Node.js** v20+。
+- 安装 **Wrangler** CLI（`npm install -g wrangler`）。
+
+## 部署方式
+
+您可以使用 GitHub 集成（推荐）或通过 CLI 部署。
+
+### 方式一：GitHub 集成
+
+<Steps>
+1. **将代码推送到 GitHub**
+   
+   确保您的项目在 GitHub 仓库中。
+
+2. **连接到 Cloudflare Pages**
+   
+   进入 Cloudflare 控制台 > Workers & Pages > 创建应用 > Pages > 连接到 Git。
+
+3. **选择仓库**
+   
+   选择您的仓库和分支。
+
+4. **配置构建设置**
+   
+   使用以下设置：
+   - **框架预设**: Astro
+   - **构建命令**: `pnpm run build`
+   - **构建输出目录**: `dist`
+   
+   <Callout type="warning" title="搜索索引">
+     `build` 脚本会自动运行 `astro build && pnpm run index:content`，用于生成 Fuse.js 搜索索引。请确保此步骤成功完成，否则部署站点的搜索功能将无法使用。
+   </Callout>
+
+5. **保存并部署**
+</Steps>
+
+### 方式二：Wrangler CLI
+
+您也可以直接从终端部署。
+
+<Steps>
+1. **登录 Wrangler**
+   
+   ```bash title="终端" frame="terminal"
+   npx wrangler login
+   ```
+
+2. **构建并部署**
+   
+   运行 `package.json` 中定义的部署脚本：
+   
+   ```bash title="终端" frame="terminal"
+   pnpm run deploy
+   ```
+   
+   此命令执行：`astro build && pnpm run index:content && wrangler pages deploy dist`。
+</Steps>
+
+## 搜索索引
+
+本项目使用 **Fuse.js** 进行搜索，需要在构建时生成内容索引。
+
+`package.json` 中的 `build` 脚本会自动处理：
+
+```json title="package.json"
+"scripts": {
+  "build": "astro build && pnpm run index:content",
+  "index:content": "node scripts/generate-search-index.mjs"
+}
+```
+
+如果部署站点上的搜索不工作，请确保索引步骤已成功运行。
+
+## 故障排除
+
+### 部署失败
+检查构建日志。常见问题包括 TypeScript 错误或缺少依赖项。
+
+### 搜索不工作
+如果搜索没有返回结果，请检查 `public/search/` 目录是否包含 `en.json` 和 `ru.json` 文件。这些文件在构建期间由 `pnpm run index:content` 生成。

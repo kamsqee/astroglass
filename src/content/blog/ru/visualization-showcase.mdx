@@ -1,0 +1,171 @@
+---
+title: "Showcase: Сила Визуализации"
+description: "Изучение полного потенциала визуализации данных и кинематографичных блоков кода в Astro Glass."
+date: "2026-02-07"
+postLayout: 2
+---
+
+import { AnalyticsDashboard } from '../../../components/ui/dashboard/AnalyticsDashboard';
+import ProjectStructureGraph from '../../../components/ui/diagrams/ProjectStructureGraph';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
+import { BarList } from '../../../components/ui/charts/BarList';
+import { Tracker } from '../../../components/ui/charts/Tracker';
+
+Эта страница демонстрирует премиальные возможности визуализации данных, интегрированные в тему.
+
+Добро пожаловать в **Astro Glass**. Этот пост показывает, как наш стек визуализации — **Shadcn Charts (Recharts)**, **Visx** и **Expressive Code** — объединяются для создания потрясающего, насыщенного данными интерфейса.
+
+## 1. Аналитика и Дашборды (Recharts)
+
+Мы вышли за рамки базовых графиков. Наша реализация **Astro Glass Charts** сочетает в себе мощь Recharts с красотой нашего движка глассморфизма.
+
+### А. Дашборд
+Полный обзор дашборда с карточками KPI, градиентными диаграммами областей и светящимися круговыми диаграммами. Обратите внимание, как цвета адаптируются к вашей активной теме (попробуйте переключиться на "Neo" или "Sunset"!).
+
+<div className="my-10 not-prose overflow-x-auto pb-4 max-w-full">
+  <div className="rounded-2xl border border-[hsl(var(--bc)/0.1)] bg-[hsl(var(--b1)/0.5)] backdrop-blur-xl p-2 sm:p-4 md:p-8 ring-1 ring-[hsl(var(--bc)/0.05)]">
+    <AnalyticsDashboard client:load />
+  </div>
+</div>
+
+### Б. Микро-визуализации
+Для отображения плотных данных без визуального шума мы используем кастомные **BarLists** и **Trackers**. Эти компоненты отличаются плавной анимацией и "жидкими" индикаторами прогресса.
+
+import { useTranslations } from '../../../utils/i18n';
+
+export const t = useTranslations('ru');
+
+<div className="my-10 grid grid-cols-1 md:grid-cols-2 gap-6 not-prose">
+  <Card variant="glass" className="border-[hsl(var(--bc)/0.1)] bg-[hsl(var(--b2)/0.3)] shadow-none">
+    <CardHeader>
+      <CardTitle>{t('blog.dashboard.topPages')}</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="flex justify-between mb-2 text-xs text-[hsl(var(--bc)/0.4)] uppercase tracking-wider font-bold">
+        <p>{t('blog.dashboard.source')}</p>
+        <p>{t('blog.dashboard.visits')}</p>
+      </div>
+      <BarList
+        data={[
+          { name: '/blog/visualization-showcase', value: 1230 },
+          { name: '/docs/getting-started', value: 751 },
+          { name: '/components/ui', value: 471 },
+          { name: '/about', value: 280 },
+          { name: '/contact', value: 190 },
+        ]}
+        className="mt-2"
+      />
+    </CardContent>
+  </Card>
+
+  <Card variant="glass" className="border-[hsl(var(--bc)/0.1)] bg-[hsl(var(--b2)/0.3)] shadow-none">
+    <CardHeader>
+      <CardTitle>{t('blog.dashboard.systemUptime')}</CardTitle>
+      <p className="text-[hsl(var(--bc)/0.6)] text-sm">{t('blog.dashboard.apiAvailability')}</p>
+    </CardHeader>
+    <CardContent>
+      <Tracker
+        data={[
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'yellow', tooltip: t('blog.dashboard.degraded') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'red', tooltip: t('blog.dashboard.downtime') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+           { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+        ]}
+        className="mt-4"
+      />
+      <div className="mt-4 flex justify-between items-center text-sm">
+        <p className="text-emerald-400 font-bold glow-sm">99.2% Uptime</p>
+        <p className="text-[hsl(var(--bc)/0.4)]">{t('blog.dashboard.last24h')}</p>
+      </div>
+    </CardContent>
+  </Card>
+</div>
+
+---
+
+## 2. Интерактивная Архитектура (React Flow)
+
+Мы используем диаграммы не только для файлов. Мы используем их для визуализации **Системной Архитектуры**. Этот интерактивный граф позволяет перетаскивать узлы, масштабировать и исследовать структуру проекта.
+
+### А. Структура Проекта
+Стандартное представление древа файлов.
+
+<div className="my-10 not-prose">
+  <ProjectStructureGraph client:only="react" />
+</div>
+
+---
+
+## 3. Кинематографичные Блоки Кода (Expressive Code)
+
+Код — это контент. Мы делаем его выразительным.
+
+### А. Подсветка и Фокус
+Направляйте взгляд пользователя именно туда, где это важно.
+
+```tsx title="src/components/Magic.tsx" {3, 7-9}
+// 1. Импортируем магию
+import { motion } from 'framer-motion';
+
+export const MagicCard = () => (
+  // 2. Анимируем это
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    Магия!
+  </motion.div>
+);
+```
+
+### Б. Просмотр Изменений (Diff) с Иконками
+Четко показывает добавления и удаления в контексте.
+
+```diff lang="js" title="astro.config.mjs"
+  export default defineConfig({
+    integrations: [
+-     react(),
++     react({ include: ['**/react/*'] }),
+      tailwind(),
+    ],
+  });
+```
+
+### В. Терминал и Фреймы
+Симуляция среды терминала.
+
+```bash title="Deploying to Edge" frame="terminal"
+$ pnpm run build
+> astro build
+
+09:41:22 [build] output target: server
+09:41:22 [build] deploying to Cloudflare...
+09:41:23 [success] Deployed to https://astroglass-preview.pages.dev 🚀
+```
+
+---
+
+## Заключение
+
+Этот шоукейс доказывает, что **Astro Glass** — это больше, чем просто шаблон — это высокопроизводительный движок контента. Используя эти инструменты, вы можете передавать сложные данные и логику с помощью дизайна, который так же красив, как и функционален.

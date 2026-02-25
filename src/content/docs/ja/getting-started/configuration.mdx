@@ -1,0 +1,72 @@
+---
+title: "構成（設定）"
+description: "ブランドに合わせて AstroGlass をカスタマイズします。"
+order: 3
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass は、`src/config/` 内のファイルと標準の CSS カスタムプロパティによって構成（設定）されます。
+
+## 設定ファイル
+
+<FileTree>
+- src/
+  - config/
+    - **themes.ts** — テーマの定義（名前、色、セクション、プレミアムフラグ）
+    - **locales.ts** — サポートされている言語とロケールのメタデータ
+    - **navigation.ts** — サイトのメインナビゲーション構造
+    - **docs.ts** — ドキュメントのサイドバーとバージョンの設定
+</FileTree>
+
+## Tailwind CSS v4 によるスタイリング
+
+このプロジェクトは、`@tailwindcss/vite` プラグインを介して **Tailwind CSS v4** を利用しています。`tailwind.config.mjs` ファイルはありません — すべての構成は CSS を通じて行われます。
+
+色やテーマの変数は、`src/styles/global.css` と `src/styles/_themes.css` の中で CSS カスタムプロパティとして定義されています：
+
+```css title="global.css"
+:root {
+  --p: 260 80% 60%;   /* プライマリ (HSL) */
+  --s: 310 80% 60%;   /* セカンダリ */
+  --a: 190 90% 60%;   /* アクセント */
+  --b1: 220 20% 10%;  /* ベース背景 */
+  --bc: 220 20% 90%;  /* ベースコンテンツ (テキスト) */
+}
+```
+
+<Callout type="tip" title="色の変更">
+  サイトのカラースキームを変更するには、`src/styles/global.css` 内の HSL 値を更新してください。テーマ固有のオーバーライド（上書き設定）は、`[data-theme="..."]` セレクターを使用して `src/styles/_themes.css` に配置されます。
+</Callout>
+
+## テーマの構成
+
+各テーマは `src/config/themes.ts` に登録されています。これにより、すべてのテーマのメタデータが一元管理されます：
+
+```typescript title="themes.ts"
+export const themes: ThemeDefinition[] = [
+  {
+    id: 'liquid',
+    name: 'Liquid',
+    color: 'from-blue-500 to-cyan-400',
+    icon: '💧',
+    sections: ['Header', 'Hero', 'About', 'Features', 'Portfolio', 'Pricing', 'Testimonial', 'FAQ', 'CTA', 'Contact', 'Footer'],
+    enabled: true,
+    premium: false,
+    description: '滑らかなアニメーションを伴う、有機的で流れるようなデザイン',
+  },
+  // ... あと5つのテーマ (Glass, Neo, Luxury, Minimal, Aurora)
+];
+```
+
+## ロケール (言語固有の地域) の構成
+
+言語は `src/config/locales.ts` で管理されています。新しい言語を追加するには、エントリを追加して `enabled: true` に設定します：
+
+```typescript title="locales.ts"
+export const localesConfig: LocaleConfig[] = [
+  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧', direction: 'ltr', enabled: true },
+  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺', direction: 'ltr', enabled: true },
+];
+```

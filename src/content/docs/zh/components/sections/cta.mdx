@@ -1,0 +1,37 @@
+---
+title: "CTA 区块"
+description: "各主题的行动号召区块。"
+order: 9
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+行动号召（CTA）区块鼓励访客采取下一步行动——注册、获取演示或进一步探索。
+
+## 主题变体
+
+| 主题 | 组件 | 风格 |
+|-------|-----------|-------|
+| **Liquid** | `CTALiquid.astro` | 动态流体背景配合渐变 CTA |
+| **Glass** | `CTAGlass.astro` | 毛玻璃 CTA 卡片 |
+| **Neo** | `CTANeo.astro` | 粗体终端风格 CTA |
+| **Luxury** | `CTALuxury.astro` | 金色点缀高端 CTA |
+| **Minimal** | `CTAMinimal.astro` | 简洁居中 CTA |
+| **Aurora** | `CTAAurora.astro` | 渐变网格背景 CTA |
+
+所有变体位于 `src/components/sections/cta/`。
+
+## 内容来源
+
+CTA 数据通过 `useTranslations()` 从 `src/locales/{lang}/cta.json` 加载。
+
+<Callout type="info" title="无需 Props">
+  CTA 组件不接受外部 props。要更改 CTA 文本或按钮标签，请编辑 `src/locales/{lang}/cta.json`。
+</Callout>
+
+## 自定义
+
+要自定义：
+1. 编辑 `src/components/sections/cta/CTA{Theme}.astro`。
+2. 在 `src/styles/components/cta/` 中调整样式。
+3. 在 `src/locales/{lang}/cta.json` 中修改内容。

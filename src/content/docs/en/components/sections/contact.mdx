@@ -1,0 +1,40 @@
+---
+title: "Contact Section"
+description: "Contact form sections with Valibot validation for each theme."
+order: 10
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+The Contact section provides validated contact forms. Each theme has its own visual style, but they all share the same Valibot-based validation logic.
+
+## Theme Variants
+
+| Theme | Component | Style |
+|-------|-----------|-------|
+| **Liquid** | `ContactLiquid.astro` | Fluid form design with gradient accents |
+| **Glass** | `ContactGlass.astro` | Frosted glass form card |
+| **Neo** | `ContactNeo.astro` | Bold, high-contrast form |
+| **Luxury** | `ContactLuxury.astro` | Premium form with gold details |
+| **Minimal** | `ContactMinimal.astro` | Clean, simple contact form |
+| **Aurora** | `ContactAurora.astro` | Gradient background form |
+
+All variants are located at `src/components/sections/contact/`.
+
+## Validation
+
+Contact forms use **Valibot** for lightweight, type-safe validation on both client and server.
+
+- Client-side validation provides instant UI feedback.
+- The shared schema lives at `src/lib/schemas/contact.ts`.
+- Validation error messages are fully translated via `src/locales/{lang}/contact.json`.
+
+See the [Forms & Validation Guide](/docs/en/guides/forms-and-validation) for details.
+
+## Content Source
+
+Contact content and validation messages are loaded from `src/locales/{lang}/contact.json`.
+
+<Callout type="info" title="No Props">
+  Contact components take no external props. To edit form labels or validation messages, update `src/locales/{lang}/contact.json`.
+</Callout>

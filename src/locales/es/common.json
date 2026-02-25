@@ -1,0 +1,25 @@
+{
+  "greeting": "¡Hola, Mundo!",
+  "title": "AstroGlass",
+  "description": "Una plantilla Astro moderna con diseño astro-glass",
+  "siteName": "AstroGlass",
+  "learnMore": "Saber más",
+  "back": "Atrás",
+  "next": "Siguiente",
+  "submit": "Enviar",
+  "cancel": "Cancelar",
+  "close": "Cerrar",
+  "loading": "Cargando...",
+  "error": "Error",
+  "success": "Éxito",
+  "required": "Obligatorio",
+  "optional": "Opcional",
+  "notFound": {
+    "title": "Página no encontrada \u2014 AstroGlass",
+    "code": "404",
+    "heading": "Perdido en el Cristal",
+    "message": "La página que buscas no existe o ha sido movida.",
+    "suggestion": "Comprueba la URL o vuelve a un terreno conocido.",
+    "homeButton": "Ir al inicio"
+  }
+}

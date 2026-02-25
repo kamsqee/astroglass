@@ -1,0 +1,45 @@
+---
+title: "安装指南"
+description: "教您怎样去部署架设并组装起你的全新 AstroGlass 项目站点环境。"
+order: 2
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+一切起步从零开始非常轻易简单快捷。只需随手将此项目源的源代码全盘扒下来连同包一块打包拉取克隆落地，接着再敲个包管理器指令即可全数部署完毕。
+
+## 你需要些什么先决预置运行条件？
+
+- 本地必需需要 Node.js 并在版本号上不得低于 v20.0.0
+- 配备有 pnpm v8+ 或者及其更靠后的强壮包管理器版本版本（非常强烈推荐使用的方案） 或者使用 npm、yarn 来装载也可行
+
+## 极速组装上手初体验 (快速启动)
+
+<Steps>
+1. **直接把代码库内容一整个全搬弄下（Clone）到你那计算机主控机上**
+   
+   ```bash frame="terminal"
+   git clone https://github.com/kamsqee/astroglass.git my-project
+   ```
+
+2. **接下来步入探身走进踏入那该个已被成功完整全下载降落存留在你电脑路径里的根目录下**
+
+   ```bash frame="terminal"
+   cd my-project
+   ```
+
+3. **装配全数必备不可少的一系列核心所需运转依靠连带包依赖组件文件们**
+
+   ```bash frame="terminal"
+   pnpm install
+   ```
+
+4. **发号施令要求启动跑起来这负责监管日常本地页面搭建工作实时更新推送的热启开发服服务器台**
+
+   ```bash frame="terminal"
+   pnpm dev
+   ```
+
+</Steps>
+
+快通过打开地址敲击拜访： `http://localhost:4321` 这里便是你那充满魔力散发出诱人魅力的全新世界啦（全新站址展出所在）。

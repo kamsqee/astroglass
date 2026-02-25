@@ -1,0 +1,92 @@
+---
+title: 项目结构
+description: AstroGlass 代码库组织结构总览。
+order: 3
+---
+
+import ProjectStructureGraph from '../../../../components/ui/diagrams/ProjectStructureGraph';
+
+AstroGlass 遵循标准的 Astro 项目结构，并带有几个关键的组织模式。
+
+<ProjectStructureGraph client:only="react" />
+
+## 核心目录
+
+### `src/components/pages/`
+
+包含用于动态路由的整页组件，如作品集页面（Portfolio Page）。按页面类型分类存放：
+
+```
+pages/
+├── portfolio/
+│   ├── aurora/
+│   │   ├── PortfolioHeroAurora.astro
+│   │   ├── ...
+│   ├── liquid/
+│   │   ├── PortfolioHeroLiquid.astro
+│   │   ├── PortfolioGridLiquid.astro
+│   │   ├── PortfolioModalLiquid.astro
+│   │   ├── PortfolioCTALiquid.astro
+│   │   └── ...
+│   └── ...
+```
+
+### `src/components/sections/`
+
+存放所有的页面区块（Section）组件，按区块类型分类。每个区块都有一个子目录，每个主题对应一个不同变体：
+
+```
+sections/
+├── hero/
+│   ├── HeroLiquid.astro
+│   ├── HeroGlass.astro
+│   ├── HeroNeo.astro
+│   ├── HeroLuxury.astro
+│   ├── HeroMinimal.astro
+│   └── HeroAurora.astro
+├── about/
+├── features/
+├── portfolio/
+├── pricing/
+├── testimonial/
+├── faq/
+├── cta/
+├── contact/
+└── footer/
+```
+
+### `src/components/layout/header/`
+
+特定于主题的页眉/导航栏（Header/Navbar）组件（例如，`HeaderGlass.astro`, `HeaderLuxury.astro`）。
+
+### `src/components/ui/`
+
+可复用的 UI 基础构件（Primitives）：`Button`，`Card`，`Badge`，`Avatar`，`Input`，`Tabs`，`Charts`，`ThemeSwitcher`，`LanguageSwitcher` 以及 `Search`。
+
+### `src/config/`
+
+用于管控核心大局的配置文件：
+- `themes.ts` — 主题注册表（ID、名称、启用状态、区块列表）
+- `locales.ts` — 受到支持的各语言类型及其元数据
+- `navigation.ts` — 网站主导航结构
+- `docs.ts` — 文档侧边栏配置和版本管理
+
+### `src/content/`
+
+用于文档和博客文章的 Astro 内容集合（Content Collections）。在 `docs/[lang]/` 内部的文件结构决定了文档的 URL 路径。
+
+### `src/locales/`
+
+根据语言代码进行分类组织的翻译 JSON 文件。每个文件分别对应着不同的页面区块（例如，`hero.json`, `pricing.json`, `contact.json`）。
+
+### `src/pages/`
+
+基于文件的路由系统。 `[theme].astro` 的动态路由生成了每一个已启用主题所对应的页面。 `[...lang]` 这种目录模式则处理遍及整个架构下已经做过本土语言适配各类的版本页面。
+
+### `src/styles/`
+
+全局 CSS、主题覆盖体系 (`_themes.css`)、动画关键帧、以及在 `components/` 目录里的仅针对组件起效的特定样式表。
+
+### `src/utils/`
+
+工具函数，包含了用于 i18n 跨语种的翻译（`i18n.ts`）、侦察当前语种环境（`locale-utils.ts`）以及关于文档系统跨页导航等相关事务的（`docs-nav.ts`）。

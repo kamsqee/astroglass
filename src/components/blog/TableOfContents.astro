@@ -1,0 +1,98 @@
+---
+import { useTranslations } from '../../utils/i18n';
+import { getLocaleFromUrl } from '../../utils/locale-utils';
+import '../../styles/components/blog/TableOfContents.css';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Filter to h2 and h3 only
+const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{tocHeadings.length > 0 && (
+  <nav class="toc" aria-label={t('blog.tableOfContents')} data-open="false">
+    {/* Desktop heading (hidden on mobile) */}
+    <p class="toc__heading">{t('blog.tableOfContents')}</p>
+
+    {/* Mobile toggle */}
+    <button class="toc__toggle" aria-expanded="false" data-toc-toggle>
+      <span>{t('blog.tableOfContents')}</span>
+      <svg class="toc__toggle-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="toc__list-wrap">
+      <ul class="toc__list">
+        {tocHeadings.map(heading => (
+          <li class="toc__item">
+            <a
+              href={`#${heading.slug}`}
+              class={`toc__link ${heading.depth === 3 ? 'toc__link--h3' : ''}`}
+              data-toc-link
+            >
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+)}
+
+<script>
+  function initToc() {
+    // Toggle accordion
+    document.querySelectorAll('[data-toc-toggle]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const toc = btn.closest('.toc');
+        if (!toc) return;
+        const isOpen = toc.getAttribute('data-open') === 'true';
+        toc.setAttribute('data-open', String(!isOpen));
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
+
+    // Active heading highlight via IntersectionObserver
+    const links = document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]');
+    if (links.length === 0) return;
+
+    const ids = Array.from(links).map(l => l.getAttribute('href')?.replace('#', '')).filter(Boolean) as string[];
+    const headingEls = ids.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+
+    if (headingEls.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('toc__link--active'));
+            const activeLink = document.querySelector<HTMLAnchorElement>(`[data-toc-link][href="#${entry.target.id}"]`);
+            activeLink?.classList.add('toc__link--active');
+          }
+        }
+      },
+      {
+        rootMargin: '-80px 0px -60% 0px',
+        threshold: 0,
+      }
+    );
+
+    headingEls.forEach(el => observer.observe(el));
+  }
+
+  initToc();
+  document.addEventListener('astro:after-swap', initToc);
+</script>

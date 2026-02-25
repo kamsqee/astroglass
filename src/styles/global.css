@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/* Import CSS partials */
+@import "./_themes.css";
+@import "./_animations.css";
+@import "./_luxury-interactions.css";
+@import "./_docs.css";
+@import "./_header.css";
+@import "./_hamburger.css";
+@import "./_mobile-menu.css";
+@import "./_dropdowns.css";
+@import "./_switcher-shared.css";
+@import "./_lang-switcher.css";
+@import "./_theme-switcher.css";
+@import "./_forms.css";
+@import "./_404.css";
+
+/* Import per-theme design tokens */
+@import "./tokens/liquid.css";
+@import "./tokens/luxury.css";
+@import "./tokens/glass.css";
+@import "./tokens/minimal.css";
+
+/* ============================================
+   Tailwind Theme Configuration
+   ============================================ */
+@theme {
+  /* Custom colors using CSS variables for dynamic theming */
+  --color-primary: hsl(var(--p));
+  --color-secondary: hsl(var(--s));
+  --color-accent: hsl(var(--a));
+  --color-neutral: hsl(var(--n));
+  --color-base-100: hsl(var(--b1));
+  --color-base-200: hsl(var(--b2));
+  --color-base-content: hsl(var(--bc));
+}
+
+
+
+/* ============================================
+   Layout Variables
+   ============================================ */
+:root {
+  --header-height: 64px;
+  --header-height-lg: 72px;
+  --nav-offset: 0px;
+  --font-serif: "Playfair Display", "Times New Roman", Times, serif;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
+  width: 100%;
+}
+
+/* Fixed/Absolute headers need offset to prevent overlap */
+/* Mobile: Sticky headers (neo) don't need large offset, but Fixed (glass, minimal, aurora) do */
+[data-header="2"], [data-header="5"], [data-header="6"] {
+  --nav-offset: 96px;
+}
+
+[data-header="3"] {
+  --nav-offset: 0px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --header-height: var(--header-height-lg);
+  }
+  /* Desktop: Fixed headers need offset */
+  [data-header="2"], [data-header="3"], [data-header="5"], [data-header="6"] {
+    --nav-offset: 100px;
+  }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Premium easing for "liquid" feel */
+.ease-out-expo {
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* ============================================
+   Theme-Aware Base Styles
+   ============================================ */
+
+/* Text selection */
+::selection {
+  background: hsl(var(--a) / 0.3);
+  color: hsl(var(--bc));
+}
+
+/* Custom scrollbars (theme-aware) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--scrollbar-track, var(--b2)));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--scrollbar-thumb, var(--n) / 0.4));
+  border-radius: 5px;
+  border: 2px solid hsl(var(--scrollbar-track, var(--b2)));
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--scrollbar-thumb, var(--n) / 0.6));
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--scrollbar-thumb, var(--n) / 0.4)) hsl(var(--scrollbar-track, var(--b2)));
+}
+
+/* Focus rings (theme-aware) */
+:focus-visible {
+  outline: 2px solid hsl(var(--glow-color, var(--a)) / 0.6);
+  outline-offset: 2px;
+  transition: outline-color 0.2s ease;
+}
+
+/* Links - theme-aware underline animation */
+a:not([class]) {
+  color: hsl(var(--a));
+  text-decoration: none;
+  background: linear-gradient(
+    to right,
+    hsl(var(--glow-color, var(--a)) / 0.3) 0%,
+    hsl(var(--glow-color, var(--a)) / 0.3) 100%
+  );
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s cubic-bezier(0.32, 0.72, 0, 1), color 0.2s ease;
+}
+
+a:not([class]):hover {
+  background-size: 100% 2px;
+  color: hsl(var(--a));
+}
+
+/* Smooth theme transitions — scoped to containers, not every element */
+body,
+main,
+header,
+footer,
+section,
+nav {
+  transition-property: background-color, border-color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  main,
+  header,
+  footer,
+  section,
+  nav {
+    transition: none;
+  }
+}
+
+/* ============================================
+   Page Transition (prevents flicker on navigation)
+   ============================================ */
+html {
+  background: hsl(var(--b1));
+  scroll-behavior: smooth;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.2s;
+}
+
+/* ============================================
+   Expressive Code — Theme Integration
+
+   github-light's default white bg is correct for
+   all light themes. Dark themes need --b2 tinting.
+   ============================================ */
+
+/* --- Dark themes: tinted backgrounds from --b2 --- */
+[data-theme="abyss"] .expressive-code .frame,
+[data-theme="neonoir"] .expressive-code .frame,
+[data-theme="synthwave"] .expressive-code .frame {
+  background-color: hsl(var(--b2)) !important;
+}
+
+[data-theme="abyss"] .expressive-code pre,
+[data-theme="neonoir"] .expressive-code pre,
+[data-theme="synthwave"] .expressive-code pre {
+  background-color: hsl(var(--b2)) !important;
+}
+
+[data-theme="abyss"] .expressive-code .header,
+[data-theme="neonoir"] .expressive-code .header,
+[data-theme="synthwave"] .expressive-code .header {
+  background-color: hsl(var(--b2)) !important;
+}
+
+[data-theme="abyss"] .expressive-code .ec-line .code,
+[data-theme="neonoir"] .expressive-code .ec-line .code,
+[data-theme="synthwave"] .expressive-code .ec-line .code {
+  background-color: transparent !important;
+}
+
+[data-theme="abyss"] .expressive-code .ec-line .gutter,
+[data-theme="neonoir"] .expressive-code .ec-line .gutter,
+[data-theme="synthwave"] .expressive-code .ec-line .gutter {
+  background-color: transparent !important;
+}
+
+/* --- Light themes: ensure code blocks blend nicely --- */
+[data-theme="azure"] .expressive-code .frame,
+[data-theme="solaris"] .expressive-code .frame,
+[data-theme="nordic"] .expressive-code .frame,
+[data-theme="evergreen"] .expressive-code .frame,
+[data-theme="rose"] .expressive-code .frame,
+[data-theme="aquatica"] .expressive-code .frame,
+[data-theme="monochrome"] .expressive-code .frame {
+  /* Border handled by config to prevent double borders */
+}

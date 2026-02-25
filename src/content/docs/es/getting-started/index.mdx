@@ -1,0 +1,148 @@
+---
+title: "Empezando con AstroGlass"
+description: "Aprenda cómo configurar y personalizar su plantilla de Astro con temas, internacionalización y despliegue en la nube."
+order: 1
+category: guide
+tags: ["getting-started", "setup", "beginner"]
+---
+
+
+¡Bienvenido a la **Plantilla AstroGlass**! Esta guía le mostrará cómo configurar su entorno de desarrollo y personalizar la plantilla para que se adapte a sus necesidades.
+
+## Requisitos Previos
+
+Antes de comenzar, asegúrese de tener lo siguiente instalado:
+
+- **Node.js** v20 o superior
+- **pnpm** (recomendado) o npm
+- Un editor de código (Se recomienda VS Code)
+
+<Callout type="tip" title="Consejo Profesional">
+  Recomendamos usar [pnpm](https://pnpm.io/) para una gestión de paquetes más rápida y eficiente en el uso del disco.
+</Callout>
+
+## Instalación
+
+<Steps>
+
+### Clonar el Repositorio
+
+Primero, clone el repositorio de la plantilla en su máquina local:
+
+```bash title="Terminal" frame="terminal"
+git clone https://github.com/kamsqee/astroglass.git my-project
+cd my-project
+```
+
+### Instalar Dependencias
+
+Instale las dependencias del proyecto usando su administrador de paquetes preferido:
+
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash frame="terminal"
+pnpm install
+```
+```bash frame="terminal"
+npm install
+```
+```bash frame="terminal"
+yarn install
+```
+</CodeTabs>
+
+### Iniciar el Servidor de Desarrollo
+
+Ejecute el servidor de desarrollo para ver su plantilla en acción:
+
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash frame="terminal"
+pnpm dev
+```
+```bash frame="terminal"
+npm run dev
+```
+```bash frame="terminal"
+yarn dev
+```
+</CodeTabs>
+
+</Steps>
+
+Su sitio debería estar funcionando ahora en `http://localhost:4321` 🎉
+
+## Estructura del Proyecto
+
+Aquí hay una descripción general de la estructura de carpetas del proyecto:
+
+<FileTree>
+- src/
+  - components/
+    - sections/
+      - hero/
+        - HeroLiquid.astro
+        - HeroGlass.astro
+        - HeroNeo.astro
+        - ...
+      - features/
+      - pricing/
+      - about/
+      - portfolio/
+      - ...
+    - layout/
+      - header/
+    - ui/
+    - docs/
+    - mdx/
+  - config/
+    - themes.ts
+    - locales.ts
+    - docs.ts
+    - navigation.ts
+  - content/
+    - docs/
+      - en/
+      - ru/
+    - blog/
+  - locales/
+    - en/
+    - ru/
+  - pages/
+    - index.astro
+    - [theme].astro
+    - docs/
+    - blog/
+  - styles/
+    - global.css
+    - _themes.css
+    - components/
+- public/
+- astro.config.mjs
+- package.json
+</FileTree>
+
+## Elección de un Tema
+
+La plantilla viene con **6 hermosos temas** listos para usar:
+
+| Tema | Descripción |
+|-------|-------------|
+| **Liquid** | Animaciones fluidas, fondos degradados |
+| **Glass** | Efectos de glassmorphism, paneles esmerilados |
+| **Neo** | Tipografía audaz, fuerte contraste |
+| **Luxury** | Elegantes acentos dorados, sensación premium |
+| **Minimal** | Limpio, enfocado, sin distracciones |
+| **Aurora** | Degradados inmersivos, estructura geométrica |
+
+Para cambiar de tema, simplemente navegue hacia el selector de temas en el encabezado o visite las páginas de demostración del tema directamente (por ejemplo, `/liquid`, `/glass`, `/aurora`).
+
+## Próximos Pasos
+
+Ahora que tiene configurado su entorno de desarrollo:
+
+1. [Sistema de Temas](/docs/es/core-concepts/theming) — Conozca cómo funciona la arquitectura de temas dinámicos
+2. [Enrutamiento e i18n](/docs/es/core-concepts/routing-i18n) — Agregue soporte para más idiomas
+3. [Despliegue en Cloudflare](/docs/es/deployment/cloudflare) — Despliegue en Cloudflare Pages
+
+<Callout type="info" title="¿Necesita Ayuda?">
+  Consulte la [Guía de Formularios y Validación](/docs/es/guides/forms-and-validation) o [abra un issue](https://github.com/kamsqee/astroglass/issues) si se encuentra con algún problema.
+</Callout>

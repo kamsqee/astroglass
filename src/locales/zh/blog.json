@@ -1,0 +1,41 @@
+{
+  "title": "博客",
+  "description": "最新动态",
+  "subtitle": "最新的想法与更新",
+  "featured": "精选",
+  "featuredBadge": "精选文章",
+  "allPosts": "所有文章",
+  "filterByTag": "按标签筛选",
+  "readMore": "阅读全文",
+  "backToBlog": "← 返回博客",
+  "publishedOn": "发布于",
+  "author": "作者",
+  "tags": "标签",
+  "noPosts": "未找到文章",
+  "relatedPosts": "相关文章",
+  "minRead": "分钟阅读",
+  "tableOfContents": "目录",
+  "share": "分享",
+  "copyLink": "复制链接",
+  "linkCopied": "链接已复制！",
+  "nextPost": "下一篇",
+  "prevPost": "上一篇",
+  "writtenBy": "撰写者",
+  "newsletter": {
+    "title": "保持关注",
+    "description": "当我们发布新内容时收到通知",
+    "placeholder": "你的邮箱地址",
+    "cta": "订阅"
+  },
+  "dashboard": {
+    "source": "来源",
+    "visits": "访问量",
+    "topPages": "热门页面",
+    "systemUptime": "系统正常运行时间（90 天）",
+    "apiAvailability": "API 可用性",
+    "operational": "运行正常",
+    "degraded": "性能下降",
+    "downtime": "宕机",
+    "last24h": "过去 24 小时"
+  }
+}

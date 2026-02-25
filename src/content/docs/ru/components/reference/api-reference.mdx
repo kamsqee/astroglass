@@ -1,0 +1,71 @@
+---
+title: "Справочник API"
+description: "Техническая документация API компонентов и утилит AstroGlass."
+order: 1
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Подробный справочник ключевых функций, типов и конфигурационных объектов AstroGlass.
+
+## `useTranslations(locale)`
+
+Возвращает функцию получения переводов для указанной локали.
+
+**Модуль**: `src/utils/i18n.ts`
+
+```typescript
+function useTranslations(locale: Locale): (key: string) => string;
+```
+
+**Использование**:
+```astro
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<h1>{t('hero.title')}</h1>
+```
+
+- Ключи из `common.json` доступны на корневом уровне (например, `t('title')`)
+- Остальные файлы имеют пространства имён по имени файла (например, `t('hero.title')`)
+
+---
+
+## `getLocaleFromUrl(url)`
+
+Извлекает код локали из текущего URL.
+
+**Модуль**: `src/utils/locale-utils.ts`
+
+```typescript
+function getLocaleFromUrl(url: URL): Locale;
+```
+
+---
+
+## `getEnabledThemes()`
+
+Возвращает все активные темы.
+
+**Модуль**: `src/config/themes.ts`
+
+```typescript
+function getEnabledThemes(): ThemeDefinition[];
+```
+
+---
+
+## Доступные темы
+
+| ID | Название | Иконка |
+|----|----------|--------|
+| `liquid` | Liquid | 💧 |
+| `glass` | Glass | 🪟 |
+| `neo` | Neo | ⚡ |
+| `luxury` | Luxury | 👑 |
+| `minimal` | Minimal | ✨ |
+| `aurora` | Aurora | 🌌 |

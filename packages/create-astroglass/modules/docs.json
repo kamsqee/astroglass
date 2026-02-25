@@ -1,0 +1,33 @@
+{
+  "name": "docs",
+  "description": "Full-text searchable documentation system with syntax highlighting",
+  "files": [
+    "src/content/docs/",
+    "src/pages/[...lang]/docs/",
+    "src/components/docs/DocsBottomBar.astro",
+    "src/components/docs/DocsLayout.astro",
+    "src/components/docs/DocsProgress.astro",
+    "src/components/docs/DocsSearch.astro",
+    "src/components/docs/DocsTOCMobile.astro",
+    "src/components/docs/PropsTable.astro",
+    "src/components/ui/search/HighlightScript.astro",
+    "src/components/ui/search/SearchDialog.tsx",
+    "src/lib/search/extractSnippet.ts",
+    "src/lib/search/useRecentSearches.ts",
+    "src/lib/search/useSearch.ts",
+    "src/styles/components/docs/DocsLayout.css",
+    "src/styles/components/docs/DocsSearch.css",
+    "src/styles/_docs.css",
+    "scripts/generate-search-index.mjs"
+  ],
+  "packages": [
+    "fuse.js",
+    "astro-expressive-code"
+  ],
+  "configPatches": {
+    "astro.config.mjs": ["expressiveCode integration"],
+    "global.css": ["@import './_docs.css'"],
+    "package.json": ["build script: generate-search-index"]
+  },
+  "reactRequired": true
+}

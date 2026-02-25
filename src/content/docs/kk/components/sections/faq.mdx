@@ -1,0 +1,37 @@
+---
+title: "Жиі қойылатын сұрақтар (FAQ) бөлімі"
+description: "Әрбір тақырыпқа арналған аккордеон UI бар жиі қойылатын сұрақтар бөлімдері."
+order: 8
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Жиі қойылатын сұрақтар (FAQ) бөлімінде аккордеон пішіміндегі жалпы сұрақтар мен жауаптар көрсетіледі.
+
+## Тақырып нұсқалары
+
+| Тақырып | Компонент | Стиль |
+|-------|-----------|-------|
+| **Liquid** | `FAQLiquid.astro` | Тегіс анимациялық аккордеондар |
+| **Glass** | `FAQGlass.astro` | Аязды әйнек (Frosted glass) аккордеондары |
+| **Neo** | `FAQNeo.astro` | Қалың, жоғары контрастты Q&A |
+| **Luxury** | `FAQLuxury.astro` | Алтын екпіні бар талғампаз аккордеондар |
+| **Minimal** | `FAQMinimal.astro` | Таза, қарапайым аккордеондар |
+| **Aurora** | `FAQAurora.astro` | Градиентті фондық FAQ карталары |
+
+Барлық нұсқалар `src/components/sections/faq/` мекенжайында орналасқан.
+
+## Мазмұн көзі
+
+FAQ элементтері `useTranslations()` арқылы `src/locales/{lang}/faq.json` файлынан жүктеледі. JSON құрылымы әдетте сұрақ-жауап жұптарының массивін қамтиды.
+
+<Callout type="info" title="Қосымша параметрлер (Props) жоқ">
+  FAQ компоненттері сыртқы props қабылдамайды. FAQ элементтерін қосу, жою немесе өңдеу үшін `src/locales/{lang}/faq.json` файлын жаңартыңыз.
+</Callout>
+
+## Баптау
+
+Баптау үшін:
+1. `src/components/sections/faq/FAQ{Theme}.astro` файлын өңдеңіз.
+2. `src/styles/components/faq/` ішіндегі стильдерді реттеңіз.
+3. `src/locales/{lang}/faq.json` файлындағы мазмұнды өзгертіңіз.

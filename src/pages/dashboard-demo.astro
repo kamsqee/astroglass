@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { AnalyticsDashboard } from '../components/ui/dashboard/AnalyticsDashboard';
+import FooterLiquid from '../components/sections/footer/FooterLiquid.astro';
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<BaseLayout title={t('dashboard.title')} description={t('dashboard.description')}>
+  <div class="relative min-h-screen pt-32 pb-20">
+    <div class="absolute inset-0 z-0">
+        <div class="absolute top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-purple-600/20 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] h-[500px] w-[500px] rounded-full bg-blue-600/20 blur-[120px]"></div>
+    </div>
+
+    <div class="container mx-auto px-4 z-10 relative">
+      <div class="mb-12 text-center">
+        <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60 mb-4">
+          {t('dashboard.heading')}
+        </h1>
+        <p class="text-lg text-white/60 max-w-2xl mx-auto">
+          {t('dashboard.subheading')}
+        </p>
+      </div>
+
+      <div class="backdrop-blur-xl bg-black/40 border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl">
+        <AnalyticsDashboard client:load />
+      </div>
+    </div>
+  </div>
+  <FooterLiquid />
+</BaseLayout>

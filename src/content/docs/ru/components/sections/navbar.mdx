@@ -1,0 +1,30 @@
+---
+title: "Навигация / Шапка"
+description: "Тематические навигационные панели."
+order: 11
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Навигационная панель (Header) отображается вверху каждой тематической страницы.
+
+## Варианты тем
+
+| Тема | Компонент | Стиль |
+|------|-----------|-------|
+| **Liquid** | `HeaderLiquid.astro` | Прозрачная шапка с размытием |
+| **Glass** | `HeaderGlass.astro` | Стеклянная навигация |
+| **Neo** | `HeaderNeo.astro` | Контрастная шапка |
+| **Luxury** | `HeaderLuxury.astro` | Премиальная шапка |
+| **Minimal** | `HeaderMinimal.astro` | Минималистичная навигация |
+| **Aurora** | `HeaderAurora.astro` | Градиентная шапка |
+
+Все варианты находятся в `src/components/layout/header/`.
+
+## Конфигурация навигации
+
+Ссылки навигации настраиваются в `src/config/navigation.ts`. Метки переводятся через `src/locales/{lang}/nav.json`.
+
+<Callout type="info" title="Без пропсов">
+  Header-компоненты не принимают внешних пропсов. Элементы навигации определяются в файлах конфигурации.
+</Callout>

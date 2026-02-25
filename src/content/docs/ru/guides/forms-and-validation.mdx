@@ -1,0 +1,114 @@
+---
+title: Формы и Валидация
+description: Узнайте, как создавать безопасные формы с валидацией, используя Valibot и Astro Actions.
+---
+
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+Этот шаблон использует **Valibot** для легкой и типизированной валидации как на клиенте, так и на сервере. Мы разработали гибридный подход, который обеспечивает:
+1.  **Мгновенную обратную связь**: С помощью небольшого клиентского скрипта.
+2.  **Безопасность на сервере**: Использование *той же самой* схемы в Astro Actions (опционально, но рекомендуется).
+
+## Быстрый Старт
+
+Чтобы добавить новую валидируемую форму:
+
+<Steps>
+1. **Определите правила (Опционально)**
+   
+   Если вам нужны правила, отличные от стандартной `ContactSchema`, создайте новую схему в `src/lib/schemas/`.
+
+2. **Добавьте форму в компонент**
+   
+   Используйте этот шаблон. Ключевым моментом является строгое именование полей ввода и использование класса `.input-error`.
+
+   ```astro title="Component.astro"
+   ---
+   import { createContactSchema } from '../../lib/schemas/contact';
+   // ... импорты
+   ---
+
+   <form class="my-form" novalidate>
+     <div class="form-control">
+       <input type="email" name="email" required />
+     </div>
+     <button type="submit">Отправить</button>
+   </form>
+
+   <script>
+     import { safeParse } from 'valibot';
+     import { createContactSchema } from '../../lib/schemas/contact';
+
+     const form = document.querySelector('.my-form');
+     // Передай функцию перевода и опции
+     const schema = createContactSchema(key => key, { companyRequired: true }); 
+
+     form.addEventListener('submit', (e) => {
+       e.preventDefault();
+       const formData = new FormData(form);
+       const data = Object.fromEntries(formData);
+       
+       // Парсинг с использованием схемы
+       const result = safeParse(schema, data);
+
+       if (!result.success) {
+         // Обработка ошибок (например, красные границы)
+         console.log(result.issues);
+       }
+     });
+   </script>
+   ```
+</Steps>
+
+## Стилизация (Темы)
+
+Мы создали систему CSS, которая автоматически адаптирует стили валидации под активную тему (Liquid, Glass, Minimal и т.д.).
+
+Вам просто нужно переключать классы `input-error` или `input-success` на полях ввода.
+
+| Класс | Эффект |
+| :--- | :--- |
+| `input-error` | Добавляет **Красную** рамку/свечение (цвет `--er`). |
+| `input-success`| Добавляет **Зеленую** рамку (цвет `--su`). |
+| `error-message`| Стилизованный текст ошибки с анимацией появления. |
+
+### Пример использования
+```javascript
+// Добавить состояние ошибки
+input.classList.add('input-error');
+
+// Убрать состояние ошибки
+input.classList.remove('input-error');
+```
+
+## Настройка правил валидации
+
+Редактируйте `src/lib/schemas/contact.ts`, чтобы изменить правила для стандартной контактной формы.
+
+```typescript
+// Современный синтаксис Valibot v1 с использованием pipe()
+export const createContactSchema = (t, options = {}) => object({
+  name: pipe(
+    string(),
+    minLength(2, t('validation.nameShort'))
+  ),
+  message: pipe(
+    string(),
+    minLength(10, t('validation.messageShort')),
+    maxLength(1000)
+  ),
+  // Условная валидация
+  company: options.companyRequired 
+    ? pipe(string(), minLength(1))
+    : optional(string())
+});
+```
+
+## Локализация (i18n)
+
+Сообщения валидации полностью переведены. Ключи находятся в:
+-   `src/locales/en/contact.json` (в объекте `validation`)
+-   `src/locales/ru/contact.json`
+
+При инициализации схемы на клиенте вы должны передать функцию перевода `t` или карту соответствий, как это сделано в `ContactGlass.astro`.

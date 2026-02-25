@@ -1,0 +1,57 @@
+---
+title: "Visualization Showcase"
+description: "Data visualization examples using static charts and code snippets"
+---
+
+# Visualization Showcase
+
+This page showcases data visualization techniques using static examples.
+
+## Chart Example
+
+The following demonstrates a sample analytics layout:
+
+| Metric        | Value   | Change |
+|---------------|---------|--------|
+| Page Views    | 12,450  | +12%   |
+| Unique Users  | 8,230   | +8%    |
+| Avg. Duration | 2m 45s  | +15%   |
+| Bounce Rate   | 32%     | -5%    |
+
+## Code Snippet
+
+Here's an example of rendering a chart component:
+
+```typescript
+// Example: Chart configuration
+const chartConfig = {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+    datasets: [{
+      label: 'Revenue',
+      data: [1200, 1900, 3000, 5000, 4200],
+      borderColor: 'hsl(var(--p))',
+      tension: 0.4,
+    }],
+  },
+};
+```
+
+## Performance Metrics
+
+```
+╭──────────────────────────────────────╮
+│  Lighthouse Scores                   │
+│                                      │
+│  Performance:    98 ████████████░░ │
+│  Accessibility:  100 ██████████████ │
+│  Best Practices: 95 ███████████░░░ │
+│  SEO:            100 ██████████████ │
+╰──────────────────────────────────────╯
+```
+
+> **Note:** For interactive charts, add the dashboard module:
+> ```bash
+> npx astroglass add dashboard
+> ```

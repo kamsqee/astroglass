@@ -1,0 +1,44 @@
+{
+  "title": "Œuvres Sélectionnées",
+  "subtitle": "Une vitrine visuelle de clarté, de profondeur et d'interaction fluide.",
+  "badge": "Portfolio",
+  "gallery": "Galerie",
+  "featured": "Projet à la Une",
+  "caseStudies": "Études de Cas",
+  "impactTitle": "Un Impact Réel, des Résultats Réels",
+  "impactSubtitle": "Chaque projet raconte une histoire. Voici ce que nous avons accompli ensemble.",
+  "scrollHint": "Faites défiler pour explorer",
+  "gridHint": "Survolez pour explorer chaque projet",
+  "viewCaseStudy": "Voir l'Étude de Cas",
+  "themeGallery": {
+    "subtitle": "Découvrir",
+    "title": "Thèmes Inclus",
+    "desc": "Découvrez les thèmes pré-construits que vous obtenez avec le modèle. Tout est personnalisable.",
+    "viewDemo": "Voir la Démo",
+    "free": "Propre & Basique",
+    "premium": "Riche & Avancé",
+    "sections": "sections"
+  },
+  "categories": {
+    "webapp": "Application Web",
+    "dashboard": "Tableau de Bord",
+    "mobile": "Mobile",
+    "branding": "Image de Marque"
+  },
+  "metrics": {
+    "faster": "Temps de chargement plus rapide",
+    "users": "Utilisateurs actifs",
+    "rating": "Note sur l'App Store",
+    "growth": "Croissance des revenus"
+  },
+  "p1Title": "Écosystème Numérique",
+  "p1Desc": "Solution complète pour les startups modernes à forte croissance.",
+  "p2Title": "Tableau de Bord Liquid",
+  "p2Desc": "Analyse de données avec exploration immersive profonde.",
+  "p3Title": "Mobile Glassic",
+  "p3Desc": "Définir la prochaine génération d'interfaces mobiles.",
+  "p4Title": "Web Quantique",
+  "p4Desc": "Brouiller les frontières entre la réalité et l'interface.",
+  "viewProject": "Voir le Projet",
+  "allWork": "Tous les Travaux"
+}

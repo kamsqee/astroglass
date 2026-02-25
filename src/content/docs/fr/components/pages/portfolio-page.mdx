@@ -1,0 +1,63 @@
+---
+title: "Page Portfolio"
+description: "Une page portfolio complète, avec filtrage, disponible pour chaque thème."
+order: 1
+---
+
+# Page Portfolio
+
+Nouveau dans **AstroGlass**, la page Portfolio est une route dynamique dédiée qui offre une présentation riche de vos projets. Elle propose un filtrage par catégorie, des vues détaillées des projets et un design qui s'adapte à votre thème actif.
+
+## Architecture
+
+La page portfolio est servie à l'adresse `/[theme]/portfolio` (par exemple, `/liquid/portfolio`, `/glass/portfolio`). Elle utilise une stratégie de routage dynamique similaire aux pages de thèmes principales.
+
+### Structure des Fichiers
+
+- **Route** : `src/pages/[theme]/portfolio.astro` - Le gestionnaire de route dynamique.
+- **Composants** : `src/components/pages/portfolio/{theme}/` - Implémentations de sections modulaires spécifiques au thème (par exemple, `PortfolioHeroLiquid.astro`, `PortfolioGridLiquid.astro`).
+- **Contenu** : `src/locales/{lang}/portfolioPage.json` - Tout le contenu textuel, les données des projets et les catégories.
+
+## Personnalisation
+
+Contrairement aux sections spécifiques de la page d'accueil, la Page Portfolio est entièrement pilotée par les données via les fichiers de localisation. Cela facilite l'ajout de projets sans avoir à toucher au code.
+
+### Gestion des Projets
+
+Modifiez `src/locales/fr/portfolioPage.json` pour gérer vos projets.
+
+```json title="src/locales/fr/portfolioPage.json"
+{
+  "projects": {
+    "p1": {
+      "title": "Nom du Projet",
+      "description": "Courte description pour la carte.",
+      "longDescription": "description plus longue pour la vue détaillée...",
+      "category": "webapp",
+      "techStack": ["React", "Node.js"],
+      "color": "from-violet-500 to-fuchsia-500"
+    }
+  }
+}
+```
+
+### Catégories
+
+Les catégories sont définies dans le même fichier JSON et utilisées pour le filtrage.
+
+```json
+{
+  "filterAll": "Tout",
+  "categoryLabels": {
+    "webapp": "Application Web",
+    "mobile": "Application Mobile"
+  }
+}
+```
+
+## Fonctionnalités
+
+- **Filtrage Dynamique** : Filtrage côté client par catégorie avec des animations fluides.
+- **Vue Détaillée** : Panneau de détails extensible pour chaque projet affichant le "Défi" (Challenge), la "Solution" et l'"Impact".
+- **Adaptation au Thème** : Utilise automatiquement le bon en-tête, pied de page et style pour le thème actif.
+- **Réactif** : Disposition entièrement réactive qui fonctionne sur mobile, tablette et ordinateur de bureau.

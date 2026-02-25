@@ -1,0 +1,31 @@
+{
+  "title": "Le Starter Que Vous Allez Lancer.",
+  "subtitle": "6 thèmes, 66+ composants, 7 langues, docs. Gratuit & Open Source.",
+  "cta": "Explorer les Thèmes",
+  "secondaryCta": "Lire la Documentation",
+  "liveBadge": "Gratuit & Open Source · Astro 5.0",
+  "digitalExperience": "Expérience Numérique",
+  "watchReel": "Voir en Action",
+  "glassCard": {
+    "title": "Composants Liquid",
+    "desc": "Des blocs magnifiquement conçus pour des expériences numériques haut de gamme."
+  },
+  "visionary": "Design Visionnaire",
+  "trustedBy": "Construit avec",
+  "scrollToExplore": "Défilez pour explorer",
+  "tryItNow": "Essayez-le maintenant",
+  "dontTakeOurWord": "Ne nous croyez pas sur parole.",
+  "startBuilding": "Commencer à Créer",
+  "viewFullDemo": "Voir la Démo Complète",
+  "interactivePreview": "Aperçu Interactif",
+  "faster": "PLUS VITE.",
+  "buildFaster": "Créez plus vite.",
+  "shippingVelocity": "Vitesse d'expédition multipliée par 10",
+  "readyToBuild": "Prêt à créer ?",
+  "askLeaders": "Demandez à Stripe, Linear, Vercel.",
+  "cloneCommand": "npx degit kamsqee/astroglass mon-site",
+  "readyIn": "Prêt en 2 minutes",
+  "terminal": {
+    "label": "Terminal"
+  }
+}

@@ -1,0 +1,37 @@
+---
+title: "FAQ (よくある質問) セクション"
+description: "各テーマ用のアコーディオン UI を備えたよくある質問セクション。"
+order: 8
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+FAQ (よくある質問) セクションでは、一般的な質問と回答をアコーディオン形式で表示します。
+
+## テーマのバリアント
+
+| テーマ | コンポーネント | スタイル |
+|-------|-----------|-------|
+| **Liquid** | `FAQLiquid.astro` | 滑らかにアニメーション化されたアコーディオン |
+| **Glass** | `FAQGlass.astro` | すりガラスのアコーディオン |
+| **Neo** | `FAQNeo.astro` | 大胆でハイコントラストな Q&A |
+| **Luxury** | `FAQLuxury.astro` | ゴールドのアクセントが効いたエレガントなアコーディオン |
+| **Minimal** | `FAQMinimal.astro` | クリーンでシンプルなアコーディオン |
+| **Aurora** | `FAQAurora.astro` | グラデーション背景の FAQ カード |
+
+すべてのバリアントは `src/components/sections/faq/` に配置されています。
+
+## コンテンツのソース
+
+FAQ の項目は、`useTranslations()` を介して `src/locales/{lang}/faq.json` から読み込まれます。通常、JSON 構造には質問と回答のペアの配列が含まれます。
+
+<Callout type="info" title="プロパティ (Props) なし">
+  FAQ コンポーネントは外部からのプロパティ (Props) を受け取りません。FAQ 項目を追加、削除、または編集するには、`src/locales/{lang}/faq.json` を更新してください。
+</Callout>
+
+## カスタマイズ
+
+カスタマイズの手順:
+1. `src/components/sections/faq/FAQ{Theme}.astro` を編集します。
+2. `src/styles/components/faq/` にあるスタイルを調整します。
+3. `src/locales/{lang}/faq.json` でコンテンツを変更します。

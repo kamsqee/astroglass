@@ -1,0 +1,82 @@
+{
+  "title": "Fonctionnalités d'Astro Glass",
+  "subtitle": "Tout ce dont vous avez besoin pour créer des expériences numériques immersives haut de gamme.",
+  "badge": "Fonctionnalités",
+  "coreBadge": "Fonctionnalité Principale",
+  "experience": "Expérience",
+  "explore": "Explorer",
+  "learnMore": "En savoir plus",
+  "pureTitle": "Pur",
+  "liquidTitle": "Liquide",
+  "luxuryTitle": "Que voulez-vous construire ?",
+  "luxurySubtitle": "Sélectionnez votre objectif et voyez comment Astro Glass vous aide à l'atteindre plus rapidement.",
+  "minimalCtaTitle": "Prêt à découvrir toutes les fonctionnalités ?",
+  "minimalCtaDesc": "Commencez à créer avec la boîte à outils complète Astro Glass dès aujourd'hui.",
+  "f1Title": "Performances Ultra",
+  "f1Desc": "L'architecture zéro-JS par défaut garantit que votre site se charge en un clin d'œil.",
+  "f1LongDesc": "Basé sur l'architecture en îles d'Astro 5.0, seul le JavaScript dont vous avez besoin est envoyé. Cela signifie des temps de chargement inférieurs à la seconde et d'excellents scores Core Web Vitals (Signaux Web essentiels) dès le départ.",
+  "f2Title": "Effets de Verre Profonds",
+  "f2Desc": "Effets de flou multicouches et de réfraction pour une esthétique vraiment premium.",
+  "f2LongDesc": "Notre système de glassmorphism (effet verre) utilise des filtres d'arrière-plan soigneusement calibrés, des transparences superposées et des dégradés subtils pour créer de la profondeur sans sacrifier les performances.",
+  "f3Title": "Adaptabilité Fluide",
+  "f3Desc": "Chaque composant répond avec grâce à n'importe quelle taille d'écran ou orientation.",
+  "f3LongDesc": "Design adaptatif pensé pour le mobile (mobile-first) avec une typographie fluide, un espacement adaptatif et des mises en page contextuelles qui fonctionnent parfaitement, de la montre connectée à l'écran ultra-large.",
+  "f4Title": "Thèmes Illimités",
+  "f4Desc": "Plus de 10 palettes de couleurs ou créez votre propre look unique en quelques secondes.",
+  "f4LongDesc": "Propulsé par les propriétés personnalisées CSS et DaisyUI, changez de thème instantanément ou créez des palettes personnalisées. Mode sombre, mode clair et tout ce qui se trouve entre les deux.",
+  "f5Title": "Prêt pour l'Edge",
+  "f5Desc": "Déployez de manière globale avec les Cloudflare Workers pour un accès instantané partout.",
+  "useCases": {
+    "speed": "Construire Rapidement",
+    "speedHeadline": "Expédiez des sites prêts pour la production en quelques heures, pas en semaines.",
+    "speedF2Title": "Bundle Optimisé",
+    "speedF2Desc": "Séparation du code (code splitting) automatique et suppression du code mort (tree shaking) pour une charge utile minimale.",
+    "design": "Un Look Premium",
+    "designHeadline": "Créez des interfaces époustouflantes, soignées et haut de gamme.",
+    "scale": "Évoluer à l'Échelle Mondiale",
+    "scaleHeadline": "Conçu pour un public international et n'importe quel appareil.",
+    "scaleF2Title": "Prêt pour l'i18n",
+    "scaleF2Desc": "Prise en charge complète de l'internationalisation avec routage multilingue et de droite à gauche (RTL)."
+  },
+  "cta": "Explorer la Documentation",
+  "home": {
+    "title": "Pourquoi AstroGlass ?",
+    "subtitle": "Performances Pures. Design Liquide.",
+    "desc": "Une boîte à outils complète pour créer facilement des sites web superbes et ultra-performants.",
+    "list": [
+      {
+        "title": "Astro 5.0",
+        "desc": "La dernière architecture de Server Islands & Content Layer pour une vitesse ultime."
+      },
+      {
+        "title": "Tailwind CSS 4.0",
+        "desc": "Le moteur utilitaire nouvelle génération. Zéro config, builds instantanés."
+      },
+      {
+        "title": "Edge de Cloudflare",
+        "desc": "Déployez de manière globale avec la configuration prête pour l'Edge et les adaptateurs inclus."
+      },
+      {
+        "title": "Recherche Premium",
+        "desc": "Implémentation sur mesure de Fuse.js. Aucun service externe requis."
+      },
+      {
+        "title": "I18n Nativ",
+        "desc": "Routage intégré, détection des paramètres régionaux et gestion des traductions."
+      },
+      {
+        "title": "React 19",
+        "desc": "Des îlots interactifs quand vous en avez besoin, du HTML statique quand ce n'est pas le cas."
+      },
+      {
+        "title": "Type-Safe",
+        "desc": "Prise en charge complète de TypeScript et schémas de validation de contenu Zod."
+      },
+      {
+        "title": "Optimisé pour le SEO",
+        "desc": "Génération incluse des URL canoniques, de l'Open Graph et des plans de site (Sitemap)."
+      }
+    ]
+  },
+  "exploreAll": "Tout explorer"
+}

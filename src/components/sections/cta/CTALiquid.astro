@@ -1,0 +1,147 @@
+---
+/**
+ * CTA Liquid - The Journey Echo (REMARKABLE)
+ * Story-driven, contextual CTA that adapts based on scroll journey.
+ * Features progressive reveal animation and adaptive messaging.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/cta/CTALiquid.css';
+
+const echoMessages = JSON.stringify([
+  t('cta.echo1'),
+  t('cta.echo2'),
+]);
+---
+
+
+<section class="relative py-20 lg:py-32 px-4 sm:px-6 overflow-hidden bg-base-100">
+  <!-- Background gradient that shifts -->
+  <div class="cta-liquid-bg absolute inset-0 opacity-30 pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-primary/10"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/10 rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="max-w-5xl mx-auto relative">
+    <div class="cta-liquid-container lg:grid lg:grid-cols-12 lg:gap-12 items-center" data-echo-messages={echoMessages}>
+      
+      <!-- Context Line (adapts based on journey) -->
+      <div class="lg:col-span-5 mb-8 lg:mb-0">
+        <div class="cta-liquid-context space-y-4">
+          <!-- Eyebrow - changes based on scroll context -->
+          <p class="cta-liquid-eyebrow text-xs font-bold uppercase tracking-[0.3em] text-accent opacity-0">
+            {t('cta.eyebrow')}
+          </p>
+          
+          <!-- Context message -->
+          <p class="cta-liquid-message text-base text-base-content/75 leading-relaxed opacity-0">
+            <span class="cta-liquid-message-text">{t('cta.subtitle')}</span>
+          </p>
+          
+          <!-- Social proof micro-stat -->
+           <div class="cta-liquid-proof flex items-center gap-3 opacity-0">
+            <div class="flex -space-x-2">
+              <div class="cta-liquid-proof-drop w-8 h-8 bg-accent/20 border-2 border-base-100 flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-accent" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C12 2 6 10 6 14.5C6 17.54 8.69 20 12 20C15.31 20 18 17.54 18 14.5C18 10 12 2 12 2Z"/></svg>
+              </div>
+              <div class="cta-liquid-proof-drop w-8 h-8 bg-primary/20 border-2 border-base-100 flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C12 2 6 10 6 14.5C6 17.54 8.69 20 12 20C15.31 20 18 17.54 18 14.5C18 10 12 2 12 2Z"/></svg>
+              </div>
+              <div class="cta-liquid-proof-drop w-8 h-8 bg-secondary/20 border-2 border-base-100 flex items-center justify-center">
+                <svg class="w-3.5 h-3.5 text-secondary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C12 2 6 10 6 14.5C6 17.54 8.69 20 12 20C15.31 20 18 17.54 18 14.5C18 10 12 2 12 2Z"/></svg>
+              </div>
+            </div>
+            <p class="text-xs text-base-content/75">{t('cta.proof')}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main CTA Card -->
+      <div class="lg:col-span-7">
+        <div class="cta-liquid-card relative p-6 sm:p-8 lg:p-10 rounded-[1.5rem] sm:rounded-[2rem] bg-base-content/[0.03] border border-base-content/10 backdrop-blur-sm overflow-hidden">
+          <!-- Inner glow -->
+          <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none"></div>
+          
+          <!-- Pull-up handle hint (mobile) -->
+          <div class="cta-liquid-handle lg:hidden w-12 h-1 bg-base-content/10 rounded-full mx-auto mb-6"></div>
+          
+          <div class="relative z-10 space-y-6">
+            <!-- Headline -->
+            <h2 class="cta-liquid-headline text-xl sm:text-2xl lg:text-4xl font-black text-base-content tracking-tight opacity-0">
+              {t('cta.title')}
+            </h2>
+            
+            <!-- Supporting text -->
+            <p class="cta-liquid-subtext text-sm sm:text-base text-base-content/75 max-w-md opacity-0">
+              {t('cta.trialDays')}. {t('cta.noCreditCardRequired')}.
+            </p>
+            
+            <!-- CTA Buttons -->
+            <div class="cta-liquid-buttons flex flex-col sm:flex-row gap-3 opacity-0">
+              <a href={`/${locale}/pricing`} class="cta-liquid-primary group relative px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-accent text-base-100 font-bold text-sm sm:text-base text-center overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95">
+                <span class="relative z-10">{t('cta.primary')}</span>
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              </a>
+              <a href={`/${locale}/docs`} class="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-base-content/10 text-base-content/70 font-medium text-sm sm:text-base text-center hover:bg-base-content/5 hover:border-base-content/20 transition-all duration-500">
+                {t('cta.secondary')}
+              </a>
+            </div>
+            
+            <!-- Trust line -->
+            <p class="cta-liquid-trust text-xs text-base-content/80 opacity-0">
+              {t('cta.trust')}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+  function initCTALiquid() {
+    const container = document.querySelector('.cta-liquid-container') as HTMLElement;
+    if (!container) return;
+
+    const elements = [
+      '.cta-liquid-eyebrow',
+      '.cta-liquid-message',
+      '.cta-liquid-proof',
+      '.cta-liquid-headline',
+      '.cta-liquid-subtext',
+      '.cta-liquid-buttons',
+      '.cta-liquid-trust'
+    ];
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          elements.forEach(selector => {
+            document.querySelector(selector)?.classList.add('revealed');
+          });
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(container);
+
+    // Context-aware messaging based on scroll journey
+    const messagesData = container.dataset.echoMessages;
+    const messages = messagesData ? JSON.parse(messagesData) : [];
+
+    const messageEl = document.querySelector('.cta-liquid-message-text');
+    if (messageEl && messages.length > 0) {
+      const randomIndex = Math.floor(Math.random() * messages.length);
+      messageEl.textContent = messages[randomIndex];
+    }
+  }
+
+  initCTALiquid();
+  document.addEventListener('astro:after-swap', initCTALiquid);
+</script>

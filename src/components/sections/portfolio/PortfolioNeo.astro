@@ -1,0 +1,126 @@
+---
+/**
+ * Portfolio Neo - Stacked Cards
+ * Overlapping card stack with depth and parallax-like hover effects.
+ */
+import '../../../styles/components/portfolio/PortfolioPageNeo.css';
+import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import LocalizedLink from '../../ui/LocalizedLink.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const projects = [
+  { id: 1, title: t('portfolio.p1Title'), desc: t('portfolio.p1Desc'), category: t('portfolio.categories.webapp'), color: 'from-violet-500 to-purple-600' },
+  { id: 2, title: t('portfolio.p2Title'), desc: t('portfolio.p2Desc'), category: t('portfolio.categories.dashboard'), color: 'from-cyan-500 to-blue-600' },
+  { id: 3, title: t('portfolio.p3Title'), desc: t('portfolio.p3Desc'), category: t('portfolio.categories.mobile'), color: 'from-emerald-500 to-teal-600' },
+  { id: 4, title: t('portfolio.p4Title'), desc: t('portfolio.p4Desc'), category: t('portfolio.categories.branding'), color: 'from-amber-500 to-orange-600' },
+];
+---
+
+<section id="portfolio" class="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 overflow-hidden">
+  <!-- Background ambient -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px]"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-12 sm:mb-16 md:mb-20">
+      <NeoSectionTag label={t('portfolio.badge')} class="mb-4" />
+      <h2 class="text-4xl sm:text-5xl md:text-7xl font-black text-base-content tracking-tight mb-4">
+        {t('portfolio.title')}
+      </h2>
+      <p class="text-base sm:text-lg text-base-content/75 max-w-xl mx-auto">
+        {t('portfolio.subtitle')}
+      </p>
+    </div>
+
+    <!-- Stacked Cards -->
+    <div class="c-portfolio-page-neo__section-container relative">
+      {projects.map((p, i) => (
+        <div 
+          class="c-portfolio-page-neo__section-card group"
+          style={`animation-delay: ${i * 100}ms`}
+          data-index={i}
+        >
+          <div class="c-portfolio-page-neo__section-inner relative rounded-2xl sm:rounded-3xl overflow-hidden border border-base-content/10 bg-base-100 backdrop-blur-xl shadow-2xl">
+            <!-- Gradient accent top -->
+            <div class={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${p.color}`} data-neo-gradient="line"></div>
+            
+            <!-- Background gradient -->
+            <div class={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-700`} data-neo-gradient="bg"></div>
+            
+            <div class="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12">
+              <div class="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
+                <!-- Left: Number + Category -->
+                <div class="flex lg:flex-col items-center lg:items-start gap-4 lg:gap-2">
+                  <span class={`text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-br ${p.color} bg-clip-text text-transparent`} data-neo-text>
+                    0{p.id}
+                  </span>
+                  <span class="px-3 py-1 rounded-lg bg-base-content/5 text-base-content/75 text-[10px] font-bold uppercase tracking-wider">
+                    {p.category}
+                  </span>
+                </div>
+                
+                <!-- Middle: Content -->
+                <div class="flex-1">
+                  <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-base-content mb-3 tracking-tight group-hover:text-accent transition-colors duration-500">
+                    {p.title}
+                  </h3>
+                  <p class="text-sm sm:text-base text-base-content/75 leading-relaxed max-w-xl">
+                    {p.desc}
+                  </p>
+                </div>
+                
+                <!-- Right: CTA -->
+                <div class="flex items-center gap-4">
+                  <LocalizedLink href="/neo/portfolio" class={`inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r ${p.color} text-white font-bold text-sm shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 group/btn`} data-neo-cta>
+                    {t('portfolio.viewProject')}
+                    <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                  </LocalizedLink>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="text-center mt-12 sm:mt-16">
+      <LocalizedLink href="/neo/portfolio" class="inline-flex items-center gap-3 text-accent font-bold hover:gap-5 transition-all duration-300 group">
+        {t('portfolio.allWork')}
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </LocalizedLink>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Monochrome visual overrides */
+  :global([data-theme="monochrome"]) .c-portfolio-page-neo__section-inner [data-neo-gradient] {
+    background-image: none;
+  }
+  
+  :global([data-theme="monochrome"]) .c-portfolio-page-neo__section-inner [data-neo-gradient="line"] {
+    background-color: hsl(var(--bc) / 0.05);
+  }
+  
+  :global([data-theme="monochrome"]) .c-portfolio-page-neo__section-inner [data-neo-text] {
+    color: hsl(var(--bc));
+    -webkit-text-fill-color: hsl(var(--bc));
+  }
+  
+  :global([data-theme="monochrome"]) .c-portfolio-page-neo__section-inner [data-neo-cta] {
+    background-image: none;
+    background-color: hsl(var(--bc));
+    color: hsl(var(--b1));
+  }
+</style>

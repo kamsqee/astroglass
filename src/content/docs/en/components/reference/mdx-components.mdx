@@ -1,0 +1,164 @@
+---
+title: "MDX Components"
+description: "Custom MDX components available for use in documentation."
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+import Badge from '../../../../../components/mdx/Badge.astro';
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+
+A library of custom MDX components available in all documentation pages. These are automatically registered in the docs rendering pipeline.
+
+## Callout
+
+Use callouts to highlight important information.
+
+```mdx
+<Callout type="info" title="Info">
+  This is an informational callout.
+</Callout>
+
+<Callout type="warning" title="Warning">
+  Be careful with this operation.
+</Callout>
+
+<Callout type="tip" title="Tip">
+  Here's a helpful suggestion.
+</Callout>
+```
+
+**Types**: `info`, `warning`, `tip`, `error`
+
+---
+
+## Badge
+
+Display version or status indicators.
+
+```mdx
+<Badge text="New" variant="success" />
+<Badge text="Experimental" variant="warning" />
+<Badge text="Deprecated" variant="error" />
+```
+
+**Props**:
+| Prop | Type | Description |
+|------|------|-------------|
+| `text` | `string` | Badge label |
+| `variant` | `'success' \| 'warning' \| 'error' \| 'info'` | Color variant |
+
+---
+
+## Steps
+
+Wrap ordered lists for step-by-step instructions.
+
+```mdx
+<Steps>
+1. **First step**
+   
+   Description of first step.
+
+2. **Second step**
+   
+   Description of second step.
+</Steps>
+```
+
+---
+
+## FileTree
+
+Display file and directory structures.
+
+```mdx
+<FileTree>
+- src/
+  - components/
+  - pages/
+    - index.astro
+    - **[theme].astro**
+- package.json
+</FileTree>
+```
+
+Bold items with `**` are highlighted. Use `-` for list items.
+
+---
+
+## CardGrid & LinkCard
+
+Display linked cards in a responsive grid.
+
+```mdx
+<CardGrid>
+  <LinkCard
+    title="Getting Started"
+    description="Set up your project in minutes."
+    href="/docs/en/getting-started/installation"
+  />
+  <LinkCard
+    title="Theming"
+    description="Learn about the theme system."
+    href="/docs/en/core-concepts/theming"
+  />
+</CardGrid>
+```
+
+**LinkCard Props**:
+| Prop | Type | Description |
+|------|------|-------------|
+| `title` | `string` | Card title |
+| `description` | `string` | Card description |
+| `href` | `string` | Link destination |
+
+---
+
+## CodeTabs
+
+Display tabbed code blocks for multiple package managers or languages.
+
+```mdx
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash
+pnpm install
+​```
+```bash
+npm install
+​```
+```bash
+yarn install
+​```
+</CodeTabs>
+```
+
+**Props**:
+| Prop | Type | Description |
+|------|------|-------------|
+| `labels` | `string[]` | Tab labels displayed above each code block |
+
+<Callout type="info" title="Code Blocks">
+  Place each code block as a direct child. The number of code blocks must match the number of labels.
+</Callout>
+
+---
+
+## PropsTable
+
+Display component prop documentation in a formatted table.
+
+```mdx
+<PropsTable component="Hero" />
+```
+
+---
+
+## ApiMethod
+
+Document a function or method signature.
+
+```mdx
+<ApiMethod name="useTranslations" params="locale: Locale" returns="(key: string) => string" />
+```

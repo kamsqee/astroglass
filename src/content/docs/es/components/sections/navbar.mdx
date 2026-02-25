@@ -1,0 +1,41 @@
+---
+title: "Barra de navegación (Navbar / Header)"
+description: "Componentes de barra de navegación específicos del tema."
+order: 11
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+El componente Barra de navegación (Header) aparece en la parte superior de cada página de tema. Cada tema tiene su propio diseño de encabezado con diferentes patrones de navegación, implementaciones de menú móvil y estilos visuales.
+
+## Variantes de tema
+
+| Tema | Componente | Estilo |
+|-------|-----------|-------|
+| **Liquid** | `HeaderLiquid.astro` | Encabezado transparente con fondo desenfocado |
+| **Glass** | `HeaderGlass.astro` | Barra de navegación de vidrio esmerilado |
+| **Neo** | `HeaderNeo.astro` | Encabezado audaz y de alto contraste |
+| **Luxury** | `HeaderLuxury.astro` | Encabezado premium con acentos dorados |
+| **Minimal** | `HeaderMinimal.astro` | Navegación limpia y minimalista |
+| **Aurora** | `HeaderAurora.astro` | Encabezado con acento degradado |
+
+Todas las variantes se encuentran en `src/components/layout/header/`.
+
+## Características
+
+Cada variante de encabezado suele incluir:
+- **Navegación de escritorio**: Navegación horizontal con menús desplegables
+- **Navegación móvil**: Menú de hamburguesa con panel lateral deslizable
+- **Selector de tema**: Componente selector de tema integrado
+- **Selector de idioma**: Selector de idioma con iconos de banderas
+- **Logotipo**: Componente del logotipo de la marca
+
+## Configuración de navegación
+
+Los enlaces de navegación se configuran en `src/config/navigation.ts` (incluyendo la navegación ampliada del tema Luxury).
+
+Las etiquetas de navegación se traducen a través de `src/locales/{lang}/nav.json`.
+
+<Callout type="info" title="Sin propiedades externas">
+  Los componentes de encabezado no aceptan propiedades (props) externas. Los elementos de navegación se definen en los archivos de configuración y las etiquetas se cargan desde el JSON de idioma.
+</Callout>

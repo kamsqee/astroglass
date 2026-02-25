@@ -1,0 +1,114 @@
+---
+title: Forms & Validation
+description: Learn how to build secure, validated forms using Valibot and Astro Actions.
+---
+
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+This template uses **Valibot** for lightweight, type-safe validation on both the client and server. We've designed a hybrid approach that gives you:
+1.  **Instant UI Feedback**: Using a tiny client-side script.
+2.  **Server-Side Security**: Using the *same* schema in Astro Actions (optional but recommended).
+
+## Quick Start
+
+To add a new validated form:
+
+<Steps>
+1. **Define specific rules (Optional)**
+   
+   If you need custom rules beyond the shared `ContactSchema`, create a new schema in `src/lib/schemas/`.
+
+2. **Add the Form to your Component**
+   
+   Copy this pattern. The key is strict naming of inputs and the `.input-error` class handling.
+
+   ```astro title="Component.astro"
+   ---
+   import { createContactSchema } from '../../lib/schemas/contact';
+   // ... imports
+   ---
+
+   <form class="my-form" novalidate>
+     <div class="form-control">
+       <input type="email" name="email" required />
+     </div>
+     <button type="submit">Send</button>
+   </form>
+
+   <script>
+     import { safeParse } from 'valibot';
+     import { createContactSchema } from '../../lib/schemas/contact';
+
+     const form = document.querySelector('.my-form');
+     // Pass translation function (or ident) and options
+     const schema = createContactSchema(key => key, { companyRequired: true }); 
+
+     form.addEventListener('submit', (e) => {
+       e.preventDefault();
+       const formData = new FormData(form);
+       const data = Object.fromEntries(formData);
+       
+       // Parse using the schema
+       const result = safeParse(schema, data);
+
+       if (!result.success) {
+         // Handle errors (e.g., show red borders)
+         console.log(result.issues);
+       }
+     });
+   </script>
+   ```
+</Steps>
+
+## Theme-Aware Styles
+
+We've built a CSS system that automatically adapts validation styles to your active theme (Liquid, Glass, Minimal, etc.).
+
+You just need to toggle the `input-error` or `input-success` classes on your inputs.
+
+| Class | Effect |
+| :--- | :--- |
+| `input-error` | Adds a **Red** border/glow (`--er` color). |
+| `input-success`| Adds a **Green** border (`--su` color). |
+| `error-message`| A styled small text helper that slides in. |
+
+### Example Usage
+```javascript
+// Add error state
+input.classList.add('input-error');
+
+// Remove error state
+input.classList.remove('input-error');
+```
+
+## Customizing Validation Rules
+
+Edit `src/lib/schemas/contact.ts` to change the rules for the default contact form.
+
+```typescript
+// Modern Valibot v1 Syntax using pipe()
+export const createContactSchema = (t, options = {}) => object({
+  name: pipe(
+    string(),
+    minLength(2, t('validation.nameShort'))
+  ),
+  message: pipe(
+    string(),
+    minLength(10, t('validation.messageShort')),
+    maxLength(1000)
+  ),
+  // Conditional validation
+  company: options.companyRequired 
+    ? pipe(string(), minLength(1))
+    : optional(string())
+});
+```
+
+## Internationalization (i18n)
+
+Validation messages are fully translated. Keys are located in:
+-   `src/locales/en/contact.json` (under `validation` object)
+-   `src/locales/ru/contact.json`
+
+When initializing the schema on the client, you must pass a translation function `t` or a lookup map, as seen in `ContactGlass.astro`.

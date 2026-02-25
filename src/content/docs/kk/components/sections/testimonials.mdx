@@ -1,0 +1,37 @@
+---
+title: "Пікірлер (Testimonials) бөлімі"
+description: "Әрбір тақырыпқа арналған тұтынушылардың пікірлер (testimonials) бөлімдері."
+order: 7
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Пікірлер (Testimonials) бөлімі әлеуметтік дәлелдер (social proof) мен тұтынушылардың шолуларын көрсетеді.
+
+## Тақырып нұсқалары
+
+| Тақырып | Компонент | Стиль |
+|-------|-----------|-------|
+| **Liquid** | `TestimonialLiquid.astro` | Айналмалы (flowing) пікір карталары |
+| **Glass** | `TestimonialGlass.astro` | Аязды әйнек дәйексөз (quote) карталары |
+| **Neo** | `TestimonialNeo.astro` | Қалың, жоғары контрастты пікірлер |
+| **Luxury** | `TestimonialLuxury.astro` | Алтын екпіні бар талғампаз шолулар |
+| **Minimal** | `TestimonialMinimal.astro` | Таза, минималистік дәйексөз макеті |
+| **Aurora** | `TestimonialAurora.astro` | Градиентті фондық пікірлер |
+
+Барлық нұсқалар `src/components/sections/testimonial/` мекенжайында орналасқан.
+
+## Мазмұн көзі
+
+Пікір деректері `useTranslations()` арқылы `src/locales/{lang}/testimonial.json` файлынан жүктеледі. JSON әдетте шолушылардың аттарын, атақтарын, дәйексөздерін және аватар ақпаратын қамтиды.
+
+<Callout type="info" title="Props жоқ">
+  Пікір компоненттері сыртқы props қабылдамайды. Дәйексөз мәтінін, аттарын немесе құрылымын өзгерту үшін `src/locales/{lang}/testimonial.json` файлын өңдеңіз.
+</Callout>
+
+## Баптау
+
+Баптау үшін:
+1. `src/components/sections/testimonial/Testimonial{Theme}.astro` файлын өңдеңіз.
+2. `src/styles/components/testimonial/` ішіндегі стильдерді реттеңіз.
+3. `src/locales/{lang}/testimonial.json` файлындағы мазмұнды өзгертіңіз.

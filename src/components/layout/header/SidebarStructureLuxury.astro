@@ -1,0 +1,375 @@
+---
+/**
+ * LuxurySidebarStructure.astro
+ * 
+ * "The Architectural Spine"
+ * A static, permanent vertical sidebar that defines the page layout.
+ * No shrinking, no floating, just rock-solid structure.
+ */
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+import LocalizedLink from '../../ui/LocalizedLink.astro';
+import { buildLuxuryNavLinks } from '../../../config/navigation';
+import { getEnabledLocales, getEnabledLocaleCodes } from '../../../config/locales';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+import { palettes } from '../../../config/palettes';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const navLinks = buildLuxuryNavLinks(t);
+
+// Path Logic — dynamic for all locales
+const currentPath = Astro.url.pathname;
+const localeCodes = getEnabledLocaleCodes();
+const localePattern = new RegExp(`^/(${localeCodes.join('|')})(/|$)`);
+const cleanPath = currentPath.replace(localePattern, '/$2').replace(/^\/\//, '/') || '/';
+
+const enabledLocales = getEnabledLocales();
+const localePaths = enabledLocales.map(loc => ({
+  code: loc.code,
+  label: loc.code.toUpperCase(),
+  href: getRelativeLocaleUrl(loc.code, cleanPath),
+  isActive: locale === loc.code,
+}));
+
+// Themes from centralized config
+const themes = palettes.map(p => ({
+  id: p.id, label: p.id.charAt(0).toUpperCase() + p.id.slice(1), color: p.accentHex, bg: p.bgHex,
+}));
+---
+
+<aside class="luxury-spine" id="luxury-spine">
+  <!-- 1. Top: Brand -->
+  <div class="luxury-spine-header">
+    <LocalizedLink href={`/${locale === 'en' ? '' : locale}`} class="luxury-brand">
+      <span class="luxury-brand-main">Liquid</span>
+      <span class="luxury-brand-sub">{t('nav.designSystem')}</span>
+    </LocalizedLink>
+  </div>
+
+  <!-- 2. Middle: Navigation -->
+  <nav class="luxury-spine-nav">
+    <div class="luxury-nav-title">{t('nav.menu')}</div>
+    <ul class="luxury-nav-list">
+      {navLinks.map((link) => {
+        // Active Logic:
+        // For 'page' type: exact match or startsWith
+        // For 'section' type: handled by client-side Observer, but we set initial active if hash matches? 
+        // SSR can't know hash. So only 'page' is active initially here.
+        const isActive = link.type === 'page' && (currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href)));
+        
+        return (
+          <li>
+            <LocalizedLink 
+              href={link.href} 
+              class={`luxury-nav-link ${isActive ? 'is-active' : ''}`}
+              data-nav-type={link.type}
+              data-nav-target={link.type === 'section' ? link.href.substring(1) : undefined}
+            >
+              {link.label}
+            </LocalizedLink>
+          </li>
+        );
+      })}
+    </ul>
+  </nav>
+
+  <!-- 3. Bottom: System -->
+  <div class="luxury-spine-footer">
+    <div class="luxury-system-label">{t('nav.system')}</div>
+    
+    <!-- Controls -->
+    <div class="luxury-controls">
+      <!-- Language -->
+      <div class="luxury-lang-switch">
+        {localePaths.map((loc, i) => (
+          <>
+            {i > 0 && <span class="luxury-sep">/</span>}
+            <a href={loc.href} class={`luxury-lang-opt ${loc.isActive ? 'is-active' : ''}`}>{loc.label}</a>
+          </>
+        ))}
+      </div>
+
+      <!-- Themes -->
+      <div class="luxury-theme-row">
+        {themes.map(theme => (
+          <button 
+            class="luxury-theme-btn"
+            aria-label={`Theme: ${theme.label}`}
+            data-set-theme-spine={theme.id}
+            title={theme.label}
+            style={`background-color: ${theme.bg};`}
+          >
+            <span class="luxury-theme-dot" style={`background-color: ${theme.color}`}></span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- GLOBAL LAYOUT ENFORCEMENT -->
+<style is:global>
+  /* 
+     When this component is present, we enforce the "Spine Layout".
+     The sidebar is fixed 280px. Content MUST start after 280px.
+  */
+  @media (min-width: 1024px) {
+    :root {
+      --luxury-spine-width: 280px;
+    }
+    
+    body:has(#luxury-spine) main {
+      margin-left: var(--luxury-spine-width);
+      width: calc(100% - var(--luxury-spine-width));
+      max-width: none;
+    }
+    
+    body:has(#luxury-spine) footer {
+      margin-left: var(--luxury-spine-width);
+      width: calc(100% - var(--luxury-spine-width));
+    }
+  }
+</style>
+
+<style>
+  /* SPINE CONTAINER */
+  .luxury-spine {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    background: linear-gradient(to right, hsla(var(--b1) / 0.85), hsla(var(--b1) / 0.7));
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-right: 1px solid hsl(var(--bc) / 0.08);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 40px;
+  }
+
+  /* 1. HEADER */
+  .luxury-spine-header {
+    margin-bottom: 64px;
+  }
+  .luxury-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    color: hsl(var(--bc));
+  }
+  .luxury-brand-main {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .luxury-brand-sub {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+  }
+
+  /* 2. NAVIGATION */
+  .luxury-spine-nav {
+    flex: 1;
+  }
+  .luxury-nav-title {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: hsl(var(--bc) / 0.4);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid hsl(var(--bc) / 0.1);
+  }
+  .luxury-nav-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .luxury-nav-link {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: hsl(var(--bc) / 0.6);
+    text-decoration: none;
+    transition: all var(--duration-luxury-fast) var(--ease-luxury);
+  }
+  .luxury-nav-link:hover {
+    color: hsl(var(--bc));
+    transform: translateX(4px);
+  }
+  
+  /* ACTIVE STATE */
+  .luxury-nav-link.is-active {
+    /* font-family: var(--font-serif); Removed per user request */
+    /* font-style: italic; Removed per user request */
+    font-size: 1.1rem; /* Keep same size or slightly larger? User wants consistent. */
+    color: hsl(var(--bc));
+    font-weight: 600;
+  }
+
+  /* 3. FOOTER / SYSTEM */
+  .luxury-spine-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .luxury-system-label {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: hsl(var(--bc) / 0.4);
+  }
+  
+  .luxury-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Language */
+  .luxury-lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: hsl(var(--bc) / 0.4);
+  }
+  .luxury-lang-opt { text-decoration: none; color: inherit; transition: color var(--duration-luxury-fast) var(--ease-luxury); }
+  .luxury-lang-opt:hover { color: hsl(var(--bc)); }
+  .luxury-lang-opt.is-active { color: hsl(var(--bc)); font-weight: 600; border-bottom: 1px solid hsl(var(--bc)); }
+  .luxury-sep { opacity: 0.3; }
+
+  /* Theme Row */
+  .luxury-theme-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .luxury-theme-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1px solid hsl(var(--bc) / 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform var(--duration-luxury-fast) var(--ease-luxury-out), border-color var(--duration-luxury-fast) var(--ease-luxury);
+    padding: 0;
+  }
+  .luxury-theme-btn:hover {
+    transform: scale(1.1);
+    border-color: hsl(var(--bc));
+  }
+  
+  /* Active Theme Indicator — handled dynamically via JS is-active class */
+  button[data-set-theme-spine].is-active {
+    border-color: hsl(var(--bc));
+    transform: scale(1.15);
+    box-shadow: 0 0 0 2px hsl(var(--bc) / 0.1);
+  }
+
+  .luxury-theme-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+</style>
+
+<script>
+  function initLuxurySpine() {
+    // 1. Theme Logic
+    const updateSpineActive = () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'azure';
+      document.querySelectorAll('[data-set-theme-spine]').forEach(btn => {
+        btn.classList.toggle('is-active', (btn as HTMLElement).dataset.setThemeSpine === current);
+      });
+    };
+
+    updateSpineActive();
+
+    document.querySelectorAll('[data-set-theme-spine]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const theme = (e.currentTarget as HTMLElement).dataset.setThemeSpine;
+        if (theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+          updateSpineActive();
+          window.dispatchEvent(new Event('theme-changed'));
+        }
+      });
+    });
+
+    window.addEventListener('theme-changed', updateSpineActive);
+
+    // 2. ScrollSpy (IntersectionObserver)
+    const sectionLinks = document.querySelectorAll('a[data-nav-type="section"]');
+    const sections = Array.from(sectionLinks).map(link => {
+      const id = (link as HTMLElement).dataset.navTarget;
+      return document.getElementById(id || '');
+    }).filter(s => s !== null) as HTMLElement[];
+
+    if (sections.length > 0) {
+      const observerCallback = (entries: IntersectionObserverEntry[]) => {
+        // Find visible section with highest intersection ratio
+        let bestCandidate: HTMLElement | null = null;
+        let maxRatio = 0;
+
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio;
+            bestCandidate = entry.target as HTMLElement;
+          }
+        });
+
+        // Also check if we are scrolled to top -> first section
+        if (window.scrollY < 100) {
+            // Usually Hero, or first section
+            // Reset active to none or first? Usually first if it's "About" etc.
+        }
+
+        // We need to determine the *currently* most active section on screen
+        // Observer only fires on change. Let's rely on intersecting state.
+      };
+
+      // Better ScrollSpy: Observe all sections, keeping track of which one is "most" visible
+      // A simplier approach: Use entry.isIntersecting to toggle.
+      // But multiple can be intersecting.
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+             // Activate this link
+             const id = entry.target.id;
+             document.querySelectorAll('.luxury-nav-link').forEach(l => l.classList.remove('is-active'));
+             const activeLink = document.querySelector(`a[data-nav-target="${id}"]`);
+             if (activeLink) activeLink.classList.add('is-active');
+          }
+        });
+      }, {
+        rootMargin: '-20% 0px -50% 0px', // Active when section is in top half
+        threshold: 0 // Trigger as soon as one pixel enters the margin zone
+      });
+
+      sections.forEach(s => observer.observe(s));
+    }
+  }
+
+  initLuxurySpine();
+  document.addEventListener('astro:after-swap', initLuxurySpine);
+</script>

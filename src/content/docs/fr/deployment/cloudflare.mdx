@@ -1,0 +1,94 @@
+---
+title: "Déploiement Cloudflare"
+description: "Déployez votre site AstroGlass sur Cloudflare Pages."
+order: 1
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+Ce projet est optimisé pour un déploiement sur **Cloudflare Pages**. Il inclut l'adaptateur nécessaire et la configuration prête à l'emploi.
+
+## Prérequis
+
+- Un compte [Cloudflare](https://dash.cloudflare.com/).
+- **Node.js** v20+ installé localement.
+- La CLI **Wrangler** installée (`npm install -g wrangler`).
+
+## Méthodes de Déploiement
+
+Vous pouvez déployer en utilisant l'intégration GitHub (recommandée) ou via l'interface en ligne de commande (CLI).
+
+### Option 1 : Intégration GitHub
+
+<Steps>
+1. **Poussez votre code sur GitHub**
+   
+   Assurez-vous que votre projet se trouve dans un dépôt GitHub.
+
+2. **Connectez-vous à Cloudflare Pages**
+   
+   Allez dans le tableau de bord Cloudflare > Workers & Pages > Créer une application > Pages > Se connecter à Git.
+
+3. **Sélectionnez le Dépôt**
+   
+   Choisissez votre dépôt et votre branche.
+
+4. **Configurez les Paramètres de Build**
+   
+   Utilisez les paramètres suivants :
+   - **Framework Preset** : Astro
+   - **Build command** : `pnpm run build`
+   - **Build output directory** : `dist`
+   
+   <Callout type="warning" title="Indexation de la Recherche">
+     Le script `build` exécute automatiquement `astro build && pnpm run index:content`, ce qui génère l'index de recherche Fuse.js. Assurez-vous que cela se termine avec succès, sinon la recherche ne fonctionnera pas sur le site déployé.
+   </Callout>
+
+5. **Enregistrez et Déployez**
+</Steps>
+
+### Option 2 : CLI Wrangler
+
+Vous pouvez également déployer directement depuis votre terminal.
+
+<Steps>
+1. **Connectez-vous à Wrangler**
+   
+   ```bash title="Terminal" frame="terminal"
+   npx wrangler login
+   ```
+
+2. **Compilez et Déployez**
+   
+   Exécutez le script de déploiement défini dans `package.json` :
+   
+   ```bash title="Terminal" frame="terminal"
+   pnpm run deploy
+   ```
+   
+   Cette commande exécute : `astro build && pnpm run index:content && wrangler pages deploy dist`.
+</Steps>
+
+## Indexation de la Recherche
+
+Le projet utilise **Fuse.js** pour la recherche. Cela nécessite une étape au moment du build pour générer l'index du contenu.
+
+Le script `build` dans `package.json` gère cela automatiquement :
+
+```json title="package.json"
+"scripts": {
+  "build": "astro build && pnpm run index:content",
+  "index:content": "node scripts/generate-search-index.mjs"
+}
+```
+
+Si la recherche ne fonctionne pas sur votre site déployé, assurez-vous que l'étape d'indexation s'est déroulée avec succès.
+
+## Dépannage
+
+### Le Déploiement Échoue
+Vérifiez les journaux de build (build logs). Les problèmes courants incluent des erreurs TypeScript ou des dépendances manquantes.
+
+### La Recherche ne Fonctionne pas
+Si la recherche ne renvoie aucun résultat, vérifiez si le répertoire `public/search/` contient les fichiers `en.json`, `fr.json`, etc. Ceux-ci sont générés pendant le build par `pnpm run index:content`.

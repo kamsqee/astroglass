@@ -1,0 +1,118 @@
+---
+title: Enrutamiento e Internacionalización
+description: Comprenda cómo funcionan las páginas y los idiomas en AstroGlass.
+order: 4
+---
+
+import FileTree from '../../../../components/mdx/FileTree.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import Steps from '../../../../components/mdx/Steps.astro';
+
+AstroGlass utiliza el sistema de enrutamiento basado en archivos de Astro combinado con una estrategia personalizada de internacionalización (i18n).
+
+## Enrutamiento de Páginas
+
+Las páginas están ubicadas en `src/pages/`. La estructura de carpetas determina la ruta de la URL.
+
+Para las páginas localizadas, usamos directorios separados:
+
+<FileTree>
+- src/
+  - pages/
+    - **[...lang]/**       — Enrutamiento Dinámico de Locales
+      - **index.astro**      — Página de Inicio (Todos los Idiomas)
+      - **[theme].astro**    — Páginas dinámicas de demostración de temas (por ej., /liquid, /es/glass)
+      - **[theme]/portfolio.astro** — Páginas dinámicas del portafolio
+      - blog/                — Páginas del blog
+      - docs/                — Páginas de documentación
+      - privacy.astro        — Política de Privacidad
+      - terms.astro          — Términos de Servicio
+    - 404.astro            — Página de error /404
+    - about.astro          — /about (No localizado)
+</FileTree>
+
+### Enrutamiento de Demostración de Temas
+
+Las páginas de temas se generan dinámicamente desde el registro de temas. Agregar un tema a `src/config/themes.ts` con `enabled: true` crea automáticamente una ruta en `/{themeId}`.
+
+## Enrutamiento de Documentación
+
+Las páginas de documentación viven en `src/content/docs/[lang]/`:
+
+<FileTree>
+- src/
+  - content/
+    - docs/
+      - en/
+      - ru/
+      - fr/
+      - es/
+      - ja/
+      - zh/
+      - kk/
+</FileTree>
+
+La URL para la documentación se genera automáticamente en función a la ruta del archivo, por ej., `/docs/es/getting-started/introduction`.
+
+## Internacionalización (i18n)
+
+Las traducciones se manejan de dos formas:
+1.  **Enrutamiento de Páginas Dinámico**: Un directorio centralizado `src/pages/[...lang]/` maneja todas las permutaciones de rutas dinámicamente mediante `getStaticPaths()`.
+2.  **Cadenas de UI**: Archivos JSON centralizados en `src/locales/`.
+
+### Traducciones de Interfaz (UI)
+
+Las cadenas comunes (elementos de navegación, botones, texto de sección, etc.) se almacenan como archivos JSON organizados por sección:
+
+```
+src/locales/
+├── en/
+├── ru/
+├── fr/
+├── es/
+├── ja/
+├── zh/
+└── kk/
+```
+
+Utilice el asistente `useTranslations` en los componentes:
+
+```astro title="Component.astro"
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<p>{t('hero.title')}</p>
+<p>{t('pricing.tier2Name')}</p>
+```
+
+Las claves de traducción soportan notación de puntos (dot notation) para valores anidados. Las claves del archivo `common.json` se extienden en el nivel raíz, mientras que los otros archivos tienen espacios de nombres según el nombre de su archivo (por ejemplo, `hero.title`, `pricing.plans`).
+
+### Agregar un Nuevo Idioma
+
+<Steps>
+1. **Registrar la configuración regional (locale)**
+
+   Agregue una entrada en `src/config/locales.ts` con `enabled: true`.
+
+2. **Crear archivos de traducción**
+
+   Cree el directorio `src/locales/{code}/` con los archivos JSON que coincidan con la estructura en inglés.
+
+3. **Crear contenido de documentación**
+
+   Cree `src/content/docs/{code}/` con los archivos MDX traducidos.
+   (por ej., `src/content/docs/es/getting-started/introduction.mdx`)
+
+4. **Crear contenido del blog**
+
+   Cree `src/content/blog/{code}/` con los archivos Markdown/MDX traducidos.
+   (por ej., `src/content/blog/es/mi-post.md`)
+</Steps>
+
+<Callout type="info" title="Descubrimiento Automático">
+  El sistema i18n utiliza `import.meta.glob` de Vite para descubrir automáticamente todos los archivos JSON dentro de `src/locales/`. No son necesarias importaciones manuales — solo cree los archivos y estarán disponibles mediante `useTranslations()`.
+</Callout>

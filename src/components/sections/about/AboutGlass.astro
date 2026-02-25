@@ -1,0 +1,67 @@
+---
+/**
+ * About Glass - The Stats Spotlight (Refined)
+ * Center-aligned narrative with meaningful stat cards.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+import '../../../styles/components/about/AboutGlass.css';
+import SectionTag from '../../ui/glass/SectionTag.astro';
+import SectionHeading from '../../ui/glass/SectionHeading.astro';
+
+export interface Props {
+  isFirst?: boolean;
+}
+
+const { isFirst = false } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const stats = [
+  { icon: '⚡', stat: t('about.stat1'), sub: t('about.stat1Sub'), desc: t('about.stat1Desc') },
+  { icon: '🎨', stat: t('about.stat2'), sub: t('about.stat2Sub'), desc: t('about.stat2Desc') },
+  { icon: '🌍', stat: t('about.stat3'), sub: t('about.stat3Sub'), desc: t('about.stat3Desc') },
+];
+---
+
+<section id="about" class:list={["relative px-4 sm:px-6 bg-base-content/[0.02]", isFirst ? "pt-[calc(40px+var(--nav-offset))] pb-16 md:pb-32 md:pt-[calc(80px+var(--nav-offset))]" : "py-16 md:py-32"]}>
+  <!-- Header -->
+  <div class="max-w-4xl mx-auto text-center mb-16 lg:mb-20">
+    <SectionTag label={t('about.ourMission')} class="mb-6" />
+    <SectionHeading size="lg" align="center" class="mb-6">
+      {t('about.title')}
+    </SectionHeading>
+    <p class="text-lg sm:text-xl text-base-content/75 max-w-2xl mx-auto leading-relaxed">
+      {t('about.description')}
+    </p>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-12">
+    {stats.map((item, i) => (
+      <div 
+        class="c-about-glass__card p-6 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-base-100/50 backdrop-blur-xl border border-base-content/5 flex flex-col items-center text-center group"
+        style={`animation-delay: ${i * 100}ms`}
+      >
+        <div class="c-about-glass__icon w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-2xl sm:text-3xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-700">
+          {item.icon}
+        </div>
+        <div class="text-3xl sm:text-4xl lg:text-5xl font-black text-base-content mb-2">{item.stat}</div>
+        <div class="text-sm font-bold text-base-content/75 mb-3">{item.sub}</div>
+        <p class="text-xs text-base-content/75 leading-relaxed">{item.desc}</p>
+      </div>
+    ))}
+  </div>
+
+  <!-- Trust strip -->
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="text-xs uppercase tracking-widest text-base-content/80 mb-4">{t('hero.trustedBy')}</p>
+    <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 opacity-60">
+      <span class="text-lg sm:text-xl font-bold text-base-content">Vercel</span>
+      <span class="text-lg sm:text-xl font-bold text-base-content">Linear</span>
+      <span class="text-lg sm:text-xl font-bold text-base-content">Stripe</span>
+      <span class="text-lg sm:text-xl font-bold text-base-content">Notion</span>
+    </div>
+  </div>
+</section>

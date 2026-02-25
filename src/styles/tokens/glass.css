@@ -1,0 +1,17 @@
+/* ============================================
+   Glass Theme Tokens
+   Frosted surfaces, smooth animations
+   ============================================ */
+@theme {
+  --tracking-tag-glass: 0.2em;
+  --text-tag-glass: 10px;
+
+  --ease-glass: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-glass: 800ms;
+  --duration-glass-fast: 400ms;
+  --duration-glass-slow: 1200ms;
+
+  --blur-glass-sm: 8px;
+  --blur-glass-md: 20px;
+  --blur-glass-lg: 40px;
+}

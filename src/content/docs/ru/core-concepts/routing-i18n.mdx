@@ -1,0 +1,80 @@
+---
+title: Маршрутизация и интернационализация
+description: Как работают страницы и языки в AstroGlass.
+order: 4
+---
+
+import FileTree from '../../../../components/mdx/FileTree.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import Steps from '../../../../components/mdx/Steps.astro';
+
+AstroGlass использует файловую маршрутизацию Astro в сочетании с пользовательской стратегией интернационализации (i18n).
+
+## Маршрутизация страниц
+
+Страницы расположены в `src/pages/`. Структура папок определяет URL.
+
+<FileTree>
+- src/
+  - pages/
+    - **[...lang]/**     — Динамическая маршрутизация локалей
+      - **index.astro**  — Главная (Все языки)
+      - **[theme].astro** — Демо-страницы тем (/liquid, /ru/glass)
+      - **[theme]/portfolio.astro** — Страницы портфолио
+      - docs/ — Страницы документации
+      - blog/ — Страницы блога
+      - privacy.astro — Политика конфиденциальности
+      - terms.astro — Условия использования
+    - 404.astro — Страница ошибки 404 
+</FileTree>
+
+## Маршрутизация документации
+
+Документация находится в `src/content/docs/[lang]/`:
+
+<FileTree>
+- src/
+  - content/
+    - docs/
+      - en/
+      - ru/
+      - fr/
+      - es/
+      - ja/
+      - zh/
+      - kk/
+</FileTree>
+
+## Интернационализация (i18n)
+
+Переводы обрабатываются двумя способами:
+1. **Динамическая маршрутизация страниц**: Централизована в `src/pages/[...lang]/`, обрабатывает все языки динамически через `getStaticPaths()`.
+2. **UI-строки**: Централизованные JSON-файлы в `src/locales/`.
+
+### UI-переводы
+
+Используйте хелпер `useTranslations` в компонентах:
+
+```astro title="Component.astro"
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<p>{t('hero.title')}</p>
+```
+
+### Добавление нового языка
+
+<Steps>
+1. **Зарегистрируйте локаль** в `src/config/locales.ts` с `enabled: true`.
+2. **Создайте файлы переводов** в `src/locales/{code}/`.
+3. **Создайте контент документации** в `src/content/docs/{code}/`.
+4. **Создайте контент блога** в `src/content/blog/{code}/`.
+</Steps>
+
+<Callout type="info" title="Автоматическое обнаружение">
+  Система i18n использует `import.meta.glob` для автоматического обнаружения JSON-файлов. Просто создайте файлы — они будут доступны через `useTranslations()`.
+</Callout>

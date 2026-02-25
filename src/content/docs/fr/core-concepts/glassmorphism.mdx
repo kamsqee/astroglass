@@ -1,0 +1,55 @@
+---
+title: "Glassmorphism"
+description: "Comprendre la philosophie de conception derrière AstroGlass."
+order: 5
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass met en œuvre une approche moderne du glassmorphism — en créant des interfaces qui semblent superposées, transparentes et premium.
+
+## La Recette
+
+L'effet glassmorphism est obtenu grâce à quatre propriétés CSS clés fonctionnant ensemble :
+
+1.  **Flou d'Arrière-plan** : Nous utilisons `backdrop-filter: blur(12px)` pour l'effet dépoli.
+2.  **Translucidité** : Les couleurs d'arrière-plan utilisent des canaux alpha (par ex., `bg-white/10`).
+3.  **Bordures** : De subtiles bordures de 1px (`border-white/20`) définissent les bords.
+4.  **Ombres** : Des ombres douces et colorées créent de la profondeur et de l'élévation.
+
+Cette combinaison crée un sentiment de hiérarchie et de modernité.
+
+## Utilisation Pratique
+
+Dans les composants AstroGlass, vous verrez ce modèle appliqué comme des classes utilitaires Tailwind :
+
+```html
+<div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg">
+  Conteneur Glassmorphic
+</div>
+```
+
+Pour les thèmes sombres, l'effet est souvent superposé avec des arrière-plans dégradés :
+
+```html
+<div class="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10">
+  Carte glassmorphic sombre
+</div>
+```
+
+## Variations de Thèmes
+
+Chaque thème dans AstroGlass interprète le glassmorphism différemment :
+
+| Thème | Style de Verre |
+|-------|-------------|
+| **Liquid** | Formes organiques avec des arrière-plans fluides en blob |
+| **Glass** | Panneaux dépolis classiques avec de la profondeur |
+| **Neo** | Contraste audacieux avec des bords nets |
+| **Luxury** | Translucidité teintée d'or avec des ombres premium |
+| **Minimal** | Transparence subtile, à peine présente |
+| **Aurora** | Arrière-plans en maille dégradée avec structure géométrique |
+
+<Callout type="tip" title="Personnalisation des Effets de Verre">
+  L'intensité du flou, de l'opacité et des effets de bordure peut être ajustée par thème via les variables CSS dans `src/styles/_themes.css`. Recherchez `--glass-blur`, `--glass-opacity`, et les propriétés personnalisées associées.
+</Callout>

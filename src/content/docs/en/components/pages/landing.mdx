@@ -1,0 +1,45 @@
+---
+title: "Landing Page Sections"
+description: "Specialized sections used on the main landing page."
+order: 2
+---
+
+# Landing Page Sections
+
+The main entry point of the template (`src/pages/index.astro`) uses several specialized sections designed to showcase the template's features. These are located in `src/components/sections/landing/`.
+
+## Stats Strip
+
+`src/components/sections/landing/StatsStrip.astro`
+
+A horizontal strip that displays key metrics about your project (e.g., "6 Themes", "66+ Components").
+
+- **Features**: Animated count-up numbers when scrolled into view.
+- **Configuration**: Edit the `stats` array in the component frontmatter or use `src/locales/{lang}/landing.json` for labels.
+
+## Template Showcase
+
+`src/components/sections/landing/TemplateShowcase.astro`
+
+A "Bento grid" style layout that provides visual navigation to different parts of the template (Themes, Components, Blog, Docs, etc.).
+
+- **Features**: Hover effects, glassmorphism cards, responsive grid layout.
+- **Content**: Managed via `src/locales/{lang}/landing.json` under `landing.showcase`.
+
+## FAQ Home
+
+`src/components/sections/landing/FAQHome.astro`
+
+A lightweight, accordion-style FAQ section designed for the landing page.
+
+- **Features**: Smooth expand/collapse animations, accessible ARIA attributes.
+- **Content**: Questions and answers are stored in `src/locales/{lang}/landing.json` under `landing.faq`.
+
+## How It Works
+
+`src/components/sections/landing/HowItWorks.astro`
+
+A 3-step visualization of the workflow (e.g., Clone -> Customize -> Deploy).
+
+- **Features**: Numbered steps with icons and gradient backgrounds.
+- **Content**: Steps text in `src/locales/{lang}/landing.json`.

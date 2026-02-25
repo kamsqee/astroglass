@@ -1,0 +1,80 @@
+---
+title: "Project Structure"
+description: "Overview of the Astroglass project directory structure"
+---
+
+# Project Structure
+
+A high-level view of how this project is organized.
+
+## Directory Tree
+
+```
+astroglass/
+├── public/                    # Static assets (favicon, robots.txt)
+├── src/
+│   ├── components/
+│   │   ├── docs/              # Documentation components
+│   │   ├── layout/
+│   │   │   ├── header/        # Theme-specific headers
+│   │   │   └── footer/        # Theme-specific footers
+│   │   ├── sections/
+│   │   │   ├── about/         # About sections per theme
+│   │   │   ├── contact/       # Contact sections per theme
+│   │   │   ├── cta/           # CTA sections per theme
+│   │   │   ├── faq/           # FAQ sections per theme
+│   │   │   ├── features/      # Feature sections per theme
+│   │   │   ├── footer/        # Footer sections per theme
+│   │   │   ├── hero/          # Hero sections per theme
+│   │   │   ├── portfolio/     # Portfolio sections per theme
+│   │   │   ├── pricing/       # Pricing sections per theme
+│   │   │   ├── testimonial/   # Testimonial sections per theme
+│   │   │   └── themes/        # Theme barrel files
+│   │   └── ui/                # Shared UI components
+│   ├── config/
+│   │   ├── locales.ts         # Language configuration
+│   │   ├── navigation.ts      # Nav link builders
+│   │   ├── palettes.ts        # Color palette registry
+│   │   ├── themePresets.ts     # Section order per theme
+│   │   ├── themeRegistry.ts   # CLI file manifests
+│   │   └── providers/         # Deploy target configs
+│   ├── content/
+│   │   ├── blog/              # Blog posts (MDX)
+│   │   └── docs/              # Documentation (MDX)
+│   ├── layouts/
+│   │   └── BaseLayout.astro   # Root layout
+│   ├── locales/               # i18n translation files
+│   │   ├── en/
+│   │   ├── ru/
+│   │   └── .../
+│   ├── pages/
+│   │   └── [...lang]/         # Locale-prefixed routes
+│   │       ├── [theme].astro  # Dynamic theme pages
+│   │       ├── blog/          # Blog routes
+│   │       └── docs/          # Docs routes
+│   ├── styles/
+│   │   ├── global.css         # Main stylesheet
+│   │   ├── palettes/          # Per-palette CSS files
+│   │   ├── tokens/            # Per-theme design tokens
+│   │   └── components/        # Component CSS files
+│   └── utils/                 # Utility functions
+├── astro.config.mjs           # Astro configuration
+├── package.json
+└── tsconfig.json
+```
+
+## Key Concepts
+
+### Themes
+Each theme has its own set of section components, header, footer, and CSS. Themes are registered in `themePresets.ts` and their files are listed in `themeRegistry.ts`.
+
+### Palettes
+Color palettes are defined in `palettes.ts` and their CSS variables live in `src/styles/palettes/`. Users can switch between palettes at runtime.
+
+### Sections
+Landing page sections (Hero, About, Features, etc.) are theme-specific components. The order is controlled by `themePresets.ts`.
+
+> **Tip:** To add interactive project structure visualization, add React:
+> ```bash
+> npx astroglass add --react
+> ```

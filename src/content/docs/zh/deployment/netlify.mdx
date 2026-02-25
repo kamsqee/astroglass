@@ -1,0 +1,60 @@
+---
+title: "Netlify 部署"
+description: "将您的 AstroGlass 网站轻量化部署至 Netlify 平台。"
+order: 2
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass 您仅需进行最少量的配置，即可被部署到 **Netlify** 上去。
+
+## 前置要求
+
+- 一个 [Netlify](https://www.netlify.com/) 账户。
+- 本地已安装 **Node.js** v20+ 运行环境。
+- 已安装 Netlify 命令行 CLI 工具 (`npm install -g netlify-cli`)。
+
+## 部署方法
+
+### 选项 1：以 GitHub 进行集成式部署 (官方推荐)
+
+<Steps>
+1. **把你的代码推送到 GitHub 上**
+   
+   确保您的项目代码就存放在您的 GitHub 储存仓库里。
+
+2. **导入进 Netlify 即执行部署接入操作**
+   
+   前往至那 [app.netlify.com](https://app.netlify.com/) 仪表板上 > Add new site (添加全新站点) > Import an existing project (自现已有的现有仓库导入它项目)。
+
+3. **设置它的部署构建参数**
+   
+   请您使用下列这一套配置参数：
+   - **Build Command (即是要去跑起构建指令)**: `pnpm run build`
+   - **Publish Directory (所要发布指向之那成果产出文件夹向)**: `dist`
+
+4. **部署它**
+   
+   点击 "Deploy site (部署站点)" 然后等待直至打包等这一套建站系统操作全面处理完成。
+</Steps>
+
+### 选项 2：通过命令行 CLI 进行部署
+
+<Steps>
+1. **登录 Netlify 系统去**
+   
+   ```bash title="Terminal" frame="terminal"
+   npx netlify login
+   ```
+
+2. **立刻进行您的站之部署上云操作**
+   
+   ```bash title="Terminal" frame="terminal"
+   pnpm run deploy:netlify
+   ```
+</Steps>
+
+<Callout type="info" title="有关于站内的检搜那引擎及数据索引生成机制">
+  搜索索引的数据包均是在进行那个 `pnpm run build` 时通过指令跑过也就自动触发所自行生成建出来的。请务必确认到那个打包也就是整个所跑的那套构建指令是否能够全部都被完全顺利毫无错误般安全通过地去完美被处理并从而这就完结完成了它这等操作的这步执行环节过程这才能去保以此保障站内在建于此的站点检索功能有能生效并且它也可得以能顺利进行也就从而去发挥其原本能提供搜索等各种等这功能运用上它的所能提供查询检索服务。
+</Callout>

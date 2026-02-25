@@ -1,0 +1,305 @@
+/* PricingLuxury.css */
+
+.c-pricing-luxury__stage {
+  perspective: 1800px;
+  perspective-origin: center center;
+  position: relative;
+}
+
+.c-pricing-luxury__track {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  height: 720px;
+  transform-style: preserve-3d;
+}
+
+/* Navigation zones - invisible click areas on left/right */
+.c-pricing-luxury__nav-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 35%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 40;
+  transition: opacity 300ms ease;
+  opacity: 0;
+}
+.c-pricing-luxury__nav-zone::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: hsl(var(--bc) / 0.05);
+  background: hsl(var(--bc) / 0.05);
+  border: 1px solid hsl(var(--bc) / 0.1);
+  transition: all var(--duration-luxury-medium) var(--ease-luxury);
+}
+.c-pricing-luxury__nav-zone:hover {
+  opacity: 1;
+}
+.c-pricing-luxury__nav-zone:hover::after {
+  background: hsl(var(--bc) / 0.1);
+  border-color: hsl(var(--bc) / 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+.c-pricing-luxury__nav-zone--left {
+  left: 0;
+}
+.c-pricing-luxury__nav-zone--left::after {
+  left: 20px;
+}
+.c-pricing-luxury__nav-zone--right {
+  right: 0;
+}
+.c-pricing-luxury__nav-zone--right::after {
+  right: 20px;
+}
+
+/* Hide zones at edges */
+[data-active="0"] .c-pricing-luxury__nav-zone--left { display: none; }
+[data-active="2"] .c-pricing-luxury__nav-zone--right { display: none; }
+
+.c-pricing-luxury__card {
+  position: absolute;
+  width: 400px;
+  height: 680px;
+  height: 680px;
+  transform-style: preserve-3d;
+  transition: transform var(--duration-luxury-slow) var(--ease-luxury),
+              opacity var(--duration-luxury-medium) ease-out;
+  cursor: pointer;
+  pointer-events: auto;
+  will-change: transform, opacity;
+}
+
+/* Ensure inactive cards remain clickable */
+.c-pricing-luxury__card .c-pricing-luxury__card-inner {
+  transition: border-color 300ms ease-out;
+}
+
+/* Spotlight Glow */
+.c-pricing-luxury__card-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    hsl(var(--a) / 0.1),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.c-pricing-luxury__card:hover .c-pricing-luxury__card-inner::before {
+  opacity: 1;
+}
+
+/* Border Beam for Popular Card */
+@keyframes borderBeam {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.c-pricing-luxury__card-inner::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(90deg, transparent 0%, transparent 40%, hsl(var(--a)/0.5) 50%, transparent 60%, transparent 100%);
+  background-size: 200% 100%;
+  animation: borderBeam 4s linear infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+[data-popular="true"] .c-pricing-luxury__card-inner::after {
+  opacity: 1;
+}
+
+.c-pricing-luxury__card-inner {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, hsl(var(--bc) / 0.08), hsl(var(--bc) / 0.02));
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid hsl(var(--bc) / 0.1);
+  /* Refined shadow for depth */
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 
+    0 20px 40px -10px rgba(0, 0, 0, 0.3);
+  border-radius: 1.5rem;
+  padding: 3rem;
+  padding-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  /* KEY FIX: Added transform, box-shadow, and border-color to transition for smoothness */
+  transition: 
+    transform var(--duration-luxury-medium) var(--ease-luxury),
+    box-shadow var(--duration-luxury-medium) var(--ease-luxury),
+    border-color var(--duration-luxury-medium) ease-out;
+  will-change: transform, box-shadow;
+}
+
+/* Hover Shine Effect */
+.c-pricing-luxury__card-inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) {
+  /* Pricing card hover effects removed per request */
+
+  /* Nav Zone Hover */
+  .c-pricing-luxury__nav-zone:hover {
+    opacity: 1;
+  }
+}
+
+/* Position states controlled by parent data-active attribute */
+
+/* When card 0 (Starter) is active */
+[data-active="0"] .c-pricing-luxury__card[data-index="0"] {
+  transform: translateZ(40px) rotateY(0deg);
+  opacity: 1;
+  z-index: 30;
+}
+[data-active="0"] .c-pricing-luxury__card[data-index="0"] .c-pricing-luxury__card-inner {
+  border-color: hsl(var(--a) / 0.3);
+}
+[data-active="0"] .c-pricing-luxury__card[data-index="1"] {
+  transform: translateX(380px) translateZ(-200px) rotateY(-15deg);
+  opacity: 0.5;
+  z-index: 20;
+}
+[data-active="0"] .c-pricing-luxury__card[data-index="2"] {
+  transform: translateX(700px) translateZ(-400px) rotateY(-25deg);
+  opacity: 0.3;
+  z-index: 10;
+}
+
+/* When card 1 (Pro) is active - DEFAULT */
+[data-active="1"] .c-pricing-luxury__card[data-index="0"] {
+  transform: translateX(-380px) translateZ(-200px) rotateY(15deg);
+  opacity: 0.5;
+  z-index: 20;
+}
+[data-active="1"] .c-pricing-luxury__card[data-index="1"] {
+  transform: translateZ(40px) rotateY(0deg);
+  opacity: 1;
+  z-index: 30;
+}
+[data-active="1"] .c-pricing-luxury__card[data-index="1"] .c-pricing-luxury__card-inner {
+  border-color: hsl(var(--a) / 0.3);
+}
+[data-active="1"] .c-pricing-luxury__card[data-index="2"] {
+  transform: translateX(380px) translateZ(-200px) rotateY(-15deg);
+  opacity: 0.5;
+  z-index: 20;
+}
+
+/* When card 2 (Enterprise) is active */
+[data-active="2"] .c-pricing-luxury__card[data-index="0"] {
+  transform: translateX(-700px) translateZ(-400px) rotateY(25deg);
+  opacity: 0.3;
+  z-index: 10;
+}
+[data-active="2"] .c-pricing-luxury__card[data-index="1"] {
+  transform: translateX(-380px) translateZ(-200px) rotateY(15deg);
+  opacity: 0.5;
+  z-index: 20;
+}
+[data-active="2"] .c-pricing-luxury__card[data-index="2"] {
+  transform: translateZ(40px) rotateY(0deg);
+  opacity: 1;
+  z-index: 30;
+}
+[data-active="2"] .c-pricing-luxury__card[data-index="2"] .c-pricing-luxury__card-inner {
+  border-color: hsl(var(--a) / 0.3);
+}
+
+/* Hover on inactive cards */
+.c-pricing-luxury__card:not([data-index]) .c-pricing-luxury__card-inner:hover,
+[data-active="0"] .c-pricing-luxury__card:not([data-index="0"]):hover,
+[data-active="1"] .c-pricing-luxury__card:not([data-index="1"]):hover,
+[data-active="2"] .c-pricing-luxury__card:not([data-index="2"]):hover {
+  border-color: hsl(var(--bc) / 0.2);
+}
+
+/* Navigation dots */
+.c-pricing-luxury__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: hsl(var(--bc) / 0.1);
+  background: hsl(var(--bc) / 0.1);
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-luxury-medium) var(--ease-luxury);
+}
+.c-pricing-luxury__dot:hover {
+  background: hsl(var(--bc) / 0.3);
+  transform: scale(1.2);
+}
+.c-pricing-luxury__dot.active {
+  background: hsl(var(--a));
+  transform: scale(1.4);
+  box-shadow: 0 0 20px hsl(var(--a) / 0.5);
+}
+
+/* Mobile tabs and cards */
+.c-pricing-luxury__mobile-tab {
+  color: hsl(var(--bc) / 0.4);
+}
+.c-pricing-luxury__mobile-tab.active {
+  background: hsl(var(--bc) / 0.08);
+  color: hsl(var(--bc));
+}
+
+.c-pricing-luxury__mobile-card {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(20px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(20px);
+  transition: all var(--duration-luxury-medium) var(--ease-luxury);
+}
+.c-pricing-luxury__mobile-card.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}

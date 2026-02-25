@@ -1,0 +1,15 @@
+/* FeaturesNeo.css */
+
+/* .neo-tile */
+.c-features-neo__tile {
+  opacity: 0;
+  transform: translateY(20px);
+  /* Use global animation keyframes */
+  animation: fade-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.c-features-neo__tile:hover {
+  z-index: 2;
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}

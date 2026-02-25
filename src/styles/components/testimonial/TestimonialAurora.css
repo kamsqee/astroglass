@@ -1,0 +1,254 @@
+/* -------------------------------------------------------------------------- */
+/*                      TESTIMONIAL AURORA — WALL OF LOVE                     */
+/* -------------------------------------------------------------------------- */
+
+.testimonial-aurora {
+  position: relative;
+  padding: 80px 24px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .testimonial-aurora {
+    padding: 120px 32px;
+  }
+}
+
+/* Header */
+.testimonial-aurora-header {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.testimonial-aurora-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: hsl(var(--a));
+  margin-bottom: 20px;
+}
+
+.testimonial-aurora-stars {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: hsl(45 100% 60%);
+  letter-spacing: 0;
+  text-shadow: 0 0 8px hsl(45 100% 60% / 0.3);
+}
+
+[data-theme="monochrome"] .testimonial-aurora-stars {
+  color: hsl(var(--bc));
+  text-shadow: 0 0 8px hsl(var(--bc) / 0.3);
+}
+
+.testimonial-aurora-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: hsl(var(--bc));
+  margin-bottom: 12px;
+}
+
+.testimonial-aurora-subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--bc) / 0.75);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            STATS STRIP                                     */
+/* -------------------------------------------------------------------------- */
+
+.testimonial-aurora-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 640px) {
+  .testimonial-aurora-stats {
+    gap: 40px;
+  }
+}
+
+.testimonial-aurora-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.testimonial-aurora-stat-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, hsl(var(--bc)), hsl(var(--a)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.testimonial-aurora-stat-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsl(var(--bc) / 0.65);
+}
+
+.testimonial-aurora-stat-divider {
+  width: 1px;
+  height: 32px;
+  background: hsl(var(--bc) / 0.08);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                           MASONRY GRID                                     */
+/* -------------------------------------------------------------------------- */
+
+.testimonial-aurora-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  columns: 1;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .testimonial-aurora-grid {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .testimonial-aurora-grid {
+    columns: 3;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             CARD                                           */
+/* -------------------------------------------------------------------------- */
+
+.testimonial-aurora-card {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 20px;
+  background: hsl(var(--b1));
+  border: 1px solid hsl(var(--bc) / 0.06);
+  border-radius: 16px;
+  padding: 28px 24px 28px 28px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: testimonial-card-reveal 0.6s ease both;
+}
+
+@keyframes testimonial-card-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.testimonial-aurora-card:hover {
+  border-color: hsl(var(--a) / 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px hsl(var(--bc) / 0.06);
+}
+
+/* Left accent bar */
+.testimonial-aurora-card-bar {
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, hsl(var(--a)), hsl(var(--a) / 0.2));
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.testimonial-aurora-card:hover .testimonial-aurora-card-bar {
+  opacity: 1;
+}
+
+/* Quote */
+.testimonial-aurora-quote {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: hsl(var(--bc) / 0.8);
+  margin: 0 0 20px;
+  font-style: italic;
+}
+
+.testimonial-aurora-card--small .testimonial-aurora-quote {
+  font-size: 0.85rem;
+}
+
+.testimonial-aurora-card--large .testimonial-aurora-quote {
+  font-size: 0.95rem;
+}
+
+/* Author */
+.testimonial-aurora-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Avatar ring glow */
+.testimonial-aurora-avatar-ring {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  padding: 2px;
+  background: hsl(var(--bc) / 0.05);
+  transition: all 0.4s ease;
+  flex-shrink: 0;
+}
+
+.testimonial-aurora-card:hover .testimonial-aurora-avatar-ring {
+  background: linear-gradient(135deg, hsl(var(--a) / 0.4), hsl(var(--a) / 0.1));
+  box-shadow: 0 0 12px hsl(var(--a) / 0.15);
+}
+
+.testimonial-aurora-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: hsl(var(--a) / 0.1);
+  color: hsl(var(--a));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.testimonial-aurora-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial-aurora-author-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: hsl(var(--bc));
+}
+
+.testimonial-aurora-author-role {
+  font-size: 0.7rem;
+  color: hsl(var(--bc) / 0.7);
+}

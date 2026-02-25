@@ -1,0 +1,37 @@
+---
+title: "Section FAQ"
+description: "Sections des questions fréquemment posées (FAQ) avec interface en accordéon pour chaque thème."
+order: 8
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La section FAQ (Foire Aux Questions) affiche les questions et réponses courantes dans un format en accordéon.
+
+## Variantes de Thème
+
+| Thème | Composant | Style |
+|-------|-----------|-------|
+| **Liquid** | `FAQLiquid.astro` | Accordéons fluides et animés |
+| **Glass** | `FAQGlass.astro` | Accordéons en verre dépoli |
+| **Neo** | `FAQNeo.astro` | Questions-Réponses audacieuses, à contraste élevé |
+| **Luxury** | `FAQLuxury.astro` | Accordéons élégants avec des touches dorées |
+| **Minimal** | `FAQMinimal.astro` | Accordéons épurés et simples |
+| **Aurora** | `FAQAurora.astro` | Cartes FAQ sur fond dégradé |
+
+Toutes les variantes se trouvent dans `src/components/sections/faq/`.
+
+## Source du Contenu
+
+Les éléments de la FAQ sont chargés depuis `src/locales/{lang}/faq.json` via `useTranslations()`. La structure JSON contient généralement un tableau (array) de paires question-réponse.
+
+<Callout type="info" title="Pas de Propriétés (Props)">
+  Les composants FAQ ne prennent aucune propriété externe. Pour ajouter, supprimer ou modifier des éléments de la FAQ, mettez à jour `src/locales/{lang}/faq.json`.
+</Callout>
+
+## Personnalisation
+
+Pour personnaliser :
+1. Modifiez `src/components/sections/faq/FAQ{Theme}.astro`.
+2. Ajustez les styles dans `src/styles/components/faq/`.
+3. Changez le contenu dans `src/locales/{lang}/faq.json`.

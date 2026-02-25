@@ -1,0 +1,47 @@
+---
+title: "Карталар (Cards)"
+description: "Функциялар мен блогтарға арналған glassmorphism (шыны тәрізді) эффектісі бар карталар."
+order: 2
+---
+
+import { Card } from '../../../../../components/ui/card.tsx';
+
+Карталар — шыны (glass) дизайн жүйесінің іргелі құрылыс блогы болып табылады.
+
+## Нұсқалары (Variants)
+
+Біз `variant` қасиеті (prop) арқылы карталардың бірнеше стильдерін қолдаймыз.
+
+| Нұсқа | Сипаттамасы | Визуалды стилі |
+| :--- | :--- | :--- |
+| `glass` | Кәдімгі күңгірт шыны (frosted glass) | Бұлыңғырлық (Blur) + Жиек |
+| `solid` | Мөлдір емес фон | Жоғары контраст |
+| `outline` | Тек жиегі ғана | Минималистік |
+
+## Жанды мысалдар
+
+<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 not-prose my-8">
+  <Card variant="glass" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Шыны карта (Glass Card)</h3>
+    <p className="text-sm opacity-80">Бұлыңғырлық пен жұқа жиегі бар стандартты күңгірт шыны (frosted glass) эффектісі.</p>
+  </Card>
+
+  <Card variant="solid" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Тұтас карта (Solid Card)</h3>
+    <p className="text-sm opacity-80">Жоғары контраст үшін мөлдір емес фон.</p>
+  </Card>
+
+  <Card variant="outline" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Контурлы карта (Outline Card)</h3>
+    <p className="text-sm opacity-80">Тек жиегінен тұратын минималистік стиль.</p>
+  </Card>
+</div>
+
+## Кодта қолданылуы
+
+```tsx
+<Card variant="glass" className="p-6">
+  <h3>Шыны карта (Glass Card)</h3>
+  <p>Бұл әдемі тереңдік әсерін (depth effect) жасайды.</p>
+</Card>
+```

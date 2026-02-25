@@ -1,0 +1,106 @@
+/* AboutLiquid.css — Liquid orb, wave divider, fluid stats */
+
+/* ── Liquid Orb (replaces glass stack) ── */
+.c-about-liquid__orb-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-about-liquid__orb-svg {
+  width: 100%;
+  height: auto;
+  max-width: 380px;
+  filter: drop-shadow(0 20px 60px hsl(var(--a) / 0.2));
+}
+
+.c-about-liquid__orb-blob-1 {
+  fill: hsl(var(--a) / 0.15);
+  animation: aboutLiquidOrbMorph1 10s ease-in-out infinite;
+}
+
+.c-about-liquid__orb-blob-2 {
+  fill: hsl(var(--p, var(--a)) / 0.1);
+  animation: aboutLiquidOrbMorph2 12s ease-in-out infinite;
+}
+
+.c-about-liquid__orb-blob-3 {
+  fill: hsl(var(--a) / 0.2);
+  animation: aboutLiquidOrbMorph3 8s ease-in-out infinite;
+}
+
+@keyframes aboutLiquidOrbMorph1 {
+  0%, 100% {
+    d: path("M250,180Q310,100,380,160Q450,220,400,300Q350,380,260,360Q170,340,140,280Q110,220,180,160Q250,100,250,180Z");
+  }
+  50% {
+    d: path("M260,160Q330,80,400,150Q470,220,420,310Q370,400,270,380Q170,360,130,290Q90,220,170,150Q250,80,260,160Z");
+  }
+}
+
+@keyframes aboutLiquidOrbMorph2 {
+  0%, 100% {
+    d: path("M240,200Q300,130,360,180Q420,230,390,310Q360,390,270,370Q180,350,150,290Q120,230,170,180Q220,130,240,200Z");
+  }
+  50% {
+    d: path("M250,190Q320,110,380,170Q440,230,410,320Q380,410,280,390Q180,370,140,300Q100,230,160,170Q220,110,250,190Z");
+  }
+}
+
+@keyframes aboutLiquidOrbMorph3 {
+  0%, 100% {
+    d: path("M260,220Q300,170,340,210Q380,250,360,300Q340,350,280,340Q220,330,200,290Q180,250,210,220Q240,190,260,220Z");
+  }
+  50% {
+    d: path("M270,210Q310,160,350,200Q390,240,370,290Q350,340,290,330Q230,320,210,280Q190,240,220,210Q250,180,270,210Z");
+  }
+}
+
+/* Orb center icon */
+.c-about-liquid__orb-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: aboutLiquidOrbPulse 3s ease-in-out infinite;
+}
+
+@keyframes aboutLiquidOrbPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+/* Orb container hover */
+.c-about-liquid__orb-container:hover .c-about-liquid__orb-blob-1 { animation-duration: 6s; }
+.c-about-liquid__orb-container:hover .c-about-liquid__orb-blob-2 { animation-duration: 8s; }
+.c-about-liquid__orb-container:hover .c-about-liquid__orb-blob-3 { animation-duration: 5s; }
+
+/* ── Wave Divider ── */
+.c-about-liquid__wave-divider {
+  position: relative;
+  height: 24px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.c-about-liquid__wave-divider svg {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  animation: aboutLiquidWaveScroll 8s linear infinite;
+}
+
+@keyframes aboutLiquidWaveScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Stats ── */
+.c-about-liquid__stat {
+  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-about-liquid__stat:hover {
+  transform: translateY(-2px);
+}

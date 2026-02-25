@@ -1,0 +1,118 @@
+---
+title: ルーティングと国際化 (i18n)
+description: AstroGlass におけるページと言語がどのように機能するかを理解します。
+order: 4
+---
+
+import FileTree from '../../../../components/mdx/FileTree.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import Steps from '../../../../components/mdx/Steps.astro';
+
+AstroGlass は、Astro のファイルベースのルーティングシステムとカスタムの国際化（i18n）戦略を組み合わせて使用しています。
+
+## ページのルーティング
+
+ページは `src/pages/` にあります。フォルダ構造が URL パスを決定します。
+
+ローカライズされた（各言語向けの）ページには、別のディレクトリを使用します：
+
+<FileTree>
+- src/
+  - pages/
+    - **[...lang]/**       — 動的なロケールルーティング
+      - **index.astro**      — ホームページ（すべての言語）
+      - **[theme].astro**    — 動的なテーマデモページ（例: /liquid、/ja/glass）
+      - **[theme]/portfolio.astro** — 動的なポートフォリオページ
+      - blog/                — ブログページ
+      - docs/                — ドキュメントページ
+      - privacy.astro        — プライバシーポリシー
+      - terms.astro          — 利用規約
+    - 404.astro            — /404 エラーページ
+    - about.astro          — /about (ローカライズなし)
+</FileTree>
+
+### テーマデモのルーティング
+
+テーマページはテーマレジストリから動的に生成されます。`src/config/themes.ts` に `enabled: true` でテーマを追加すると、自動的に `/{themeId}` のルート（経路）が作成されます。
+
+## ドキュメントのルーティング
+
+ドキュメントのページは `src/content/docs/[lang]/` にあります：
+
+<FileTree>
+- src/
+  - content/
+    - docs/
+      - en/
+      - ru/
+      - fr/
+      - es/
+      - ja/
+      - zh/
+      - kk/
+</FileTree>
+
+ドキュメントの URL はファイルパスに基づいて自動的に生成されます。例： `/docs/ja/getting-started/introduction`。
+
+## 国際化 (i18n)
+
+翻訳は2つの方法で処理されます：
+1.  **動的なページルーティング**: 中央の `src/pages/[...lang]/` ディレクトリが、`getStaticPaths()` を介してすべての経路の順列を動的に処理します。
+2.  **UI 文字列**: `src/locales/` にある中央集権的な JSON ファイル。
+
+### UI の翻訳
+
+共通の文字列（ナビゲーションアイテム、ボタン、セクションのテキストなど）は、セクションごとにまとめられた JSON ファイルとして保存されます：
+
+```
+src/locales/
+├── en/
+├── ru/
+├── fr/
+├── es/
+├── ja/
+├── zh/
+└── kk/
+```
+
+コンポーネントではヘルパーメソッド `useTranslations` を使用します：
+
+```astro title="Component.astro"
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<p>{t('hero.title')}</p>
+<p>{t('pricing.tier2Name')}</p>
+```
+
+翻訳キーは、ネストされた値のドット表記（dot notation）をサポートしています。`common.json` のキーはルートレベルで展開されますが、他のファイルはファイル名によって名前空間が分けられています（例： `hero.title`、`pricing.plans`）。
+
+### 新しい言語の追加
+
+<Steps>
+1. **ロケールの登録**
+
+   `src/config/locales.ts` に `enabled: true` のエントリを追加します。
+
+2. **翻訳ファイルの作成**
+
+   英語の構造に一致する JSON ファイルを含む `src/locales/{code}/` ディレクトリを作成します。
+
+3. **ドキュメントコンテンツの作成**
+
+   翻訳された MDX ファイルを含む `src/content/docs/{code}/` を作成します。
+   （例： `src/content/docs/ja/getting-started/introduction.mdx`）
+
+4. **ブログコンテンツの作成**
+
+   翻訳された Markdown/MDX ファイルを含む `src/content/blog/{code}/` を作成します。
+   （例： `src/content/blog/ja/my-post.md`）
+</Steps>
+
+<Callout type="info" title="自動検出">
+  i18n システムは Vite の `import.meta.glob` を使用して、`src/locales/` 内のすべての JSON ファイルを自動的に検出します。手動でのインポートは不要です — ファイルを作成するだけで、`useTranslations()` を介して利用できるようになります。
+</Callout>

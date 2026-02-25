@@ -1,0 +1,134 @@
+---
+title: "Système de Thèmes"
+description: "Comprendre l'architecture centrale du système de thèmes dynamique, y compris les variables CSS, le registre des thèmes et le rendu des variantes."
+order: 1
+category: core-concepts
+tags: ["theming", "design-system", "css"]
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass se caractérise par un système de thèmes dynamique hautement flexible, construit sur **Tailwind CSS v4** et **l'architecture des composants d'Astro**.
+
+## Aperçu de l'Architecture
+
+Le système de thèmes se compose de trois couches principales :
+
+1. **Registre des Thèmes** : Définitions pour chaque thème dans `src/config/themes.ts`.
+2. **Propriétés Personnalisées CSS** : Variables sensibles aux thèmes définies dans `src/styles/_themes.css`.
+3. **Rendu Dynamique** : La page `[theme].astro` rend dynamiquement la variante correcte du composant pour chaque section.
+
+## Registre des Thèmes
+
+Chaque thème est enregistré dans `src/config/themes.ts`. Cela centralise les métadonnées du thème et les rend disponibles pour l'ensemble de l'application.
+
+<FileTree>
+- src/
+  - config/
+    - themes.ts
+</FileTree>
+
+Chaque définition de thème comprend :
+
+```typescript
+export const themes: ThemeDefinition[] = [
+  {
+    id: 'liquid',
+    name: 'Liquid',
+    color: 'from-blue-500 to-cyan-400',  // Classes de dégradé Tailwind
+    icon: '💧',
+    sections: ['Header', 'Hero', 'About', 'Features', 'Portfolio', 'Pricing', 'Testimonial', 'FAQ', 'CTA', 'Contact', 'Footer'],
+    enabled: true,
+    premium: false,
+    description: 'Design fluide, organique avec des animations douces',
+  },
+  // Glass, Neo, Luxury, Minimal, Aurora...
+];
+```
+
+## Variables CSS
+
+Les couleurs et les effets spécifiques aux thèmes sont contrôlés par des propriétés personnalisées CSS. Les variables sont limitées à un attribut `data-theme` sur la balise `<html>` ou `<body>`.
+
+```css
+/* src/styles/_themes.css */
+[data-theme="liquid"] {
+  --p: 260 80% 60%;    /* Primaire */
+  --s: 310 80% 60%;    /* Secondaire */
+  --a: 190 90% 60%;    /* Accent */
+  --b1: 220 20% 10%;   /* Arrière-plan de base */
+  --bc: 220 20% 90%;   /* Contenu de base (texte) */
+}
+```
+
+Les composants les consomment via `hsl(var(--p))` ou les utilitaires Tailwind :
+
+```html
+<div class="bg-[hsl(var(--p))] text-[hsl(var(--bc))]">
+  Contenu Thématique
+</div>
+```
+
+<Callout type="warning" title="Convention de Nommage">
+  Les variables utilisent des noms courts (`--p`, `--s`, `--a`, `--b1`, `--bc`, `--er`, `--su`) pour rester cohérentes avec la convention de nommage inspirée de DaisyUI utilisée dans tout le projet.
+</Callout>
+
+## Rendu Dynamique des Composants
+
+Les pages de thèmes sont générées par `src/pages/[theme].astro`. Ce fichier utilise une **carte de composants** pour sélectionner dynamiquement la variante correcte pour chaque section :
+
+```astro title="[theme].astro"
+---
+const componentMap = {
+  liquid: {
+    Header: HeaderLiquid,
+    Hero: HeroLiquid,
+    About: AboutLiquid,
+    Features: FeaturesLiquid,
+    // ... les 12+ sections
+  },
+  glass: { /* ... */ },
+  neo: { /* ... */ },
+  luxury: { /* ... */ },
+  minimal: { /* ... */ },
+  aurora: { /* ... */ },
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Header />
+<components.Hero />
+<components.About />
+<!-- ... -->
+```
+
+<Callout type="info">
+  Chaque variante de section est un composant Astro autonome. Il utilise `useTranslations()` en interne pour tout le texte — aucune prop externe n'est nécessaire. Cela permet à chaque thème d'avoir des structures HTML complètement différentes tout en maintenant une API uniforme.
+</Callout>
+
+## Créer un Nouveau Thème
+
+<Steps>
+1. **Ajouter la Définition du Thème**
+   
+   Ajoutez l'objet de définition du thème à `src/config/themes.ts`.
+
+2. **Définir les Variables CSS**
+   
+   Définissez les variables CSS du nouveau thème dans `src/styles/_themes.css`.
+
+3. **Créer des Composants de Section**
+   
+   Créez des variantes de composants spécifiques au thème pour chaque section, par ex., `src/components/sections/hero/HeroMonTheme.astro`.
+
+4. **Enregistrer dans la Carte des Composants**
+   
+   Ajoutez les composants du nouveau thème au `componentMap` dans `src/pages/[theme].astro`.
+
+5. **Ajouter des Traductions**
+   
+   Ajoutez toute nouvelle chaîne localisée aux fichiers JSON dans `src/locales/`.
+</Steps> 

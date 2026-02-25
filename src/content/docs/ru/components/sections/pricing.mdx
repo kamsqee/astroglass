@@ -1,0 +1,24 @@
+---
+title: "Секция Pricing"
+description: "Секции таблиц цен для каждой темы."
+order: 6
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Секция Pricing отображает тарифные планы продукта.
+
+## Варианты тем
+
+| Тема | Компонент | Стиль |
+|------|-----------|-------|
+| **Liquid** | `PricingLiquid.astro` | Плавные карточки с градиентами |
+| **Glass** | `PricingGlass.astro` | Матовые стеклянные карточки тарифов |
+| **Neo** | `PricingNeo.astro` | Высококонтрастная сетка |
+| **Luxury** | `PricingLuxury.astro` | Золотые акценты, премиальный вид |
+| **Minimal** | `PricingMinimal.astro` | Чистый, простой список |
+| **Aurora** | `PricingAurora.astro` | Градиентный фон |
+
+<Callout type="info" title="Без пропсов">
+  Данные тарифов загружаются из `src/locales/{lang}/pricing.json` через `useTranslations()`.
+</Callout>

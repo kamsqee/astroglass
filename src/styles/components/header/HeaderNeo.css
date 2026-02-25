@@ -1,0 +1,530 @@
+/* -------------------------------------------------------------------------- */
+/*                          HEADER NEO — BASE                                 */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  /* Ultra-smooth ease for organic motion */
+  --ease-spring: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.header-neo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 20px 24px;
+  transition: all 0.8s var(--ease-spring);
+}
+
+@media (min-width: 1024px) {
+  .header-neo { 
+    padding: 24px 40px; 
+    position: fixed;
+  }
+}
+
+/* Scrolled — shrink to compact pill */
+.header-neo.is-scrolled {
+  padding: 10px 20px;
+}
+
+@media (min-width: 1024px) {
+  .header-neo.is-scrolled { padding: 10px 40px; }
+}
+
+/* Inner container */
+.header-neo-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  
+  /* Initial Glass State */
+  background: hsl(var(--b1) / 0.6);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid hsl(var(--bc) / 0.08);
+  border-radius: 20px;
+  
+  transition: all 0.8s var(--ease-spring);
+}
+
+.header-neo.is-scrolled .header-neo-inner {
+  max-width: var(--scrolled-max-width, 960px); /* Wider pill to fit all nav links + actions dynamically */
+  padding: 8px 18px;
+  border-radius: 999px;
+  
+  /* Deep Glass Evolution */
+  background: hsl(var(--b1) / 0.8);
+  backdrop-filter: blur(50px) saturate(180%); /* Increased blur */
+  -webkit-backdrop-filter: blur(50px) saturate(180%);
+  box-shadow: 
+    0 4px 6px -1px hsl(var(--shadow-color, 0 0% 0%) / 0.1), 
+    0 12px 30px -10px hsl(var(--shadow-color, 0 0% 0%) / 0.2);
+  border-color: hsl(var(--bc) / 0.12);
+}
+
+/* Logo */
+.logo-neo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: hsl(var(--bc));
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  transition: gap 0.6s var(--ease-spring);
+}
+
+.header-neo.is-scrolled .logo-neo {
+  gap: 0; /* Remove gap when text hides */
+}
+
+.logo-neo-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, hsl(var(--a)), hsl(var(--a) / 0.7));
+  border-radius: 10px;
+  color: white;
+  transition: all 0.6s var(--ease-spring);
+  box-shadow: 0 4px 12px -2px hsl(var(--a) / 0.3);
+}
+
+.header-neo.is-scrolled .logo-neo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%; /* Rounded icon in pill mode */
+}
+
+.logo-neo-icon svg { width: 18px; height: 18px; }
+
+/* Organic Text Collapse */
+.logo-neo-text {
+  max-width: 150px;
+  opacity: 1;
+  transform: translateX(0);
+  margin-left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.6s var(--ease-spring);
+  letter-spacing: -0.02em;
+}
+
+.header-neo.is-scrolled .logo-neo-text { 
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  margin-left: -4px; /* Slight pull to tighten */
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            DESKTOP NAVIGATION                              */
+/* -------------------------------------------------------------------------- */
+
+.nav-neo {
+  display: none;
+  align-items: center;
+  gap: 6px; /* Slightly looser initial gap */
+  transition: gap 0.6s var(--ease-spring);
+}
+
+@media (min-width: 1024px) {
+  .nav-neo { display: flex; }
+}
+
+.header-neo.is-scrolled .nav-neo {
+  gap: 2px; /* Tighter gap in pill */
+}
+
+.nav-neo-link {
+  position: relative;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: hsl(var(--bc) / 0.8);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.nav-neo-link:hover {
+  color: hsl(var(--bc));
+  background: hsl(var(--bc) / 0.05);
+}
+
+/* Scrolled: compact links */
+.header-neo.is-scrolled .nav-neo-link {
+  padding: 7px 12px;
+  font-size: 0.85rem;
+}
+
+/* Nav as button (dropdown trigger) */
+button.nav-neo-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+}
+
+.nav-neo-chevron {
+  width: 14px;
+  height: 14px;
+  opacity: 0.4;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-neo.is-open .nav-neo-chevron {
+  transform: rotate(180deg);
+}
+
+/* Desktop Dropdown Menu */
+.dropdown-neo {
+  position: relative;
+}
+
+.dropdown-neo-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  min-width: 180px;
+  padding: 6px;
+  background: hsl(var(--b1) / 0.8);
+  backdrop-filter: blur(25px);
+  border: 1px solid hsl(var(--bc) / 0.08);
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 6px -1px hsl(var(--shadow-color, 0 0% 0%) / 0.05),
+    0 12px 30px -8px hsl(var(--shadow-color, 0 0% 0%) / 0.15);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+  transform-origin: top center;
+}
+
+.dropdown-neo.is-open .dropdown-neo-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.dropdown-neo-item {
+  display: block;
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--bc) / 0.7);
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.dropdown-neo-item:hover {
+  color: hsl(var(--a));
+  background: hsl(var(--a) / 0.08);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            ACTIONS                                          */
+/* -------------------------------------------------------------------------- */
+
+.header-neo-actions {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.6s var(--ease-spring);
+}
+
+@media (min-width: 1024px) {
+  .header-neo-actions { display: flex; }
+}
+
+.header-neo.is-scrolled .header-neo-actions {
+  gap: 4px; /* Tighter actions */
+}
+
+.header-neo-divider {
+  width: 1px;
+  height: 20px;
+  background: hsl(var(--bc) / 0.1);
+  margin: 0 4px;
+  transition: height 0.6s var(--ease-spring), opacity 0.6s ease;
+}
+
+.header-neo.is-scrolled .header-neo-divider {
+  height: 14px;
+  opacity: 0.6;
+}
+
+/* Search button */
+.search-neo {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: hsl(var(--bc) / 0.04);
+  border: 1px solid hsl(var(--bc) / 0.08);
+  border-radius: 10px;
+  color: hsl(var(--bc) / 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-neo:hover {
+  background: hsl(var(--a) / 0.1);
+  border-color: hsl(var(--a) / 0.2);
+  color: hsl(var(--a));
+}
+
+.search-neo svg { width: 18px; height: 18px; }
+
+/* -------------------------------------------------------------------------- */
+/*                                BURGER                                      */
+/* -------------------------------------------------------------------------- */
+
+.burger-neo {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: hsl(var(--bc) / 0.05);
+  border: 1px solid hsl(var(--bc) / 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .burger-neo { display: none; }
+}
+
+.burger-neo:hover {
+  background: hsl(var(--a) / 0.08);
+  border-color: hsl(var(--a) / 0.2);
+}
+
+.burger-neo-line {
+  width: 18px;
+  height: 2px;
+  background: hsl(var(--bc) / 0.7);
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.burger-neo.is-active .burger-neo-line:first-child {
+  transform: translateY(4px) rotate(45deg);
+}
+
+.burger-neo.is-active .burger-neo-line:last-child {
+  transform: translateY(-4px) rotate(-45deg);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          FULLSCREEN OVERLAY                                */
+/* -------------------------------------------------------------------------- */
+
+.overlay-neo {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: hsl(var(--b1) / 0.96);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.overlay-neo.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-neo-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 100px 32px 40px;
+  padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px));
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .overlay-neo-content {
+    padding: 120px 48px 60px;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          OVERLAY NAVIGATION                                */
+/* -------------------------------------------------------------------------- */
+
+.overlay-neo-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Top-level link */
+.overlay-neo-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: hsl(var(--bc));
+  text-decoration: none;
+  border-bottom: 1px solid hsl(var(--bc) / 0.05);
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .overlay-neo-link { font-size: 2.2rem; }
+}
+
+.overlay-neo-link:hover {
+  color: hsl(var(--a));
+  transform: translateX(8px);
+}
+
+.overlay-neo-link-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: hsl(var(--a) / 0.1);
+  color: hsl(var(--a));
+  flex-shrink: 0;
+}
+
+.overlay-neo-link-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Expandable group */
+.overlay-neo-group {
+  border-bottom: 1px solid hsl(var(--bc) / 0.05);
+}
+
+.overlay-neo-group-trigger {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: hsl(var(--bc));
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .overlay-neo-group-trigger { font-size: 2.2rem; }
+}
+
+.overlay-neo-group-trigger:hover {
+  color: hsl(var(--a));
+}
+
+.overlay-neo-group-chevron {
+  width: 22px;
+  height: 22px;
+  color: hsl(var(--bc) / 0.3);
+  margin-left: auto;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.overlay-neo-group.is-open .overlay-neo-group-chevron {
+  transform: rotate(180deg);
+  color: hsl(var(--a));
+}
+
+/* Children panel */
+.overlay-neo-group-children {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.overlay-neo-group.is-open .overlay-neo-group-children {
+  grid-template-rows: 1fr;
+}
+
+.overlay-neo-group-children-inner {
+  overflow: hidden;
+}
+
+.overlay-neo-child-link {
+  display: block;
+  padding: 12px 0 12px 56px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: hsl(var(--bc) / 0.8);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.overlay-neo-child-link:hover {
+  color: hsl(var(--a));
+  padding-left: 64px;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          OVERLAY FOOTER                                    */
+/* -------------------------------------------------------------------------- */
+
+.overlay-neo-footer {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid hsl(var(--bc) / 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.overlay-neo-footer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.overlay-neo-footer-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: hsl(var(--bc) / 0.35);
+}

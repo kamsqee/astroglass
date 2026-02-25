@@ -1,0 +1,93 @@
+---
+title: Cloudflare Deployment
+description: Deploy your AstroGlass site to Cloudflare Pages.
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+This project is optimized for deployment on **Cloudflare Pages**. It includes the necessary adapter and configuration out of the box.
+
+## Prerequisites
+
+- A [Cloudflare](https://dash.cloudflare.com/) account.
+- **Node.js** v20+ installed locally.
+- **Wrangler** CLI installed (`npm install -g wrangler`).
+
+## Deployment Methods
+
+You can deploy using GitHub integration (recommended) or via CLI.
+
+### Option 1: GitHub Integration
+
+<Steps>
+1. **Push your code to GitHub**
+   
+   Ensure your project is in a GitHub repository.
+
+2. **Connect to Cloudflare Pages**
+   
+   Go to the Cloudflare Dashboard > Workers & Pages > Create Application > Pages > Connect to Git.
+
+3. **Select Repository**
+   
+   Choose your repository and branch.
+
+4. **Configure Build Settings**
+   
+   Use the following settings:
+   - **Framework Preset**: Astro
+   - **Build command**: `pnpm run build`
+   - **Build output directory**: `dist`
+   
+   <Callout type="warning" title="Search Indexing">
+     The `build` script automatically runs `astro build && pnpm run index:content`, which generates the Fuse.js search index. Ensure this completes successfully or search will not work on the deployed site.
+   </Callout>
+
+5. **Save and Deploy**
+</Steps>
+
+### Option 2: Wrangler CLI
+
+You can also deploy directly from your terminal.
+
+<Steps>
+1. **Login to Wrangler**
+   
+   ```bash title="Terminal" frame="terminal"
+   npx wrangler login
+   ```
+
+2. **Build and Deploy**
+   
+   Run the deploy script defined in `package.json`:
+   
+   ```bash title="Terminal" frame="terminal"
+   pnpm run deploy
+   ```
+   
+   This command executes: `astro build && pnpm run index:content && wrangler pages deploy dist`.
+</Steps>
+
+## Search Indexing
+
+The project uses **Fuse.js** for search. This requires a build-time step to generate the content index.
+
+The `build` script in `package.json` handles this automatically:
+
+```json title="package.json"
+"scripts": {
+  "build": "astro build && pnpm run index:content",
+  "index:content": "node scripts/generate-search-index.mjs"
+}
+```
+
+If search isn't working on your deployed site, ensure that the indexing step ran successfully.
+
+## Troubleshooting
+
+### Deployment Fails
+Check the build logs. Common issues include TypeScript errors or missing dependencies.
+
+### Search Not Working
+If search returns no results, check if the `public/search/` directory contains `en.json` and `ru.json` files. These are generated during build by `pnpm run index:content`.

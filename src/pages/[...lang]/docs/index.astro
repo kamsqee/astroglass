@@ -1,0 +1,60 @@
+---
+import { getEnabledLocaleCodes, defaultLocale } from '../../../config/locales';
+
+export async function getStaticPaths() {
+  return getEnabledLocaleCodes().map(lang => ({
+    params: { lang: lang === defaultLocale ? undefined : lang },
+    props: { locale: lang }
+  }));
+}
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { buildDocsNav } from '../../../utils/docs-nav';
+import FooterLiquid from '../../../components/sections/footer/FooterLiquid.astro';
+import { useTranslations } from '../../../utils/i18n';
+
+type DocsLocale = Parameters<typeof buildDocsNav>[0];
+
+const { locale } = Astro.props;
+const sections = await buildDocsNav(locale as DocsLocale);
+const t = useTranslations(locale as DocsLocale);
+
+---
+
+<BaseLayout title={t('docs.indexTitle')} description={t('docs.indexDescription')}>
+  <main class="pt-[calc(80px+var(--nav-offset))] pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+    <div class="text-center mb-12 sm:mb-16">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black mb-4 sm:mb-6">{t('docs.indexTitle')}</h1>
+      <p class="text-base sm:text-xl text-base-content/80 max-w-2xl mx-auto px-2">
+        {t('docs.indexDescription')}
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sections.map(section => (
+        <div class="p-8 rounded-2xl bg-base-content/[0.02] border border-base-content/10 hover:border-accent/30 hover:bg-accent/5 transition-all duration-300 group">
+          <h2 class="text-xl font-bold mb-4 group-hover:text-accent transition-colors">{section.title}</h2>
+          <ul class="space-y-2">
+            {section.items.slice(0, 5).map(item => (
+              <li>
+                <a href={item.href} class="text-sm text-base-content/75 hover:text-base-content transition-colors flex items-center gap-2">
+                  <span class="w-1 h-1 rounded-full bg-accent/50"></span>
+                  {item.title}
+                </a>
+              </li>
+            ))}
+            {section.items.length > 5 && (
+              <li class="text-xs text-base-content/75 pt-2">+ {section.items.length - 5} {t('docs.more')}</li>
+            )}
+          </ul>
+          <div class="mt-6 pt-6 border-t border-base-content/5">
+            <a href={section.items[0]?.href} class="text-sm font-bold text-accent hover:underline">
+              {t('docs.viewSection')}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </main>
+  <FooterLiquid />
+</BaseLayout>

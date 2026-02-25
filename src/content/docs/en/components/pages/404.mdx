@@ -1,0 +1,25 @@
+---
+title: "404 Page"
+description: "Theme-adaptive error page."
+order: 3
+---
+
+# 404 Page
+
+AstroGlass includes a sophisticated 404 Error page that automatically adapts to the user's selected theme.
+
+## Architecture
+
+Located at `src/pages/404.astro`.
+
+The page uses CSS variables defined in `src/styles/_themes.css` to render standard 404 visuals (floating particles, glowing orbs, glass cards) that match the active color palette.
+
+## Features
+
+- **Theme Adaptive**: If a user is browsing with the "Luxury" theme and hits a 404, the error page will be Gold/Black. If they are on "Neo", it will be Black/Cyan.
+- **Interactive Background**: Features animated elements like floating particles and morphing blobs.
+- **Localization**: Fully translated messages via `src/locales/{lang}/common.json` (keys starting with `notFound`).
+
+## Usage
+
+This page is automatically served by Astro (and most deployment platforms like Cloudflare/Vercel) when a user requests a non-existent route. No configuration is required.

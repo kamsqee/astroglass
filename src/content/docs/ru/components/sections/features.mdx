@@ -1,0 +1,24 @@
+---
+title: "Секция Features"
+description: "Секции демонстрации функций для каждой темы."
+order: 4
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Секция Features выделяет преимущества продукта или сервиса.
+
+## Варианты тем
+
+| Тема | Компонент | Компоновка |
+|------|-----------|-----------|
+| **Liquid** | `FeaturesLiquid.astro` | Анимированные карточки с жидкими hover-эффектами |
+| **Glass** | `FeaturesGlass.astro` | Матовые стеклянные карточки |
+| **Neo** | `FeaturesNeo.astro` | Смелая сетка с резкими краями |
+| **Luxury** | `FeaturesLuxury.astro` | Элегантная сетка с золотыми акцентами |
+| **Minimal** | `FeaturesMinimal.astro` | Чистый, простой формат списка |
+| **Aurora** | `FeaturesAurora.astro` | Градиентный фон с карточками |
+
+<Callout type="info" title="Без пропсов">
+  Контент загружается из `src/locales/{lang}/features.json` через `useTranslations()`.
+</Callout>

@@ -1,0 +1,219 @@
+---
+/**
+ * Hero Luxury - The Product Stage
+ * Interactive product showcase where users can immediately experience the product.
+ * Mobile: Demo above fold. Desktop: Side-by-side with content.
+ */
+import '../../../styles/components/hero/HeroLuxury.css';
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import LuxuryButton from '../../ui/luxury/LuxuryButton.astro';
+import LuxurySectionLabel from '../../ui/luxury/LuxurySectionLabel.astro';
+
+import { palettes } from '../../../config/palettes';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Show first 4 palettes as interactive demo swatches
+const themes = palettes.slice(0, 4).map(p => ({
+  id: p.id, name: p.id.charAt(0).toUpperCase() + p.id.slice(1), color: p.accentHex,
+}));
+---
+
+
+
+<section class="relative min-h-screen flex items-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-[calc(80px+var(--nav-offset))] pb-16 lg:pb-24">
+  <!-- Background -->
+  <div class="absolute inset-0 z-0 pointer-events-none">
+    <div class="c-hero-luxury__glow js-parallax absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent opacity-10 blur-[150px] rounded-full transition-all duration-1000"></div>
+  </div>
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto">
+    <!-- Mobile: Demo First -->
+    <div class="lg:hidden mb-10">
+      <!-- Interactive Demo Frame -->
+      <div class="hero-luxury-demo-frame relative mx-auto max-w-sm">
+        <div class="relative bg-gradient-to-br from-base-content/[0.08] to-base-content/[0.02] backdrop-blur-3xl border border-base-content/10 rounded-3xl p-4 shadow-2xl overflow-hidden ring-1 ring-white/10 ring-inset">
+          <!-- Phone notch -->
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-base-100/80 backdrop-blur-md rounded-b-xl border-b border-r border-l border-base-content/5 z-20"></div>
+          
+          <!-- Demo content -->
+          <div class="hero-luxury-demo-content aspect-[9/16] bg-base-100 rounded-2xl overflow-hidden flex flex-col items-center justify-center p-6 relative">
+            <!-- Interactive theme preview -->
+            <div class="c-hero-luxury__preview-card w-full aspect-video rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-6 transition-luxury">
+              <span class="text-4xl">✨</span>
+            </div>
+            
+            <!-- Theme switcher -->
+            <div class="flex gap-2">
+                  {themes.map((theme, i) => (
+                    <button 
+                      class={`c-hero-luxury__theme-btn w-10 h-10 border transition-luxury rounded-xl ${i === 0 ? 'scale-110 border-base-content' : 'border-transparent opacity-60 hover:opacity-100 hover:border-base-content/20'}`}
+                      style={`background: ${theme.color}`}
+                      data-theme={theme.id}
+                      data-color={theme.color}
+                      aria-label={theme.name}
+                    ></button>
+                  ))}
+                </div>
+                
+                <p class="text-[10px] uppercase tracking-luxury-wide text-base-content/75 mt-6 font-bold">{t('hero.tryItNow')}</p>
+              </div>
+            </div>
+            
+            <!-- Floating reaction -->
+            <div class="absolute -right-2 top-1/4 px-3 py-1 bg-base-content text-base-100 border border-base-content/10 text-xs font-bold animate-bounce shadow-xl rounded-full">
+              🔥 Live
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <!-- Content (Already updated) -->
+          <div class="text-center lg:text-left order-2 lg:order-1">
+        <!-- Badge -->
+        <div class="mb-8 flex justify-center lg:justify-start">
+          <LuxurySectionLabel text={t('hero.digitalExperience')} />
+        </div>
+
+        <!-- Headline -->
+        <!-- Headline -->
+        <h1 class="font-serif font-light text-base-content mb-12 max-w-5xl mx-auto lg:mx-0 flex flex-col gap-4 lg:gap-6">
+          <span class="text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-tight block">{t('hero.dontTakeOurWord')}</span>
+          <span class="text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-tight block text-accent italic">{t('hero.tryItNow')}</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg text-base-content/75 max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed font-light">
+          {t('hero.subtitle')}
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero-luxury__actions flex flex-col sm:flex-row items-center justify-center gap-4 px-4">
+          <LuxuryButton href="#services" variant="primary">{t('hero.startBuilding')}</LuxuryButton>
+          <LuxuryButton href={`/${locale}/docs`} variant="secondary">
+            {t('hero.viewFullDemo')}
+          </LuxuryButton>
+        </div>
+
+        <!-- Trust indicators -->
+        <div class="flex items-center justify-center lg:justify-start gap-4 mt-12 text-base-content/75">
+          <span class="text-[10px] uppercase tracking-widest font-bold">{t('hero.trustedBy')}</span>
+          <div class="flex gap-4 text-sm font-medium opacity-70">
+            <span>Vercel</span>
+            <span class="opacity-30">/</span>
+            <span>Linear</span>
+            <span class="opacity-30">/</span>
+            <span>Stripe</span>
+          </div>
+        </div>
+          </div>
+
+          <!-- Desktop: Large Demo -->
+          <div class="hidden lg:block order-1 lg:order-2">
+            <div class="hero-luxury-demo-frame relative c-hero-luxury__perspective-2000">
+              <!-- Browser frame -->
+              <div class="relative bg-gradient-to-br from-base-content/[0.08] to-base-content/[0.02] backdrop-blur-3xl border border-base-content/10 overflow-hidden shadow-2xl transform hover:scale-[1.01] transition-all duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] rounded-2xl ring-1 ring-white/10 ring-inset">
+                <!-- Browser chrome -->
+                <div class="flex items-center gap-2 px-6 py-4 bg-base-content/[0.02] border-b border-base-content/5">
+                  <div class="flex gap-2">
+                    <div class="w-2.5 h-2.5 bg-base-content/20 rounded-full"></div>
+                    <div class="w-2.5 h-2.5 bg-base-content/20 rounded-full"></div>
+                    <div class="w-2.5 h-2.5 bg-base-content/20 rounded-full"></div>
+                  </div>
+                  <div class="flex-1 mx-4">
+                    <div class="w-48 h-5 bg-base-content/[0.03] border border-base-content/5 rounded-lg"></div>
+                  </div>
+                </div>
+
+                <!-- Demo content -->
+                <div class="hero-luxury-demo-content aspect-video bg-base-100 p-8 flex flex-col items-center justify-center">
+                  <!-- Interactive preview card -->
+                  <div class="c-hero-luxury__preview-card w-full max-w-md aspect-video bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mb-8 transition-luxury shadow-none rounded-2xl">
+                    <div class="text-center">
+                      <span class="text-6xl block mb-2 font-serif italic">Aa</span>
+                      <span class="text-base-content/75 text-xs uppercase tracking-luxury-wide">{t('hero.interactivePreview')}</span>
+                    </div>
+                  </div>
+
+                  <!-- Theme switcher -->
+                  <div class="flex items-center gap-6">
+                    <span class="text-xs text-base-content/75 uppercase tracking-luxury-wide font-bold">{t('themeSwitcher.label')}</span>
+                    <div class="flex gap-3">
+                      {themes.map((theme, i) => (
+                        <button 
+                          class={`c-hero-luxury__theme-btn w-12 h-12 border transition-luxury hover:scale-105 rounded-xl ${i === 0 ? 'scale-110 border-base-content' : 'border-transparent opacity-60 hover:opacity-100 hover:border-base-content/20'}`}
+                          style={`background: ${theme.color}`}
+                          data-theme={theme.id}
+                          data-color={theme.color}
+                          aria-label={theme.name}
+                        ></button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating elements -->
+              <div class="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br from-accent/20 to-accent/5 backdrop-blur-xl border border-accent/20 rotate-12 animate-float rounded-2xl ring-1 ring-white/10 ring-inset shadow-main-luxury"></div>
+              <div class="absolute -bottom-4 -left-4 px-4 py-3 bg-base-content text-base-100 border border-base-content/10 text-sm animate-float shadow-main-luxury font-medium rounded-xl ring-1 ring-white/10 ring-inset" style="animation-delay: -2s;">
+                <span class="text-accent font-bold">+127%</span>
+                <span class="opacity-80 ml-1">{t('hero.faster').toLowerCase().replace('.', '')}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<script>
+  import { Parallax } from '../../../scripts/luxury-interactions';
+
+  function initHeroLuxury() {
+    // Init Magnetic Buttons
+    // Note: We need to target the anchor tags inside LuxuryButton if needed, or just apply strictly to .js-magnetic if we kept that class.
+    // However, LuxuryButton uses standard CSS transitions. If we want magnetic flair, we should add it to LuxuryButton component or here.
+    // For now, let's keep it simple as per audit findings to standardize.
+    
+    // Init Parallax
+    new Parallax('.js-parallax', 0.1); 
+
+
+
+    const buttons = document.querySelectorAll('.c-hero-luxury__theme-btn');
+    const previewCards = document.querySelectorAll('.c-hero-luxury__preview-card');
+    const glow = document.querySelector('.c-hero-luxury__glow');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const color = (btn as HTMLElement).dataset.color;
+        if (!color) return;
+        
+        // Update button states
+        buttons.forEach(b => {
+          b.classList.remove('scale-110', 'border-base-content', 'shadow-lg');
+          b.classList.add('border-transparent', 'opacity-60');
+        });
+        btn.classList.remove('border-transparent', 'opacity-60');
+        btn.classList.add('scale-110', 'border-base-content', 'shadow-lg');
+
+        // Update preview cards
+        previewCards.forEach(card => {
+          (card as HTMLElement).style.background = `linear-gradient(135deg, ${color}33 0%, ${color}11 100%)`;
+          (card as HTMLElement).style.borderColor = `${color}44`;
+        });
+
+        // Update background glow
+        if (glow) {
+          (glow as HTMLElement).style.background = color;
+        }
+      });
+    });
+  }
+
+  initHeroLuxury();
+  document.addEventListener('astro:after-swap', initHeroLuxury);
+</script>

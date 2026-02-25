@@ -1,0 +1,51 @@
+{
+  "title": "Conditions Générales",
+  "lastUpdated": "Dernière mise à jour : Février 2026",
+  "description": "Lisez nos conditions générales d'utilisation des services d'Astroglass.",
+  "sections": {
+    "intro": {
+      "title": "Introduction",
+      "content": "Bienvenue chez Astroglass ! Ces conditions générales décrivent les règles et règlements d'utilisation du site web d'Astroglass. En accédant à ce site web, nous supposons que vous acceptez ces conditions générales. Ne continuez pas à utiliser Astroglass si vous n'acceptez pas la totalité des conditions générales énoncées sur cette page."
+    },
+    "license": {
+      "title": "Licence",
+      "content": "Sauf indication contraire, Astroglass et/ou ses concédants de licence détiennent les droits de propriété intellectuelle de tout le matériel sur Astroglass. Tous les droits de propriété intellectuelle sont réservés. Vous pouvez y accéder à partir d'Astroglass pour votre usage personnel, sous réserve des restrictions définies dans ces conditions générales."
+    },
+    "restrictions": {
+      "title": "Restrictions",
+      "content": "Il vous est spécifiquement interdit de : publier tout matériel du site web dans d'autres médias ; vendre, sous-licencier et/ou commercialiser de toute autre manière tout matériel du site web ; exécuter et/ou montrer publiquement tout matériel du site web ; utiliser ce site web d'une manière qui est ou pourrait être dommageable pour ce site web."
+    },
+    "content": {
+      "title": "Votre Contenu",
+      "content": "Dans ces conditions générales standard du site web, « Votre Contenu » désigne tout fichier audio, texte vidéo, image ou autre matériel que vous choisissez d'afficher sur ce site web. En affichant Votre Contenu, vous accordez à Astroglass une licence non exclusive, irrévocable à l'échelle mondiale et sous-licenciable pour l'utiliser, le reproduire, l'adapter, le publier, le traduire et le distribuer dans tous les médias."
+    },
+    "privacy": {
+      "title": "Votre Confidentialité",
+      "content": "Veuillez lire notre politique de confidentialité."
+    },
+    "warranties": {
+      "title": "Aucune garantie",
+      "content": "Ce site web est fourni « tel quel », avec tous ses défauts, et Astroglass n'exprime aucune représentation ou garantie d'aucune sorte concernant ce site web ou le matériel qu'il contient."
+    },
+    "liability": {
+      "title": "Limitation de responsabilité",
+      "content": "En aucun cas Astroglass, ni aucun de ses dirigeants, administrateurs et employés, ne sauraient être tenus responsables de quoi que ce soit découlant de ou lié de quelque manière que ce soit à votre utilisation de ce site web, que cette responsabilité soit contractuelle. Astroglass, y compris ses dirigeants, administrateurs et employés, ne sauraient être tenus responsables de toute responsabilité indirecte, consécutive ou spéciale découlant de ou liée de quelque manière que ce soit à votre utilisation de ce site web."
+    },
+    "indemnification": {
+      "title": "Indemnisation",
+      "content": "Par la présente, vous indemnisez Astroglass dans toute la mesure du possible contre toute obligation, coût, demande, cause d'action, dommage et dépense découlant de quelque manière que ce soit de votre violation de l'une des dispositions des présentes conditions."
+    },
+    "severability": {
+      "title": "Divisibilité",
+      "content": "Si une disposition de ces conditions s'avère invalide en vertu d'une loi applicable, ces dispositions seront supprimées sans affecter les autres dispositions contenues dans les présentes."
+    },
+    "variation": {
+      "title": "Modification des Conditions",
+      "content": "Astroglass est autorisé à réviser ces conditions à tout moment selon ce qu'il juge approprié, et en utilisant ce site web, vous êtes censé revoir ces conditions régulièrement."
+    },
+    "governing": {
+      "title": "Droit applicable et juridiction",
+      "content": "Ces conditions seront régies et interprétées conformément aux lois de l'État du Pays, et vous vous soumettez à la juridiction non exclusive des tribunaux d'État et fédéraux situés dans le Pays pour la résolution de tout litige."
+    }
+  }
+}

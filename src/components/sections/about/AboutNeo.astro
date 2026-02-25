@@ -1,0 +1,83 @@
+---
+/**
+ * About Neo - The Editorial Split (Refined)
+ * Elegant typography left, purposeful visual right.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+import '../../../styles/components/about/AboutNeo.css';
+
+export interface Props {
+  isFirst?: boolean;
+}
+
+const { isFirst = false } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Safely split title for accent treatment
+const titleWords = t('about.title').split(' ');
+const accentWord = titleWords.length > 1 ? titleWords.pop() : '';
+const remainingTitle = titleWords.join(' ');
+---
+
+<section id="about" class:list={["relative px-4 sm:px-6 overflow-hidden bg-base-100", isFirst ? "pt-[calc(40px+var(--nav-offset))] pb-16 md:pb-32 md:pt-[calc(80px+var(--nav-offset))]" : "py-16 md:py-32"]}>
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+    
+    <!-- Text Content (First on mobile) -->
+    <div class="w-full lg:w-[55%] order-2 lg:order-2">
+      <h2 class="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl font-black text-base-content mb-8 lg:mb-12 tracking-tight leading-[1.1] lg:leading-[0.95]">
+        {remainingTitle}{' '}
+        {accentWord && (
+          <span class="text-accent relative">
+            {accentWord}
+            <span class="absolute -bottom-1 left-0 w-full h-2 bg-accent/20 -z-10"></span>
+          </span>
+        )}
+      </h2>
+       
+      <div class="space-y-6 max-w-xl">
+        <!-- Accent divider -->
+        <div class="w-12 h-1 bg-accent rounded-full"></div>
+        
+        <p class="text-xl sm:text-2xl font-medium text-base-content/70 leading-relaxed">
+          {t('about.subtitle')}
+        </p>
+        
+        <p class="text-base sm:text-lg text-base-content/75 leading-relaxed">
+          {t('about.description')}
+        </p>
+        
+        <!-- CTA -->
+        <div class="mt-8 flex items-center justify-center md:justify-start gap-4">
+          <a href={`/${locale}/contact`} class="c-about-neo__cta inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-base-content/[0.03] border border-base-content/10 text-base-content font-bold text-sm hover:bg-accent/10 hover:border-accent/30 hover:text-accent transition-all duration-500 group">
+            {t('about.meetTeam')}
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual Panel (Second on mobile, smaller) -->
+    <div class="w-full lg:w-[45%] order-1 lg:order-1">
+      <div class="c-about-neo__card relative aspect-square sm:aspect-[4/5] max-h-[300px] sm:max-h-none rounded-3xl lg:rounded-[3rem] overflow-hidden border border-base-content/10 group shadow-xl">
+        <!-- Gradient background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-accent/20 via-primary/10 to-base-content/5"></div>
+        
+        <!-- Inner content box -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] border border-base-content/10 rounded-2xl lg:rounded-3xl backdrop-blur-xl bg-base-100/30 flex flex-col items-center justify-center p-6 sm:p-10 group-hover:scale-105 transition-all duration-700">
+          <div class="text-5xl sm:text-6xl mb-4">✨</div>
+          <p class="text-xs sm:text-sm font-bold tracking-widest uppercase text-base-content/75 text-center">{t('about.liquidCore')}</p>
+        </div>
+        
+        <!-- Decorative orbs -->
+        <div class="absolute top-6 right-6 w-16 h-16 sm:w-24 sm:h-24 bg-accent/30 rounded-full blur-[40px] animate-pulse"></div>
+        <div class="absolute bottom-6 left-6 w-20 h-20 sm:w-28 sm:h-28 bg-primary/30 rounded-full blur-[50px] animate-pulse" style="animation-delay: -2s;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>

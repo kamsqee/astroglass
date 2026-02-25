@@ -1,0 +1,51 @@
+---
+title: "料金体系セクション"
+description: "各テーマの料金表セクション。"
+order: 6
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+料金体系 (Pricing) セクションでは、製品のプランと階層が表示されます。各テーマには独自の視覚的表現があります。
+
+## テーマバリアント
+
+| テーマ | コンポーネント | スタイル |
+|-------|-----------|-------|
+| **Liquid** | `PricingLiquid.astro` | グラデーションのアクセントがある流動的なカードレイアウト |
+| **Glass** | `PricingGlass.astro` | すりガラスの料金カード |
+| **Neo** | `PricingNeo.astro` | ハイコントラストの料金グリッド |
+| **Luxury** | `PricingLuxury.astro` | 高級感のあるゴールドアクセントの料金体系 |
+| **Minimal** | `PricingMinimal.astro` | クリーンでシンプルな料金リスト |
+| **Aurora** | `PricingAurora.astro` | グラデーション背景の料金カード |
+
+すべてのバリアントは `src/components/sections/pricing/` にあります。
+
+## コンテンツソース
+
+料金データは、`useTranslations()` を介して `src/locales/{lang}/pricing.json` からロードされます。JSONには、プラン名、説明、価格、機能、およびCTAテキストが含まれています。
+
+```json title="pricing.json (抜粋)"
+{
+  "title": "シンプルな料金体系",
+  "subtitle": "あなたに合ったプランをお選びください",
+  "plans": {
+    "starter": {
+      "name": "スターター",
+      "price": "19",
+      "features": ["5プロジェクト", "基本分析"]
+    }
+  }
+}
+```
+
+<Callout type="info" title="Propsなし">
+  料金コンポーネントは外部のPropsを受け取りません。プラン、価格、または機能を変更するには、`src/locales/{lang}/pricing.json` を更新してください。
+</Callout>
+
+## カスタマイズ
+
+カスタマイズするには：
+1. `src/components/sections/pricing/Pricing{Theme}.astro` を編集します。
+2. `src/styles/components/pricing/` のスタイルを調整します。
+3. `src/locales/{lang}/pricing.json` のコンテンツを変更します。

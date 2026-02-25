@@ -1,0 +1,59 @@
+---
+title: "Hero 区块"
+description: "各主题的全屏首图区块。"
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Hero 区块是访客进入站点时看到的第一个内容。每个主题都有独特的首图设计，包含自定义动画、背景和布局。
+
+## 主题变体
+
+| 主题 | 组件 | 设计风格 |
+|-------|-----------|--------|
+| **Liquid** | `HeroLiquid.astro` | 动态 SVG 流体形变、渐变文字 |
+| **Glass** | `HeroGlass.astro` | 毛玻璃卡片、模糊背景 |
+| **Neo** | `HeroNeo.astro` | 粗体排版、高对比度 |
+| **Luxury** | `HeroLuxury.astro` | 金色点缀、高端布局 |
+| **Minimal** | `HeroMinimal.astro` | 简洁居中、无干扰 |
+| **Aurora** | `HeroAurora.astro` | 渐变网格、几何元素 |
+
+所有变体位于 `src/components/sections/hero/`。
+
+## 工作原理
+
+每个 Hero 变体是一个独立的 Astro 组件，它会：
+
+1. 导入并初始化当前语言环境的 `useTranslations()`。
+2. 使用主题特定的 CSS 渲染其独特的 HTML 结构。
+3. 从 `src/locales/{lang}/hero.json` 加载翻译键，如 `hero.title`、`hero.subtitle`、`hero.cta` 和 `hero.liveBadge`。
+
+```astro title="HeroLiquid.astro（简化版）"
+---
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section>
+  <h1>{t('hero.title')}</h1>
+  <p>{t('hero.subtitle')}</p>
+  <a href="#explore">{t('hero.cta')}</a>
+</section>
+```
+
+<Callout type="info" title="无需 Props">
+  Hero 组件不接受外部 props。要更改标题、副标题或 CTA 文本，请编辑 `src/locales/en/hero.json`（或对应的语言环境文件）。
+</Callout>
+
+## 自定义 Hero
+
+要自定义特定主题的首图：
+
+1. 打开 `src/components/sections/hero/Hero{Theme}.astro`。
+2. 根据需要修改 HTML 结构、类名或动画。
+3. CSS 更改请编辑 `src/styles/components/hero/Hero{Theme}.css`。
+4. 文本更改请编辑 `src/locales/{lang}/hero.json`。

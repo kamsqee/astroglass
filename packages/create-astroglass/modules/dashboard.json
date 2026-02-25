@@ -1,0 +1,16 @@
+{
+  "name": "dashboard",
+  "description": "Interactive analytics dashboard demo with Recharts",
+  "files": [
+    "src/components/ui/dashboard/AnalyticsDashboard.tsx",
+    "src/pages/dashboard-demo.astro"
+  ],
+  "localeFiles": [
+    "src/locales/*/dashboard.json"
+  ],
+  "packages": [
+    "recharts"
+  ],
+  "configPatches": {},
+  "reactRequired": true
+}

@@ -1,0 +1,57 @@
+/* ============================================
+   ShareBar — Social sharing strip
+   ============================================ */
+
+.share-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid hsl(var(--bc) / 0.06);
+  margin-top: 2.5rem;
+}
+
+.share-bar__label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: hsl(var(--bc) / 0.4);
+  margin-right: 0.25rem;
+}
+
+.share-bar__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  border: 1px solid hsl(var(--bc) / 0.08);
+  background: hsl(var(--bc) / 0.03);
+  color: hsl(var(--bc) / 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.share-bar__btn:hover {
+  background: hsl(var(--a) / 0.1);
+  border-color: hsl(var(--a) / 0.2);
+  color: hsl(var(--a));
+}
+
+.share-bar__btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.share-bar__toast {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--a));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  margin-left: 0.5rem;
+}
+
+.share-bar__toast--visible {
+  opacity: 1;
+}

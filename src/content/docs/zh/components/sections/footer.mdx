@@ -1,0 +1,30 @@
+---
+title: "页脚 (Footer) 区块"
+description: "各大主题所配备的底端页脚区块。"
+order: 12
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+页脚 (Footer) 区块出现在每个主题页面的最底端位置。各项主题都配有包含自身品牌视觉、导航链接、及社交媒体徽标等特殊设计的独立专属变体组件呈现版本。
+
+## 变体及其风格特色
+
+| 主题风格 | 对应组件 | 风格描述 |
+|-------|-----------|-------|
+| **Liquid** | `FooterLiquid.astro` | 富含流体变幻的流动渐层色彩的专属页脚 |
+| **Glass** | `FooterGlass.astro` | 使用了仿毛玻璃特性特效材质底纹展现特质 |
+| **Neo** | `FooterNeo.astro` | 具有强高反色差的极粗重文本展示效果 |
+| **Luxury** | `FooterLuxury.astro` | 用有金色边缘高亮材质去突现的高贵典雅的高端特色 |
+| **Minimal** | `FooterMinimal.astro` | 干净单纯甚至于极简之风格的无赘余款 |
+| **Aurora** | `FooterAurora.astro` | 伴有仿如极光一般等网格极简底背景展现特色 |
+
+上述所有的各个呈现方式其变体皆可由 `src/components/sections/footer/` 路径结构寻得获取。
+
+## 内容文案等具体来源
+
+该区域呈现包含的所有指向与信息文本说明文字皆由 `useTranslations()` 根据 `src/locales/{lang}/footer.json` 与 `src/locales/{lang}/nav.json` 而对应读取调取出以填充。
+
+<Callout type="info" title="无Props配置 (No Props)">
+  各类 Footer 变种均不在意外部传入此等各个外部 props，若需改变其中部分或者其部分链接项目与底部各个声明介绍信息时，建议由其内修改配置文件来变更：`src/locales/{lang}/footer.json`。
+</Callout>

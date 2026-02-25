@@ -1,0 +1,15 @@
+/* PortfolioCardsLiquid.css — Monochrome visual overrides */
+
+[data-theme="monochrome"] .c-portfolio-page-liquid__card .bg-gradient-to-br,
+[data-theme="monochrome"] .c-portfolio-page-liquid__card .bg-gradient-to-r {
+  background-image: none;
+}
+
+[data-theme="monochrome"] .c-portfolio-page-liquid__visual .bg-gradient-to-br {
+  background-color: hsl(var(--bc) / 0.05);
+}
+
+[data-theme="monochrome"] .c-portfolio-page-liquid__metric .bg-gradient-to-r {
+  color: hsl(var(--bc));
+  -webkit-text-fill-color: hsl(var(--bc));
+}

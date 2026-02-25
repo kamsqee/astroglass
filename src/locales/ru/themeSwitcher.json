@@ -1,0 +1,22 @@
+{
+  "label": "Тема",
+  "hint": "Листайте для выбора",
+  "categories": {
+    "light": "Светлые",
+    "dark": "Тёмные",
+    "colorful": "Цветные"
+  },
+  "themes": {
+    "azure": "Лазурь",
+    "nordic": "Север",
+    "solaris": "Солнце",
+    "abyss": "Бездна",
+    "neonoir": "Неон",
+    "synthwave": "Ретро",
+    "evergreen": "Лес",
+    "rose": "Розе",
+    "aquatica": "Вода",
+    "monochrome": "Моно",
+    "default": "По умолчанию"
+  }
+}

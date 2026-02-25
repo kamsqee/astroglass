@@ -1,0 +1,22 @@
+{
+  "label": "Thème",
+  "hint": "Glisser pour explorer",
+  "categories": {
+    "light": "Clair",
+    "dark": "Sombre",
+    "colorful": "Coloré"
+  },
+  "themes": {
+    "azure": "Azure",
+    "nordic": "Nordique",
+    "solaris": "Solaris",
+    "abyss": "Abysses",
+    "neonoir": "Néonoir",
+    "synthwave": "Synthwave",
+    "evergreen": "Forêt",
+    "rose": "Rosé",
+    "aquatica": "Aquatica",
+    "monochrome": "Mono",
+    "default": "Défaut"
+  }
+}

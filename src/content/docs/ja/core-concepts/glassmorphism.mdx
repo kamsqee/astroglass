@@ -1,0 +1,55 @@
+---
+title: "グラスモーフィズム (Glassmorphism)"
+description: "AstroGlass の背後にあるデザイン哲学を理解する。"
+order: 5
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass は、レイヤー化され、透明で、プレミアム感のあるインターフェースを作成する、現代的なグラスモーフィズムの実装を取り入れています。
+
+## レシピ
+
+グラスモーフィズム効果は、以下の4つの主要な CSS プロパティが連動することで実現されています：
+
+1.  **背景のぼかし (Backdrop Blur)**: すりガラス効果には `backdrop-filter: blur(12px)` を使用します。
+2.  **半透明 (Translucency)**: 背景色にはアルファチャンネルを使用します（例： `bg-white/10`）。
+3.  **境界線 (Borders)**: わずか 1px の枠線（`border-white/20`）が縁（エッジ）を定義します。
+4.  **影 (Shadows)**: 柔らかく着色された影が、奥行きと浮遊感を作り出します。
+
+この組み合わせにより、階層と現代的な感覚が生まれます。
+
+## 実用的な使用法
+
+AstroGlass のコンポーネントでは、このパターンが Tailwind のユーティリティクラスとして適用されているのを確認できます：
+
+```html
+<div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg">
+  グラスモーフィズムのコンテナ
+</div>
+```
+
+ダークテーマの場合、この効果はしばしばグラデーションの背景と重ね合わされます：
+
+```html
+<div class="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10">
+  ダークなグラスモーフィズムカード
+</div>
+```
+
+## テーマのバリエーション
+
+AstroGlass の各テーマでは、グラスモーフィズムを異なる形で解釈しています：
+
+| テーマ | ガラススタイル |
+|-------|-------------|
+| **Liquid** | オーガニックな形状と流動的な塊（ブロブ）の背景 |
+| **Glass** | 奥行きのある古典的なすりガラスパネル |
+| **Neo** | シャープなエッジと大胆なコントラスト |
+| **Luxury** | プレミアムな影とゴールドがかった半透明 |
+| **Minimal** | 控えめで、存在するかしないかの透明感 |
+| **Aurora** | 幾何学的構造を持つグラデーションメッシュ背景 |
+
+<Callout type="tip" title="ガラス効果のカスタマイズ">
+  ぼかし、不透明度、境界線効果の強さは、`src/styles/_themes.css` にある CSS 変数を使用してテーマごとに調整できます。`--glass-blur`、`--glass-opacity`、および関連するカスタムプロパティを探してみてください。
+</Callout>

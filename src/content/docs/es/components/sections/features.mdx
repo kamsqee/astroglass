@@ -1,0 +1,50 @@
+---
+title: "Sección de Características (Features)"
+description: "Secciones de presentación de características para cada tema."
+order: 4
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La sección de Características resalta los beneficios del producto o servicio. Cada tema proporciona un diseño único: desde cuadrículas de tarjetas hasta listas animadas.
+
+## Variantes del Tema
+
+| Tema | Componente | Diseño |
+|-------|-----------|--------|
+| **Liquid** | `FeaturesLiquid.astro` | Tarjetas de características animadas con efectos de desplazamiento (hover) líquidos |
+| **Glass** | `FeaturesGlass.astro` | Tarjetas de características de cristal esmerilado |
+| **Neo** | `FeaturesNeo.astro` | Diseño de cuadrícula llamativo con bordes afilados |
+| **Luxury** | `FeaturesLuxury.astro` | Elegante cuadrícula con detalles dorados |
+| **Minimal** | `FeaturesMinimal.astro` | Formato de lista limpio y simple |
+| **Aurora** | `FeaturesAurora.astro` | Fondo con malla de degradado y cuadrícula de tarjetas |
+
+Todas las variantes se encuentran en `src/components/sections/features/`.
+
+## Fuente del Contenido
+
+Los datos de las características se cargan desde `src/locales/{lang}/features.json` a través de `useTranslations()`. La estructura JSON generalmente contiene:
+
+```json title="features.json (fragmento)"
+{
+  "title": "Por Qué Elegirnos",
+  "subtitle": "Creado para el rendimiento y la facilidad de uso",
+  "items": [
+    {
+      "title": "A la Velocidad de la Luz",
+      "description": "Generación estática para tiempos de carga de menos de un segundo."
+    }
+  ]
+}
+```
+
+<Callout type="info" title="Sin Propiedades (Props)">
+  Los componentes de Características no reciben propiedades externas. Para editar los elementos de las características, títulos o descripciones, actualiza `src/locales/{lang}/features.json`.
+</Callout>
+
+## Personalización
+
+Para personalizar:
+1. Edita la variante del tema en `src/components/sections/features/Features{Theme}.astro`.
+2. Ajusta los estilos en `src/styles/components/features/`.
+3. Cambia el contenido en `src/locales/{lang}/features.json`.

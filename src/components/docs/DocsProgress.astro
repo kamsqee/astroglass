@@ -1,0 +1,42 @@
+---
+/**
+ * Docs Reading Progress Component
+ * 
+ * Shows a progress bar at the top of the page indicating
+ * how far the user has scrolled through the document.
+ */
+---
+
+<div id="docs-progress" class="docs-progress" style="transform: scaleX(0);"></div>
+
+<script>
+  function initDocsProgress() {
+    const progressBar = document.getElementById('docs-progress');
+    const content = document.querySelector('.docs-content');
+    
+    if (!progressBar || !content) return;
+    
+    function updateProgress() {
+      if (!progressBar || !content) return;
+      const contentRect = content.getBoundingClientRect();
+      const contentTop = contentRect.top + window.scrollY;
+      const contentHeight = contentRect.height;
+      const windowHeight = window.innerHeight;
+      const scrollY = window.scrollY;
+      
+      // Calculate progress (0 to 1)
+      const scrollableHeight = contentHeight - windowHeight;
+      const scrolled = scrollY - contentTop;
+      const progress = Math.max(0, Math.min(1, scrolled / scrollableHeight));
+      
+      progressBar.style.transform = `scaleX(${progress})`;
+    }
+    
+    // Use passive listener for better scroll performance
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress(); // Initial call
+  }
+  
+  initDocsProgress();
+  document.addEventListener('astro:after-swap', initDocsProgress);
+</script>

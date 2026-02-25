@@ -1,0 +1,119 @@
+/* AboutLuxury.css */
+
+.c-about-luxury__section {
+  background: radial-gradient(ellipse at 50% 0%, hsl(var(--a) / 0.03) 0%, transparent 50%);
+}
+
+.c-about-luxury__node {
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-about-luxury__node-outer {
+  transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-about-luxury__wrapper:hover .c-about-luxury__node-outer {
+  transform: scale(1.15);
+  border-color: hsl(var(--a) / 0.4);
+  box-shadow: 0 0 30px hsl(var(--a) / 0.3);
+}
+
+.c-about-luxury__wrapper:hover .c-about-luxury__node-inner {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.c-about-luxury__node-inner {
+  transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-about-luxury__card {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: aboutLuxuryCardReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.c-about-luxury__wrapper:nth-child(1) .c-about-luxury__card { animation-delay: 0ms; }
+.c-about-luxury__wrapper:nth-child(2) .c-about-luxury__card { animation-delay: 150ms; }
+.c-about-luxury__wrapper:nth-child(3) .c-about-luxury__card { animation-delay: 300ms; }
+.c-about-luxury__wrapper:nth-child(4) .c-about-luxury__card { animation-delay: 450ms; }
+.c-about-luxury__wrapper:nth-child(5) .c-about-luxury__card { animation-delay: 600ms; }
+
+@keyframes aboutLuxuryCardReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.c-about-luxury__card-inner {
+  transition: all 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-about-luxury__wrapper:hover .c-about-luxury__card-inner {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.c-about-luxury__glow {
+  animation: aboutLuxuryGlowPulse 3s ease-in-out infinite;
+}
+
+@keyframes aboutLuxuryGlowPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* Desktop alternating layout */
+@media (min-width: 1024px) {
+  .c-about-luxury__wrapper:nth-child(odd) .c-about-luxury__card {
+    animation-name: aboutLuxuryCardRevealLeft;
+  }
+  
+  .c-about-luxury__wrapper:nth-child(even) .c-about-luxury__card {
+    animation-name: aboutLuxuryCardRevealRight;
+  }
+
+  @keyframes aboutLuxuryCardRevealLeft {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes aboutLuxuryCardRevealRight {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                         MONOCHROME THEME OVERRIDES                         */
+/* -------------------------------------------------------------------------- */
+[data-theme="monochrome"] .c-about-luxury__node-inner.bg-gradient-to-br,
+[data-theme="monochrome"] .c-about-luxury__node-outer > .bg-gradient-to-br.animate-ping,
+[data-theme="monochrome"] .c-about-luxury__card-inner > .bg-gradient-to-b {
+  background: none;
+  background-color: hsl(var(--bc) / 0.15);
+}
+
+[data-theme="monochrome"] .c-about-luxury__node span.bg-gradient-to-r {
+  background: none;
+  background-color: hsl(var(--bc));
+  color: hsl(var(--b1));
+}
+
+[data-theme="monochrome"] .c-about-luxury__card a.bg-gradient-to-r {
+  background: none;
+  background-color: hsl(var(--bc));
+  color: hsl(var(--b1));
+}

@@ -1,0 +1,25 @@
+{
+  "greeting": "Bonjour le monde !",
+  "title": "AstroGlass",
+  "description": "Un modèle Astro moderne avec un design astro-glass",
+  "siteName": "AstroGlass",
+  "learnMore": "En savoir plus",
+  "back": "Retour",
+  "next": "Suivant",
+  "submit": "Envoyer",
+  "cancel": "Annuler",
+  "close": "Fermer",
+  "loading": "Chargement...",
+  "error": "Erreur",
+  "success": "Succès",
+  "required": "Requis",
+  "optional": "Optionnel",
+  "notFound": {
+    "title": "Page Non Trouvée \u2014 AstroGlass",
+    "code": "404",
+    "heading": "Perdu dans le Verre",
+    "message": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "suggestion": "Vérifiez l'URL ou retournez en terrain connu.",
+    "homeButton": "Retour à l'accueil"
+  }
+}

@@ -1,0 +1,72 @@
+---
+title: "Configuration"
+description: "Customize AstroGlass to match your brand."
+order: 3
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass is configured via files in `src/config/` and standard CSS custom properties.
+
+## Configuration Files
+
+<FileTree>
+- src/
+  - config/
+    - **themes.ts** — Theme definitions (name, colors, sections, premium flag)
+    - **locales.ts** — Supported languages and locale metadata
+    - **navigation.ts** — Main site navigation structure
+    - **docs.ts** — Documentation sidebar and version config
+</FileTree>
+
+## Styling with Tailwind CSS v4
+
+This project uses **Tailwind CSS v4** via the `@tailwindcss/vite` plugin. There is no `tailwind.config.mjs` file — all configuration is done through CSS.
+
+Colors and theme variables are defined as CSS custom properties in `src/styles/global.css` and `src/styles/_themes.css`:
+
+```css title="global.css"
+:root {
+  --p: 260 80% 60%;   /* Primary (HSL) */
+  --s: 310 80% 60%;   /* Secondary */
+  --a: 190 90% 60%;   /* Accent */
+  --b1: 220 20% 10%;  /* Base background */
+  --bc: 220 20% 90%;  /* Base content (text) */
+}
+```
+
+<Callout type="tip" title="Changing Colors">
+  To change the site's color scheme, update the HSL values in `src/styles/global.css`. Theme-specific overrides live in `src/styles/_themes.css` using `[data-theme="..."]` selectors.
+</Callout>
+
+## Theme Configuration
+
+Each theme is registered in `src/config/themes.ts`. This centralizes all theme metadata:
+
+```typescript title="themes.ts"
+export const themes: ThemeDefinition[] = [
+  {
+    id: 'liquid',
+    name: 'Liquid',
+    color: 'from-blue-500 to-cyan-400',
+    icon: '💧',
+    sections: ['Header', 'Hero', 'About', 'Features', 'Portfolio', 'Pricing', 'Testimonial', 'FAQ', 'CTA', 'Contact', 'Footer'],
+    enabled: true,
+    premium: false,
+    description: 'Fluid, organic design with smooth animations',
+  },
+  // ... 5 more themes (Glass, Neo, Luxury, Minimal, Aurora)
+];
+```
+
+## Locale Configuration
+
+Languages are managed in `src/config/locales.ts`. To add a new language, add an entry and set `enabled: true`:
+
+```typescript title="locales.ts"
+export const localesConfig: LocaleConfig[] = [
+  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧', direction: 'ltr', enabled: true },
+  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺', direction: 'ltr', enabled: true },
+];
+```

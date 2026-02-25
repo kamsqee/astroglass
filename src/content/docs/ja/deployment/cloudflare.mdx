@@ -1,0 +1,94 @@
+---
+title: "Cloudflare デプロイ"
+description: "AstroGlass サイトを Cloudflare Pages にデプロイします。"
+order: 1
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+このプロジェクトは **Cloudflare Pages** へのデプロイに最適化されています。必要なアダプターと構成が最初から含まれています。
+
+## 前提条件
+
+- [Cloudflare](https://dash.cloudflare.com/) アカウント。
+- **Node.js** v20 以降がローカルにインストールされていること。
+- **Wrangler** CLI がインストールされていること (`npm install -g wrangler`)。
+
+## デプロイ方法
+
+GitHub 統合 (推奨) または CLI を使用してデプロイできます。
+
+### オプション 1: GitHub 統合
+
+<Steps>
+1. **GitHub にコードをプッシュする**
+   
+   プロジェクトが GitHub リポジトリにあることを確認してください。
+
+2. **Cloudflare Pages に接続する**
+   
+   Cloudflare ダッシュボード > ワークス＆ページ > アプリケーションを作成 > ページ > Git に接続の順に移動します。
+
+3. **リポジトリを選択**
+   
+   リポジトリとブランチを選択します。
+
+4. **ビルド設定の構成**
+   
+   以下の設定を使用します：
+   - **フレームワーク プリセット (Framework Preset)**: Astro
+   - **ビルド コマンド (Build command)**: `pnpm run build`
+   - **ビルド出力ディレクトリ (Build output directory)**: `dist`
+   
+   <Callout type="warning" title="検索のインデックス作成">
+     `build` スクリプトは自動的に `astro build && pnpm run index:content` を実行し、これにより Fuse.js の検索インデックスが生成されます。これが正常に完了しないと、デプロイされたサイトで検索が機能しません。
+   </Callout>
+
+5. **保存してデプロイ**
+</Steps>
+
+### オプション 2: Wrangler CLI
+
+ターミナルから直接デプロイすることもできます。
+
+<Steps>
+1. **Wrangler にログイン**
+   
+   ```bash title="ターミナル (Terminal)" frame="terminal"
+   npx wrangler login
+   ```
+
+2. **ビルドしてデプロイ**
+   
+   `package.json` で定義されているデプロイスクリプトを実行します：
+   
+   ```bash title="ターミナル (Terminal)" frame="terminal"
+   pnpm run deploy
+   ```
+   
+   このコマンドは以下を実行します：`astro build && pnpm run index:content && wrangler pages deploy dist`。
+</Steps>
+
+## 検索インデックス作成
+
+プロジェクトは検索に **Fuse.js** を使用しています。これには、コンテンツ インデックスを生成するためのビルド時ステップが必要です。
+
+`package.json` 内の `build` スクリプトがこれを自動的に処理します：
+
+```json title="package.json"
+"scripts": {
+  "build": "astro build && pnpm run index:content",
+  "index:content": "node scripts/generate-search-index.mjs"
+}
+```
+
+デプロイされたサイトで検索が機能しない場合は、インデックス作成のステップが正常に実行されたか確認してください。
+
+## トラブルシューティング
+
+### デプロイに失敗する
+ビルドログを確認してください。よくある問題としては、TypeScript のエラーや依存関係の不足が挙げられます。
+
+### 検索が機能しない
+検索結果が何も返されない場合は、`public/search/` ディレクトリに `en.json` や `ja.json` などのファイルが含まれているか確認してください。これらはビルド時に `pnpm run index:content` によって生成されます。

@@ -1,0 +1,31 @@
+{
+  "title": "リリースできるスターター。",
+  "subtitle": "6つのテーマ、66以上のコンポーネント、7つの言語、ドキュメント。無料でオープンソース。",
+  "cta": "テーマを見る",
+  "secondaryCta": "ドキュメントを読む",
+  "liveBadge": "無料 & オープンソース · Astro 5.0",
+  "digitalExperience": "デジタル体験",
+  "watchReel": "動画を見る",
+  "glassCard": {
+    "title": "Liquidコンポーネント",
+    "desc": "ハイエンドなデジタル体験のために美しく作られたブロック。"
+  },
+  "visionary": "先見的なデザイン",
+  "trustedBy": "使用技術",
+  "scrollToExplore": "スクロールして見る",
+  "tryItNow": "試してみる",
+  "dontTakeOurWord": "百聞は一見にしかず",
+  "startBuilding": "構築を始める",
+  "viewFullDemo": "デモをすべて見る",
+  "interactivePreview": "インタラクティブプレビュー",
+  "faster": "もっと速く。",
+  "buildFaster": "最速で構築。",
+  "shippingVelocity": "リリース速度が10倍に",
+  "readyToBuild": "準備はいいですか？",
+  "askLeaders": "Stripe、Linear、Vercelも認める。",
+  "cloneCommand": "npx degit kamsqee/astroglass my-site",
+  "readyIn": "2分で準備完了",
+  "terminal": {
+    "label": "ターミナル"
+  }
+}

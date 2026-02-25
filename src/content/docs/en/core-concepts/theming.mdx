@@ -1,0 +1,134 @@
+---
+title: "Theming System"
+description: "Understand the core architecture of the dynamic theming system, including CSS variables, theme registry, and variant rendering."
+order: 1
+category: core-concepts
+tags: ["theming", "design-system", "css"]
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass features a highly flexible dynamic theming system built on top of **Tailwind CSS v4** and **Astro's component architecture**.
+
+## Architecture Overview
+
+The theming system consists of three main layers:
+
+1. **Theme Registry**: Definitions for each theme in `src/config/themes.ts`.
+2. **CSS Custom Properties**: Theme-aware variables defined in `src/styles/_themes.css`.
+3. **Dynamic Rendering**: The `[theme].astro` page dynamically renders the correct component variant for each section.
+
+## Theme Registry
+
+Every theme is registered in `src/config/themes.ts`. This centralizes theme metadata and makes it available to the entire application.
+
+<FileTree>
+- src/
+  - config/
+    - themes.ts
+</FileTree>
+
+Each theme definition includes:
+
+```typescript
+export const themes: ThemeDefinition[] = [
+  {
+    id: 'liquid',
+    name: 'Liquid',
+    color: 'from-blue-500 to-cyan-400',  // Tailwind gradient classes
+    icon: '💧',
+    sections: ['Header', 'Hero', 'About', 'Features', 'Portfolio', 'Pricing', 'Testimonial', 'FAQ', 'CTA', 'Contact', 'Footer'],
+    enabled: true,
+    premium: false,
+    description: 'Fluid, organic design with smooth animations',
+  },
+  // Glass, Neo, Luxury, Minimal, Aurora...
+];
+```
+
+## CSS Variables
+
+Theme-specific colors and effects are controlled through CSS custom properties. Variables are scoped to a `data-theme` attribute on the `<html>` or `<body>` tag.
+
+```css
+/* src/styles/_themes.css */
+[data-theme="liquid"] {
+  --p: 260 80% 60%;    /* Primary */
+  --s: 310 80% 60%;    /* Secondary */
+  --a: 190 90% 60%;    /* Accent */
+  --b1: 220 20% 10%;   /* Base background */
+  --bc: 220 20% 90%;   /* Base content (text) */
+}
+```
+
+Components consume these via `hsl(var(--p))` or Tailwind utilities:
+
+```html
+<div class="bg-[hsl(var(--p))] text-[hsl(var(--bc))]">
+  Themed Content
+</div>
+```
+
+<Callout type="warning" title="Naming Convention">
+  Variables use short names (`--p`, `--s`, `--a`, `--b1`, `--bc`, `--er`, `--su`) to stay consistent with the DaisyUI-inspired naming convention used throughout the project.
+</Callout>
+
+## Dynamic Component Rendering
+
+Theme pages are rendered by `src/pages/[theme].astro`. This file uses a **component map** to dynamically select the correct variant for each section:
+
+```astro title="[theme].astro"
+---
+const componentMap = {
+  liquid: {
+    Header: HeaderLiquid,
+    Hero: HeroLiquid,
+    About: AboutLiquid,
+    Features: FeaturesLiquid,
+    // ... all 12+ sections
+  },
+  glass: { /* ... */ },
+  neo: { /* ... */ },
+  luxury: { /* ... */ },
+  minimal: { /* ... */ },
+  aurora: { /* ... */ },
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Header />
+<components.Hero />
+<components.About />
+<!-- ... -->
+```
+
+<Callout type="info">
+  Each section variant is a self-contained Astro component. It uses `useTranslations()` internally for all text — no external props are needed. This allows each theme to have completely different HTML structures while maintaining a uniform API.
+</Callout>
+
+## Creating a New Theme
+
+<Steps>
+1. **Add Theme Definition**
+   
+   Add the theme definition object to `src/config/themes.ts`.
+
+2. **Define CSS Variables**
+   
+   Define the new theme's CSS variables in `src/styles/_themes.css`.
+
+3. **Create Section Components**
+   
+   Create theme-specific component variants for each section, e.g., `src/components/sections/hero/HeroMyTheme.astro`.
+
+4. **Register in Component Map**
+   
+   Add the new theme's components to the `componentMap` in `src/pages/[theme].astro`.
+
+5. **Add Translations**
+   
+   Add any new localized strings to the JSON files in `src/locales/`.
+</Steps> 

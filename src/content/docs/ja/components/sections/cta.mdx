@@ -1,0 +1,37 @@
+---
+title: "CTA セクション"
+description: "各テーマのコール トゥ アクション (CTA) セクション。"
+order: 9
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Call to Action (CTA - コール トゥ アクション) セクションは、訪問者に次のステップ（サインアップ、デモの取得、詳細の確認など）を取るよう促します。
+
+## テーマのバリアント
+
+| テーマ | コンポーネント | スタイル |
+|-------|-----------|-------|
+| **Liquid** | `CTALiquid.astro` | アニメーションする液状の背景とグラデーション CTA |
+| **Glass** | `CTAGlass.astro` | すりガラスの CTA カード |
+| **Neo** | `CTANeo.astro` | ターミナル スタイルの大胆な CTA |
+| **Luxury** | `CTALuxury.astro` | ゴールドのアクセントが効いたプレミアムな CTA |
+| **Minimal** | `CTAMinimal.astro` | クリーンで中央揃えの CTA |
+| **Aurora** | `CTAAurora.astro` | グラデーション メッシュ背景の CTA |
+
+すべてのバリアントは `src/components/sections/cta/` に配置されています。
+
+## コンテンツのソース
+
+CTA のデータは、`useTranslations()` を介して `src/locales/{lang}/cta.json` から読み込まれます。
+
+<Callout type="info" title="プロパティ (Props) なし">
+  CTA コンポーネントは外部からのプロパティ (Props) を受け取りません。CTA のテキストやボタンのラベルを変更するには、`src/locales/{lang}/cta.json` を編集してください。
+</Callout>
+
+## カスタマイズ
+
+カスタマイズの手順:
+1. `src/components/sections/cta/CTA{Theme}.astro` を編集します。
+2. `src/styles/components/cta/` にあるスタイルを調整します。
+3. `src/locales/{lang}/cta.json` でコンテンツを変更します。

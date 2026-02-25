@@ -1,0 +1,37 @@
+---
+title: "About Section"
+description: "Company or product introduction sections for each theme."
+order: 3
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+The About section introduces your company, product, or story. Each theme provides a unique layout with different visual elements.
+
+## Theme Variants
+
+| Theme | Component | Style |
+|-------|-----------|-------|
+| **Liquid** | `AboutLiquid.astro` | Organic blob backgrounds with fluid layout |
+| **Glass** | `AboutGlass.astro` | Frosted glass panels with depth |
+| **Neo** | `AboutNeo.astro` | Bold typography and high contrast cards |
+| **Luxury** | `AboutLuxury.astro` | Elegant layout with gold accents |
+| **Minimal** | `AboutMinimal.astro` | Clean, content-focused design |
+| **Aurora** | `AboutAurora.astro` | Gradient mesh with geometric structure |
+
+All variants are located at `src/components/sections/about/`.
+
+## Content Source
+
+About section text is loaded from `src/locales/{lang}/about.json` via `useTranslations()`.
+
+<Callout type="info" title="No Props">
+  About components take no external props. To edit the about content, update `src/locales/{lang}/about.json`.
+</Callout>
+
+## Customizing
+
+To customize:
+1. Edit `src/components/sections/about/About{Theme}.astro`.
+2. Adjust styles in `src/styles/components/about/`.
+3. Change content in `src/locales/{lang}/about.json`.

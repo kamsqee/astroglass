@@ -1,0 +1,90 @@
+---
+/**
+ * CTA Neo - Floating Glass Card
+ * Classic centered CTA with premium glass aesthetic.
+ * Executes the liquid-glass design language perfectly.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+import '../../../styles/components/cta/CTANeo.css';
+import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
+---
+
+
+<section class="relative py-20 lg:py-32 px-4 sm:px-6 overflow-hidden bg-base-100">
+  <!-- Background elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-accent/5 rounded-full blur-[150px]"></div>
+    <div class="absolute bottom-0 left-0 w-[200px] sm:w-[400px] h-[200px] sm:h-[400px] bg-primary/5 rounded-full blur-[100px]"></div>
+    <div class="absolute top-0 right-0 w-[150px] sm:w-[300px] h-[150px] sm:h-[300px] bg-secondary/5 rounded-full blur-[80px]"></div>
+  </div>
+
+  <div class="max-w-2xl mx-auto relative">
+    <!-- Floating Glass Card -->
+    <div class="cta-neo-card relative p-6 sm:p-8 lg:p-12 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] bg-base-100/60 backdrop-blur-[40px] border border-base-content/10 shadow-[0_20px_80px_rgba(0,0,0,0.1)]">
+      
+      <!-- Glass border glow -->
+      <div class="absolute inset-0 rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] pointer-events-none">
+        <div class="absolute inset-[-1px] rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-[2.5rem] bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 text-center space-y-5 sm:space-y-6">
+        <!-- Eyebrow -->
+        <NeoSectionTag label={t('cta.limitedTime')} class="mb-2" />
+
+        <!-- Headline -->
+        <h2 class="text-2xl sm:text-3xl lg:text-5xl font-black text-base-content tracking-tight leading-tight">
+          {t('cta.startBuilding')}
+        </h2>
+
+        <!-- Supporting text -->
+        <p class="text-sm sm:text-base lg:text-lg text-base-content/75 max-w-md mx-auto leading-relaxed">
+          {t('cta.join10k')}
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2 sm:pt-4">
+          <a href={`/${locale}/pricing`} class="cta-neo-primary group relative px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-accent text-base-100 font-bold text-sm sm:text-base text-center overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 hover:shadow-[0_10px_40px_rgba(var(--a),0.3)]">
+            <span class="relative z-10 flex items-center justify-center gap-3">
+              {t('cta.primary')}
+              <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+          </a>
+          <a href={`/${locale}/docs`} class="px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl border border-base-content/10 text-base-content/70 font-medium text-sm sm:text-base text-center hover:bg-base-content/5 hover:border-base-content/20 transition-all duration-500">
+            {t('cta.secondary')}
+          </a>
+        </div>
+
+        <!-- Trust indicators -->
+        <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-4 sm:pt-6 text-[10px] sm:text-xs text-base-content/80">
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            {t('cta.trialDays')}
+          </span>
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            {t('cta.noCreditCard')}
+          </span>
+          <span class="flex items-center gap-1">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            {t('cta.cancelAnytime')}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

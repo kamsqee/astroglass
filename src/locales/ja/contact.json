@@ -1,0 +1,165 @@
+{
+  "eyebrow": "お問い合わせ",
+  "title": "ぜひお話しましょう",
+  "subtitle": "私たちのチームがサポートいたします。いつでもご連絡ください。",
+  "supportTeam": "サポートチーム",
+  "onlineNow": "オンライン · 通常すぐに返信します",
+  "botWelcome": "こんにちは！👋 サポート担当です。本日はどのようなご用件でしょうか？",
+  "messageSent": "メッセージを送信しました！間もなくご連絡いたします。",
+  "secureInfo": "🔒 あなたの情報は安全に保護され、第三者と共有されることはありません",
+  "intents": {
+    "sales": "営業へのお問い合わせ",
+    "salesDesc": "価格、デモ、エンタープライズ版について",
+    "support": "サポート",
+    "supportDesc": "技術的な質問、バグ、問題について",
+    "partnership": "パートナーシップ",
+    "partnershipDesc": "連携、協業について",
+    "other": "その他",
+    "otherDesc": "その他すべて"
+  },
+  "form": {
+    "name": "お名前",
+    "email": "勤務先メールアドレス",
+    "company": "会社名",
+    "message": "どのようなサポートをご希望ですか？",
+    "topic": "トピック",
+    "send": "メッセージを送信",
+    "sending": "送信中...",
+    "success": "メッセージを送信しました！24時間以内にご返答いたします。",
+    "privacy": "送信することで、以下の内容に同意したことになります：",
+    "privacyPolicy": "プライバシーポリシー"
+  },
+  "placeholders": {
+    "typeMessage": "メッセージを入力してください...",
+    "yourEmail": "your@email.com",
+    "emailAddress": "メールアドレス",
+    "johnSmith": "山田 太郎",
+    "acmeInc": "株式会社Acme",
+    "tellUs": "プロジェクトやご質問についてお聞かせください...",
+    "selectTopic": "トピックを選択...",
+    "yourMessage": "メッセージ..."
+  },
+  "topics": {
+    "general": "一般的なお問い合わせ",
+    "sales": "営業",
+    "salesQuestion": "営業への質問",
+    "support": "テクニカルサポート",
+    "partnership": "パートナーシップ"
+  },
+  "chat": {
+    "askName": "ありがとうございます！お名前を教えていただけますか？",
+    "askEmail": "はじめまして、{name}さん！ご連絡のとれるメールアドレスを教えてください。",
+    "askMessage": "完璧です！それでは、どのようなサポートが必要か少し詳しく教えてください。",
+    "thanks": "ありがとうございます！🎉 メッセージを受け取りました。数時間以内にご連絡いたします。"
+  },
+  "wizard": {
+    "step1": "トピック",
+    "step2": "詳細",
+    "step3": "連絡先",
+    "continue": "次へ →",
+    "back": "← 戻る",
+    "steps": {
+      "topic": "トピックを選ぶ",
+      "details": "詳細",
+      "send": "送信"
+    },
+    "actions": {
+      "change": "変更",
+      "continue": "次へ",
+      "back": "← 詳細に戻る",
+      "restart": "別のメッセージを送信"
+    },
+    "fields": {
+      "companyName": "会社名",
+      "teamSize": "チーム規模",
+      "budget": "予算の範囲",
+      "issueType": "問題の種類",
+      "severity": "重要度",
+      "accountEmail": "アカウントのメールアドレス",
+      "yourRole": "あなたの役職",
+      "partnershipType": "パートナーシップの種類",
+      "topic": "トピック"
+    },
+    "placeholders": {
+      "acme": "株式会社Acme",
+      "partnerCorp": "提携企業名",
+      "role": "例：事業開発マネージャー",
+      "topic": "どのような内容ですか？",
+      "accountEmail": "アカウントのメールアドレス",
+      "teamSize": "1-10|11-50|51-200|200以上",
+      "budget": "100万円未満|100万-500万円|500万-2,000万円|2,000万円以上",
+      "issueType": "バグ|機能リクエスト|質問|その他",
+      "severity": "低|中|高|緊急",
+      "partnershipType": "連携|リセラー|アフィリエイト|その他",
+      "select": "選択..."
+    },
+    "teams": {
+      "sales": "営業チーム",
+      "support": "サポートチーム",
+      "partnership": "パートナーシップチーム",
+      "default": "チーム"
+    },
+    "successMsg": "お問い合わせありがとうございます。担当の{team}より間もなくご連絡いたします。"
+  },
+  "contactUs": "お問い合わせ",
+  "howCanWeHelp": "どのようなサポートをご希望ですか？",
+  "card": {
+    "swipeHint": "スワイプまたは矢印を使用",
+    "prev": "前へ",
+    "next": "次へ",
+    "submit": "送信",
+    "step": "ステップ"
+  },
+  "split": {
+    "whyTitle": "お問い合わせの理由",
+    "reason1": "パーソナライズされたデモの依頼",
+    "reason2": "エンタープライズ向けソリューションの相談",
+    "reason3": "技術的なサポートとガイダンス",
+    "reason4": "パートナーシップの機会",
+    "trusted": "10,000以上のチームからの信頼",
+    "response": "平均返信時間：4時間以内"
+  },
+  "salesEyebrow": "営業にお問い合わせ",
+  "salesTitle": "共に素晴らしいものを創りましょう",
+  "salesSubtitle": "フォームにご記入ください。24時間以内にチームよりご連絡いたします。皆様の成功をサポートします。",
+  "subtitleLuxury": "皆様からのご連絡をお待ちしております",
+  "benefits": {
+    "response24h": "24時間以内の返答",
+    "response24hDesc": "チームが24時間体制でお問い合わせを確認しています",
+    "dedicatedSupport": "専任のサポートチーム",
+    "dedicatedSupportDesc": "エキスパートによるパーソナライズされた支援",
+    "security": "エンタープライズレベルのセキュリティ",
+    "securityDesc": "SOC 2 Type II認証、GDPR準拠"
+  },
+  "trustedBy": "業界のリーダーたちからの信頼",
+  "successTitle": "メッセージ送信完了！",
+  "successTitleLuxury": "お問い合わせありがとうございます！",
+  "successDesc": "24時間以内にご連絡いたします。",
+  "successDescLuxury": "間もなくご連絡いたします。",
+  "secure": "安全",
+  "noSpam": "スパムなし",
+  "emailLabel": "メール",
+  "officeLabel": "オフィス",
+  "officeLocation": "カリフォルニア州 サンフランシスコ",
+  "name": "お名前",
+  "email": "メールアドレス",
+  "scaleLabel": "プロジェクト規模",
+  "scale": {
+    "sm": "小規模 (1,000ユーザー未満)",
+    "md": "中規模 (1,000〜10,000ユーザー)",
+    "lg": "大規模 (10,000〜100,000ユーザー)",
+    "xl": "グローバル (100,000ユーザー以上)"
+  },
+  "message": "メッセージ",
+  "messagePlaceholder": "プロジェクトについて教えてください...",
+  "send": "メッセージを送信",
+  "validation": {
+    "nameShort": "名前は2文字以上で入力してください",
+    "nameLong": "名前が長すぎます",
+    "emailInvalid": "有効なメールアドレスを入力してください",
+    "messageShort": "メッセージは10文字以上で入力してください",
+    "messageLong": "メッセージが長すぎます",
+    "required": "この項目は必須です",
+    "submitError": "エラーが発生しました。もう一度お試しください。"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "company": "AstroGlass",
+  "tagline": "Красивые шаблоны для современного веба",
+
+  "copyright": "© 2026 AstroGlass",
+  "allRightsReserved": "Все права защищены",
+  "backToTop": "Наверх",
+  "links": {
+    "product": "Продукт",
+    "features": "Возможности",
+    "pricing": "Цены",
+    "demos": "Демо",
+    "company": "Проект",
+    "about": "О нас",
+    "blog": "Блог",
+    "contact": "Контакты",
+    "resources": "Ресурсы",
+    "docs": "Документация",
+    "faq": "FAQ",
+    "support": "Поддержка",
+    "terms": "Условия и положения",
+    "privacy": "Политика конфиденциальности"
+  },
+  "social": {
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "discord": "Discord"
+  }
+}

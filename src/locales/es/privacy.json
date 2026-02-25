@@ -1,0 +1,38 @@
+{
+  "title": "Política de Privacidad",
+  "lastUpdated": "Última actualización: Febrero de 2026",
+  "description": "Descubra cómo recopilamos, utilizamos y protegemos sus datos en Astroglass.",
+  "sections": {
+    "intro": {
+      "content": "Bienvenido a Astroglass. Respetamos su privacidad y nos comprometemos a proteger sus datos personales. Esta política de privacidad le informará sobre cómo cuidamos sus datos personales cuando visita nuestro sitio web y le hablará sobre sus derechos de privacidad y cómo la ley lo protege."
+    },
+    "collection": {
+      "title": "Información que Recopilamos",
+      "content": "Podemos recopilar, utilizar, almacenar y transferir diferentes tipos de datos personales sobre usted, que hemos agrupado de la siguiente manera: Datos de identidad, Datos de contacto, Datos técnicos y Datos de uso. No recopilamos ninguna Categoría Especial de Datos Personales sobre usted."
+    },
+    "usage": {
+      "title": "Cómo Utilizamos su Información",
+      "content": "Solo utilizaremos sus datos personales cuando la ley nos lo permita. De manera más común, utilizaremos sus datos personales en las siguientes circunstancias: Cuando necesitemos ejecutar el contrato que estamos a punto de celebrar o hemos celebrado con usted. Cuando sea necesario para nuestros intereses legítimos (o los de un tercero) y sus intereses y derechos fundamentales no prevalezcan sobre esos intereses."
+    },
+    "sharing": {
+      "title": "Divulgación de sus Datos Personales",
+      "content": "Podemos compartir sus datos personales con las partes establecidas a continuación para los fines establecidos en la tabla anterior. Terceros internos, Terceros externos (como Cloudflare) y Terceros a quienes podemos elegir vender, transferir o fusionar partes de nuestro negocio o nuestros activos."
+    },
+    "security": {
+      "title": "Seguridad de los Datos",
+      "content": "Hemos implementado medidas de seguridad apropiadas para evitar que sus datos personales se pierdan, se usen o se acceda a ellos de manera no autorizada, se alteren o se divulguen accidentalmente. Además, limitamos el acceso a sus datos personales a aquellos empleados, agentes, contratistas y otros terceros que tengan una necesidad comercial de conocerlos."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "content": "Puede configurar su navegador para que rechace todas o algunas cookies del navegador, o para que le avise cuando los sitios web instalen o accedan a las cookies. Si deshabilita o rechaza las cookies, tenga en cuenta que algunas partes de este sitio web pueden volverse inaccesibles o no funcionar correctamente."
+    },
+    "rights": {
+      "title": "Sus Derechos Legales",
+      "content": "En determinadas circunstancias, tiene derechos en virtud de las leyes de protección de datos en relación con sus datos personales, incluido el derecho a solicitar acceso, corrección, borrado, restricción, transferencia, a oponerse al procesamiento, a la portabilidad de los datos y (donde el fundamento legal del procesamiento sea el consentimiento) a retirar su consentimiento."
+    },
+    "contact": {
+      "title": "Contáctenos",
+      "content": "Si tiene alguna pregunta sobre esta política de privacidad o nuestras prácticas de privacidad, contáctenos en: support@example.com."
+    }
+  }
+}

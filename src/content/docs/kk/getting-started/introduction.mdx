@@ -1,0 +1,45 @@
+---
+title: "Кіріспе"
+description: "AstroGlass құжаттамасына қош келдіңіз."
+order: 1
+---
+
+
+import CardGrid from '../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../components/mdx/LinkCard.astro';
+
+AstroGlass - бұл өзгелерден ерекшеленгісі келетін стартаптар мен жасаушыларға (creators) арналып жасалған премиум Astro тақырыбы. Бұл Tailwind CSS v4 негізінде құрылған бірегей **Шыны морфизмі (Glassmorphism)** дизайн жүйесімен ерекшеленеді.
+
+## Неліктен AstroGlass?
+
+- **Премиум Дизайн**: Тереңдік және бұлыңғырлық (blur) эффектілері бар 6 толық тақырып (theme) нұсқасы.
+- **Гибридті Өнімділік**: Серверлік (server-side) мүмкіндіктерімен қатар статикалық түрде жасалған контент.
+- **Әзірлеуші Тәжірибесі (Developer Experience)**: Типтері қауіпсіз (type-safe) контент топтамалары және оңай конфигурациялау.
+- **Толық i18n**: 7 тілді кіріктірілген қолдау, оңай кеңейтіледі (extensible).
+
+## Нелер қамтылған?
+
+Үлгі (template) толықтай безендірілген 6 тақырыппен келеді. Олардың әрқайсысы 12-ден астам бет бөлімдерін ұсынады (Басты [Hero], Біз туралы, Мүмкіндіктер, Бағалар, Пікірлер, ЖҚС [FAQ], Әрекетке шақыру [CTA], Байланыс, Жоғарғы бөлік [Header], Төменгі бөлік [Footer], сонымен қатар Басты бетке [Landing Page] арналған жаңа бөлімдер), арнайы Портфолио беті, реттелген 404 беті, сондай-ақ блог жүйесі мен толық құжаттама бар.
+
+<CardGrid>
+  <LinkCard
+    title="6 Тақырып (Theme) Нұсқасы"
+    description="Liquid, Glass, Neo, Luxury, Minimal және Aurora."
+    href="/docs/kk/components/sections/overview"
+  />
+  <LinkCard
+    title="Мүмкіндіктер Бөлімдері"
+    description="Өнімнің мүмкіндіктерін көрсетуге арналған әмбебап торлар (grids) мен тізімдер."
+    href="/docs/kk/components/sections/features"
+  />
+  <LinkCard
+    title="Бағалар Кестесі"
+    description="Келушілерді тартуға (convert) арналған түсінікті баға опциялары."
+    href="/docs/kk/components/sections/pricing"
+  />
+  <LinkCard
+    title="Блог және Құжаттама"
+    description="MDX қолдауы бар кешенді контент жүйесі."
+    href="/docs/kk/components/reference/mdx-components"
+  />
+</CardGrid>

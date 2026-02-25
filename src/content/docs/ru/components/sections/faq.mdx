@@ -1,0 +1,24 @@
+---
+title: "Секция FAQ"
+description: "Секции частых вопросов с аккордеоном для каждой темы."
+order: 8
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Секция FAQ отображает частые вопросы и ответы в формате аккордеона.
+
+## Варианты тем
+
+| Тема | Компонент | Стиль |
+|------|-----------|-------|
+| **Liquid** | `FAQLiquid.astro` | Анимированные аккордеоны |
+| **Glass** | `FAQGlass.astro` | Матовые стеклянные аккордеоны |
+| **Neo** | `FAQNeo.astro` | Контрастные вопрос-ответ |
+| **Luxury** | `FAQLuxury.astro` | Элегантные аккордеоны |
+| **Minimal** | `FAQMinimal.astro` | Простые аккордеоны |
+| **Aurora** | `FAQAurora.astro` | Градиентный фон |
+
+<Callout type="info" title="Без пропсов">
+  Контент загружается из `src/locales/{lang}/faq.json`.
+</Callout>

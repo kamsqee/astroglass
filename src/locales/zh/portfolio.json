@@ -1,0 +1,44 @@
+{
+  "title": "精选作品",
+  "subtitle": "清晰、深度与流畅互动的视觉盛宴。",
+  "badge": "作品集",
+  "gallery": "画廊",
+  "featured": "精选项目",
+  "caseStudies": "案例研究",
+  "impactTitle": "真实的影响力，真实的成果",
+  "impactSubtitle": "每个项目都在讲述一个故事。这是我们共同取得的成就。",
+  "scrollHint": "滚动以探索",
+  "gridHint": "悬停以探索每个项目",
+  "viewCaseStudy": "查看案例研究",
+  "themeGallery": {
+    "subtitle": "发现",
+    "title": "包含的主题",
+    "desc": "查看模板随附的预制主题。一切皆可自定义。",
+    "viewDemo": "查看演示",
+    "free": "整洁 & 基础",
+    "premium": "丰富 & 高级",
+    "sections": "栏目"
+  },
+  "categories": {
+    "webapp": "Web 应用",
+    "dashboard": "仪表盘",
+    "mobile": "移动端",
+    "branding": "品牌构建"
+  },
+  "metrics": {
+    "faster": "加载速度提升",
+    "users": "活跃用户量",
+    "rating": "App Store 评分",
+    "growth": "收入增长"
+  },
+  "p1Title": "数字生态系统",
+  "p1Desc": "为现代高增长初创企业提供的综合解决方案。",
+  "p2Title": "灵动仪表盘",
+  "p2Desc": "带有深度沉浸式探索体验的数据分析平台。",
+  "p3Title": "拟物经典移动端",
+  "p3Desc": "重新定义下一代移动端界面设计。",
+  "p4Title": "量子网络",
+  "p4Desc": "模糊现实与交互界面之间的界限。",
+  "viewProject": "查看项目",
+  "allWork": "所有作品"
+}

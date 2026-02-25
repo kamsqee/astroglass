@@ -1,0 +1,37 @@
+---
+title: "CTA бөлімі (Әрекетке шақыру)"
+description: "Әрбір тақырыпқа арналған әрекетке шақыру (Call to action) бөлімдері."
+order: 9
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Call to Action (CTA - Әрекетке шақыру) бөлімі келушілерді келесі қадамды жасауға — тіркелуге, демо-нұсқасын алуға немесе одан әрі зерттеуге ынталандырады.
+
+## Тақырып нұсқалары
+
+| Тақырып (Theme) | Компонент | Стилі |
+|-------|-----------|-------|
+| **Liquid** | `CTALiquid.astro` | Градиентті CTA-мен анимацияланған сұйық фон |
+| **Glass** | `CTAGlass.astro` | Күңгірт шыныдан жасалған CTA картасы |
+| **Neo** | `CTANeo.astro` | Айқын, терминал стиліндегі CTA |
+| **Luxury** | `CTALuxury.astro` | Алтын бөлшектері бар премиум CTA |
+| **Minimal** | `CTAMinimal.astro` | Таза, ортаға тураланған CTA |
+| **Aurora** | `CTAAurora.astro` | Градиентті тор фоны бар CTA |
+
+Барлық нұсқалар `src/components/sections/cta/` орналасқан.
+
+## Контент көзі
+
+CTA деректері `useTranslations()` арқылы `src/locales/{lang}/cta.json` файлынан жүктеледі.
+
+<Callout type="info" title="Қасиеттер (Props) жоқ">
+  CTA компоненттері сыртқы қасиеттерді (props) қабылдамайды. CTA мәтінін немесе түймешік (button) белгілерін өзгерту үшін `src/locales/{lang}/cta.json` файлын өңдеңіз.
+</Callout>
+
+## Баптау
+
+Баптау үшін:
+1. `src/components/sections/cta/CTA{Theme}.astro` файлын өңдеңіз.
+2. Стильдерді `src/styles/components/cta/` ішінде реттеңіз.
+3. Контентті `src/locales/{lang}/cta.json` ішінде өзгертіңіз.

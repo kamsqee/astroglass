@@ -1,0 +1,178 @@
+---
+/**
+ * Testimonial Luxury - The Masonry Wall
+ * Pinterest-style staggered grid with varied card heights.
+ * Mobile: 2-column masonry. Desktop: 4-column with featured highlights.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+import LuxurySectionLabel from '../../ui/luxury/LuxurySectionLabel.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/testimonial/TestimonialLuxury.css';
+
+const testimonials = [
+  {
+    quote: t('testimonial.t4_quote1'),
+    author: t('testimonial.t4_author1'),
+    role: t('testimonial.t4_role1'),
+    avatar: "https://i.pravatar.cc/60?img=1",
+    size: "small",
+    accent: false
+  },
+  {
+    quote: t('testimonial.t4_quote2'),
+    author: t('testimonial.t4_author2'),
+    role: t('testimonial.t4_role2'),
+    avatar: "https://i.pravatar.cc/60?img=5",
+    size: "large",
+    accent: true
+  },
+  {
+    quote: t('testimonial.t4_quote3'),
+    author: t('testimonial.t4_author3'),
+    role: t('testimonial.t4_role3'),
+    avatar: "https://i.pravatar.cc/60?img=8",
+    size: "medium",
+    accent: false
+  },
+  {
+    quote: t('testimonial.t4_quote4'),
+    author: t('testimonial.t4_author4'),
+    role: t('testimonial.t4_role4'),
+    avatar: "https://i.pravatar.cc/60?img=10",
+    size: "medium",
+    accent: false
+  },
+  {
+    quote: t('testimonial.t4_quote5'),
+    author: t('testimonial.t4_author5'),
+    role: t('testimonial.t4_role5'),
+    avatar: "https://i.pravatar.cc/60?img=11",
+    size: "small",
+    accent: false
+  },
+  {
+    quote: t('testimonial.t4_quote6'),
+    author: t('testimonial.t4_author6'),
+    role: t('testimonial.t4_role6'),
+    avatar: "https://i.pravatar.cc/60?img=12",
+    size: "large",
+    accent: true
+  },
+  {
+    quote: t('testimonial.t4_quote7'),
+    author: t('testimonial.t4_author7'),
+    role: t('testimonial.t4_role7'),
+    avatar: "https://i.pravatar.cc/60?img=20",
+    size: "small",
+    accent: false
+  },
+  {
+    quote: t('testimonial.t4_quote8'),
+    author: t('testimonial.t4_author8'),
+    role: t('testimonial.t4_role8'),
+    avatar: "https://i.pravatar.cc/60?img=15",
+    size: "medium",
+    accent: false
+  },
+];
+---
+
+<section class="relative py-24 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-base-100">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+       <div class="mb-4 flex justify-center">
+         <LuxurySectionLabel text={t('testimonial.wallOfLove')} />
+       </div>
+       <h2 class="text-4xl md:text-6xl font-normal font-serif text-base-content tracking-tighter">{t('testimonial.buildersSay')}</h2>
+       <p class="text-base text-base-content mt-4 max-w-xl mx-auto">{t('testimonial.t4_subtitle')}</p>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="c-testimonial-luxury__grid columns-1 md:columns-2 lg:columns-3 2xl:columns-4 gap-4 lg:gap-6">
+       {testimonials.map((item, i) => (
+          <div 
+            class="c-testimonial-luxury__card break-inside-avoid mb-4 lg:mb-6 group"
+            style={`animation-delay: ${i * 80}ms`}
+          >
+             <div class:list={[
+               "relative p-6 lg:p-8 rounded-2xl lg:rounded-3xl border transition-luxury overflow-hidden ring-1 ring-white/5 ring-inset shadow-xl flex flex-col justify-between h-full",
+               item.accent 
+                 ? "c-testimonial-luxury__card--accent bg-gradient-to-br from-accent/10 to-primary/10 border-accent/20" 
+                 : "c-testimonial-luxury__card--default bg-gradient-to-br from-base-content/[0.05] to-base-content/[0.01] border-base-content/10 font-light backdrop-blur-xl",
+               item.size === 'large' ? "lg:p-10" : ""
+             ]}>
+                
+                {/* Glow Effect */}
+                <div class="c-testimonial-luxury__glow absolute inset-0 bg-accent/5 rounded-2xl lg:rounded-3xl blur-xl"></div>
+
+                <!-- Quote Icon for large cards -->
+                {item.size === 'large' && (
+                   <div class="absolute top-6 right-6 w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center opacity-50">
+                      <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                      </svg>
+                   </div>
+                )}
+                
+                <!-- Quote -->
+                <div class="mb-6 relative z-10">
+                   <p class:list={[
+                     "text-base-content/80 leading-relaxed font-serif",
+                     item.size === 'large' ? "text-lg lg:text-xl font-medium" : "text-base",
+                     item.size === 'small' ? "text-sm font-medium" : ""
+                   ]}>
+                      "{item.quote}"
+                   </p>
+                </div>
+
+                <!-- Author -->
+                <div class="flex items-center gap-4 mt-auto pt-4 border-t border-base-content/5 relative z-10">
+                   <img 
+                     src={item.avatar} 
+                     alt={item.author} 
+                     class:list={[
+                       "rounded-full object-cover border-2 shadow-sm",
+                       item.accent ? "border-white/20" : "border-base-content/10",
+                       item.size === 'large' ? "w-12 h-12" : "w-10 h-10"
+                     ]}
+                   />
+                   <div>
+                      <p class:list={[
+                        "font-bold text-base-content tracking-tight",
+                        item.size === 'large' ? "text-base" : "text-sm"
+                      ]}>{item.author}</p>
+                      <p class:list={[
+                        "font-medium tracking-wide uppercase mt-0.5",
+                        item.accent ? "text-accent" : "text-base-content",
+                        item.size === 'large' ? "text-[10px]" : "text-[9px]"
+                      ]}>{item.role}</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+       ))}
+    </div>
+
+    <!-- Stats Row -->
+    <div class="flex flex-wrap justify-center gap-8 lg:gap-16 mt-16 pt-16 border-t border-base-content/5">
+       <div class="text-center">
+          <p class="text-3xl lg:text-4xl font-black text-base-content">10K+</p>
+          <p class="text-xs text-base-content mt-1">{t('testimonial.happyUsers')}</p>
+       </div>
+       <div class="text-center">
+          <p class="text-3xl lg:text-4xl font-black text-accent">4.9</p>
+          <p class="text-xs text-base-content mt-1">{t('testimonial.avgRating')}</p>
+       </div>
+       <div class="text-center">
+          <p class="text-3xl lg:text-4xl font-black text-base-content">50+</p>
+          <p class="text-xs text-base-content mt-1">{t('testimonial.countries')}</p>
+       </div>
+    </div>
+  </div>
+</section>

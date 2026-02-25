@@ -1,0 +1,82 @@
+{
+  "title": "Características de Astro Glass",
+  "subtitle": "Todo lo que necesitas para construir experiencias digitales inmersivas y de alta gama.",
+  "badge": "Características",
+  "coreBadge": "Función Principal",
+  "experience": "Experiencia",
+  "explore": "Explorar",
+  "learnMore": "Conoce más",
+  "pureTitle": "Puro",
+  "liquidTitle": "Líquido",
+  "luxuryTitle": "¿Qué deseas construir?",
+  "luxurySubtitle": "Selecciona tu objetivo y descubre cómo Astro Glass te ayuda a alcanzarlo más rápido.",
+  "minimalCtaTitle": "¿Listo para experimentar todas las funciones?",
+  "minimalCtaDesc": "Empieza a construir hoy mismo con el kit completo de herramientas Astro Glass.",
+  "f1Title": "Rendimiento Ultra",
+  "f1Desc": "La arquitectura cero-JS por defecto asegura que tu sitio cargue en un abrir y cerrar de ojos.",
+  "f1LongDesc": "Construido sobre la arquitectura de islas de Astro 5.0, solo se envía el JavaScript que necesitas. Esto significa tiempos de carga de menos de un segundo y puntuaciones perfectas de Core Web Vitals listas para usar.",
+  "f2Title": "Efectos de Vidrio Profundos",
+  "f2Desc": "Desenfoque multicapa y efectos de refracción para una estética verdaderamente premium.",
+  "f2LongDesc": "Nuestro sistema de glassmorphism utiliza filtros de fondo calibrados, transparencias en capas y gradientes sutiles para crear profundidad sin sacrificar el rendimiento.",
+  "f3Title": "Adaptabilidad Fluida",
+  "f3Desc": "Cada componente responde elegantemente a cualquier tamaño u orientación de pantalla.",
+  "f3LongDesc": "Diseño adaptable «mobile-first» (pensado primero en móviles) con tipografía fluida, espaciado adaptativo y diseños optimizados que funcionan perfectamente desde un reloj inteligente hasta pantallas ultra anchas.",
+  "f4Title": "Temas Ilimitados",
+  "f4Desc": "Más de 10 paletas de colores o crea tu propio estilo característico en segundos.",
+  "f4LongDesc": "Impulsado por propiedades personalizadas de CSS y DaisyUI, cambia de tema al instante o crea paletas exclusivas. Modo oscuro, modo claro y todo lo demás.",
+  "f5Title": "Listo para el Borde (Edge)",
+  "f5Desc": "Despliegue global con Cloudflare Workers para un acceso instantáneo en cualquier lugar.",
+  "useCases": {
+    "speed": "Construcción Rápida",
+    "speedHeadline": "Lanza sitios listos para producción en horas, no en semanas.",
+    "speedF2Title": "Paquete Optimizado",
+    "speedF2Desc": "División automática de código y eliminación de código inactivo para una carga mínima.",
+    "design": "Apariencia Premium",
+    "designHeadline": "Crea interfaces impresionantes que se sientan pulidas y sofisticadas.",
+    "scale": "Escala Globalmente",
+    "scaleHeadline": "Construido para audiencias internacionales y cualquier dispositivo.",
+    "scaleF2Title": "Listo para i18n",
+    "scaleF2Desc": "Soporte completo de internacionalización con rutas para múltiples idiomas y compatibilidad con RTL (de derecha a izquierda)."
+  },
+  "cta": "Explorar la Documentación",
+  "home": {
+    "title": "¿Por qué AstroGlass?",
+    "subtitle": "Rendimiento Puro. Diseño Líquido.",
+    "desc": "Un conjunto completo de herramientas para crear sitios web impresionantes y de alto rendimiento sin complicaciones.",
+    "list": [
+      {
+        "title": "Astro 5.0",
+        "desc": "La arquitectura de Server Islands & Content Layer más reciente para velocidad extrema."
+      },
+      {
+        "title": "Tailwind CSS 4.0",
+        "desc": "Motor de utilidades (utility engine) de nueva generación. Cero configuraciones, builds instantáneos."
+      },
+      {
+        "title": "Cloudflare Edge",
+        "desc": "Despliega de manera global con soporte listo para Edge y adaptadores incluidos."
+      },
+      {
+        "title": "Búsqueda Premium",
+        "desc": "Implementación personalizada de Fuse.js. No requiere de servicios externos."
+      },
+      {
+        "title": "I18n Nativo",
+        "desc": "Enrutamiento multilingüe integrado, detección automática y gestión de traducciones."
+      },
+      {
+        "title": "React 19",
+        "desc": "Islas interactivas cuando lo necesitas; código HTML estático cuando no."
+      },
+      {
+        "title": "Tipo Seguro",
+        "desc": "Total compatibilidad con TypeScript y esquemas de validación con Zod."
+      },
+      {
+        "title": "Optimización SEO",
+        "desc": "Generación incluida de mapas de sitio, URLs canónicas, así como Open Graph."
+      }
+    ]
+  },
+  "exploreAll": "Explorar Todo"
+}

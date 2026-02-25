@@ -1,0 +1,92 @@
+---
+title: Structure du Projet
+description: Aperçu de l'organisation du code source d'AstroGlass.
+order: 3
+---
+
+import ProjectStructureGraph from '../../../../components/ui/diagrams/ProjectStructureGraph';
+
+AstroGlass suit une structure de projet Astro standard avec quelques modèles d'organisation clés.
+
+<ProjectStructureGraph client:only="react" />
+
+## Répertoires Clés
+
+### `src/components/pages/`
+
+Contient des composants pleine page pour les routes dynamiques, tels que la Page Portfolio. Organisé par type de page :
+
+```
+pages/
+├── portfolio/
+│   ├── aurora/
+│   │   ├── PortfolioHeroAurora.astro
+│   │   ├── ...
+│   ├── liquid/
+│   │   ├── PortfolioHeroLiquid.astro
+│   │   ├── PortfolioGridLiquid.astro
+│   │   ├── PortfolioModalLiquid.astro
+│   │   ├── PortfolioCTALiquid.astro
+│   │   └── ...
+│   └── ...
+```
+
+### `src/components/sections/`
+
+Contient tous les composants de section de page, organisés par type de section. Chaque section possède un sous-répertoire avec une variante par thème :
+
+```
+sections/
+├── hero/
+│   ├── HeroLiquid.astro
+│   ├── HeroGlass.astro
+│   ├── HeroNeo.astro
+│   ├── HeroLuxury.astro
+│   ├── HeroMinimal.astro
+│   └── HeroAurora.astro
+├── about/
+├── features/
+├── portfolio/
+├── pricing/
+├── testimonial/
+├── faq/
+├── cta/
+├── contact/
+└── footer/
+```
+
+### `src/components/layout/header/`
+
+Composants d'en-tête/barre de navigation spécifiques au thème (par ex., `HeaderGlass.astro`, `HeaderLuxury.astro`).
+
+### `src/components/ui/`
+
+Primitives d'interface utilisateur réutilisables : `Button`, `Card`, `Badge`, `Avatar`, `Input`, `Tabs`, `Charts`, `ThemeSwitcher`, `LanguageSwitcher`, et `Search`.
+
+### `src/config/`
+
+Fichiers de configuration centraux :
+- `themes.ts` — Registre des thèmes (ID, noms, statut d'activation, listes de sections)
+- `locales.ts` — Langues prises en charge et leurs métadonnées
+- `navigation.ts` — Structure de navigation principale du site
+- `docs.ts` — Configuration de la barre latérale de la documentation et gestion des versions
+
+### `src/content/`
+
+Collections de Contenu Astro pour la documentation et les articles de blog. La structure à l'intérieur de `docs/[lang]/` détermine les chemins URL pour la documentation.
+
+### `src/locales/`
+
+Fichiers de traduction JSON organisés par code de langue. Chaque fichier correspond à une section de page (par ex., `hero.json`, `pricing.json`, `contact.json`).
+
+### `src/pages/`
+
+Routage basé sur les fichiers. La route dynamique `[theme].astro` génère des pages pour chaque thème activé. Les modèles de répertoire `[...lang]` gèrent les variantes de pages localisées sur l'ensemble de l'architecture.
+
+### `src/styles/`
+
+CSS global, surcharges de thème (`_themes.css`), images clés d'animation, et feuilles de style spécifiques aux composants dans `components/`.
+
+### `src/utils/`
+
+Fonctions utilitaires pour les traductions i18n (`i18n.ts`), la détection de la langue (`locale-utils.ts`), et la navigation dans la documentation (`docs-nav.ts`).

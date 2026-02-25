@@ -1,0 +1,61 @@
+---
+title: "Vercel デプロイ"
+description: "AstroGlass サイトを Vercel にデプロイします。"
+order: 3
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass は最小限の構成で **Vercel** にデプロイできます。
+
+## 前提条件
+
+- [Vercel](https://vercel.com/) アカウント。
+- **Node.js** v20 以降がローカルにインストールされていること。
+- Vercel CLI がインストールされていること (`npm install -g vercel`)。
+
+## デプロイ方法
+
+### オプション 1: GitHub 統合 (推奨)
+
+<Steps>
+1. **GitHub にコードをプッシュする**
+   
+   プロジェクトが GitHub リポジトリにあることを確認してください。
+
+2. **Vercel にインポート**
+   
+   [vercel.com/new](https://vercel.com/new) に移動し、GitHub リポジトリをインポートします。
+
+3. **ビルド設定の構成**
+   
+   Vercel は自動的に Astro を検出するはずです。そうでない場合は、以下を使用します：
+   - **フレームワーク プリセット (Framework Preset)**: Astro
+   - **ビルド コマンド (Build Command)**: `pnpm run build`
+   - **出力ディレクトリ (Output Directory)**: `dist`
+
+4. **デプロイ**
+   
+   「Deploy」をクリックし、ビルドが完了するのを待ちます。
+</Steps>
+
+### オプション 2: CLI によるデプロイ
+
+<Steps>
+1. **Vercel にログイン**
+   
+   ```bash title="ターミナル (Terminal)" frame="terminal"
+   npx vercel login
+   ```
+
+2. **デプロイ**
+   
+   ```bash title="ターミナル (Terminal)" frame="terminal"
+   pnpm run deploy:vercel
+   ```
+</Steps>
+
+<Callout type="info" title="検索インデックス">
+  ビルド中 (`pnpm run build`) に検索インデックスが自動的に生成されます。デプロイされたサイトで検索機能が動作するためには、ビルドのステップが正常に完了していることを確認してください。
+</Callout>

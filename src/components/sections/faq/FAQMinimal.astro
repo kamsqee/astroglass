@@ -1,0 +1,182 @@
+---
+/**
+ * FAQ Minimal - The Accordion Stack
+ * Classic vertical accordion with refined animations and visual grouping.
+ * Mobile: Full-width accordion. Desktop: Centered with sticky TOC.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/faq/FAQMinimal.css';
+import '../../../styles/components/tag/TagMinimal.css';
+
+const sections = [
+  {
+    id: 'general',
+    title: t('faq.minimal.general.title'),
+    icon: '📋',
+    questions: [
+      { q: t('faq.minimal.general.q1'), a: t('faq.minimal.general.a1') },
+      { q: t('faq.minimal.general.q2'), a: t('faq.minimal.general.a2') },
+      { q: t('faq.minimal.general.q3'), a: t('faq.minimal.general.a3') },
+      { q: t('faq.minimal.general.q4'), a: t('faq.minimal.general.a4') },
+    ]
+  },
+  {
+    id: 'pricing',
+    title: t('faq.minimal.pricing.title'),
+    icon: '💳',
+    questions: [
+      { q: t('faq.minimal.pricing.q1'), a: t('faq.minimal.pricing.a1') },
+      { q: t('faq.minimal.pricing.q2'), a: t('faq.minimal.pricing.a2') },
+      { q: t('faq.minimal.pricing.q3'), a: t('faq.minimal.pricing.a3') },
+      { q: t('faq.minimal.pricing.q4'), a: t('faq.minimal.pricing.a4') },
+    ]
+  },
+  {
+    id: 'features',
+    title: t('faq.minimal.features.title'),
+    icon: '✨',
+    questions: [
+      { q: t('faq.minimal.features.q1'), a: t('faq.minimal.features.a1') },
+      { q: t('faq.minimal.features.q2'), a: t('faq.minimal.features.a2') },
+      { q: t('faq.minimal.features.q3'), a: t('faq.minimal.features.a3') },
+      { q: t('faq.minimal.features.q4'), a: t('faq.minimal.features.a4') },
+    ]
+  },
+  {
+    id: 'security',
+    title: t('faq.minimal.security.title'),
+    icon: '🔒',
+    questions: [
+      { q: t('faq.minimal.security.q1'), a: t('faq.minimal.security.a1') },
+      { q: t('faq.minimal.security.q2'), a: t('faq.minimal.security.a2') },
+      { q: t('faq.minimal.security.q3'), a: t('faq.minimal.security.a3') },
+      { q: t('faq.minimal.security.q4'), a: t('faq.minimal.security.a4') },
+    ]
+  },
+];
+---
+
+<section id="faq" class="relative py-24 lg:py-32 px-6 overflow-hidden bg-base-100">
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12 lg:mb-16">
+       <span class="c-tag-minimal mb-4 block"><span class="c-tag-minimal__dash"></span>{t('nav.resourcesFaq')}</span>
+       <h2 class="text-4xl md:text-6xl font-black text-base-content tracking-tighter">{t('faq.findAnswer')}</h2>
+       <p class="text-base text-base-content/75 mt-4">{t('faq.subtitle')}</p>
+    </div>
+
+    <div class="lg:grid lg:grid-cols-12 lg:gap-12">
+       <!-- Sticky TOC (Desktop only) -->
+       <div class="hidden lg:block lg:col-span-3">
+          <div class="sticky top-8">
+             <p class="text-[10px] font-black uppercase tracking-widest text-base-content/80 mb-4">{t('faq.jumpTo')}</p>
+             <nav class="space-y-2">
+                {sections.map(section => (
+                   <a 
+                     href={`#faq-minimal-${section.id}`} 
+                     class="c-faq-minimal__toc-link group flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-base-content/75 hover:text-base-content hover:bg-base-content/[0.03] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                     data-section={section.id}
+                   >
+                      <span class="text-base opacity-50 group-hover:opacity-100 transition-opacity duration-500">{section.icon}</span>
+                      <span>{section.title}</span>
+                   </a>
+                ))}
+             </nav>
+             
+             <div class="mt-8 p-4 rounded-xl bg-accent/5 border border-accent/10">
+                <p class="text-xs text-accent font-bold mb-2">{t('faq.stillQuestions')}</p>
+                <a href={`/${locale}/contact`} class="text-xs text-base-content/75 hover:text-accent transition-colors duration-500">{t('faq.contactSupport')} →</a>
+             </div>
+          </div>
+       </div>
+
+       <!-- Accordion Content -->
+       <div class="lg:col-span-9 space-y-12">
+          {sections.map((section, si) => (
+             <div id={`faq-minimal-${section.id}`} class="c-faq-minimal__section scroll-mt-8" style={`animation-delay: ${si * 100}ms`}>
+                <h3 class="text-lg font-bold text-base-content mb-6 flex items-center gap-3">
+                   <span class="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-lg">{section.icon}</span>
+                   <span>{section.title}</span>
+                   <span class="ml-auto w-7 h-7 rounded-full bg-base-content/5 flex items-center justify-center text-xs text-base-content/75">{section.questions.length}</span>
+                </h3>
+                
+                <div class="space-y-3">
+                   {section.questions.map((q, i) => (
+                      <div class="c-faq-minimal__accordion-item rounded-xl border border-base-content/5 overflow-hidden bg-base-content/[0.01] hover:bg-base-content/[0.02] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]" style={`animation-delay: ${(si * 100) + (i * 50)}ms`}>
+                         <button class="c-faq-minimal__acc-trigger w-full flex items-center justify-between p-5 text-left group">
+                            <span class="text-sm lg:text-base text-base-content font-medium pr-4 group-hover:text-accent transition-colors duration-500">{q.q}</span>
+                            <div class="w-8 h-8 rounded-full bg-base-content/5 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/10 transition-all duration-500">
+                               <svg class="w-4 h-4 text-base-content/80 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] c-faq-minimal__acc-icon group-hover:text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m6-6H6" />
+                               </svg>
+                            </div>
+                         </button>
+                         <div class="c-faq-minimal__acc-content hidden">
+                            <div class="px-5 pb-5">
+                               <div class="h-px bg-base-content/5 mb-4"></div>
+                               <p class="text-sm text-base-content/75 leading-relaxed">{q.a}</p>
+                            </div>
+                         </div>
+                      </div>
+                   ))}
+                </div>
+             </div>
+          ))}
+       </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let faqMinimalController: AbortController | null = null;
+
+  function initFAQMinimalAccordion() {
+    // Abort previous listeners
+    faqMinimalController?.abort();
+    faqMinimalController = new AbortController();
+    const signal = faqMinimalController.signal;
+
+    // Accordion functionality
+    document.querySelectorAll('.c-faq-minimal__acc-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.c-faq-minimal__accordion-item');
+        const content = item?.querySelector('.c-faq-minimal__acc-content');
+        const isOpen = item?.classList.contains('open');
+        
+        // Toggle this item
+        item?.classList.toggle('open', !isOpen);
+        content?.classList.toggle('hidden', isOpen);
+      }, { signal });
+    });
+
+    // TOC scroll spy
+    const tocLinks = document.querySelectorAll('.c-faq-minimal__toc-link');
+    const sections = document.querySelectorAll('.c-faq-minimal__section');
+    
+    function updateTOC() {
+      let currentSection = '';
+      
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 150) {
+          currentSection = section.id.replace('faq-minimal-', '');
+        }
+      });
+      
+      tocLinks.forEach(link => {
+        link.classList.toggle('active', (link as HTMLElement).dataset.section === currentSection);
+      });
+    }
+    
+    window.addEventListener('scroll', updateTOC, { passive: true, signal });
+    updateTOC();
+  }
+
+  initFAQMinimalAccordion();
+  document.addEventListener('astro:after-swap', initFAQMinimalAccordion);
+</script>

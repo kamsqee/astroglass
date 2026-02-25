@@ -1,0 +1,15 @@
+/* AboutNeo.css */
+
+.c-about-neo__card {
+  transition: all 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-about-neo__card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 40px 80px -20px rgba(0,0,0,0.3);
+  border-color: hsl(var(--bc) / 0.2);
+}
+
+.c-about-neo__cta {
+  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}

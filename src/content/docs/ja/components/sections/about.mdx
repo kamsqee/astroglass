@@ -1,0 +1,37 @@
+---
+title: "概要 (About) セクション"
+description: "各テーマの企業や製品の紹介セクション。"
+order: 3
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+About (アバウト) セクションでは、会社、製品、またはストーリーを紹介します。各テーマには、異なる視覚要素を持つ独自のレイアウトが用意されています。
+
+## テーマのバリアント
+
+| テーマ | コンポーネント | スタイル |
+|-------|-----------|-------|
+| **Liquid** | `AboutLiquid.astro` | 流動的なレイアウトを持つ、有機的なブロブ (変形する塊) の背景 |
+| **Glass** | `AboutGlass.astro` | 奥行きのあるすりガラスパネル |
+| **Neo** | `AboutNeo.astro` | 太字のタイポグラフィとハイコントラストのカード |
+| **Luxury** | `AboutLuxury.astro` | ゴールドのアクセントが効いたエレガントなレイアウト |
+| **Minimal** | `AboutMinimal.astro` | クリーンでコンテンツに焦点を当てたデザイン |
+| **Aurora** | `AboutAurora.astro` | 幾何学的な構造を持つグラデーション メッシュ |
+
+すべてのバリアントは `src/components/sections/about/` に配置されています。
+
+## コンテンツのソース
+
+About セクションのテキストは、`useTranslations()` を介して `src/locales/{lang}/about.json` から読み込まれます。
+
+<Callout type="info" title="プロパティ (Props) なし">
+  About コンポーネントは外部からのプロパティ (Props) を受け取りません。概要のコンテンツを編集するには、`src/locales/{lang}/about.json` を更新してください。
+</Callout>
+
+## カスタマイズ
+
+カスタマイズの手順:
+1. `src/components/sections/about/About{Theme}.astro` を編集します。
+2. `src/styles/components/about/` にあるスタイルを調整します。
+3. `src/locales/{lang}/about.json` でコンテンツを変更します。

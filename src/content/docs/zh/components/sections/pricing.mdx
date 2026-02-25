@@ -1,0 +1,51 @@
+---
+title: "定价区段 (Pricing Section)"
+description: "各大主题所配备的定价表格区段。"
+order: 6
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+定价 (Pricing) 区段用于展示产品订阅计划和层级结构。每个主题对该区段都有其独特的视觉表现形式。
+
+## 变体及其风格特色
+
+| 主题风格 | 对应组件 | 风格描述 |
+|-------|-----------|-------|
+| **Liquid** | `PricingLiquid.astro` | 带有渐变色边缘和高流线液态形状卡片的灵动布局 |
+| **Glass** | `PricingGlass.astro` | 富有磨砂毛玻璃视效的半透半隐透光价格卡片组件 |
+| **Neo** | `PricingNeo.astro` | 张狂惹眼附有强烈颜色碰撞的反差风格极粗线段矩阵式价格表 |
+| **Luxury** | `PricingLuxury.astro` | 以贵金属色泽镶金设计风格强调出昂贵质感尽显卓越品位版本 |
+| **Minimal** | `PricingMinimal.astro` | 完全褪尽表面所有额外多余繁文缛节修容只剩下朴实单价表列本身呈现样貌 |
+| **Aurora** | `PricingAurora.astro` | 卡片下方有着幻变多姿犹如美丽极光特效渲染铺排出的动态渐褪网格底层展现 |
+
+上述所有呈现不同效果的具体实作模板都收藏安置于 `src/components/sections/pricing/` 这个路境内中获取。
+
+## 内容文案等具体来源
+
+该区域呈现的各类报价信息文字均是 `useTranslations()` 从对应的字典包 `src/locales/{lang}/pricing.json` 指派调出呈现并生效。此类 JSON 配置档案里包括了包含各服务计划命名，附带项目特性简介，月/年等周期价格标准以及召唤按键文字等所需全类别全维度详细配置指标体系表叙说明：
+
+```json title="pricing.json (配置内容节选)"
+{
+  "title": "简单明了的订阅报价",
+  "subtitle": "选择满足您所需的最佳方案",
+  "plans": {
+    "starter": {
+      "name": "起步版本方案 (Starter)",
+      "price": "19",
+      "features": ["允许5个并发微型项目", "简易流量使用情况数据追踪仪表"]
+    }
+  }
+}
+```
+
+<Callout type="info" title="无Props配置 (No Props)">
+  各类 Pricing 变种均不在意外部传入的外部 props，要想要变更内部各个产品分级价格、功能条款或方案结构，必须也需要针对各个对应字典语言包例如去更新其相应修改配置文件来变更：`src/locales/{lang}/pricing.json`。
+</Callout>
+
+## 定制和调整
+
+定制步骤如下指引进行：
+1. 于内部编辑或重整 `src/components/sections/pricing/Pricing{Theme}.astro` 中代码架构等。
+2. 对于色彩或呈现版面，去对调控管理所有关于视觉元素的指令 `src/styles/components/pricing/` 相关附属文件调整。
+3. 若单纯为文本及内容则仅只需处理：`src/locales/{lang}/pricing.json`。

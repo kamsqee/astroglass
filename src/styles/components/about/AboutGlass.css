@@ -1,0 +1,30 @@
+/* AboutGlass.css */
+
+.c-about-glass__card {
+  transition: all 800ms var(--ease-glass);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: aboutGlassCardIn 0.8s var(--ease-glass) forwards;
+}
+
+@keyframes aboutGlassCardIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.c-about-glass__card:hover {
+  background-color: hsl(var(--a) / 0.05);
+  border-color: hsl(var(--a) / 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -15px rgba(0,0,0,0.2);
+}
+
+.c-about-glass__icon {
+  transition: all 700ms var(--ease-glass);
+}
+
+.c-about-glass__card:hover .c-about-glass__icon {
+  background-color: hsl(var(--a) / 0.2);
+}

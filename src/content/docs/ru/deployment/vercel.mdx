@@ -1,0 +1,35 @@
+---
+title: "Развёртывание на Vercel"
+description: "Развертывание AstroGlass на Vercel."
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass можно развернуть на **Vercel** с минимальной конфигурацией.
+
+## Предварительные требования
+
+- Аккаунт [Vercel](https://vercel.com/).
+- **Node.js** v20+ установлен локально.
+
+## Способы развёртывания
+
+### GitHub (рекомендуется)
+
+<Steps>
+1. **Загрузите код на GitHub**.
+2. **Импортируйте в Vercel**: [vercel.com/new](https://vercel.com/new).
+3. **Настройте сборку**: Framework Preset: Astro, Build Command: `pnpm run build`, Output: `dist`.
+4. **Нажмите Deploy**.
+</Steps>
+
+### CLI
+
+```bash frame="terminal"
+pnpm run deploy:vercel
+```
+
+<Callout type="info" title="Поисковый индекс">
+  Индекс генерируется автоматически во время `pnpm run build`.
+</Callout>

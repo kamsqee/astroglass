@@ -1,0 +1,77 @@
+---
+title: Customization
+description: How to customize styles, themes, and configuration.
+order: 2
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass uses **Tailwind CSS v4** for styling via the `@tailwindcss/vite` plugin. There is no separate `tailwind.config.mjs` — all customization happens through CSS.
+
+## Styling Overview
+
+Global styles and CSS variables are defined in `src/styles/global.css`. This file handles:
+- Base layer resets
+- Custom fonts (Inter & JetBrains Mono)
+- CSS variables for theming (HSL color values)
+
+Theme-specific overrides live in `src/styles/_themes.css`.
+
+<FileTree>
+- src/
+  - styles/
+    - **global.css** — Base styles, fonts, root CSS variables
+    - **_themes.css** — Per-theme color overrides
+    - **_animations.css** — Shared animation keyframes
+    - **_forms.css** — Form input styles
+    - components/ — Component-specific styles (hero, pricing, etc.)
+</FileTree>
+
+## Color System
+
+The project uses a CSS variable-based color system. Colors are defined as HSL values (without the `hsl()` wrapper), allowing Tailwind's opacity modifier syntax to work correctly.
+
+```css title="global.css"
+/* src/styles/global.css */
+:root {
+  --p: 260 80% 60%;   /* Primary */
+  --s: 310 80% 60%;   /* Secondary */
+  --a: 190 90% 60%;   /* Accent */
+  --b1: 220 20% 10%;  /* Base 1 (Background) */
+  --b2: 220 18% 14%;  /* Base 2 (Surface) */
+  --bc: 220 20% 90%;  /* Base Content (Text) */
+  --er: 0 80% 60%;    /* Error */
+  --su: 150 80% 50%;  /* Success */
+}
+```
+
+Components consume these variables via Tailwind utility classes or `hsl()`:
+
+```html
+<div class="bg-[hsl(var(--p))] text-[hsl(var(--bc))]">
+  Primary Background with Base Content Text
+</div>
+```
+
+<Callout type="tip" title="Changing Colors">
+  To change the site's color scheme, update the HSL values in `global.css`. For theme-specific overrides (light/dark mode, per-theme colors), use `[data-theme="..."]` selectors in `_themes.css`.
+</Callout>
+
+## Adding Custom Fonts
+
+1.  Place font files in `public/fonts/` or import from Google Fonts in `global.css`.
+2.  Define `@font-face` rules in `src/styles/global.css`.
+3.  Update the font-family CSS variables or Tailwind utilities as needed.
+
+## Component Customization
+
+Each theme has its own component variants (e.g., `HeroLiquid.astro`, `HeroGlass.astro`). To customize a specific section:
+
+1.  Navigate to `src/components/sections/{section}/` (e.g., `hero/`).
+2.  Edit the theme-specific file directly (e.g., `HeroGlass.astro`).
+3.  Component-specific CSS lives in `src/styles/components/{section}/`.
+
+<Callout type="info" title="No External Props">
+  Section components do not accept text props. All content is driven by translation keys via `useTranslations()`. To change text, edit the JSON files in `src/locales/{lang}/`.
+</Callout>

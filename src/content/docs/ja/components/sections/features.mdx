@@ -1,0 +1,50 @@
+---
+title: "特徴・機能 (Features) セクション"
+description: "各テーマの機能紹介・特徴セクション。"
+order: 4
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Features (特徴・機能) セクションは、製品やサービスの利点を強調します。各テーマには、カードのグリッドからアニメーション化されたリストまで、独自のレイアウトが用意されています。
+
+## テーマのバリアント
+
+| テーマ | コンポーネント | レイアウト |
+|-------|-----------|--------|
+| **Liquid** | `FeaturesLiquid.astro` | 流動的なホバー エフェクトを備えたアニメーション機能カード |
+| **Glass** | `FeaturesGlass.astro` | すりガラスの特徴カード |
+| **Neo** | `FeaturesNeo.astro` | シャープなエッジを持つ大胆なグリッド レイアウト |
+| **Luxury** | `FeaturesLuxury.astro` | ゴールドのハイライトが効いたエレガントなグリッド |
+| **Minimal** | `FeaturesMinimal.astro` | クリーンでシンプルなリスト形式 |
+| **Aurora** | `FeaturesAurora.astro` | カード グリッドを持つグラデーション メッシュ背景 |
+
+すべてのバリアントは `src/components/sections/features/` に配置されています。
+
+## コンテンツのソース
+
+特徴のデータは、`useTranslations()` を介して `src/locales/{lang}/features.json` から読み込まれます。JSON 構造には通常、以下が含まれます。
+
+```json title="features.json (抜粋)"
+{
+  "title": "当社の強み",
+  "subtitle": "パフォーマンスと使いやすさのために構築",
+  "items": [
+    {
+      "title": "驚異的なスピード",
+      "description": "静的生成により、1秒未満のページ読み込み時間を実現します。"
+    }
+  ]
+}
+```
+
+<Callout type="info" title="プロパティ (Props) なし">
+  Features コンポーネントは外部からのプロパティ (Props) を受け取りません。特徴の項目、タイトル、または説明を編集するには、`src/locales/{lang}/features.json` を更新してください。
+</Callout>
+
+## カスタマイズ
+
+カスタマイズの手順:
+1. `src/components/sections/features/Features{Theme}.astro` でテーマのバリアントを編集します。
+2. `src/styles/components/features/` にあるスタイルを調整します。
+3. `src/locales/{lang}/features.json` でコンテンツを変更します。

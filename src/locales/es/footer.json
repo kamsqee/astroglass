@@ -1,0 +1,29 @@
+{
+  "company": "AstroGlass",
+  "tagline": "Hermosas plantillas para la web moderna",
+
+  "copyright": "© 2026 AstroGlass",
+  "allRightsReserved": "Todos los derechos reservados",
+  "backToTop": "Volver arriba",
+  "links": {
+    "product": "Producto",
+    "features": "Características",
+    "pricing": "Precios",
+    "demos": "Demos",
+    "company": "Proyecto",
+    "about": "Nosotros",
+    "blog": "Blog",
+    "contact": "Contacto",
+    "resources": "Recursos",
+    "docs": "Documentación",
+    "faq": "FAQ",
+    "support": "Soporte",
+    "terms": "Términos y Condiciones",
+    "privacy": "Política de Privacidad"
+  },
+  "social": {
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "discord": "Discord"
+  }
+}

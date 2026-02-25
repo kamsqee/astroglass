@@ -1,0 +1,17 @@
+/* ============================================
+   Minimal Theme Tokens
+   Clean geometry, focused timing
+   ============================================ */
+@theme {
+  --tracking-tag-minimal: 0.2em;
+  --text-tag-minimal: 10px;
+
+  --ease-minimal: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-minimal: 800ms;
+  --duration-minimal-fast: 400ms;
+  --duration-minimal-slow: 1500ms;
+
+  --radius-minimal-sm: 0.75rem;
+  --radius-minimal-md: 1rem;
+  --radius-minimal-lg: 2rem;
+}

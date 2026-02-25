@@ -1,0 +1,37 @@
+---
+title: "ポートフォリオセクション (Portfolio)"
+description: "各テーマのプロジェクト紹介セクション。"
+order: 5
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+ポートフォリオセクションでは、プロジェクト、ケーススタディ、または過去の制作物を紹介します。各テーマは独自のギャラリーレイアウトを提供します。
+
+## テーマバリアント
+
+| テーマ | コンポーネント | スタイル |
+|-------|-----------|-------|
+| **Liquid** | `PortfolioLiquid.astro` | ホバーアニメーション付きの流動的なグリッド |
+| **Glass** | `PortfolioGlass.astro` | すりガラスのプロジェクトカード |
+| **Neo** | `PortfolioNeo.astro` | 大胆な石積みレイアウト (Masonry) |
+| **Luxury** | `PortfolioLuxury.astro` | エレガントなプロジェクトのプレゼンテーション |
+| **Minimal** | `PortfolioMinimal.astro` | クリーンでシンプルなプロジェクトグリッド |
+| **Aurora** | `PortfolioAurora.astro` | グラデーション背景のギャラリー |
+
+すべてのバリアントは `src/components/sections/portfolio/` にあります。
+
+## コンテンツソース
+
+ポートフォリオの項目は `src/locales/{lang}/portfolio.json` から `useTranslations()` を介してロードされます。
+
+<Callout type="info" title="Propsなし">
+  ポートフォリオコンポーネントは外部のPropsを受け取りません。プロジェクトのタイトル、説明、または画像を編集するには、`src/locales/{lang}/portfolio.json` を更新してください。
+</Callout>
+
+## カスタマイズ
+
+カスタマイズするには：
+1. `src/components/sections/portfolio/Portfolio{Theme}.astro` を編集します。
+2. `src/styles/components/portfolio/` のスタイルを調整します。
+3. `src/locales/{lang}/portfolio.json` のコンテンツを変更します。

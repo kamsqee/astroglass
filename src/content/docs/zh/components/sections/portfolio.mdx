@@ -1,0 +1,37 @@
+---
+title: "作品集 (Portfolio) 区块"
+description: "专属于各大主题特色下为呈现各类精选标榜工作与创作等实例汇聚成展示展厅之特设区块。"
+order: 5
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+作品集 (Portfolio) 这个展出区域是为了帮助呈现与张榜有关历年过去已经经手的各路重点精选特级实例工程专案研究案例，或者是历日以久的重点心力劳动产出的相关精华集萃，各主题皆依顺各自表现特性展现不同排列展示方式与视觉展廊风格特性。
+
+## 变体及其风格特色
+
+| 主题风格 | 对应组件 | 风格描述 |
+|-------|-----------|-------|
+| **Liquid** | `PortfolioLiquid.astro` | 运用着当悬停滑过会带出动态互动变化的浮光掠影平滑感阵列相簿 |
+| **Glass** | `PortfolioGlass.astro` | 富有磨砂毛玻璃视效的半透半隐透光项目成品卡片套件 |
+| **Neo** | `PortfolioNeo.astro` | 张狂惹眼附有强烈颜色碰撞如不规则砌砖式拼成的反差高显眼乱搭画廊墙面 |
+| **Luxury** | `PortfolioLuxury.astro` | 于处处隐隐流露透露不凡气质具有奢侈典雅高端的奢靡典礼般的品位大展位 |
+| **Minimal** | `PortfolioMinimal.astro` | 完全褪尽表面所有额外多余繁文缛节修容只剩下朴实干净的单薄影像矩阵罗列 |
+| **Aurora** | `PortfolioAurora.astro` | 画廊相框底部与背光处有着幻变多姿犹如美丽极光特效渲染铺排出的变色极彩 |
+
+所有包含这些特色各异展示特效的具体执行相关呈现源代码等皆藏置归于 `src/components/sections/portfolio/` 这个目录下等待获取被调用。
+
+## 内容文案等具体来源
+
+画薄展现集本里面的各项代表单品条目内容详细参数均由调用指令 `useTranslations()` 根据配置从而准确通过在针对获取自 `src/locales/{lang}/portfolio.json` 各特定文库中获取后将对应文本数据注入使用。
+
+<Callout type="info" title="无Props配置 (No Props)">
+  各类 Portfolio 的众多独立组件均舍弃接收外部导入调用的 props 的控制方式。当想需要更迭修正相关展示名称、介绍题头文字甚至变更更换演示样图时候，只需要对针对修改那个与其向连着对应的配置文件便可搞定一切内容层的问题：`src/locales/{lang}/portfolio.json`。
+</Callout>
+
+## 定制和调整
+
+定制步骤如下指引进行：
+1. 于内部编辑或重整相关模板 `src/components/sections/portfolio/Portfolio{Theme}.astro` 其中的对应布局代码。
+2. 针对想要调节排版形态与色彩间距等这方面的展示层参数调整，通过进入去管控影响一切此类表面修工装修改的对应CSS包 `src/styles/components/portfolio/` 里面进行整改。
+3. 若只是想着更换介绍更换文字，只需要去应对改写那内容：`src/locales/{lang}/portfolio.json`。

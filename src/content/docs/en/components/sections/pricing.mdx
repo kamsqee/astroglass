@@ -1,0 +1,51 @@
+---
+title: "Pricing Section"
+description: "Pricing table sections for each theme."
+order: 6
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+The Pricing section displays product plans and tiers. Each theme has its own visual treatment.
+
+## Theme Variants
+
+| Theme | Component | Style |
+|-------|-----------|-------|
+| **Liquid** | `PricingLiquid.astro` | Fluid card layout with gradient accents |
+| **Glass** | `PricingGlass.astro` | Frosted pricing cards |
+| **Neo** | `PricingNeo.astro` | High-contrast pricing grid |
+| **Luxury** | `PricingLuxury.astro` | Gold accent pricing with premium feel |
+| **Minimal** | `PricingMinimal.astro` | Clean, simple pricing list |
+| **Aurora** | `PricingAurora.astro` | Gradient background pricing cards |
+
+All variants are located at `src/components/sections/pricing/`.
+
+## Content Source
+
+Pricing data is loaded from `src/locales/{lang}/pricing.json` via `useTranslations()`. The JSON contains plan names, descriptions, prices, features, and CTA text.
+
+```json title="pricing.json (excerpt)"
+{
+  "title": "Simple Pricing",
+  "subtitle": "Choose the plan that works for you",
+  "plans": {
+    "starter": {
+      "name": "Starter",
+      "price": "19",
+      "features": ["5 Projects", "Basic Analytics"]
+    }
+  }
+}
+```
+
+<Callout type="info" title="No Props">
+  Pricing components take no external props. To change plans, prices, or features, edit `src/locales/{lang}/pricing.json`.
+</Callout>
+
+## Customizing
+
+To customize:
+1. Edit `src/components/sections/pricing/Pricing{Theme}.astro`.
+2. Adjust styles in `src/styles/components/pricing/`.
+3. Change content in `src/locales/{lang}/pricing.json`.

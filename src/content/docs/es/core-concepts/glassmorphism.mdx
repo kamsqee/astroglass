@@ -1,0 +1,55 @@
+---
+title: "Glassmorphism"
+description: "Comprendiendo la filosofía de diseño detrás de AstroGlass."
+order: 5
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass implementa una versión moderna de glassmorphism — creando interfaces que se sienten en capas, transparentes y premium.
+
+## La Receta
+
+El efecto de glassmorphism se logra a través de cuatro propiedades CSS clave que trabajan en conjunto:
+
+1.  **Desenfoque de Fondo**: Usamos `backdrop-filter: blur(12px)` para el efecto esmerilado.
+2.  **Translucidez**: Los colores de fondo usan canales alfa (por ej., `bg-white/10`).
+3.  **Bordes**: Bordes sutiles de 1px (`border-white/20`) definen los márgenes.
+4.  **Sombras**: Sombras suaves y coloreadas crean profundidad y elevación.
+
+Esta combinación crea una sensación de jerarquía y modernidad.
+
+## Uso Práctico
+
+En los componentes de AstroGlass, verá aplicado este patrón como clases de utilidad de Tailwind:
+
+```html
+<div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg">
+  Contenedor Glassmorphic
+</div>
+```
+
+Para temas oscuros, el efecto se superpone a menudo con fondos degradados:
+
+```html
+<div class="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10">
+  Tarjeta glassmorphic oscura
+</div>
+```
+
+## Variaciones de Temas
+
+Cada tema en AstroGlass interpreta el glassmorphism de forma diferente:
+
+| Tema | Estilo de Vidrio |
+|-------|-------------|
+| **Liquid** | Formas orgánicas con fondos de manchas fluidas (blobs) |
+| **Glass** | Paneles esmerilados clásicos con profundidad |
+| **Neo** | Contraste audaz con bordes afilados |
+| **Luxury** | Translucidez con tinte dorado y sombras premium |
+| **Minimal** | Transparencia sutil, apenas perceptible |
+| **Aurora** | Fondos de malla degradada con estructura geométrica |
+
+<Callout type="tip" title="Personalizando Efectos de Vidrio">
+  La intensidad del desenfoque, la opacidad y los efectos de borde se pueden ajustar por tema a través de las variables CSS en `src/styles/_themes.css`. Busque `--glass-blur`, `--glass-opacity`, y propiedades personalizadas relacionadas.
+</Callout>

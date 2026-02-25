@@ -1,0 +1,87 @@
+---
+/**
+ * Docs Bottom Bar Component
+ * 
+ * Mobile-only bottom navigation for documentation pages.
+ * Provides quick access to Home, Search, TOC, and Settings.
+ */
+import { mobileBottomBarItems } from '../../config/docs';
+
+export interface Props {
+  currentPath?: string;
+  locale?: string;
+}
+
+const { currentPath = '/docs', locale = 'en' } = Astro.props;
+const prefix = locale === 'en' ? '' : `/${locale}`;
+---
+
+<nav class="docs-bottom-bar lg:hidden" aria-label="Documentation navigation">
+  {mobileBottomBarItems.map((item) => {
+    const isLink = 'href' in item && item.href;
+    const href = isLink ? `${prefix}${item.href}` : undefined;
+    const isActive = isLink && currentPath.startsWith(item.href);
+    
+    return isLink ? (
+      <a 
+        href={href} 
+        class:list={['docs-bottom-bar-item', isActive && 'is-active']}
+        aria-current={isActive ? 'page' : undefined}
+      >
+        <span class="icon">{item.icon}</span>
+        <span>{item.label}</span>
+      </a>
+    ) : (
+      <button 
+        type="button"
+        class="docs-bottom-bar-item"
+        data-action={item.action}
+        aria-label={item.label}
+      >
+        <span class="icon">{item.icon}</span>
+        <span>{item.label}</span>
+      </button>
+    );
+  })}
+</nav>
+
+<script>
+  function initBottomBar() {
+    const bottomBar = document.querySelector('.docs-bottom-bar');
+    if (!bottomBar) return;
+
+    bottomBar.querySelectorAll('[data-action]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const action = (btn as HTMLElement).dataset.action;
+        
+        switch (action) {
+          case 'openDrawer':
+            // Logic handled in DocsLayout, but we can emit a custom event or trigger directly if buttons handle ids.
+            // But DocsLayout listens to 'mobile-menu-btn'.
+            // Better approach: Since this is inside BottomBar, let's emit a global event or find the function.
+            // Actually, DocsLayout manages the drawer state. We should trigger the same logic.
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('mobile-drawer-overlay');
+            if (drawer && overlay) {
+              drawer.classList.remove('-translate-x-full');
+              overlay.classList.remove('opacity-0', 'invisible');
+              overlay.classList.add('opacity-100', 'visible');
+              document.body.style.overflow = 'hidden';
+            }
+            break;
+          case 'openSearch':
+            window.__SEARCH_OPEN__ = true;
+            window.dispatchEvent(new CustomEvent('open-search'));
+            break;
+          case 'openTOC':
+            // Toggle mobile TOC
+            document.getElementById('mobile-toc')?.classList.toggle('is-open');
+            break;
+        }
+      });
+    });
+  }
+
+  initBottomBar();
+  document.addEventListener('astro:after-swap', initBottomBar);
+</script>

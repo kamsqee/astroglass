@@ -1,0 +1,37 @@
+---
+/**
+ * SectionHeading — Glass Theme
+ * Unified section heading with standardized responsive type scale.
+ *
+ * @prop tag   — HTML tag: 'h1' | 'h2' | 'h3' (default 'h2')
+ * @prop size  — Scale preset: 'xl' | 'lg' | 'md' | 'sm' (default 'lg')
+ * @prop align — Text alignment: 'left' | 'center' (default 'left')
+ * @prop class — Additional classes
+ */
+interface Props {
+  tag?: 'h1' | 'h2' | 'h3';
+  size?: 'xl' | 'lg' | 'md' | 'sm';
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const { tag: Tag = 'h2', size = 'lg', align = 'left', class: className } = Astro.props;
+
+const baseClasses = 'font-black text-base-content';
+
+const sizeMap: Record<string, string> = {
+  xl: 'text-4xl sm:text-5xl lg:text-[6rem] xl:text-[7.5rem] tracking-tight leading-[0.95]',
+  lg: 'text-4xl sm:text-5xl md:text-7xl tracking-tight',
+  md: 'text-4xl md:text-6xl tracking-tighter',
+  sm: 'text-2xl sm:text-3xl md:text-5xl tracking-tight',
+};
+
+const alignMap: Record<string, string> = {
+  left: 'text-left',
+  center: 'text-center',
+};
+---
+
+<Tag class:list={[baseClasses, sizeMap[size], alignMap[align], className]}>
+  <slot />
+</Tag>

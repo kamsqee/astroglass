@@ -1,0 +1,37 @@
+---
+title: "Портфолио (Portfolio) бөлімі"
+description: "Әрбір тақырыпқа арналған жоба көрмесі бөлімдері."
+order: 5
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Портфолио бөлімі жобаларды, жағдайлық зерттеулерді (case studies) немесе жұмыс үлгілерін көрсетеді. Әр тақырып бірегей галерея орналасуын қамтамасыз етеді.
+
+## Тақырып нұсқалары
+
+| Тақырып | Компонент | Стиль |
+|-------|-----------|-------|
+| **Liquid** | `PortfolioLiquid.astro` | Меңзерді апару (hover) анимациялары бар сұйық тор |
+| **Glass** | `PortfolioGlass.astro` | Аязды әйнек жоба карталары |
+| **Neo** | `PortfolioNeo.astro` | Қалың (bold) қалау (masonry) макеті |
+| **Luxury** | `PortfolioLuxury.astro` | Талғампаз жоба презентациялары |
+| **Minimal** | `PortfolioMinimal.astro` | Таза, қарапайым жобалар торы |
+| **Aurora** | `PortfolioAurora.astro` | Градиентті фон галереясы |
+
+Барлық нұсқалар `src/components/sections/portfolio/` мекенжайында орналасқан.
+
+## Мазмұн көзі
+
+Портфолио элементтері `useTranslations()` арқылы `src/locales/{lang}/portfolio.json` файлынан жүктеледі.
+
+<Callout type="info" title="Props жоқ">
+  Портфолио компоненттері сыртқы props қабылдамайды. Жоба тақырыптарын, сипаттамаларын немесе суреттерін өңдеу үшін `src/locales/{lang}/portfolio.json` файлын жаңартыңыз.
+</Callout>
+
+## Баптау
+
+Баптау үшін:
+1. `src/components/sections/portfolio/Portfolio{Theme}.astro` файлын өңдеңіз.
+2. `src/styles/components/portfolio/` ішіндегі стильдерді реттеңіз.
+3. `src/locales/{lang}/portfolio.json` файлындағы мазмұнды өзгертіңіз.

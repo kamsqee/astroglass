@@ -1,0 +1,148 @@
+---
+title: "AstroGlassを始めよう"
+description: "テーマ、国際化（i18n）、およびクラウドへのデプロイメントを使用して、Astroテンプレートをセットアップおよびカスタマイズする方法について学びます。"
+order: 1
+category: guide
+tags: ["getting-started", "setup", "beginner"]
+---
+
+
+**AstroGlassテンプレート**へようこそ！このガイドでは、開発環境のセットアップと、ニーズに合わせてテンプレートをカスタマイズする手順を説明します。
+
+## 前提条件
+
+始める前に、以下がインストールされていることを確認してください：
+
+- **Node.js** v20 以上
+- **pnpm** (推奨) または npm
+- コードエディタ (VS Code を推奨)
+
+<Callout type="tip" title="プロのヒント">
+  より高速でディスク効率の良いパッケージ管理のために、[pnpm](https://pnpm.io/)の使用を推奨します。
+</Callout>
+
+## インストール
+
+<Steps>
+
+### リポジトリのクローン
+
+まず、テンプレートリポジトリをローカルマシンにクローンします：
+
+```bash title="Terminal" frame="terminal"
+git clone https://github.com/kamsqee/astroglass.git my-project
+cd my-project
+```
+
+### 依存関係のインストール
+
+お好みのパッケージマネージャーを使用して、プロジェクトの依存関係をインストールします：
+
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash frame="terminal"
+pnpm install
+```
+```bash frame="terminal"
+npm install
+```
+```bash frame="terminal"
+yarn install
+```
+</CodeTabs>
+
+### 開発用サーバーの起動
+
+開発用サーバーを実行して、テンプレートの動作を確認します：
+
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash frame="terminal"
+pnpm dev
+```
+```bash frame="terminal"
+npm run dev
+```
+```bash frame="terminal"
+yarn dev
+```
+</CodeTabs>
+
+</Steps>
+
+これで、あなたのサイトが `http://localhost:4321` で実行されているはずです 🎉
+
+## プロジェクト構造
+
+プロジェクトのフォルダ構造の概要は以下の通りです：
+
+<FileTree>
+- src/
+  - components/
+    - sections/
+      - hero/
+        - HeroLiquid.astro
+        - HeroGlass.astro
+        - HeroNeo.astro
+        - ...
+      - features/
+      - pricing/
+      - about/
+      - portfolio/
+      - ...
+    - layout/
+      - header/
+    - ui/
+    - docs/
+    - mdx/
+  - config/
+    - themes.ts
+    - locales.ts
+    - docs.ts
+    - navigation.ts
+  - content/
+    - docs/
+      - en/
+      - ru/
+    - blog/
+  - locales/
+    - en/
+    - ru/
+  - pages/
+    - index.astro
+    - [theme].astro
+    - docs/
+    - blog/
+  - styles/
+    - global.css
+    - _themes.css
+    - components/
+- public/
+- astro.config.mjs
+- package.json
+</FileTree>
+
+## テーマの選択
+
+テンプレートには、すぐに使える**6つの美しいテーマ**が用意されています：
+
+| テーマ | 説明 |
+|-------|-------------|
+| **Liquid** | 流れるようなアニメーション、グラデーションの背景 |
+| **Glass** | グラスモーフィズム効果、すりガラスのパネル |
+| **Neo** | 大胆なタイポグラフィ、強いコントラスト |
+| **Luxury** | エレガントなゴールドのアクセント、プレミアムな質感 |
+| **Minimal** | クリーンで焦点が絞られた、気を散らさないデザイン |
+| **Aurora** | 没入感のあるグラデーション、幾何学的な構造 |
+
+テーマを切り替えるには、ヘッダーのテーマスイッチャーに移動するか、テーマのデモページ（例：`/liquid`、`/glass`、`/aurora`）に直接アクセスするだけです。
+
+## 次のステップ
+
+開発環境のセットアップが完了しました：
+
+1. [テーマシステム](/docs/ja/core-concepts/theming) — ダイナミックなテーマアーキテクチャの仕組みを学ぶ
+2. [ルーティング & i18n](/docs/ja/core-concepts/routing-i18n) — より多くの言語のサポートを追加する
+3. [Cloudflare へのデプロイ](/docs/ja/deployment/cloudflare) — Cloudflare Pages にデプロイする
+
+<Callout type="info" title="ヘルプが必要ですか？">
+  問題が発生した場合は、[フォーム & バリデーションガイド](/docs/ja/guides/forms-and-validation)を確認するか、[issueを作成](https://github.com/kamsqee/astroglass/issues)してください。
+</Callout>

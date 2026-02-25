@@ -1,0 +1,198 @@
+---
+/**
+ * Testimonial Neo - The Spotlight Stage
+ * One testimonial in dramatic focus with blurred side cards.
+ * Mobile: Swipe carousel. Desktop: 3-card perspective view.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/testimonial/TestimonialNeo.css';
+import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
+
+const testimonials = [
+  {
+    quote: t('testimonial.t3_quote1'),
+    author: t('testimonial.t3_author1'),
+    role: t('testimonial.t3_role1'),
+    company: t('testimonial.t3_company1'),
+    avatar: "https://i.pravatar.cc/60?img=16"
+  },
+  {
+    quote: t('testimonial.t3_quote2'),
+    author: t('testimonial.t3_author2'),
+    role: t('testimonial.t3_role2'),
+    company: t('testimonial.t3_company2'),
+    avatar: "https://i.pravatar.cc/60?img=12"
+  },
+  {
+    quote: t('testimonial.t3_quote3'),
+    author: t('testimonial.t3_author3'),
+    role: t('testimonial.t3_role3'),
+    company: t('testimonial.t3_company3'),
+    avatar: "https://i.pravatar.cc/60?img=25"
+  },
+  {
+    quote: t('testimonial.t3_quote4'),
+    author: t('testimonial.t3_author4'),
+    role: t('testimonial.t3_role4'),
+    company: t('testimonial.t3_company4'),
+    avatar: "https://i.pravatar.cc/60?img=60"
+  },
+  {
+    quote: t('testimonial.t3_quote5'),
+    author: t('testimonial.t3_author5'),
+    role: t('testimonial.t3_role5'),
+    company: t('testimonial.t3_company5'),
+    avatar: "https://i.pravatar.cc/60?img=32"
+  },
+];
+---
+
+<section class="relative py-24 lg:py-40 px-6 overflow-hidden bg-base-100">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16 lg:mb-24">
+       <NeoSectionTag label={t('testimonial.eyebrow')} class="mb-4" />
+       <h2 class="text-4xl md:text-7xl font-black text-base-content tracking-tighter">{t('testimonial.lovedByLeaders')}</h2>
+    </div>
+
+    <!-- Spotlight Stage -->
+    <div class="c-testimonial-neo__stage relative" data-active="2">
+       <!-- Cards Container -->
+       <div class="c-testimonial-neo__track relative h-[400px] lg:h-[450px]">
+          {testimonials.map((item, i) => (
+             <div 
+               class:list={[
+                 "c-testimonial-neo__card absolute left-1/2 top-1/2",
+                 i === 2 ? "active" : "",
+                 i === 1 ? "prev" : "",
+                 i === 3 ? "next" : "",
+                 (i !== 1 && i !== 2 && i !== 3) ? "far" : ""
+               ]}
+               data-index={i}
+               aria-hidden={i !== 2 ? "true" : undefined}
+             >
+                <div class="c-testimonial-neo__content p-8 lg:p-12 rounded-[2.5rem] bg-base-100/95 border border-base-content/10 backdrop-blur-3xl text-center shadow-lg hover:shadow-xl hover:bg-base-content/[0.02] hover:border-base-content/20 transition-all duration-300">
+                   <!-- Quote Icon -->
+                   <div class="w-12 h-12 mx-auto mb-6 rounded-full bg-accent/10 flex items-center justify-center">
+                      <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                         <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                      </svg>
+                   </div>
+
+                   <!-- Quote -->
+                   <p class="text-lg lg:text-2xl font-medium text-base-content leading-relaxed mb-8 max-w-lg mx-auto">
+                      "{item.quote}"
+                   </p>
+
+                   <!-- Avatar & Attribution -->
+                   <div class="flex flex-col items-center gap-4">
+                      <img 
+                        src={item.avatar} 
+                        alt={item.author} 
+                        class="w-16 h-16 rounded-full object-cover border-4 border-base-content/10"
+                      />
+                      <div>
+                         <p class="text-base font-bold text-base-content">{item.author}</p>
+                         <p class="text-sm font-medium text-base-content">{item.role} {t('testimonial.at')} {item.company}</p>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          ))}
+       </div>
+
+       <!-- Navigation Dots -->
+       <div class="flex justify-center gap-0 mt-4">
+          {testimonials.map((_, i) => (
+             <button 
+               class="c-testimonial-neo__dot-btn w-11 h-11 flex items-center justify-center group"
+               data-target={i}
+               aria-label={`Go to testimonial ${i + 1}`}
+             >
+               <span class="c-testimonial-neo__dot relative w-2.5 h-2.5 rounded-full bg-base-content/20 group-hover:bg-base-content/40 transition-all"></span>
+             </button>
+          ))}
+       </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let spotlightController: AbortController | null = null;
+
+  function initSpotlightStage() {
+    // Abort previous listeners
+    spotlightController?.abort();
+    spotlightController = new AbortController();
+    const signal = spotlightController.signal;
+
+    const stage = document.querySelector('.c-testimonial-neo__stage') as HTMLElement;
+    const cards = document.querySelectorAll('.c-testimonial-neo__card');
+    const dots = document.querySelectorAll('.c-testimonial-neo__dot-btn');
+    
+    if (!stage || !cards.length) return;
+
+    let current = 2; // Start in middle
+    const total = cards.length;
+
+    function updatePositions() {
+      cards.forEach((card, i) => {
+        card.classList.remove('active', 'prev', 'next', 'far');
+        
+        const offset = i - current;
+        
+        if (offset === 0) {
+          card.classList.add('active');
+          card.removeAttribute('aria-hidden');
+        } else {
+          card.setAttribute('aria-hidden', 'true');
+          if (offset === -1) card.classList.add('prev');
+          else if (offset === 1) card.classList.add('next');
+          else card.classList.add('far');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === current);
+      });
+    }
+
+    function setActive(index: number) {
+      current = Math.max(0, Math.min(total - 1, index));
+      updatePositions();
+    }
+
+    // Card clicks
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => setActive(i), { signal });
+    });
+
+    // Dot clicks
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => setActive(i), { signal });
+    });
+
+    // Touch/swipe for mobile
+    let touchStartX = 0;
+    stage.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { signal });
+    stage.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) setActive(current + 1);
+        else setActive(current - 1);
+      }
+    }, { signal });
+
+    updatePositions();
+  }
+
+  initSpotlightStage();
+  document.addEventListener('astro:after-swap', initSpotlightStage);
+</script>

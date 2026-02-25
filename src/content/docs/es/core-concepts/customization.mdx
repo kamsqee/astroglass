@@ -1,0 +1,77 @@
+---
+title: Personalización
+description: Cómo personalizar estilos, temas y configuración.
+order: 2
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass utiliza **Tailwind CSS v4** para el estilo a través del complemento `@tailwindcss/vite`. No hay un archivo `tailwind.config.mjs` separado — toda la personalización ocurre a través de CSS.
+
+## Descripción General de Estilos
+
+Los estilos globales y las variables CSS se definen en `src/styles/global.css`. Este archivo maneja:
+- Reinicios de la capa base (resets)
+- Fuentes personalizadas (Inter & JetBrains Mono)
+- Variables CSS para la tematización (valores de color HSL)
+
+Las anulaciones específicas de cada tema se encuentran en `src/styles/_themes.css`.
+
+<FileTree>
+- src/
+  - styles/
+    - **global.css** — Estilos base, fuentes, variables CSS raíz
+    - **_themes.css** — Anulaciones de color por tema
+    - **_animations.css** — Fotogramas clave de animación compartidos
+    - **_forms.css** — Estilos para entradas de formularios
+    - components/ — Estilos específicos de componentes (hero, precios, etc.)
+</FileTree>
+
+## Sistema de Colores
+
+El proyecto usa un sistema de color basado en variables CSS. Los colores se definen como valores HSL (sin el envoltorio `hsl()`), permitiendo que la sintaxis de modificador de opacidad de Tailwind funcione correctamente.
+
+```css title="global.css"
+/* src/styles/global.css */
+:root {
+  --p: 260 80% 60%;   /* Primario */
+  --s: 310 80% 60%;   /* Secundario */
+  --a: 190 90% 60%;   /* Acento */
+  --b1: 220 20% 10%;  /* Base 1 (Fondo) */
+  --b2: 220 18% 14%;  /* Base 2 (Superficie) */
+  --bc: 220 20% 90%;  /* Contenido Base (Texto) */
+  --er: 0 80% 60%;    /* Error */
+  --su: 150 80% 50%;  /* Éxito */
+}
+```
+
+Los componentes consumen estas variables a través de clases de utilidad Tailwind o `hsl()`:
+
+```html
+<div class="bg-[hsl(var(--p))] text-[hsl(var(--bc))]">
+  Fondo Primario con Texto de Contenido Base
+</div>
+```
+
+<Callout type="tip" title="Cambiando Colores">
+  Para cambiar el esquema de colores del sitio, actualice los valores HSL en `global.css`. Para anulaciones específicas del tema (modo claro/oscuro, colores por tema), use selectores `[data-theme="..."]` en `_themes.css`.
+</Callout>
+
+## Agregando Fuentes Personalizadas
+
+1.  Coloque los archivos de fuentes en `public/fonts/` o importe desde Google Fonts en `global.css`.
+2.  Defina las reglas `@font-face` en `src/styles/global.css`.
+3.  Actualice las variables CSS font-family o las utilidades de Tailwind según sea necesario.
+
+## Personalización de Componentes
+
+Cada tema tiene sus propias variantes de componentes (por ejemplo, `HeroLiquid.astro`, `HeroGlass.astro`). Para personalizar una sección específica:
+
+1.  Navegue a `src/components/sections/{section}/` (por ej., `hero/`).
+2.  Edite el archivo específico del tema directamente (por ej., `HeroGlass.astro`).
+3.  El CSS específico del componente se encuentra en `src/styles/components/{section}/`.
+
+<Callout type="info" title="Sin Props Externas">
+  Los componentes de sección no aceptan props de texto. Todo el contenido es impulsado por claves de traducción mediante `useTranslations()`. Para cambiar el texto, edite los archivos JSON en `src/locales/{lang}/`.
+</Callout>

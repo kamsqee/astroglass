@@ -1,0 +1,184 @@
+---
+/**
+ * Testimonial Glass - The Conversation Thread
+ * Chat-style testimonials with typing indicators and message bubbles.
+ * Mobile: Full-width chat with stacked meta. Desktop: Centered chat window.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import SectionTag from '../../ui/glass/SectionTag.astro';
+import SectionHeading from '../../ui/glass/SectionHeading.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/testimonial/TestimonialGlass.css';
+
+import { Card } from '../../ui/card';
+import { UserAvatar } from '../../ui/UserAvatar';
+
+const messages = [
+  {
+    quote: t('testimonial.chat1'),
+    author: "Alex Turner",
+    role: t('testimonial.roles.indie'),
+    company: "",
+    avatar: "https://i.pravatar.cc/60?img=11",
+    time: t('testimonial.time.2m'),
+    reactions: [{ emoji: "🔥", count: 24 }, { emoji: "💯", count: 12 }]
+  },
+  {
+    quote: t('testimonial.chat2'),
+    author: "Priya Sharma",
+    role: t('testimonial.roles.lead'),
+    company: t('testimonial.companies.stripe'),
+    avatar: "https://i.pravatar.cc/60?img=23",
+    time: t('testimonial.time.15m'),
+    reactions: [{ emoji: "❤️", count: 47 }, { emoji: "🙌", count: 18 }],
+    verified: true
+  },
+  {
+    quote: t('testimonial.chat3'),
+    author: "James Wilson",
+    role: t('testimonial.roles.senior'),
+    company: t('testimonial.companies.shopify'),
+    avatar: "https://i.pravatar.cc/60?img=33",
+    time: t('testimonial.time.1h'),
+    reactions: [{ emoji: "👏", count: 31 }]
+  },
+  {
+    quote: t('testimonial.chat4'),
+    author: "Maria Santos",
+    role: t('testimonial.roles.founder'),
+    company: t('testimonial.companies.launchpad'),
+    avatar: "https://i.pravatar.cc/60?img=44",
+    time: t('testimonial.time.3h'),
+    reactions: [{ emoji: "🎉", count: 89 }, { emoji: "💪", count: 23 }]
+  },
+  {
+    quote: t('testimonial.chat5'),
+    author: "Chen Wei",
+    role: t('testimonial.roles.cto'),
+    company: t('testimonial.companies.techflow'),
+    avatar: "https://i.pravatar.cc/60?img=52",
+    time: t('testimonial.yesterday'),
+    reactions: [{ emoji: "📈", count: 15 }],
+    verified: true
+  },
+];
+---
+
+<section class="relative py-24 lg:py-32 px-6 overflow-hidden bg-base-100">
+  <div class="max-w-3xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12">
+       <SectionTag label={`${messages.length} ${t('testimonial.peopleTalking')}`} class="mb-6" />
+       <SectionHeading size="md" align="center">{t('testimonial.buzz')}</SectionHeading>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="c-testimonial-glass__container relative">
+       <!-- Messages -->
+       <div class="space-y-6">
+          {messages.map((m, i) => (
+             <div 
+               class="c-testimonial-glass__message opacity-0 translate-y-4"
+               data-delay={i * 150}
+               style={`animation-delay: ${i * 150}ms`}
+             >
+                <div class="flex gap-3 sm:gap-4">
+                   {/* Avatar */}
+                   <div class="flex-shrink-0">
+                      <div class="relative">
+                         <UserAvatar 
+                           src={m.avatar} 
+                           alt={m.author} 
+                           fallback={m.author.charAt(0)}
+                           className="w-10 h-10 sm:w-12 sm:h-12 border-2 border-base-content/10"
+                         />
+                         {m.verified && (
+                            <div class="absolute -bottom-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-accent flex items-center justify-center z-10">
+                               <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-base-100" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                               </svg>
+                            </div>
+                         )}
+                      </div>
+                   </div>
+
+                   <!-- Bubble -->
+                   <div class="flex-1 min-w-0">
+                      <!-- Desktop: inline meta -->
+                      <div class="hidden sm:flex items-center gap-2 mb-2">
+                         <span class="text-sm font-bold text-base-content">{m.author}</span>
+                         <span class="text-xs text-base-content/80 truncate">{m.role}{m.company ? `, ${m.company}` : ''}</span>
+                         <span class="text-xs text-base-content/60">· {m.time}</span>
+                      </div>
+                      
+                      <!-- Mobile: stacked meta -->
+                      <div class="sm:hidden mb-2">
+                         <div class="flex items-center gap-2">
+                            <span class="text-sm font-bold text-base-content">{m.author}</span>
+                            <span class="text-xs text-base-content/60">{m.time}</span>
+                         </div>
+                         <span class="text-xs text-base-content">{m.role}{m.company ? `, ${m.company}` : ''}</span>
+                      </div>
+                      
+                      <Card className="c-testimonial-glass__bubble relative p-4 sm:p-5 rounded-2xl rounded-tl-md bg-base-content/[0.04] border-base-content/5 shadow-none">
+                         <p class="text-sm sm:text-base text-base-content/80 leading-relaxed">{m.quote}</p>
+                      </Card>
+
+                      <!-- Reactions -->
+                      {m.reactions && (
+                         <div class="flex flex-wrap gap-2 mt-3">
+                            {m.reactions.map(r => (
+                               <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-base-content/[0.03] border border-base-content/5 hover:bg-base-content/[0.06] transition-colors cursor-pointer">
+                                  <span class="text-sm">{r.emoji}</span>
+                                  <span class="text-xs font-bold text-base-content">{r.count}</span>
+                               </div>
+                            ))}
+                         </div>
+                      )}
+                   </div>
+                </div>
+             </div>
+          ))}
+       </div>
+
+       <!-- Typing Indicator -->
+       <div class="c-testimonial-glass__typing-indicator flex gap-3 sm:gap-4 mt-8 opacity-60">
+          <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-base-content/5 border border-base-content/10 flex items-center justify-center">
+             <span class="text-base sm:text-lg">💬</span>
+          </div>
+          <div class="flex items-center gap-1.5 px-4 sm:px-5 py-3 rounded-2xl rounded-tl-md bg-base-content/[0.03] border border-base-content/5">
+             <div class="c-testimonial-glass__typing-dot w-2 h-2 rounded-full bg-base-content/30"></div>
+             <div class="c-testimonial-glass__typing-dot w-2 h-2 rounded-full bg-base-content/30"></div>
+             <div class="c-testimonial-glass__typing-dot w-2 h-2 rounded-full bg-base-content/30"></div>
+          </div>
+       </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initChatMessages() {
+    const messages = document.querySelectorAll('.c-testimonial-glass__message');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = parseInt((entry.target as HTMLElement).dataset.delay || '0');
+          setTimeout(() => {
+            entry.target.classList.add('animate');
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    messages.forEach(m => observer.observe(m));
+  }
+
+  initChatMessages();
+  document.addEventListener('astro:after-swap', initChatMessages);
+</script>

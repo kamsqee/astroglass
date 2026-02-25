@@ -1,0 +1,173 @@
+---
+title: "ショーケース：可視化の力"
+description: "Astro Glassにおけるデータ可視化とシネマティックなコードブロックの可能性を最大限に引き出します。"
+date: 2026-02-07
+postLayout: 2
+---
+
+import { AnalyticsDashboard } from '../../../components/ui/dashboard/AnalyticsDashboard';
+import ProjectStructureGraph from '../../../components/ui/diagrams/ProjectStructureGraph';
+import { Card, CardHeader, CardTitle, CardContent } from '../../../components/ui/card';
+import { BarList } from '../../../components/ui/charts/BarList';
+import { Tracker } from '../../../components/ui/charts/Tracker';
+
+このページでは、テーマに統合されているプレミアムなデーター可視化機能について紹介します。
+
+**Astro Glass**の可視化ショーケースへようこそ。この投稿では、我々のコアな可視化スタックである**Shadcn Charts (Recharts)**、**Visx**、および**Expressive Code**が、どのように連携して視覚的に美しく、データ豊富な体験を生み出すかについてデモンストレーションします。
+
+## 1. アナリティクスとダッシュボード (Recharts)
+
+我々は基本的なチャート（グラフ）からさらに先へ進みました。我々がカスタマイズ実装した**Astro Glass Charts**は、Rechartsの強力さと共に、我々のグラスモーフィズム・エンジンの美しさを兼ね備えています。
+
+### A. ダッシュボード
+KPIカードや、グラデーションが施されたエリアチャート、光輝くドーナツチャートなどで完全にビューが構成されたダッシュボードです。色が現在のアクティブなテーマにどう適応するか注目してみてください（「Neo」または「Sunset」にテーマを切り替えてみてください！）。
+
+<div className="my-10 not-prose overflow-x-auto pb-4 max-w-full">
+  <div className="rounded-2xl border border-[hsl(var(--bc)/0.1)] bg-[hsl(var(--b1)/0.5)] backdrop-blur-xl p-2 sm:p-4 md:p-8 ring-1 ring-[hsl(var(--bc)/0.05)]">
+    <AnalyticsDashboard client:load />
+  </div>
+</div>
+
+### B. マイクロ・ビジュアライゼーション
+視覚的な混乱を招くことなくデータの密度を高めるため、カスタムした**BarList**と**Tracker**を使用します。これらのコンポーネントは、滑らかなアニメーションと「リキッド（液状）」の進行インジケーターを備えています。
+
+import { useTranslations } from '../../../utils/i18n';
+
+export const t = useTranslations('ja');
+
+<div className="my-10 grid grid-cols-1 md:grid-cols-2 gap-6 not-prose">
+  <Card variant="glass" className="border-[hsl(var(--bc)/0.1)] bg-[hsl(var(--b2)/0.3)] shadow-none">
+    <CardHeader>
+      <CardTitle>{t('blog.dashboard.topPages')}</CardTitle>
+    </CardHeader>
+    <CardContent>
+      <div className="flex justify-between mb-2 text-xs text-[hsl(var(--bc)/0.4)] uppercase tracking-wider font-bold">
+        <p>{t('blog.dashboard.source')}</p>
+        <p>{t('blog.dashboard.visits')}</p>
+      </div>
+      <BarList
+        data={[
+          { name: '/blog/visualization-showcase', value: 1230 },
+          { name: '/docs/getting-started', value: 751 },
+          { name: '/components/ui', value: 471 },
+          { name: '/about', value: 280 },
+          { name: '/contact', value: 190 },
+        ]}
+        className="mt-2"
+      />
+    </CardContent>
+  </Card>
+
+  <Card variant="glass" className="border-[hsl(var(--bc)/0.1)] bg-[hsl(var(--b2)/0.3)] shadow-none">
+    <CardHeader>
+      <CardTitle>{t('blog.dashboard.systemUptime')}</CardTitle>
+      <p className="text-[hsl(var(--bc)/0.6)] text-sm">{t('blog.dashboard.apiAvailability')}</p>
+    </CardHeader>
+    <CardContent>
+      <Tracker
+        data={[
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'yellow', tooltip: t('blog.dashboard.degraded') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'red', tooltip: t('blog.dashboard.downtime') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+           { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+          { color: 'emerald', tooltip: t('blog.dashboard.operational') },
+        ]}
+        className="mt-4"
+      />
+      <div className="mt-4 flex justify-between items-center text-sm">
+        <p className="text-emerald-400 font-bold glow-sm">稼働率 99.2%</p>
+        <p className="text-[hsl(var(--bc)/0.4)]">{t('blog.dashboard.last24h')}</p>
+      </div>
+    </CardContent>
+  </Card>
+</div>
+
+---
+
+## 2. インタラクティブな体系図表示 (React Flow)
+
+我々はファイルの図解化だけに留まりません。**システムアーキテクチャ**の可視化にも使用しています。このインタラクティブなグラフでは、ノードをドラッグしたり、ズームインしたり、プロジェクトの構造を探索したりすることができます。
+
+### A. プロジェクト構造
+標準的なファイルツリーであるツリービュー。
+
+<div className="my-10 not-prose overflow-x-auto pb-4">
+  <ProjectStructureGraph client:only="react" />
+</div>
+
+
+
+---
+
+## 3. シネマティックなコードブロック表示 (Expressive Code)
+
+コードもまたコンテンツです。我々はそれを際立たせます。
+
+### A. ハイライトとフォーカス
+ユーザーの視線を、正確に重要な箇所へと誘導します。
+
+```tsx title="src/components/Magic.tsx" {3, 7-9}
+// 1. 魔法をここへ輸入する
+import { motion } from 'framer-motion';
+
+export const MagicCard = () => (
+  // 2. それをアニメーションにする
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.5 }}
+  >
+    マジック！
+  </motion.div>
+);
+```
+
+### B. ファイルのアイコン付きのDiff表示
+何が追加されたのか、文脈付きで明確に削除や追加を示します。
+
+```diff lang="js" title="astro.config.mjs"
+  export default defineConfig({
+    integrations: [
+-     react(),
++     react({ include: ['**/react/*'] }),
+      tailwind(),
+    ],
+  });
+```
+
+### C. ターミナルとフレーム
+ターミナル環境そのものをシミュレートします。
+
+```bash title="Deploying to Edge" frame="terminal"
+$ pnpm run build
+> astro build
+
+09:41:22 [build] output target: server
+09:41:22 [build] deploying to Cloudflare...
+09:41:23 [success] Deployed to https://astroglass-preview.pages.dev 🚀
+```
+
+---
+
+## 結論
+
+このショーケースは、**Astro Glass** が単なるテンプレート以上の—高パフォーマンスなコンテンツエンジンであることを証明しています。これらのツールを最大限活用することで、機能的でありながらも美しいデザインによる、複雑なデーターやロジックが伝達可能となります。

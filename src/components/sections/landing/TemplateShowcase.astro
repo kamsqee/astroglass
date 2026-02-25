@@ -1,0 +1,187 @@
+---
+/**
+ * Template Showcase — Bento grid showing template capabilities
+ * Interactive cards highlighting: themes, components, blog, i18n, docs, edge deployment
+ */
+import '../../../styles/components/landing/TemplateShowcase.css';
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const cards = [
+  {
+    key: 'themes',
+    icon: '🎨',
+    value: '6',
+    gradient: 'from-violet-500/10 to-blue-500/10',
+    borderHover: 'hover:border-violet-500/30',
+    span: 'lg:col-span-2 lg:row-span-2',
+    large: true,
+    href: '#themes',
+  },
+  {
+    key: 'components',
+    icon: '⚡',
+    value: '66+',
+    gradient: 'from-emerald-500/10 to-teal-500/10',
+    borderHover: 'hover:border-emerald-500/30',
+    span: '',
+    large: false,
+    href: '/liquid',
+  },
+  {
+    key: 'blog',
+    icon: '📝',
+    value: '',
+    gradient: 'from-amber-500/10 to-orange-500/10',
+    borderHover: 'hover:border-amber-500/30',
+    span: '',
+    large: false,
+    href: '/blog',
+  },
+  {
+    key: 'i18n',
+    icon: '🌐',
+    value: '2',
+    gradient: 'from-cyan-500/10 to-blue-500/10',
+    borderHover: 'hover:border-cyan-500/30',
+    span: '',
+    large: false,
+    href: '/ru',
+  },
+  {
+    key: 'docs',
+    icon: '📖',
+    value: '',
+    gradient: 'from-pink-500/10 to-rose-500/10',
+    borderHover: 'hover:border-pink-500/30',
+    span: '',
+    large: false,
+    href: '/docs',
+  },
+  {
+    key: 'edge',
+    icon: '☁️',
+    value: '',
+    gradient: 'from-blue-500/10 to-indigo-500/10',
+    borderHover: 'hover:border-blue-500/30',
+    span: '',
+    large: false,
+    href: '/docs',
+  },
+  {
+    key: 'seo',
+    icon: '🔍',
+    value: '',
+    gradient: 'from-lime-500/10 to-green-500/10',
+    borderHover: 'hover:border-lime-500/30',
+    span: '',
+    large: false,
+    href: '/docs',
+  },
+  {
+    key: 'perf',
+    icon: '🚀',
+    value: '100',
+    gradient: 'from-yellow-500/10 to-red-500/10',
+    borderHover: 'hover:border-yellow-500/30',
+    span: '',
+    large: false,
+    href: '/docs',
+  },
+  {
+    key: 'colorThemes',
+    icon: '🎭',
+    value: '10',
+    gradient: 'from-fuchsia-500/10 to-purple-500/10',
+    borderHover: 'hover:border-fuchsia-500/30',
+    span: '',
+    large: false,
+    href: '#themes',
+  },
+];
+---
+
+<section id="showcase" class="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-base-100 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12 sm:mb-16 md:mb-20">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/20 bg-accent/[0.06] text-base-content/80 text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+        {t('landing.showcase.eyebrow')}
+      </div>
+      <h2 class="text-4xl sm:text-5xl md:text-7xl font-black text-base-content tracking-tighter leading-[0.95] mb-6">
+        {t('landing.showcase.title')}
+      </h2>
+      <p class="text-base sm:text-lg text-base-content/75 max-w-xl mx-auto">
+        {t('landing.showcase.desc')}
+      </p>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="showcase-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      {cards.map((card, i) => (
+        <a
+          href={card.href}
+          class:list={[
+            "showcase-card group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-base-content/5 transition-all duration-700",
+            card.borderHover,
+            card.span,
+            card.large ? 'min-h-[320px] sm:min-h-[400px]' : 'min-h-[200px] sm:min-h-[240px]'
+          ]}
+          style={`animation-delay: ${i * 80}ms`}
+        >
+          {/* Background gradient */}
+          <div class={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} data-showcase-bg></div>
+          
+          {/* Glass overlay */}
+          <div class="absolute inset-0 bg-base-content/[0.02] group-hover:bg-base-content/[0.04] transition-colors duration-700"></div>
+
+          <div class="relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between">
+            {/* Top: Icon + Value */}
+            <div class="flex items-start justify-between">
+              <div class="text-3xl sm:text-4xl transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                {card.icon}
+              </div>
+              {card.value && (
+                <span data-content={card.value} class:list={[
+                  "showcase-value font-black tracking-tighter transition-colors duration-500",
+                  card.large ? "text-5xl sm:text-7xl text-base-content/5 group-hover:text-base-content/10" : "text-3xl sm:text-4xl text-base-content/5 group-hover:text-base-content/10"
+                ]}>
+                </span>
+              )}
+            </div>
+
+            {/* Bottom: Content */}
+            <div>
+              <h3 class:list={[
+                "font-black tracking-tight mb-2 group-hover:text-accent transition-colors duration-500",
+                card.large ? "text-2xl sm:text-3xl" : "text-lg sm:text-xl"
+              ]}>
+                {t(`landing.showcase.${card.key}`)}
+              </h3>
+              <p class:list={[
+                "text-base-content/75 group-hover:text-base-content/75 leading-relaxed transition-colors duration-500",
+                card.large ? "text-sm sm:text-base max-w-sm" : "text-xs sm:text-sm"
+              ]}>
+                {t(`landing.showcase.${card.key}Desc`)}
+              </p>
+
+              {/* Explore link */}
+              <div class="inline-flex items-center gap-2 mt-4 text-xs font-bold text-base-content/20 group-hover:text-accent transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+                {t('landing.showcase.explore')}
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+

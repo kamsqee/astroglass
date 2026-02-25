@@ -1,0 +1,148 @@
+---
+title: "Démarrer avec AstroGlass"
+description: "Découvrez comment configurer et personnaliser votre modèle Astro avec des thèmes, l'internationalisation et le déploiement sur le cloud."
+order: 1
+category: guide
+tags: ["getting-started", "setup", "beginner"]
+---
+
+
+Bienvenue dans le **Modèle AstroGlass** ! Ce guide vous accompagnera pour configurer votre environnement de développement et personnaliser le modèle pour répondre à vos besoins.
+
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir installé ce qui suit :
+
+- **Node.js** v20 ou supérieur
+- **pnpm** (recommandé) ou npm
+- Un éditeur de code (VS Code recommandé)
+
+<Callout type="tip" title="Conseil de pro">
+  Nous recommandons d'utiliser [pnpm](https://pnpm.io/) pour une gestion de paquets plus rapide et économe en espace disque.
+</Callout>
+
+## Installation
+
+<Steps>
+
+### Cloner le dépôt
+
+Tout d'abord, clonez le dépôt du modèle sur votre machine locale :
+
+```bash title="Terminal" frame="terminal"
+git clone https://github.com/kamsqee/astroglass.git my-project
+cd my-project
+```
+
+### Installer les dépendances
+
+Installez les dépendances du projet en utilisant votre gestionnaire de paquets préféré :
+
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash frame="terminal"
+pnpm install
+```
+```bash frame="terminal"
+npm install
+```
+```bash frame="terminal"
+yarn install
+```
+</CodeTabs>
+
+### Démarrer le serveur de développement
+
+Lancez le serveur de développement pour voir votre modèle en action :
+
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash frame="terminal"
+pnpm dev
+```
+```bash frame="terminal"
+npm run dev
+```
+```bash frame="terminal"
+yarn dev
+```
+</CodeTabs>
+
+</Steps>
+
+Votre site devrait maintenant fonctionner sur `http://localhost:4321` 🎉
+
+## Structure du Projet
+
+Voici un aperçu de la structure des dossiers du projet :
+
+<FileTree>
+- src/
+  - components/
+    - sections/
+      - hero/
+        - HeroLiquid.astro
+        - HeroGlass.astro
+        - HeroNeo.astro
+        - ...
+      - features/
+      - pricing/
+      - about/
+      - portfolio/
+      - ...
+    - layout/
+      - header/
+    - ui/
+    - docs/
+    - mdx/
+  - config/
+    - themes.ts
+    - locales.ts
+    - docs.ts
+    - navigation.ts
+  - content/
+    - docs/
+      - en/
+      - ru/
+    - blog/
+  - locales/
+    - en/
+    - ru/
+  - pages/
+    - index.astro
+    - [theme].astro
+    - docs/
+    - blog/
+  - styles/
+    - global.css
+    - _themes.css
+    - components/
+- public/
+- astro.config.mjs
+- package.json
+</FileTree>
+
+## Choisir un Thème
+
+Le modèle est livré avec **6 superbes thèmes** prêts à l'emploi :
+
+| Thème | Description |
+|-------|-------------|
+| **Liquid** | Animations fluides, arrière-plans dégradés |
+| **Glass** | Effets de glassmorphism, panneaux dépolis |
+| **Neo** | Typographie audacieuse, fort contraste |
+| **Luxury** | Élégants accents dorés, sensation premium |
+| **Minimal** | Épuré, ciblé, sans distraction |
+| **Aurora** | Dégradés immersifs, structure géométrique |
+
+Pour changer de thème, accédez simplement au sélecteur de thème dans l'en-tête ou visitez directement les pages de démonstration des thèmes (par ex., `/liquid`, `/glass`, `/aurora`).
+
+## Prochaines Étapes
+
+Maintenant que votre environnement de développement est configuré :
+
+1. [Système de Thèmes](/docs/fr/core-concepts/theming) — Découvrez comment fonctionne l'architecture de thèmes dynamiques
+2. [Routage & i18n](/docs/fr/core-concepts/routing-i18n) — Ajoutez le support de langues supplémentaires
+3. [Déploiement Cloudflare](/docs/fr/deployment/cloudflare) — Déployez sur Cloudflare Pages
+
+<Callout type="info" title="Besoin d'aide ?">
+  Consultez le [Guide des Formulaires & Validation](/docs/fr/guides/forms-and-validation) ou [ouvrez un problème](https://github.com/kamsqee/astroglass/issues) si vous rencontrez des difficultés.
+</Callout>

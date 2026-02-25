@@ -1,0 +1,51 @@
+---
+title: "Section Tarification (Pricing)"
+description: "Sections de tableau de prix pour chaque thème."
+order: 6
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La section Tarification (Pricing) affiche les forfaits et les niveaux de produits. Chaque thème a son propre traitement visuel.
+
+## Variantes de thème
+
+| Thème | Composant | Style |
+|-------|-----------|-------|
+| **Liquid** | `PricingLiquid.astro` | Disposition de cartes fluides avec des accents dégradés |
+| **Glass** | `PricingGlass.astro` | Cartes de tarification en verre givré |
+| **Neo** | `PricingNeo.astro` | Grille de tarification à fort contraste |
+| **Luxury** | `PricingLuxury.astro` | Tarification avec accents dorés et sensation premium |
+| **Minimal** | `PricingMinimal.astro` | Liste de prix simple et épurée |
+| **Aurora** | `PricingAurora.astro` | Cartes de tarification sur fond dégradé |
+
+Toutes les variantes se trouvent dans `src/components/sections/pricing/`.
+
+## Source du contenu
+
+Les données de tarification sont chargées à partir de `src/locales/{lang}/pricing.json` via `useTranslations()`. Le JSON contient les noms des forfaits, les descriptions, les prix, les fonctionnalités et le texte de l'appel à l'action.
+
+```json title="pricing.json (extrait)"
+{
+  "title": "Tarification Simple",
+  "subtitle": "Choisissez le forfait qui vous convient",
+  "plans": {
+    "starter": {
+      "name": "Débutant",
+      "price": "19",
+      "features": ["5 Projets", "Analyses de base"]
+    }
+  }
+}
+```
+
+<Callout type="info" title="Pas de props">
+  Les composants de tarification n'acceptent aucune prop externe. Pour modifier les forfaits, les prix ou les fonctionnalités, mettez à jour `src/locales/{lang}/pricing.json`.
+</Callout>
+
+## Personnalisation
+
+Pour personnaliser :
+1. Modifiez `src/components/sections/pricing/Pricing{Theme}.astro`.
+2. Ajustez les styles dans `src/styles/components/pricing/`.
+3. Modifiez le contenu dans `src/locales/{lang}/pricing.json`.

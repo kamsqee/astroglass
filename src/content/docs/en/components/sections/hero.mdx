@@ -1,0 +1,59 @@
+---
+title: "Hero Section"
+description: "Full-screen hero sections for each theme."
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+The Hero section is the first thing visitors see. Each theme has its own unique hero design with custom animations, backgrounds, and layout.
+
+## Theme Variants
+
+| Theme | Component | Design |
+|-------|-----------|--------|
+| **Liquid** | `HeroLiquid.astro` | Animated SVG liquid blobs, gradient text |
+| **Glass** | `HeroGlass.astro` | Frosted card hero with blur backgrounds |
+| **Neo** | `HeroNeo.astro` | Bold typography, high contrast |
+| **Luxury** | `HeroLuxury.astro` | Gold accents, premium layout |
+| **Minimal** | `HeroMinimal.astro` | Clean, centered, distraction-free |
+| **Aurora** | `HeroAurora.astro` | Gradient mesh, geometric elements |
+
+All variants are located at `src/components/sections/hero/`.
+
+## How It Works
+
+Each Hero variant is a self-contained Astro component that:
+
+1. Imports and initializes `useTranslations()` for the current locale.
+2. Renders its own unique HTML structure with theme-specific CSS.
+3. Loads translation keys like `hero.title`, `hero.subtitle`, `hero.cta`, and `hero.liveBadge` from `src/locales/{lang}/hero.json`.
+
+```astro title="HeroLiquid.astro (simplified)"
+---
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section>
+  <h1>{t('hero.title')}</h1>
+  <p>{t('hero.subtitle')}</p>
+  <a href="#explore">{t('hero.cta')}</a>
+</section>
+```
+
+<Callout type="info" title="No Props">
+  Hero components take no external props. To change the headline, subtitle, or CTA text, edit `src/locales/en/hero.json` (or the appropriate locale file).
+</Callout>
+
+## Customizing a Hero
+
+To customize a specific theme's hero:
+
+1. Open `src/components/sections/hero/Hero{Theme}.astro`.
+2. Modify the HTML structure, classes, or animations as needed.
+3. For CSS changes, edit `src/styles/components/hero/Hero{Theme}.css`.
+4. For text changes, edit `src/locales/{lang}/hero.json`.

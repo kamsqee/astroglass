@@ -1,0 +1,93 @@
+---
+/**
+ * Features Glass - Horizontal List (Refined)
+ * Numbered rows with better mobile layout and visible interactions.
+ */
+import '../../../styles/components/features/FeaturesGlass.css';
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import SectionTag from '../../ui/glass/SectionTag.astro';
+import SectionHeading from '../../ui/glass/SectionHeading.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const features = [
+  { id: 1, title: t('features.f1Title'), desc: t('features.f1Desc'), icon: '🚀' },
+  { id: 2, title: t('features.f2Title'), desc: t('features.f2Desc'), icon: '💎' },
+  { id: 3, title: t('features.f3Title'), desc: t('features.f3Desc'), icon: '📱' },
+  { id: 4, title: t('features.f4Title'), desc: t('features.f4Desc'), icon: '🎨' },
+];
+
+
+---
+
+<section id="services" class="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-base-content/[0.01]">
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16 md:mb-20">
+      <div class="max-w-xl">
+        <SectionTag label={t('features.experience')} class="mb-4" />
+        <SectionHeading size="lg" class="leading-none">
+          {t('features.title')}
+        </SectionHeading>
+      </div>
+      <p class="text-base sm:text-lg text-base-content/75 font-medium max-w-sm">
+        {t('features.subtitle')}
+      </p>
+    </div>
+
+    <!-- Feature Rows -->
+    <div class="space-y-2 sm:space-y-3">
+      {features.map((f, i) => (
+        <div class="c-features-glass__row group relative" style={`animation-delay: ${i * 100}ms`}>
+          <!-- Hover background -->
+          <div class="absolute inset-0 bg-base-content/[0.03] backdrop-blur-xl rounded-2xl sm:rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 scale-[0.98] group-hover:scale-100"></div>
+          
+          <div class="relative z-10 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 p-5 sm:p-6 md:p-8 border-b border-base-content/5 last:border-none transition-all duration-500">
+            <!-- Number + Icon -->
+            <div class="flex items-center gap-4 sm:gap-6">
+              <span aria-hidden="true" class="text-accent/80 font-black text-sm tracking-wider">0{i + 1}</span>
+              <div class="text-3xl sm:text-4xl opacity-60 group-hover:opacity-100 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                {f.icon}
+              </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="flex-1">
+              <h3 class="text-lg sm:text-xl md:text-2xl font-black text-base-content group-hover:text-accent transition-colors duration-500 mb-1 sm:mb-2 tracking-tight">
+                {f.title}
+              </h3>
+              <p class="text-sm sm:text-base text-base-content/75 group-hover:text-base-content/75 transition-colors duration-500 font-medium leading-relaxed max-w-2xl">
+                {f.desc}
+              </p>
+            </div>
+            
+            <!-- Arrow -->
+            <div class="flex items-center gap-2 text-base-content/80 group-hover:text-accent transition-all duration-500">
+              <span class="text-xs font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden sm:block">{t('features.learnMore')}</span>
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+          
+          <!-- Left accent on hover -->
+          <div class="absolute left-0 top-4 bottom-4 w-1 rounded-full bg-accent opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Section CTA -->
+    <div class="text-center mt-12 sm:mt-16">
+      <a href={`/${locale}/docs`} class="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-base-content/[0.03] border border-base-content/10 text-base-content font-bold text-sm hover:bg-accent/10 hover:border-accent/30 hover:text-accent transition-all duration-300 group">
+        {t('features.exploreAll')}
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+

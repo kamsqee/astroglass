@@ -1,0 +1,204 @@
+---
+/**
+ * CTA Glass - The Confidence Builder (REMARKABLE)
+ * Interactive 3-step micro-commitment CTA.
+ * Uses psychology of small choices to increase conversion.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const options = [
+  { id: 'build', icon: '🚀', label: t('cta.steps.build'), response: t('cta.steps.buildResponse'), cta: t('cta.steps.buildCta') },
+  { id: 'scale', icon: '📈', label: t('cta.steps.scale'), response: t('cta.steps.scaleResponse'), cta: t('cta.steps.scaleCta') },
+  { id: 'ship', icon: '⚡', label: t('cta.steps.ship'), response: t('cta.steps.shipResponse'), cta: t('cta.steps.shipCta') },
+];
+
+const optionsJson = JSON.stringify(options);
+
+import '../../../styles/components/cta/CTAGlass.css';
+import { Button, buttonVariants } from '../../ui/button';
+import { cn } from '../../../lib/utils';
+import SectionTag from '../../ui/glass/SectionTag.astro';
+import SectionHeading from '../../ui/glass/SectionHeading.astro';
+---
+
+<section class="relative py-20 lg:py-32 px-4 sm:px-6 overflow-hidden bg-base-100">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8 sm:mb-12">
+      <SectionTag label={t('cta.getStarted')} class="mb-4" />
+      <SectionHeading size="sm" align="center">{t('cta.steps.title')}</SectionHeading>
+    </div>
+
+    <!-- Interactive Stepper -->
+    <div class="cta-glass-stepper relative" data-options={optionsJson}>
+      
+      <!-- Step Indicators (Desktop) -->
+      <div class="hidden lg:flex items-center justify-center gap-4 mb-12">
+        <div class="c-cta-glass__indicator flex items-center gap-3" data-step="1">
+          <div class="w-8 h-8 rounded-full bg-accent text-base-100 flex items-center justify-center text-sm font-bold">1</div>
+          <span class="text-sm text-base-content/75">{t('cta.steps.chooseGoal')}</span>
+        </div>
+        <div class="w-16 h-px bg-base-content/10 c-cta-glass__connector"></div>
+        <div class="c-cta-glass__indicator flex items-center gap-3 opacity-40" data-step="2">
+          <div class="w-8 h-8 rounded-full bg-base-content/10 text-base-content/75 flex items-center justify-center text-sm font-bold">2</div>
+          <span class="text-sm text-base-content/75">{t('cta.steps.seeHow')}</span>
+        </div>
+        <div class="w-16 h-px bg-base-content/10 c-cta-glass__connector"></div>
+        <div class="c-cta-glass__indicator flex items-center gap-3 opacity-40" data-step="3">
+          <div class="w-8 h-8 rounded-full bg-base-content/10 text-base-content/75 flex items-center justify-center text-sm font-bold">3</div>
+          <span class="text-sm text-base-content/75">{t('cta.steps.getStarted')}</span>
+        </div>
+      </div>
+
+       <!-- Step 1: Choose Goal -->
+       <div class="c-cta-glass__step cta-glass-step-1">
+         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+           {options.map(opt => (
+             <button 
+               class="c-cta-glass__option group p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-base-content/[0.02] border border-base-content/10 text-left hover:bg-base-content/[0.05] hover:border-accent/30 transition-all duration-500"
+               data-option={opt.id}
+             >
+               <span class="text-2xl sm:text-3xl mb-3 sm:mb-4 block group-hover:scale-110 transition-transform duration-500">{opt.icon}</span>
+              <p class="text-sm sm:text-base font-bold text-base-content mb-1">{opt.label}</p>
+              <p class="text-xs text-base-content/75">{t('cta.steps.tapToSelect')}</p>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Step 2: Response (hidden initially) -->
+      <div class="c-cta-glass__step cta-glass-step-2 hidden">
+        <div class="text-center p-6 sm:p-8 rounded-xl sm:rounded-2xl bg-accent/5 border border-accent/20">
+          <div class="c-cta-glass__response-icon text-3xl sm:text-4xl mb-3 sm:mb-4">🚀</div>
+          <p class="c-cta-glass__response-text text-base sm:text-lg text-base-content font-medium mb-5 sm:mb-6">
+            {t('cta.steps.buildResponse')}
+          </p>
+          <Button 
+            className="cta-glass-continue px-5 sm:px-6 py-2.5 sm:py-3 h-auto rounded-xl bg-base-content/5 text-sm sm:text-base text-base-content/70 font-medium hover:bg-base-content/10 transition-all duration-500 shadow-none border-none"
+            variant="ghost"
+          >
+            {t('cta.steps.continue')}
+          </Button>
+        </div>
+      </div>
+
+      <!-- Step 3: Final CTA (hidden initially) -->
+      <div class="c-cta-glass__step cta-glass-step-3 hidden">
+        <div class="text-center p-6 sm:p-8 lg:p-12 rounded-xl sm:rounded-2xl bg-base-content/[0.03] border border-base-content/10">
+          <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-accent/10 flex items-center justify-center text-2xl sm:text-3xl mx-auto mb-4 sm:mb-6">
+            ✨
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-base-content mb-3 sm:mb-4">{t('cta.steps.allSet')}</h3>
+          <p class="text-sm sm:text-base text-base-content/75 mb-6 sm:mb-8 max-w-md mx-auto">
+            {t('cta.steps.startTrial')}
+          </p>
+          <a  
+            href={`/${locale}/pricing`}
+            class={cn(buttonVariants({ variant: "liquid", size: "liquid" }), "c-cta-glass__final-btn bg-accent text-white hover:text-base-content")}
+          >
+            <span class="cta-glass-final-btn-text relative z-10">{t('cta.steps.buildCta')}</span>
+            <div class="absolute inset-0 bg-base-100 translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out"></div>
+          </a>
+          <p class="text-xs text-base-content/80 mt-6">{t('cta.noCreditCardRequired')} · {t('cta.cancelAnytime')}</p>
+          
+          <!-- Restart option -->
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="cta-glass-restart mt-6 text-xs text-base-content/80 hover:text-accent transition-colors duration-300 h-auto p-0 hover:bg-transparent"
+          >
+            {t('cta.steps.changeGoal')}
+          </Button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  function initCTAGlass() {
+    const stepper = document.querySelector('.cta-glass-stepper') as HTMLElement;
+    if (!stepper) return;
+
+    const options = JSON.parse(stepper.dataset.options || '[]');
+    let selectedOption: any = null;
+
+    const step1 = stepper.querySelector('.cta-glass-step-1');
+    const step2 = stepper.querySelector('.cta-glass-step-2');
+    const step3 = stepper.querySelector('.cta-glass-step-3');
+    const indicators = stepper.querySelectorAll('.c-cta-glass__indicator');
+    const connectors = stepper.querySelectorAll('.c-cta-glass__connector');
+
+    function updateIndicators(currentStep: number) {
+      indicators.forEach((ind, i) => {
+        const stepNum = i + 1;
+        ind.classList.remove('active', 'completed');
+        ind.classList.toggle('opacity-40', stepNum > currentStep);
+        if (stepNum === currentStep) ind.classList.add('active');
+        if (stepNum < currentStep) ind.classList.add('completed');
+      });
+      connectors.forEach((conn, i) => {
+        conn.classList.toggle('active', i < currentStep - 1);
+      });
+    }
+
+    function goToStep(step: number) {
+      step1?.classList.toggle('hidden', step !== 1);
+      step2?.classList.toggle('hidden', step !== 2);
+      step3?.classList.toggle('hidden', step !== 3);
+      updateIndicators(step);
+    }
+
+    // Step 1: Option selection
+    stepper.querySelectorAll('.c-cta-glass__option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const optionId = (btn as HTMLElement).dataset.option;
+        selectedOption = options.find((o: any) => o.id === optionId);
+        
+        if (!selectedOption) return;
+
+        // Mark as selected
+        stepper.querySelectorAll('.c-cta-glass__option').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+
+        // Update step 2 content
+        const iconEl = step2?.querySelector('.c-cta-glass__response-icon');
+        const textEl = step2?.querySelector('.c-cta-glass__response-text');
+        if (iconEl) iconEl.textContent = selectedOption.icon;
+        if (textEl) textEl.textContent = selectedOption.response;
+
+        // Go to step 2
+        setTimeout(() => goToStep(2), 300);
+      });
+    });
+
+    // Step 2: Continue
+    stepper.querySelector('.cta-glass-continue')?.addEventListener('click', () => {
+      // Update final CTA button text
+      const btnText = step3?.querySelector('.cta-glass-final-btn-text');
+      if (btnText && selectedOption) btnText.textContent = selectedOption.cta;
+      
+      goToStep(3);
+    });
+
+    // Restart
+    stepper.querySelector('.cta-glass-restart')?.addEventListener('click', () => {
+      selectedOption = null;
+      stepper.querySelectorAll('.c-cta-glass__option').forEach(b => b.classList.remove('selected'));
+      goToStep(1);
+    });
+
+    // Initialize
+    goToStep(1);
+  }
+
+  initCTAGlass();
+  document.addEventListener('astro:after-swap', initCTAGlass);
+</script>

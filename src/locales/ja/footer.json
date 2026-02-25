@@ -1,0 +1,29 @@
+{
+  "company": "AstroGlass",
+  "tagline": "モダンWebのための美しいテンプレート",
+
+  "copyright": "© 2026 AstroGlass",
+  "allRightsReserved": "All rights reserved",
+  "backToTop": "トップへ戻る",
+  "links": {
+    "product": "プロダクト",
+    "features": "特徴",
+    "pricing": "料金",
+    "demos": "デモ",
+    "company": "プロジェクト",
+    "about": "概要",
+    "blog": "ブログ",
+    "contact": "お問い合わせ",
+    "resources": "リソース",
+    "docs": "ドキュメント",
+    "faq": "FAQ",
+    "support": "サポート",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー"
+  },
+  "social": {
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "discord": "Discord"
+  }
+}

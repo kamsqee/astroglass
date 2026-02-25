@@ -1,0 +1,25 @@
+{
+  "greeting": "こんにちは、世界！",
+  "title": "AstroGlass",
+  "description": "astro-glassデザインのモダンなAstroテンプレート",
+  "siteName": "AstroGlass",
+  "learnMore": "詳細を見る",
+  "back": "戻る",
+  "next": "次へ",
+  "submit": "送信",
+  "cancel": "キャンセル",
+  "close": "閉じる",
+  "loading": "読み込み中...",
+  "error": "エラー",
+  "success": "成功",
+  "required": "必須",
+  "optional": "任意",
+  "notFound": {
+    "title": "ページが見つかりません \u2014 AstroGlass",
+    "code": "404",
+    "heading": "ガラスの中で迷子に",
+    "message": "お探しのページは存在しないか、移動しました。",
+    "suggestion": "URLを確認するか、馴染みのある場所にお戻りください。",
+    "homeButton": "トップへ戻る"
+  }
+}

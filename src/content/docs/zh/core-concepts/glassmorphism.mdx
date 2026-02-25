@@ -1,0 +1,55 @@
+---
+title: "玻璃拟物态 (Glassmorphism)"
+description: "了解 AstroGlass 背后的设计哲学。"
+order: 5
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass 采用了一种现代的玻璃拟物化设计理念 — 打造出具有层次感、通透感且极具高级感的交互界面。
+
+## 调制配方
+
+玻璃拟物效果主要通过以下四个核心 CSS 属性协同工作来实现：
+
+1.  **背景模糊 (Backdrop Blur)**：我们使用 `backdrop-filter: blur(12px)` 来营造磨砂玻璃般的视觉效果。
+2.  **半透明度 (Translucency)**：背景颜色使用了 Alpha 通道（例如，`bg-white/10`）。
+3.  **纤细边框 (Borders)**：微妙的 1像素边框 (`border-white/20`) 用于勾勒边缘轮廓。
+4.  **柔和阴影 (Shadows)**：柔和且带有颜色的阴影能制造出深邃感和悬浮的层次感。
+
+这种组合不仅创建了视觉上的层级关系，更赋予了现代的气息。
+
+## 实际应用
+
+在 AstroGlass 的各个组件开发中，您会看到这种设计模式作为 Tailwind 实用类被应用：
+
+```html
+<div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg">
+  玻璃特效容器 (Glassmorphic container)
+</div>
+```
+
+对于深色主题而言，这种效果往往还会额外叠加渐变背景色：
+
+```html
+<div class="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10">
+  暗黑版的玻璃拟物卡片 (Dark glassmorphic card)
+</div>
+```
+
+## 主题衍变差异
+
+AstroGlass 内部的每款主题都会以截然不同的方式演绎这种玻璃拟物属性：
+
+| 主题名 | 玻璃质感表现风格 |
+|-------|-------------|
+| **Liquid (清泉)** | 采用有机的流体形状并配以液化渐变背景色 |
+| **Glass (琉璃)** | 带深邃立体感的经典磨砂玻璃面板视觉 |
+| **Neo (新锐)** | 大胆的高反差对比搭配棱角分明的锐利边框设定 |
+| **Luxury (尊享)** | 流露着尊贵感带着金色光泽色调的半透明以及极高级的阴影呈现 |
+| **Minimal (极简)** | 极尽克制极其低调，通透明澈几乎化为虚无的微量隐约透明 |
+| **Aurora (极光)** | 具有网状几何渐变构造体系并辅以网格结构背景展现 |
+
+<Callout type="tip" title="关于自定义其玻璃质感视效厚度的指南">
+  至于关于模糊度的高低强弱、其色彩的透明度水平以及各个边框的质感效果表现力度水平等各种设定效果，这些全都是可以经由通过单独到每个系统层级皮肤特定系统池当中的也就是在 `src/styles/_themes.css` 那通过改写调整其预定义写好的 CSS 原生变量而去作分别微调设定的。您可以寻找类似像 `--glass-blur`，`--glass-opacity` 及等其他诸如相对应的那些各类专属设定的根定制变量去执行变更修改。
+</Callout>

@@ -1,0 +1,198 @@
+---
+/**
+ * FAQ Neo - The Category Grid
+ * Visual category cards that expand into accordion lists.
+ * Mobile: 2-column grid → full-screen accordion. Desktop: 3-column with inline expand.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/faq/FAQNeo.css';
+import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
+
+const categories = [
+  {
+    id: 'getting-started',
+    icon: '🚀',
+    title: t('faq.cat_getting_started'),
+    color: 'from-violet-500/20 to-fuchsia-500/20',
+    questions: [
+      { q: t('faq.q_create_project'), a: t('faq.a_create_project') },
+      { q: t('faq.q_sys_req'), a: t('faq.a_sys_req') },
+      { q: t('faq.q2'), a: t('faq.a2') },
+    ]
+  },
+  {
+    id: 'billing',
+    icon: '💳',
+    title: t('faq.cat_billing'),
+    color: 'from-emerald-500/20 to-teal-500/20',
+    questions: [
+      { q: t('faq.q_billing'), a: t('faq.a_billing') },
+      { q: t('faq.q_refund'), a: t('faq.a_refund') },
+      { q: t('faq.q_team_discount'), a: t('faq.a_team_discount') },
+    ]
+  },
+  {
+    id: 'technical',
+    icon: '⚙️',
+    title: t('faq.cat_technical'),
+    color: 'from-cyan-500/20 to-blue-500/20',
+    questions: [
+      { q: t('faq.q5'), a: t('faq.a5') },
+      { q: t('faq.q9'), a: t('faq.a9') },
+      { q: t('faq.q6'), a: t('faq.a6') },
+    ]
+  },
+  {
+    id: 'account',
+    icon: '👤',
+    title: t('faq.cat_account'),
+    color: 'from-amber-500/20 to-orange-500/20',
+    questions: [
+      { q: t('faq.q8'), a: t('faq.a8') },
+      { q: t('faq.q7'), a: t('faq.a7') },
+      { q: t('faq.q_delete_account'), a: t('faq.a_delete_account') },
+    ]
+  },
+  {
+    id: 'features',
+    icon: '✨',
+    title: t('faq.cat_features'),
+    color: 'from-pink-500/20 to-rose-500/20',
+    questions: [
+      { q: t('faq.q_features'), a: t('faq.a_features') },
+      { q: t('faq.q_customize'), a: t('faq.a_customize') },
+      { q: t('faq.q_offline'), a: t('faq.a_offline') },
+    ]
+  },
+  {
+    id: 'support',
+    icon: '💬',
+    title: t('faq.cat_support'),
+    color: 'from-indigo-500/20 to-purple-500/20',
+    questions: [
+      { q: t('faq.q10'), a: t('faq.a10') },
+      { q: t('faq.q11'), a: t('faq.a11') },
+      { q: t('faq.q_training'), a: t('faq.a_training') },
+    ]
+  },
+];
+---
+
+<section id="faq" class="relative py-24 lg:py-32 px-6 overflow-hidden bg-base-100">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12 lg:mb-16">
+       <NeoSectionTag label={t('nav.resourcesFaq')} class="mb-4" />
+       <h2 class="text-4xl md:text-6xl font-black text-base-content tracking-tighter">{t('faq.findAnswer')}</h2>
+       <p class="text-base text-base-content/75 mt-4">{t('faq.subtitle')}</p>
+    </div>
+
+    <!-- Category Grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6" id="faq-neo-grid">
+       {categories.map((cat, i) => (
+          <div class="c-faq-neo__category-card" data-category={cat.id} style={`animation-delay: ${i * 80}ms`}>
+             <button class="c-faq-neo__cat-trigger w-full p-6 lg:p-8 rounded-2xl lg:rounded-[1.5rem] bg-base-content/[0.02] border border-base-content/10 text-left group relative overflow-hidden">
+                <!-- Gradient overlay on hover -->
+                <div class:list={["absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-[800ms] pointer-events-none", cat.color]}></div>
+                
+                <div class="relative z-10">
+                   <span class="text-2xl lg:text-3xl mb-4 block">{cat.icon}</span>
+                   <p class="text-sm lg:text-base font-bold text-base-content mb-1">{cat.title}</p>
+                   <p class="text-xs text-base-content/75">{t('faq.questionsCount').replace('{count}', cat.questions.length.toString())}</p>
+                </div>
+             </button>
+             
+             <!-- Expanded accordion (hidden by default) -->
+             <div class="c-faq-neo__cat-expanded hidden mt-4 space-y-2">
+                {cat.questions.map((q, qi) => (
+                   <div class="c-faq-neo__accordion-item">
+                      <button class="c-faq-neo__acc-trigger w-full flex items-center justify-between p-4 rounded-xl bg-base-content/[0.02] border border-base-content/5 text-left">
+                         <span class="text-sm text-base-content pr-4">{q.q}</span>
+                         <svg class="w-4 h-4 text-base-content/80 flex-shrink-0 c-faq-neo__acc-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                         </svg>
+                      </button>
+                      <div class="c-faq-neo__acc-content hidden px-4 pb-4">
+                         <p class="text-sm text-base-content/75 leading-relaxed pt-3">{q.a}</p>
+                      </div>
+                   </div>
+                ))}
+                
+                <button class="c-faq-neo__close-cat w-full p-3 rounded-xl border border-dashed border-base-content/10 text-xs text-base-content/75 hover:text-base-content/75 hover:border-base-content/20 transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+                   ← {t('faq.backToCategories')}
+                </button>
+             </div>
+          </div>
+       ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  let faqNeoController: AbortController | null = null;
+
+  function initFAQNeoGrid() {
+    // Abort previous listeners
+    faqNeoController?.abort();
+    faqNeoController = new AbortController();
+    const signal = faqNeoController.signal;
+
+    // Category card clicks
+    document.querySelectorAll('.c-faq-neo__cat-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.c-faq-neo__category-card');
+        const expanded = card?.querySelector('.c-faq-neo__cat-expanded');
+        
+        // Close all other categories
+        document.querySelectorAll('.c-faq-neo__category-card').forEach(c => {
+          if (c !== card) {
+            c.classList.remove('expanded');
+            c.querySelector('.c-faq-neo__cat-expanded')?.classList.add('hidden');
+          }
+        });
+        
+        // Toggle this one
+        card?.classList.toggle('expanded');
+        expanded?.classList.toggle('hidden');
+      }, { signal });
+    });
+
+    // Back button clicks
+    document.querySelectorAll('.c-faq-neo__close-cat').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('.c-faq-neo__category-card');
+        card?.classList.remove('expanded');
+        card?.querySelector('.c-faq-neo__cat-expanded')?.classList.add('hidden');
+      }, { signal });
+    });
+
+    // Accordion item clicks
+    document.querySelectorAll('.c-faq-neo__acc-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.c-faq-neo__accordion-item');
+        const content = item?.querySelector('.c-faq-neo__acc-content');
+        const isOpen = item?.classList.contains('open');
+        
+        // Close siblings
+        item?.parentElement?.querySelectorAll('.c-faq-neo__accordion-item').forEach(i => {
+          if (i !== item) {
+            i.classList.remove('open');
+            i.querySelector('.c-faq-neo__acc-content')?.classList.add('hidden');
+          }
+        });
+        
+        // Toggle this
+        item?.classList.toggle('open', !isOpen);
+        content?.classList.toggle('hidden', isOpen);
+      }, { signal });
+    });
+  }
+
+  initFAQNeoGrid();
+  document.addEventListener('astro:after-swap', initFAQNeoGrid);
+</script>

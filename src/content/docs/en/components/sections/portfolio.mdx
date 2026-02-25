@@ -1,0 +1,37 @@
+---
+title: "Portfolio Section"
+description: "Project showcase sections for each theme."
+order: 5
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+The Portfolio section showcases projects, case studies, or work samples. Each theme provides a unique gallery layout.
+
+## Theme Variants
+
+| Theme | Component | Style |
+|-------|-----------|-------|
+| **Liquid** | `PortfolioLiquid.astro` | Fluid grid with hover animations |
+| **Glass** | `PortfolioGlass.astro` | Frosted glass project cards |
+| **Neo** | `PortfolioNeo.astro` | Bold masonry layout |
+| **Luxury** | `PortfolioLuxury.astro` | Elegant project presentations |
+| **Minimal** | `PortfolioMinimal.astro` | Clean, simple project grid |
+| **Aurora** | `PortfolioAurora.astro` | Gradient background gallery |
+
+All variants are located at `src/components/sections/portfolio/`.
+
+## Content Source
+
+Portfolio items are loaded from `src/locales/{lang}/portfolio.json` via `useTranslations()`.
+
+<Callout type="info" title="No Props">
+  Portfolio components take no external props. To edit project titles, descriptions, or images, update `src/locales/{lang}/portfolio.json`.
+</Callout>
+
+## Customizing
+
+To customize:
+1. Edit `src/components/sections/portfolio/Portfolio{Theme}.astro`.
+2. Adjust styles in `src/styles/components/portfolio/`.
+3. Change content in `src/locales/{lang}/portfolio.json`.

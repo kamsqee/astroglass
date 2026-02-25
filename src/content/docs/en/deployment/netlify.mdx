@@ -1,0 +1,59 @@
+---
+title: "Netlify Deployment"
+description: "Deploy your AstroGlass site to Netlify."
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass can be deployed to **Netlify** with minimal configuration.
+
+## Prerequisites
+
+- A [Netlify](https://www.netlify.com/) account.
+- **Node.js** v20+ installed locally.
+- Netlify CLI installed (`npm install -g netlify-cli`).
+
+## Deployment Methods
+
+### Option 1: GitHub Integration (Recommended)
+
+<Steps>
+1. **Push your code to GitHub**
+   
+   Ensure your project is in a GitHub repository.
+
+2. **Import to Netlify**
+   
+   Go to [app.netlify.com](https://app.netlify.com/) > Add new site > Import an existing project.
+
+3. **Configure Build Settings**
+   
+   Use the following settings:
+   - **Build Command**: `pnpm run build`
+   - **Publish Directory**: `dist`
+
+4. **Deploy**
+   
+   Click "Deploy site" and wait for the build to complete.
+</Steps>
+
+### Option 2: CLI Deployment
+
+<Steps>
+1. **Login to Netlify**
+   
+   ```bash title="Terminal" frame="terminal"
+   npx netlify login
+   ```
+
+2. **Deploy**
+   
+   ```bash title="Terminal" frame="terminal"
+   pnpm run deploy:netlify
+   ```
+</Steps>
+
+<Callout type="info" title="Search Index">
+  The search index is generated automatically during `pnpm run build`. Ensure the build step completes successfully for search to work on the deployed site.
+</Callout>

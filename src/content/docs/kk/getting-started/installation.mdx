@@ -1,0 +1,45 @@
+---
+title: "Орнату"
+description: "Жаңа AstroGlass жобасын қалай реттеуге (setup) болады."
+order: 2
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+Бастау өте оңай. Репозиторийді клондап, тәуелділіктерді орнатыңыз.
+
+## Алғышарттар
+
+- Node.js v20.0.0 немесе одан жоғарысы
+- pnpm v8+ (ұсынылады) немесе npm/yarn
+
+## Жылдам Бастау
+
+<Steps>
+1. **Репозиторийді клондау**
+   
+   ```bash frame="terminal"
+   git clone https://github.com/kamsqee/astroglass.git my-project
+   ```
+
+2. **Каталогқа кіру**
+
+   ```bash frame="terminal"
+   cd my-project
+   ```
+
+3. **Тәуелділіктерді (Dependencies) орнату**
+
+   ```bash frame="terminal"
+   pnpm install
+   ```
+
+4. **Әзірлеу серверін іске қосу**
+
+   ```bash frame="terminal"
+   pnpm dev
+   ```
+
+</Steps>
+
+Жаңа сайтыңызды көру үшін `http://localhost:4321` мекенжайына өтіңіз.

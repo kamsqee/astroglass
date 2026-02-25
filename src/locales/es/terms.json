@@ -1,0 +1,51 @@
+{
+  "title": "Términos y Condiciones",
+  "lastUpdated": "Última actualización: Febrero de 2026",
+  "description": "Lea nuestros términos y condiciones para el uso de los servicios de Astroglass.",
+  "sections": {
+    "intro": {
+      "title": "Introducción",
+      "content": "¡Bienvenido a Astroglass! Estos términos y condiciones describen las reglas y regulaciones para el uso del sitio web de Astroglass. Al acceder a este sitio web asumimos que acepta estos términos y condiciones. No continúe utilizando Astroglass si no acepta todos los términos y condiciones establecidos en esta página."
+    },
+    "license": {
+      "title": "Licencia",
+      "content": "A menos que se indique lo contrario, Astroglass y/o sus licenciantes poseen los derechos de propiedad intelectual de todo el material en Astroglass. Todos los derechos de propiedad intelectual están reservados. Puede acceder a esto desde Astroglass para su propio uso personal sujeto a las restricciones establecidas en estos términos y condiciones."
+    },
+    "restrictions": {
+      "title": "Restricciones",
+      "content": "Está específicamente restringido de todo lo siguiente: publicar cualquier material del sitio web en cualquier otro medio; vender, sublicenciar y/o comercializar de otro modo cualquier material del sitio web; presentar y/o mostrar públicamente cualquier material del sitio web; usar este sitio web de cualquier manera que sea o pueda ser perjudicial para este sitio web."
+    },
+    "content": {
+      "title": "Su Contenido",
+      "content": "En estos Términos y Condiciones Estándar del Sitio Web, 'Su Contenido' significará cualquier audio, texto de video, imágenes u otro material que elija mostrar en este Sitio Web. Al mostrar Su Contenido, otorga a Astroglass una licencia no exclusiva, irrevocable a nivel mundial y sublicenciable para usarlo, reproducirlo, adaptarlo, publicarlo, traducirlo y distribuirlo en todos y cada uno de los medios."
+    },
+    "privacy": {
+      "title": "Su Privacidad",
+      "content": "Por favor lea nuestra Política de Privacidad."
+    },
+    "warranties": {
+      "title": "Sin garantías",
+      "content": "Este Sitio Web se proporciona 'tal cual', con todos los defectos, y Astroglass no expresa representaciones ni garantías de ningún tipo relacionadas con este Sitio Web o los materiales contenidas en este Sitio Web."
+    },
+    "liability": {
+      "title": "Limitación de responsabilidad",
+      "content": "En ningún caso Astroglass, ni ninguno de sus funcionarios, directores y empleados, serán responsables de nada que surja de o de cualquier manera esté conectado con su uso de este Sitio Web, ya sea que dicha responsabilidad sea bajo contrato. Astroglass, incluidos sus funcionarios, directores y empleados, no serán responsables de ninguna responsabilidad indirecta, consecuente o especial que surja de o de alguna manera esté relacionada con su uso de este Sitio Web."
+    },
+    "indemnification": {
+      "title": "Indemnización",
+      "content": "Por la presente indemniza en la mayor medida posible a Astroglass de y contra cualquier y/o todas las responsabilidades, costos, demandas, causas de acción, daños y gastos que surjan de cualquier manera relacionada con su incumplimiento de cualquiera de las disposiciones de estos Términos."
+    },
+    "severability": {
+      "title": "Divisibilidad",
+      "content": "Si se determina que alguna disposición de estos Términos es inválida según cualquier ley aplicable, dichas disposiciones se eliminarán sin afectar las disposiciones restantes del presente."
+    },
+    "variation": {
+      "title": "Modificación de Términos",
+      "content": "Astroglass tiene permitido revisar estos Términos en cualquier momento que considere oportuno, y al usar este Sitio Web se espera que revise estos Términos de manera regular."
+    },
+    "governing": {
+      "title": "Ley aplicable y Jurisdicción",
+      "content": "Estos Términos se regirán e interpretarán de acuerdo con las leyes del Estado o País, y se somete a la jurisdicción no exclusiva de los tribunales estatales y federales ubicados en el País para la resolución de cualquier disputa."
+    }
+  }
+}

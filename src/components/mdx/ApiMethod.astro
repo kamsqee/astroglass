@@ -1,0 +1,117 @@
+---
+/**
+ * ApiMethod Component
+ * 
+ * Display API method/function documentation with signature,
+ * parameters, return type, and description.
+ * 
+ * Usage in MDX:
+ * <ApiMethod
+ *   name="useTranslations"
+ *   signature="useTranslations(locale: Locale): (key: string) => string"
+ *   params={[
+ *     { name: 'locale', type: 'Locale', description: 'Current locale code' }
+ *   ]}
+ *   returns={{ type: '(key: string) => string', description: 'Translation function' }}
+ *   since="liquid.0.0"
+ * />
+ */
+
+import '../../styles/components/mdx/ApiMethod.css';
+import { getLocaleFromUrl, useTranslations } from '../../utils/i18n';
+
+export interface ApiParam {
+  name: string;
+  type: string;
+  description?: string;
+  required?: boolean;
+  default?: string;
+}
+
+export interface ApiReturn {
+  type: string;
+  description?: string;
+}
+
+export interface Props {
+  name: string;
+  signature?: string;
+  description?: string;
+  params?: ApiParam[];
+  returns?: ApiReturn;
+  since?: string;
+  deprecated?: boolean;
+  deprecatedMessage?: string;
+}
+
+const { 
+  name, 
+  signature, 
+  description,
+  params = [], 
+  returns, 
+  since,
+  deprecated = false,
+  deprecatedMessage
+} = Astro.props;
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<div class:list={['c-api-method', deprecated && 'is-deprecated']}>
+  <div class="c-api-method__header">
+    <h3 class="c-api-method__name" id={name.toLowerCase()}>
+      <code>{name}</code>
+      {since && <span class="c-api-badge c-api-badge--since">{since}</span>}
+      {deprecated && <span class="c-api-badge c-api-badge--deprecated">{t('docs.api.deprecated')}</span>}
+    </h3>
+  </div>
+  
+  {signature && (
+    <pre class="c-api-method__signature"><code>{signature}</code></pre>
+  )}
+  
+  {deprecated && deprecatedMessage && (
+    <div class="c-api-method__deprecation-notice">
+      ⚠️ {deprecatedMessage}
+    </div>
+  )}
+  
+  {description && <p class="c-api-method__description">{description}</p>}
+  
+  <slot />
+  
+  {params.length > 0 && (
+    <div class="c-api-method__section">
+      <h4 class="c-api-method__section-title">{t('docs.api.parameters')}</h4>
+      <div class="c-api-method__params">
+        {params.map((param) => (
+          <div class="c-api-method__param">
+            <div class="c-api-method__param-header">
+              <code class="c-api-method__param-name">{param.name}</code>
+              <code class="c-api-method__param-type">{param.type}</code>
+              {param.required === false && <span class="c-api-badge">{t('common.optional').toLowerCase()}</span>}
+              {param.default && <span class="c-api-badge">default: {param.default}</span>}
+            </div>
+            {param.description && (
+              <p class="c-api-method__param-description">{param.description}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+  
+  {returns && (
+    <div class="c-api-method__section">
+      <h4 class="c-api-method__section-title">{t('docs.api.returns')}</h4>
+      <div class="c-api-method__return">
+        <code class="c-api-method__return-type">{returns.type}</code>
+        {returns.description && (
+          <p class="c-api-method__return-description">{returns.description}</p>
+        )}
+      </div>
+    </div>
+  )}
+</div>

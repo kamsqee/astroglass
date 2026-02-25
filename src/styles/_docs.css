@@ -1,0 +1,284 @@
+/**
+ * Documentation-Specific Styles
+ * 
+ * Mobile-first styles for the documentation system.
+ * Includes responsive typography, touch-optimized elements,
+ * and desktop enhancements.
+ */
+
+/* ============================================
+   Base Variables
+   ============================================ */
+
+.docs-container {
+  --docs-sidebar-width: 260px;
+  --docs-toc-width: 240px;
+  --docs-content-max-width: 720px;
+  --docs-mobile-bottom-bar-height: 56px;
+}
+
+/* ============================================
+   Mobile-First Typography
+   ============================================ */
+
+.docs-content {
+  /* Fluid typography */
+  font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+  line-height: 1.75;
+}
+
+.docs-content h1 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.docs-content h2 {
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  scroll-margin-top: 100px;
+}
+
+.docs-content h3 {
+  font-size: clamp(1.1rem, 3.5vw, 1.35rem);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  scroll-margin-top: 100px;
+}
+
+.docs-content p {
+  margin-bottom: 1.25em;
+}
+
+.docs-content a {
+  color: var(--color-accent, #3b82f6);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 0.2s;
+}
+
+.docs-content a:hover {
+  opacity: 0.8;
+}
+
+/* Code block styles are handled by astro-expressive-code */
+
+/* ============================================
+   Mobile Bottom Bar
+   ============================================ */
+
+.docs-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--docs-mobile-bottom-bar-height);
+  background: var(--color-base-100, #fff);
+  border-top: 1px solid rgba(var(--color-base-content-rgb, 0 0 0), 0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 50;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (min-width: 1024px) {
+  .docs-bottom-bar {
+    display: none;
+  }
+}
+
+.docs-bottom-bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 16px;
+  min-width: 64px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.docs-bottom-bar-item:active,
+.docs-bottom-bar-item.is-active {
+  opacity: 1;
+}
+
+.docs-bottom-bar-item .icon {
+  font-size: 1.25rem;
+}
+
+/* ============================================
+   Floating Mobile TOC
+   ============================================ */
+
+.docs-toc-mobile {
+  position: fixed;
+  bottom: calc(var(--docs-mobile-bottom-bar-height) + 16px);
+  right: 16px;
+  max-height: 50vh;
+  width: calc(100vw - 32px);
+  max-width: 320px;
+  background: var(--color-base-100, #fff);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 16px;
+  z-index: 45;
+  overflow-y: auto;
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+}
+
+.docs-toc-mobile.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 1024px) {
+  .docs-toc-mobile {
+    display: none;
+  }
+}
+
+/* ============================================
+   Scroll Progress Indicator
+   ============================================ */
+
+.docs-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--color-accent, #3b82f6);
+  z-index: 100;
+  transform-origin: left;
+  transition: transform 0.1s;
+}
+
+/* ============================================
+   Desktop Enhancements
+   ============================================ */
+
+@media (min-width: 1024px) {
+  /* Glassmorphism sidebar */
+  .docs-sidebar {
+    background: rgba(var(--color-base-100-rgb, 255 255 255), 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Hover reveal on code language badge */
+  .code-block-wrapper {
+    position: relative;
+  }
+
+  .code-lang-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: rgba(var(--color-base-content-rgb, 0 0 0), 0.1);
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .code-block-wrapper:hover .code-lang-badge {
+    opacity: 1;
+  }
+
+  /* TOC active link animation */
+  .docs-toc-link {
+    position: relative;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .docs-toc-link::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%) scaleY(0);
+    width: 2px;
+    height: 100%;
+    background: var(--color-accent, #3b82f6);
+    border-radius: 1px;
+    transition: transform 0.2s;
+  }
+
+  .docs-toc-link.is-active::before {
+    transform: translateY(-50%) scaleY(1);
+  }
+
+  .docs-toc-link.is-active {
+    color: var(--color-accent, #3b82f6);
+    transform: translateX(4px);
+  }
+}
+
+
+
+/* ============================================
+   Touch Optimizations
+   ============================================ */
+
+@media (pointer: coarse) {
+  /* Larger touch targets */
+  .docs-nav-link,
+  .docs-toc-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Disable hover states on touch */
+  .code-block-wrapper:hover .code-lang-badge {
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Safe Area Padding (for notched devices)
+   ============================================ */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .docs-container {
+    padding-bottom: calc(var(--docs-mobile-bottom-bar-height) + env(safe-area-inset-bottom));
+  }
+
+  @media (min-width: 1024px) {
+    .docs-container {
+      padding-bottom: 0;
+    }
+  }
+}
+
+/* Specific override for search input to remove global focus ring without !important */
+.search-input-wrapper input:focus,
+.search-input-wrapper input:focus-visible,
+.search-input-wrapper [cmdk-input]:focus,
+.search-input-wrapper [cmdk-input]:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Force white text selection within search input for readability on all themes */
+.search-input-wrapper input::selection,
+.search-input-wrapper [cmdk-input]::selection {
+  color: white;
+  background: hsl(var(--a) / 0.3);
+}

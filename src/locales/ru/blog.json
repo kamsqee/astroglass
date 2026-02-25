@@ -1,0 +1,41 @@
+{
+  "title": "Блог",
+  "description": "Последние обновления",
+  "subtitle": "Последние мысли и обновления",
+  "featured": "Избранное",
+  "featuredBadge": "Избранное",
+  "allPosts": "Все записи",
+  "filterByTag": "Фильтр по тегу",
+  "readMore": "Читать далее",
+  "backToBlog": "← Вернуться в блог",
+  "publishedOn": "Опубликовано",
+  "author": "Автор",
+  "tags": "Теги",
+  "noPosts": "Записи не найдены",
+  "relatedPosts": "Похожие записи",
+  "minRead": "мин чтения",
+  "tableOfContents": "Содержание",
+  "share": "Поделиться",
+  "copyLink": "Копировать ссылку",
+  "linkCopied": "Ссылка скопирована!",
+  "nextPost": "Следующая запись",
+  "prevPost": "Предыдущая запись",
+  "writtenBy": "Автор",
+  "newsletter": {
+    "title": "Будьте в курсе",
+    "description": "Узнавайте о новых публикациях первыми",
+    "placeholder": "Ваш email",
+    "cta": "Подписаться"
+  },
+  "dashboard": {
+    "source": "Источник",
+    "visits": "Визиты",
+    "topPages": "Популярные Страницы",
+    "systemUptime": "Аптайм Системы (90 Дней)",
+    "apiAvailability": "Доступность API",
+    "operational": "Работает",
+    "degraded": "Снижение производительности",
+    "downtime": "Отказ",
+    "last24h": "Последние 24ч"
+  }
+}

@@ -1,0 +1,50 @@
+---
+title: "Features Section"
+description: "Feature showcase sections for each theme."
+order: 4
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+The Features section highlights product or service benefits. Each theme provides a unique layout — from card grids to animated lists.
+
+## Theme Variants
+
+| Theme | Component | Layout |
+|-------|-----------|--------|
+| **Liquid** | `FeaturesLiquid.astro` | Animated feature cards with liquid hover effects |
+| **Glass** | `FeaturesGlass.astro` | Frosted glass feature cards |
+| **Neo** | `FeaturesNeo.astro` | Bold grid layout with sharp edges |
+| **Luxury** | `FeaturesLuxury.astro` | Elegant grid with gold highlights |
+| **Minimal** | `FeaturesMinimal.astro` | Clean, simple list format |
+| **Aurora** | `FeaturesAurora.astro` | Gradient mesh background with card grid |
+
+All variants are located at `src/components/sections/features/`.
+
+## Content Source
+
+Feature data is loaded from `src/locales/{lang}/features.json` via `useTranslations()`. The JSON structure typically contains:
+
+```json title="features.json (excerpt)"
+{
+  "title": "Why Choose Us",
+  "subtitle": "Built for performance and ease of use",
+  "items": [
+    {
+      "title": "Lightning Fast",
+      "description": "Static generation for sub-second load times."
+    }
+  ]
+}
+```
+
+<Callout type="info" title="No Props">
+  Features components take no external props. To edit feature items, titles, or descriptions, update `src/locales/{lang}/features.json`.
+</Callout>
+
+## Customizing
+
+To customize:
+1. Edit the theme variant in `src/components/sections/features/Features{Theme}.astro`.
+2. Adjust styles in `src/styles/components/features/`.
+3. Change content in `src/locales/{lang}/features.json`.

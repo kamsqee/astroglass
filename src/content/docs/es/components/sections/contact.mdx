@@ -1,0 +1,40 @@
+---
+title: "Sección de Contacto (Contact)"
+description: "Secciones de formulario de contacto con validación Valibot para cada tema."
+order: 10
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La sección de Contacto proporciona formularios de contacto validados. Cada tema tiene su propio estilo visual, pero todos comparten la misma lógica de validación basada en Valibot.
+
+## Variantes del Tema
+
+| Tema | Componente | Estilo |
+|-------|-----------|-------|
+| **Liquid** | `ContactLiquid.astro` | Diseño de formulario fluido con acentos de gradiente |
+| **Glass** | `ContactGlass.astro` | Tarjeta de formulario de cristal esmerilado |
+| **Neo** | `ContactNeo.astro` | Formulario llamativo y de alto contraste |
+| **Luxury** | `ContactLuxury.astro` | Formulario premium con detalles dorados |
+| **Minimal** | `ContactMinimal.astro` | Formulario de contacto limpio y sencillo |
+| **Aurora** | `ContactAurora.astro` | Formulario con fondo degradado |
+
+Todas las variantes se encuentran en `src/components/sections/contact/`.
+
+## Validación
+
+Los formularios de contacto usan **Valibot** para una validación liviana y con tipado seguro (type-safe) tanto en el cliente como en el servidor.
+
+- La validación del lado del cliente provee retroalimentación (feedback) instantánea en la interfaz de usuario.
+- El esquema (schema) compartido se encuentra en `src/lib/schemas/contact.ts`.
+- Los mensajes de error de validación están totalmente traducidos a través de `src/locales/{lang}/contact.json`.
+
+Consulta la [Guía de Formularios y Validación](/docs/es/guides/forms-and-validation) para más detalles.
+
+## Fuente del Contenido
+
+El contenido del contacto y los mensajes de validación se cargan desde `src/locales/{lang}/contact.json`.
+
+<Callout type="info" title="Sin Propiedades (Props)">
+  Los componentes Contact no reciben propiedades externas. Para editar las etiquetas del formulario o los mensajes de validación, actualiza `src/locales/{lang}/contact.json`.
+</Callout>

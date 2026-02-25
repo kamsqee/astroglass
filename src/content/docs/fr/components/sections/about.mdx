@@ -1,0 +1,37 @@
+---
+title: "Section À propos (About)"
+description: "Sections de présentation de l'entreprise ou du produit pour chaque thème."
+order: 3
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La section À propos (About) présente votre entreprise, votre produit ou votre histoire. Chaque thème offre une disposition unique avec des éléments visuels différents.
+
+## Variantes de Thème
+
+| Thème | Composant | Style |
+|-------|-----------|-------|
+| **Liquid** | `AboutLiquid.astro` | Arrière-plans de formes organiques et disposition fluide |
+| **Glass** | `AboutGlass.astro` | Panneaux en verre dépoli avec effet de profondeur |
+| **Neo** | `AboutNeo.astro` | Typographie audacieuse et cartes à contraste élevé |
+| **Luxury** | `AboutLuxury.astro` | Disposition élégante avec des touches dorées |
+| **Minimal** | `AboutMinimal.astro` | Design épuré, axé sur le contenu |
+| **Aurora** | `AboutAurora.astro` | Maillage de dégradés avec une structure géométrique |
+
+Toutes les variantes se trouvent dans `src/components/sections/about/`.
+
+## Source du Contenu
+
+Le texte de la section À propos est chargé depuis `src/locales/{lang}/about.json` via `useTranslations()`.
+
+<Callout type="info" title="Pas de de Propriétés (Props)">
+  Les composants About ne prennent aucune propriété externe. Pour modifier le contenu, mettez à jour `src/locales/{lang}/about.json`.
+</Callout>
+
+## Personnalisation
+
+Pour personnaliser :
+1. Modifiez `src/components/sections/about/About{Theme}.astro`.
+2. Ajustez les styles dans `src/styles/components/about/`.
+3. Changez le contenu dans `src/locales/{lang}/about.json`.

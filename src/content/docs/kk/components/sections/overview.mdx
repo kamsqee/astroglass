@@ -1,0 +1,112 @@
+---
+title: "Бөлімдер компоненттеріне шолу (Section Components Overview)"
+description: "AstroGlass-та қолжетімді барлық бөлім компоненттеріне жалпы шолу."
+order: 1
+---
+
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Бөлім компоненттері әрбір тақырып бетінің құрылыс блоктары болып табылады. Әрбір тақырып беті әр тақырып үшін арнайы нұсқасы бар **12-ден астам бөлімнен** тұрады.
+
+## Қолжетімді бөлімдер
+
+<CardGrid>
+  <LinkCard
+    title="Басты (Hero)"
+    description="Тақырыпқа тән анимациялары бар толық экранды бастапқы бөлімдер."
+    href="/docs/kk/components/sections/hero"
+  />
+  <LinkCard
+    title="Біз туралы (About)"
+    description="Компанияны немесе өнімді таныстыру бөлімдері."
+    href="/docs/kk/components/sections/about"
+  />
+  <LinkCard
+    title="Ерекшеліктер (Features)"
+    description="Торлар, тізімдер және карталар бар өнім мүмкіндіктерін көрсету."
+    href="/docs/kk/components/sections/features"
+  />
+  <LinkCard
+    title="Портфолио (Portfolio)"
+    description="Жоба галереялары мен көрмелері."
+    href="/docs/kk/components/sections/portfolio"
+  />
+  <LinkCard
+    title="Баға (Pricing)"
+    description="Жоспарлары мен салыстырулары бар баға кестелері."
+    href="/docs/kk/components/sections/pricing"
+  />
+  <LinkCard
+    title="Пікірлер (Testimonials)"
+    description="Әлеуметтік дәлелдер және тұтынушылардың пікірлері."
+    href="/docs/kk/components/sections/testimonials"
+  />
+  <LinkCard
+    title="Жиі қойылатын сұрақтар (FAQ)"
+    description="Аккордеон UI арқылы жиі қойылатын сұрақтар."
+    href="/docs/kk/components/sections/faq"
+  />
+  <LinkCard
+    title="Әрекетке шақыру (CTA)"
+    description="Конверсияларды арттыруға арналған әрекетке шақыру бөлімдері."
+    href="/docs/kk/components/sections/cta"
+  />
+  <LinkCard
+    title="Байланыс (Contact)"
+    description="Valibot тексеруі бар байланыс пішіндері."
+    href="/docs/kk/components/sections/contact"
+  />
+  <LinkCard
+    title="Навигация (Navbar)"
+    description="Тақырыпқа тән тақырып пен навигация тақталары."
+    href="/docs/kk/components/sections/navbar"
+  />
+  <LinkCard
+    title="Төменгі деректеме (Footer)"
+    description="Сілтемелер, әлеуметтік желілер және брендинг бар төменгі сайт бөлімдері."
+    href="/docs/kk/components/sections/footer"
+  />
+</CardGrid>
+
+## Ол қалай жұмыс істейді
+
+Әрбір бөлімде **6 тақырып нұсқасы** бар — әр тақырып үшін біреу (Liquid, Glass, Neo, Luxury, Minimal, Aurora). `src/pages/[theme].astro` мекенжайындағы динамикалық бет сәйкес нұсқаны көрсету үшін компонент картасын пайдаланады:
+
+```astro
+---
+// [theme].astro файлынан жеңілдетілген
+const componentMap = {
+  liquid: { Hero: HeroLiquid, About: AboutLiquid, ... },
+  glass:  { Hero: HeroGlass,  About: AboutGlass,  ... },
+  // neo, luxury, minimal, aurora...
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Hero />
+<components.About />
+<components.Features />
+```
+
+<Callout type="info" title="Сыртқы Props жоқ">
+  Бөлім компоненттері **props қабылдамайды**. Барлық мәтіндік мазмұн `src/locales/{lang}/{section}.json` файлынан `useTranslations()` арқылы жүктеледі. Кез келген бөлімнің мазмұнын өзгерту үшін сәйкес тілдің JSON файлын өңдеңіз.
+</Callout>
+
+## Файл құрылымы
+
+Әрбір бөлім тұрақты каталог үлгісін ұстанады:
+
+```
+src/components/sections/{section}/
+├── {Section}Liquid.astro
+├── {Section}Glass.astro
+├── {Section}Neo.astro
+├── {Section}Luxury.astro
+├── {Section}Minimal.astro
+└── {Section}Aurora.astro
+```
+
+Әр бөлімге арналған CSS `src/styles/components/{section}/` мекенжайында орналасқан.

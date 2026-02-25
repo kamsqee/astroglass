@@ -1,0 +1,113 @@
+---
+title: Пішіндер және тексеру (Forms & Validation)
+description: Valibot және Astro Actions арқылы қауіпсіз, расталған пішіндерді (forms) құру жолын үйреніңіз.
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+Бұл үлгі клиентте де, серверде де жеңіл, типке қауіпсіз тексеру үшін **Valibot** пайдаланады. Біз сізге мыналарды беретін гибридтік тәсілді жасадық:
+1.  **Лезде UI кері байланысы (Instant UI Feedback)**: Шағын клиенттік скриптті пайдалану.
+2.  **Сервер жағындағы қауіпсіздік**: Astro Actions ішіндегі *бірдей* схеманы пайдалану (қосымша, бірақ ұсынылады).
+
+## Жылдам бастау
+
+Жаңа расталған пішінді (form) қосу үшін:
+
+<Steps>
+1. **Арнайы ережелерді анықтау (Міндетті емес)**
+   
+   Егер сізге ортақ `ContactSchema`-дан тыс арнайы ережелер қажет болса, `src/lib/schemas/` ішінде жаңа схема (schema) жасаңыз.
+
+2. **Пішінді өз компонентіңізге қосу**
+   
+   Бұл үлгіні (pattern) көшіріңіз. Ең бастысы - енгізулерді (inputs) қатаң атау және `.input-error` класын өңдеу.
+
+   ```astro title="Component.astro"
+   ---
+   import { createContactSchema } from '../../lib/schemas/contact';
+   // ... импорттар
+   ---
+
+   <form class="my-form" novalidate>
+     <div class="form-control">
+       <input type="email" name="email" required />
+     </div>
+     <button type="submit">Жіберу</button>
+   </form>
+
+   <script>
+     import { safeParse } from 'valibot';
+     import { createContactSchema } from '../../lib/schemas/contact';
+
+     const form = document.querySelector('.my-form');
+     // Аударма функциясын (немесе идентификаторды) және параметрлерді өткізіңіз
+     const schema = createContactSchema(key => key, { companyRequired: true });
+
+     form.addEventListener('submit', (e) => {
+       e.preventDefault();
+       const formData = new FormData(form);
+       const data = Object.fromEntries(formData);
+       
+       // Схеманы пайдаланып талдау (Parse)
+       const result = safeParse(schema, data);
+
+       if (!result.success) {
+         // Қателерді өңдеу (мысалы, қызыл жиектерді көрсету)
+         console.log(result.issues);
+       }
+     });
+   </script>
+   ```
+</Steps>
+
+## Тақырыпқа бейімделген стильдер (Theme-Aware Styles)
+
+Біз тексеру (validation) стильдерін белсенді тақырыбыңызға (Liquid, Glass, Minimal, т.б.) автоматты түрде бейімдейтін CSS жүйесін құрдық.
+
+Енгізулердегі `input-error` немесе `input-success` кластарын ауыстырсаңыз болғаны.
+
+| Класс | Әсер |
+| :--- | :--- |
+| `input-error` | **Қызыл** жиек/жарқырау (`--er` түсі) қосады. |
+| `input-success`| **Жасыл** жиек (`--su` түсі) қосады. |
+| `error-message`| Сырғып кіретін стильдендірілген шағын мәтіндік көмекші. |
+
+### Қолдану мысалы
+```javascript
+// Қате күйін қосу
+input.classList.add('input-error');
+
+// Қате күйін алып тастау
+input.classList.remove('input-error');
+```
+
+## Тексеру ережелерін баптау
+
+Әдепкі байланыс пішінінің ережелерін өзгерту үшін `src/lib/schemas/contact.ts` файлын өңдеңіз.
+
+```typescript
+// pipe() қолданатын заманауи Valibot v1 синтаксисі
+export const createContactSchema = (t, options = {}) => object({
+  name: pipe(
+    string(),
+    minLength(2, t('validation.nameShort'))
+  ),
+  message: pipe(
+    string(),
+    minLength(10, t('validation.messageShort')),
+    maxLength(1000)
+  ),
+  // Шартты тексеру (Conditional validation)
+  company: options.companyRequired 
+    ? pipe(string(), minLength(1))
+    : optional(string())
+});
+```
+
+## Интернационализация (i18n)
+
+Тексеру (validation) хабарламалары толығымен аударылған. Кілттер (keys) мына жерде орналасқан:
+-   `src/locales/en/contact.json` (`validation` объектісінің астында)
+-   `src/locales/ru/contact.json`
+
+Клиентте схеманы іске қосқан кезде, `ContactGlass.astro` файлында көрсетілгендей `t` аударма функциясын немесе іздеу картасын беруіңіз керек.

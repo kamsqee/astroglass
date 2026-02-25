@@ -1,0 +1,41 @@
+{
+  "title": "ブログ",
+  "description": "最新のアップデート",
+  "subtitle": "最新の考えとアップデート",
+  "featured": "特集",
+  "featuredBadge": "注目の記事",
+  "allPosts": "すべての記事",
+  "filterByTag": "タグで絞り込む",
+  "readMore": "続きを読む",
+  "backToBlog": "← ブログに戻る",
+  "publishedOn": "公開日",
+  "author": "著者",
+  "tags": "タグ",
+  "noPosts": "記事が見つかりません",
+  "relatedPosts": "関連記事",
+  "minRead": "分で読了",
+  "tableOfContents": "目次",
+  "share": "シェア",
+  "copyLink": "リンクをコピー",
+  "linkCopied": "リンクをコピーしました！",
+  "nextPost": "次の記事",
+  "prevPost": "前の記事",
+  "writtenBy": "執筆者",
+  "newsletter": {
+    "title": "最新情報を受け取る",
+    "description": "新しい記事を公開した際にお知らせします",
+    "placeholder": "メールアドレス",
+    "cta": "購読する"
+  },
+  "dashboard": {
+    "source": "参照元",
+    "visits": "訪問数",
+    "topPages": "トップページ",
+    "systemUptime": "システム稼働時間 (90日間)",
+    "apiAvailability": "APIの可用性",
+    "operational": "稼働中",
+    "degraded": "パフォーマンス低下",
+    "downtime": "ダウンタイム",
+    "last24h": "過去24時間"
+  }
+}

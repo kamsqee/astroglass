@@ -1,0 +1,59 @@
+---
+title: "ヒーロー (Hero) セクション"
+description: "各テーマのフルスクリーン ヒーロー セクション。"
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Hero (ヒーロー) セクションは、訪問者が最初に目にする場所です。各テーマには、カスタム アニメーション、背景、レイアウトを備えた独自の強力なヒーロー デザインがあります。
+
+## テーマのバリアント
+
+| テーマ | コンポーネント | デザイン |
+|-------|-----------|--------|
+| **Liquid** | `HeroLiquid.astro` | アニメーションする液体のような SVG ブロブ、グラデーションのテキスト |
+| **Glass** | `HeroGlass.astro` | ぼかし背景を持つすりガラスのヒーロー カード |
+| **Neo** | `HeroNeo.astro` | 大胆なタイポグラフィ、ハイコントラスト |
+| **Luxury** | `HeroLuxury.astro` | ゴールドのアクセント、プレミアムなレイアウト |
+| **Minimal** | `HeroMinimal.astro` | クリーンで中央に配置され、気を散らさないデザイン |
+| **Aurora** | `HeroAurora.astro` | グラデーション メッシュ、幾何学的な要素 |
+
+すべてのバリアントは `src/components/sections/hero/` に配置されています。
+
+## 仕組み
+
+ヒーロー バリアントはそれぞれ自己完結型の Astro コンポーネントであり、以下の役割を果たします。
+
+1. 現在のロケールのために `useTranslations()` をインポートして初期化します。
+2. テーマ固有の CSS を用いて、独自の HTML 構造をレンダリングします。
+3. `hero.title`、`hero.subtitle`、`hero.cta`、`hero.liveBadge` などの翻訳キーを `src/locales/{lang}/hero.json` から読み込みます。
+
+```astro title="HeroLiquid.astro (簡略化)"
+---
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section>
+  <h1>{t('hero.title')}</h1>
+  <p>{t('hero.subtitle')}</p>
+  <a href="#explore">{t('hero.cta')}</a>
+</section>
+```
+
+<Callout type="info" title="プロパティ (Props) なし">
+  Hero コンポーネントは外部からのプロパティ (Props) を受け取りません。見出し、サブタイトル、または CTA (コール トゥ アクション) テキストを変更するには、`src/locales/ja/hero.json` (または適切なロケール ファイル) を編集してください。
+</Callout>
+
+## ヒーローのカスタマイズ
+
+特定のテーマのヒーローをカスタマイズするには：
+
+1. `src/components/sections/hero/Hero{Theme}.astro` を開きます。
+2. 必要に応じて HTML 構造、クラス、またはアニメーションを変更します。
+3. CSS を変更する場合は、`src/styles/components/hero/Hero{Theme}.css` を編集します。
+4. テキストを変更する場合は、`src/locales/{lang}/hero.json` を編集します。

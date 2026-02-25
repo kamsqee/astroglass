@@ -1,0 +1,89 @@
+{
+  "pageTitle": "Nuestros Trabajos",
+  "pageSubtitle": "Una colección seleccionada de experiencias digitales diseñadas con precisión, profundidad e interacción fluida.",
+  "backToHome": "Volver al Inicio",
+  "filterAll": "Todos",
+  "viewDetails": "Ver Detalles",
+  "closeDetails": "Cerrar",
+  "theChallenge": "El Reto",
+  "theSolution": "La Solución",
+  "theImpact": "El Impacto",
+  "techStackLabel": "Tecnologías",
+  "startProject": "Inicia tu Proyecto",
+  "startProjectSub": "¿Listo para dar vida a tu visión?",
+  "comingSoon": "Esta página de portafolio estará disponible pronto.",
+  "projects": {
+    "p1": {
+      "title": "Ecosistema Digital",
+      "description": "Solución integral para startups modernas de alto crecimiento.",
+      "longDescription": "Una plataforma digital full-stack que unifica la participación del cliente, el análisis y las operaciones en una sola interfaz fluida. Creada para scale-ups que exigen claridad a gran velocidad.",
+      "category": "Aplicación Web",
+      "challenge": "El cliente necesitaba consolidar 12 herramientas separadas en una plataforma cohesiva sin sacrificar la funcionalidad especializada de cada una.",
+      "solution": "Diseñamos un sistema modular (micro-frontends) con sincronización de datos en tiempo real, envuelto en una interfaz orgánica que hace que los flujos de trabajo complejos parezcan fáciles.",
+      "impact": "Reducción de los gastos operativos en un 60% e incremento de la velocidad del equipo en 3x durante el primer trimestre de implementación.",
+      "techStack": ["React", "Node.js", "GraphQL", "Redis", "AWS"],
+      "metric": "3x",
+      "metricLabel": "Entrega más rápida"
+    },
+    "p2": {
+      "title": "Panel de Control Líquido",
+      "description": "Análisis de datos con profunda exploración inmersiva.",
+      "longDescription": "Un panel de control analítico que transforma los datos sin procesar en visualizaciones fluidas e interactivas. Los usuarios navegan por los conjuntos de datos como exploradores cartografiando un nuevo territorio.",
+      "category": "Panel de Control",
+      "challenge": "Los paneles de control tradicionales abrumaban a los usuarios con gráficos y tablas estáticos. El cliente quería que la exploración de datos se sintiera intuitiva y atractiva.",
+      "solution": "Diseñamos visualizaciones de datos interactivos, orientados por los gestos con diseños adaptativos que responden al comportamiento del usuario para revelar información valiosa de manera proactiva.",
+      "impact": "El engagement o compromiso de los usuarios aumentó en un 240% y el tiempo promedio para encontrar una visión útil se redujo de 15 a menos de 3 minutos.",
+      "techStack": ["Vue.js", "D3.js", "Python", "PostgreSQL", "Docker"],
+      "metric": "50K+",
+      "metricLabel": "Usuarios activos"
+    },
+    "p3": {
+      "title": "Móvil Clásico (Glassic)",
+      "description": "Definiendo la próxima generación de interfaces móviles.",
+      "longDescription": "Una experiencia, elaborada especialmente para dispositivos móviles, que empuja los límites acerca de cómo una app nativa debería de sentirse. Profundidad combinada con movimiento y con un sistema visual tipo vidrio.",
+      "category": "Móvil",
+      "challenge": "La app actual se sintió pesada, muy aburrida y difícil de ocupar. Los usuarios desistían rápidamente a la hora del tutorial (onboarding).",
+      "solution": "Mejoramos, desde los cimientos la interfaz con una nueva propuesta visual de glass-morphism y patrones tácticos con el cual facilitamos su uso y comprensión sin afectar sus funciones clave.",
+      "impact": "La calificación en la tienda de aplicaciones saltó de 3.2 a 4.9 estrellas y la compleción del tutorial mejoró sustancialmente un 85%.",
+      "techStack": ["Swift", "SwiftUI", "Firebase", "Lottie", "CoreData"],
+      "metric": "4.9★",
+      "metricLabel": "En la App Store"
+    },
+    "p4": {
+      "title": "Web Cuántica",
+      "description": "Desdibujando las líneas entre la realidad y la interfaz.",
+      "longDescription": "Una plataforma web experimental que utiliza animaciones de última tecnología, con espacialidad 3D en pantallas 2D planas, dándole otra concepción inmersiva al proyecto.",
+      "category": "Marca",
+      "challenge": "La firma, buscaba algo digital similar a la misma esencia de los recintos de tienda físisca en materia de lujos visuales y experiencia pero que de por medio se pudiera acceder con navegador web estándar.",
+      "solution": "Hemos acudido a WebGL junto con GSAP, y de un scroll interactivo sumado a unos increíbles trazados o filtros en tiempo real y dinámicos para ofrecer resultados increíbles a su mercado e inversionistas.",
+      "impact": "Ganó 3 Awwwards Site of the Day de forma absoluta y alzó unas visitas del sitio con unas duraciones promedio triplicadas logrando aumentar el 'Brand Engagement' un 200%.",
+      "techStack": ["Three.js", "GSAP", "WebGL", "Astro", "Cloudflare"],
+      "metric": "200%",
+      "metricLabel": "Retención de marca"
+    },
+    "p5": {
+      "title": "Flujo Neuronal",
+      "description": "Automatización de IA en las operaciones para diseño creativo",
+      "longDescription": "Inteligente, con herramientas integradas pre-aprende los problemas repetitivos y la ruta de acciones tediosa, simplifica la parte repetitiva para los diseñadores, ofreciendo tiempo de valor real hacia verdaderas metas.",
+      "category": "Aplicación Web",
+      "challenge": "A las agencias y su control horario, se le escurrían hasta un 30% del volumen de facturación o el costo del sueldo solo lidiando con problemas inútiles o rutineiros por medio del panel estándar, aprobaciones, flujos sin fin.",
+      "solution": "Implementación y recapacitación de automatización bajo el apoyo directo del motor lógico y predictivo a los requerimientos, para trazar ruta sin obstáculos ni elementos ruidosos en UX.",
+      "impact": "Se pudo medir una recuperación muy favorable y redituable gracias a una métrica calculada: al menos unas 12 horas en ahorro netos de tiempo muerto a favor cada semana para la planilla.",
+      "techStack": ["Next.js", "OpenAI", "Prisma", "Supabase", "Vercel"],
+      "metric": "40%",
+      "metricLabel": "Ahorro al finalizar"
+    },
+    "p6": {
+      "title": "Prisma Commerce",
+      "description": "E-Commerce de Next-Gen con un poder inmersivo inagotable del producto en AR.",
+      "longDescription": "Headless commerce en forma y diseño, adaptativo al consumidor y con personalizaciones directas sin esperas. Incorpora vista 3D y elementos interactivos únicos con el catálogo.",
+      "category": "Panel de Control",
+      "challenge": "Sus límites estancaron a los potenciales clientes bajando la tasa de ventas a nivel virtual; les faltaba ver de cara el lujo que pagaban (no hay sensación real o táctil).",
+      "solution": "Trajimos a su catálogo, herramientas directas como WebXR real, sin descargas extras de aplicativos móviles, compras simplificadas con solo 'un-toque' y una mejora de fricción para su conversión económica final del visitante.",
+      "impact": "Un asombroso paso de su tope o límite inferior anterior de 2.1% a 5.8%, re-aprovechando una bajada masiva a la mitad de todas de las devoluciones y reclamos originados por discrepancias del producto real vs digital.",
+      "techStack": ["Remix", "Shopify Hydrogen", "Three.js", "Stripe", "Edge Functions"],
+      "metric": "176%",
+      "metricLabel": "Aumento en Venta"
+    }
+  }
+}

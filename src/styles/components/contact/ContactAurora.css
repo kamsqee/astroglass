@@ -1,0 +1,290 @@
+/* -------------------------------------------------------------------------- */
+/*                        CONTACT AURORA — SPLIT FORM                         */
+/* -------------------------------------------------------------------------- */
+
+.contact-aurora {
+  position: relative;
+  padding: 80px 24px;
+}
+
+@media (min-width: 768px) {
+  .contact-aurora {
+    padding: 120px 32px;
+  }
+}
+
+.contact-aurora-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+@media (min-width: 1024px) {
+  .contact-aurora-inner {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 64px;
+    align-items: start;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                           LEFT: INFO                                       */
+/* -------------------------------------------------------------------------- */
+
+.contact-aurora-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: hsl(var(--a));
+  margin-bottom: 20px;
+}
+
+.contact-aurora-label-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, hsl(var(--a) / 0.15), hsl(var(--a) / 0.05));
+  border: 1px solid hsl(var(--a) / 0.2);
+  border-radius: 8px;
+  color: hsl(var(--a));
+}
+
+.contact-aurora-label-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.contact-aurora-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: hsl(var(--bc));
+  margin-bottom: 12px;
+}
+
+.contact-aurora-desc {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--bc) / 0.75);
+  margin-bottom: 32px;
+}
+
+/* Reasons list */
+.contact-aurora-reasons {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-aurora-reasons li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: hsl(var(--bc) / 0.9);
+}
+
+.contact-aurora-reason-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, hsl(var(--a) / 0.15), hsl(var(--a) / 0.05));
+  color: hsl(var(--a));
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* Trust signals */
+.contact-aurora-trust-signals {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 24px;
+  border-top: 1px solid hsl(var(--bc) / 0.06);
+}
+
+.contact-aurora-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: hsl(var(--bc) / 0.65);
+}
+
+.contact-aurora-trust-icon {
+  color: hsl(var(--a));
+  font-size: 0.5rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          RIGHT: FORM                                       */
+/* -------------------------------------------------------------------------- */
+
+.contact-aurora-form-wrapper {
+  position: relative;
+  background: hsl(var(--b1));
+  border: 1px solid hsl(var(--bc) / 0.06);
+  border-radius: 20px;
+  padding: 32px 28px;
+  overflow: hidden;
+}
+
+/* Dot-grid background */
+.contact-aurora-form-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, hsl(var(--bc) / 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.contact-aurora-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-aurora-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .contact-aurora-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contact-aurora-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-aurora-field label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: hsl(var(--bc) / 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-aurora-field input,
+.contact-aurora-field select,
+.contact-aurora-field textarea {
+  padding: 12px 0;
+  font-size: 0.9rem;
+  color: hsl(var(--bc));
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid hsl(var(--bc) / 0.1);
+  border-radius: 0;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+/* Hard override for Chrome Autofill specific to Aurora's transparent fields */
+.contact-aurora-field input:-webkit-autofill,
+.contact-aurora-field input:-webkit-autofill:hover,
+.contact-aurora-field input:-webkit-autofill:focus,
+.contact-aurora-field input:-webkit-autofill:active,
+.contact-aurora-field textarea:-webkit-autofill,
+.contact-aurora-field select:-webkit-autofill {
+  transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: hsl(var(--bc)) !important;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  background-color: transparent !important;
+}
+
+.contact-aurora-field input:focus,
+.contact-aurora-field select:focus,
+.contact-aurora-field textarea:focus {
+  border-bottom-color: hsl(var(--a));
+  box-shadow: 0 2px 0 hsl(var(--a) / 0.3);
+}
+
+.contact-aurora-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-aurora-submit {
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: hsl(var(--b1));
+  background: hsl(var(--a));
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.contact-aurora-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px hsl(var(--a) / 0.3);
+}
+
+.contact-aurora-privacy {
+  font-size: 0.72rem;
+  color: hsl(var(--bc) / 0.7);
+  text-align: center;
+}
+
+/* Validation states */
+.contact-aurora-error {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: hsl(var(--er));
+  min-height: 1.125rem;
+  margin-top: 2px;
+  transition: opacity 0.2s ease;
+}
+
+.contact-aurora-field input.contact-aurora-input--error,
+.contact-aurora-field textarea.contact-aurora-input--error,
+.contact-aurora-field select.contact-aurora-input--error,
+.contact-aurora-field input.contact-aurora-input--error:focus,
+.contact-aurora-field textarea.contact-aurora-input--error:focus,
+.contact-aurora-field select.contact-aurora-input--error:focus {
+  border-bottom-color: hsl(var(--er));
+  box-shadow: 0 2px 0 hsl(var(--er) / 0.3);
+}
+
+.contact-aurora-success {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--su));
+  text-align: center;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background: hsl(var(--su) / 0.08);
+  border: 1px solid hsl(var(--su) / 0.15);
+}
+
+.contact-aurora-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}

@@ -1,0 +1,47 @@
+---
+title: "カード (Cards)"
+description: "機能やブログ用のグラスモーフィズム効果を備えたカード。"
+order: 2
+---
+
+import { Card } from '../../../../../components/ui/card.tsx';
+
+カードは、ガラス デザイン システムの基本的な構成要素です。
+
+## バリアント (Variants)
+
+`variant` プロパティを通じて複数のカード スタイルをサポートしています。
+
+| バリアント | 説明 | 視覚的スタイル |
+| :--- | :--- | :--- |
+| `glass` | 標準のすりガラス効果 | ぼかし + 境界線 |
+| `solid` | 不透明な背景 | 高コントラスト |
+| `outline` | 境界線のみ | ミニマリスト |
+
+## ライブ使用例
+
+<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 not-prose my-8">
+  <Card variant="glass" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">ガラス カード (Glass Card)</h3>
+    <p className="text-sm opacity-80">ぼかしと控えめな境界線を備えた、標準のすりガラス効果です。</p>
+  </Card>
+
+  <Card variant="solid" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">ソリッド カード (Solid Card)</h3>
+    <p className="text-sm opacity-80">コントラストを高める不透明な背景です。</p>
+  </Card>
+
+  <Card variant="outline" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">アウトライン カード (Outline Card)</h3>
+    <p className="text-sm opacity-80">境界線のみで作られたミニマリストなスタイルです。</p>
+  </Card>
+</div>
+
+## コードの使用法
+
+```tsx
+<Card variant="glass" className="p-6">
+  <h3>ガラス カード (Glass Card)</h3>
+  <p>これにより、美しい奥行き効果が生まれます。</p>
+</Card>
+```

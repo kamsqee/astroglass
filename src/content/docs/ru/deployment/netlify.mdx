@@ -1,0 +1,35 @@
+---
+title: "Развёртывание на Netlify"
+description: "Развертывание AstroGlass на Netlify."
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass можно развернуть на **Netlify** с минимальной конфигурацией.
+
+## Предварительные требования
+
+- Аккаунт [Netlify](https://www.netlify.com/).
+- **Node.js** v20+ установлен локально.
+
+## Способы развёртывания
+
+### GitHub (рекомендуется)
+
+<Steps>
+1. **Загрузите код на GitHub**.
+2. **Импортируйте в Netlify**: [app.netlify.com](https://app.netlify.com/) > Add new site.
+3. **Настройте сборку**: Build Command: `pnpm run build`, Publish Directory: `dist`.
+4. **Нажмите Deploy site**.
+</Steps>
+
+### CLI
+
+```bash frame="terminal"
+pnpm run deploy:netlify
+```
+
+<Callout type="info" title="Поисковый индекс">
+  Индекс генерируется автоматически во время `pnpm run build`.
+</Callout>

@@ -1,0 +1,113 @@
+/* FAQGlass.css */
+
+.c-faq-glass__typing-dot {
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+.c-faq-glass__typing-dot:nth-child(1) { animation-delay: 0ms; }
+.c-faq-glass__typing-dot:nth-child(2) { animation-delay: 200ms; }
+.c-faq-glass__typing-dot:nth-child(3) { animation-delay: 400ms; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-4px); }
+}
+
+.c-faq-glass__msg {
+  animation: msgSlideInGlass 800ms var(--ease-glass);
+}
+
+@keyframes msgSlideInGlass {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.c-faq-glass__suggest-btn {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.c-faq-glass__suggest-btn:hover {
+  transform: translateY(-3px) translateZ(0);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Ask button shine effect */
+.c-faq-glass__ask-btn {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.c-faq-glass__ask-shine {
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.4) 40%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.4) 60%,
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  animation: askButtonShine 3s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+@keyframes askButtonShine {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  15%, 85% {
+    transform: translateX(100%);
+  }
+}
+
+/* Pause shine on hover */
+.c-faq-glass__ask-btn:hover .c-faq-glass__ask-shine {
+  animation-play-state: paused;
+  opacity: 0;
+}
+
+/* Input - remove all focus styles */
+#faq-glass-input,
+#faq-glass-input:focus,
+#faq-glass-input:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Helpful feedback buttons */
+.c-faq-glass__helpful-btn {
+  transition: all 500ms var(--ease-glass);
+}
+
+.c-faq-glass__helpful-btn:hover {
+  transform: scale(1.1);
+}
+
+.c-faq-glass__helpful-btn.chosen {
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+.c-faq-glass__helpful-btn.not-chosen {
+  pointer-events: none;
+}
+
+.c-faq-glass__scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.c-faq-glass__scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.c-faq-glass__scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--bc) / 0.1);
+  border-radius: 10px;
+}

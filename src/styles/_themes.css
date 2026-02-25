@@ -1,0 +1,20 @@
+/* ============================================
+   Theme Definitions
+   Each palette has unique visual characteristics.
+   
+   Individual palette files live in ./palettes/.
+   The CLI adds/removes @import lines here
+   when palettes are added or removed.
+   ============================================ */
+
+@import "./palettes/_root.css";
+@import "./palettes/azure.css";
+@import "./palettes/abyss.css";
+@import "./palettes/solaris.css";
+@import "./palettes/nordic.css";
+@import "./palettes/neonoir.css";
+@import "./palettes/evergreen.css";
+@import "./palettes/rose.css";
+@import "./palettes/aquatica.css";
+@import "./palettes/monochrome.css";
+@import "./palettes/synthwave.css";

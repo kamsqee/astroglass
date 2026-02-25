@@ -1,0 +1,98 @@
+---
+/**
+ * Features Neo - Vertical Tiles (Refined)
+ * Editorial header with labeled scroll CTA, better tile proportions.
+ */
+import '../../../styles/components/features/FeaturesNeo.css';
+import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const features = [
+  { id: 1, title: t('features.f1Title'), desc: t('features.f1Desc'), icon: '🚀', featured: true },
+  { id: 2, title: t('features.f2Title'), desc: t('features.f2Desc'), icon: '💎' },
+  { id: 3, title: t('features.f3Title'), desc: t('features.f3Desc'), icon: '📱' },
+  { id: 4, title: t('features.f4Title'), desc: t('features.f4Desc'), icon: '🎨' },
+];
+
+---
+
+<section id="services" class="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-base-100 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12 sm:mb-16 md:mb-20 border-b border-base-content/5 pb-8 sm:pb-12">
+      <div class="max-w-2xl">
+        <NeoSectionTag label={t('features.badge')} class="mb-4" />
+        <h2 class="text-5xl sm:text-6xl md:text-8xl font-black text-base-content tracking-tighter leading-[0.9]">
+          {t('features.pureTitle')}<br/>
+          <span class="text-accent italic">{t('features.liquidTitle')}</span>
+        </h2>
+      </div>
+      <div class="flex flex-col sm:flex-row items-start sm:items-end gap-4 sm:gap-6">
+        <p class="text-base sm:text-lg text-base-content/75 font-medium max-w-xs">
+          {t('features.subtitle')}
+        </p>
+        <a href="#feature-grid" class="group flex items-center gap-3 px-5 py-3 rounded-full border border-base-content/10 hover:border-accent/30 hover:bg-accent/5 transition-all duration-300">
+          <span class="text-sm font-bold text-base-content/75 group-hover:text-accent transition-colors duration-300">{t('features.explore')}</span>
+          <svg class="w-5 h-5 text-base-content/75 group-hover:text-accent group-hover:translate-y-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Tile Grid -->
+    <div id="feature-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      {features.map((f, i) => (
+        <a 
+          href={`/${locale}/docs`}
+          class:list={[
+            "block c-features-neo__tile group relative rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-700",
+            f.featured ? "bg-gradient-to-br from-accent/10 to-primary/5 border border-accent/20" : "bg-base-content/[0.02] border border-base-content/5 hover:bg-base-content/[0.04]"
+          ]}
+          style={`animation-delay: ${i * 100}ms`}
+        >
+          <div class="relative p-6 sm:p-8 lg:p-10 min-h-[240px] sm:min-h-[280px] lg:min-h-[340px] flex flex-col justify-between">
+            <!-- Gradient overlay on hover -->
+            <div class="absolute inset-0 bg-gradient-to-b from-accent/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            
+            <!-- Top: Number + Icon -->
+            <div class="relative z-10 flex items-center justify-between mb-6">
+              <span aria-hidden="true" class:list={[
+                "text-xs font-black tracking-widest",
+                f.featured ? "text-accent" : "text-accent/70 group-hover:text-accent/80"
+              ]}>0{i + 1}</span>
+              <div class="text-3xl sm:text-4xl transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500">
+                {f.icon}
+              </div>
+            </div>
+
+            <!-- Bottom: Content -->
+            <div class="relative z-10">
+              <h3 class:list={[
+                "text-lg sm:text-xl lg:text-2xl font-black mb-3 tracking-tight transition-colors duration-500",
+                f.featured ? "text-accent" : "text-base-content group-hover:text-accent"
+              ]}>
+                {f.title}
+              </h3>
+              <p class="text-sm sm:text-base text-base-content/75 group-hover:text-base-content/75 leading-relaxed transition-colors duration-500 mb-4">
+                {f.desc}
+              </p>
+              
+              <!-- Learn more link -->
+              <span class="inline-flex items-center gap-2 text-xs font-bold text-base-content/80 group-hover:text-accent transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0">
+                {t('features.exploreAll')}
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

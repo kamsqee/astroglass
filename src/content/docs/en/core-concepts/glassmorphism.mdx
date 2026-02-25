@@ -1,0 +1,55 @@
+---
+title: "Glassmorphism"
+description: "Understanding the design philosophy behind AstroGlass."
+order: 5
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass implements a modern take on glassmorphism — creating interfaces that feel layered, transparent, and premium.
+
+## The Recipe
+
+The glassmorphism effect is achieved through four key CSS properties working together:
+
+1.  **Backdrop Blur**: We use `backdrop-filter: blur(12px)` for the frosted effect.
+2.  **Translucency**: Background colors use alpha channels (e.g., `bg-white/10`).
+3.  **Borders**: Subtle 1px borders (`border-white/20`) define the edges.
+4.  **Shadows**: Soft, colored shadows create depth and elevation.
+
+This combination creates a sense of hierarchy and modernity.
+
+## Practical Usage
+
+In AstroGlass components, you'll see this pattern applied as Tailwind utility classes:
+
+```html
+<div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-lg">
+  Glassmorphic container
+</div>
+```
+
+For dark themes, the effect is often layered with gradient backgrounds:
+
+```html
+<div class="bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl border border-white/10">
+  Dark glassmorphic card
+</div>
+```
+
+## Theme Variations
+
+Each theme in AstroGlass interprets glassmorphism differently:
+
+| Theme | Glass Style |
+|-------|-------------|
+| **Liquid** | Organic shapes with fluid blob backgrounds |
+| **Glass** | Classic frosted panels with depth |
+| **Neo** | Bold contrast with sharp edges |
+| **Luxury** | Gold-tinted translucency with premium shadows |
+| **Minimal** | Subtle, barely-there transparency |
+| **Aurora** | Gradient mesh backgrounds with geometric structure |
+
+<Callout type="tip" title="Customizing Glass Effects">
+  The intensity of blur, opacity, and border effects can be adjusted per-theme through the CSS variables in `src/styles/_themes.css`. Look for `--glass-blur`, `--glass-opacity`, and related custom properties.
+</Callout>

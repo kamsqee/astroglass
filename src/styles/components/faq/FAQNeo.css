@@ -1,0 +1,149 @@
+/* FAQNeo.css */
+
+.c-faq-neo__category-card {
+  opacity: 0;
+  animation: cardFadeInNeo 1000ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardFadeInNeo {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.c-faq-neo__cat-trigger {
+  position: relative;
+  transition: all 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Glow border effect on hover */
+.c-faq-neo__cat-trigger::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    hsl(var(--a) / 0.3) 50%,
+    transparent 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.c-faq-neo__category-card:hover .c-faq-neo__cat-trigger::before {
+  opacity: 1;
+}
+
+.c-faq-neo__category-card:hover .c-faq-neo__cat-trigger {
+  background: hsl(var(--bc) / 0.06);
+  border-color: transparent;
+}
+
+/* Subtle inner glow */
+.c-faq-neo__cat-trigger::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    hsl(var(--a) / 0.08) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.c-faq-neo__category-card:hover .c-faq-neo__cat-trigger::after {
+  opacity: 1;
+}
+
+/* Content stays stable - no transforms on hover */
+.c-faq-neo__cat-trigger > div {
+  position: relative;
+  z-index: 1;
+}
+
+.c-faq-neo__category-card.expanded .c-faq-neo__cat-trigger {
+  display: none;
+}
+
+/* Accordion items */
+.c-faq-neo__accordion-item {
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.c-faq-neo__acc-trigger {
+  transition: all 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.c-faq-neo__acc-trigger:hover {
+  background: hsl(var(--bc) / 0.05);
+  border-color: hsl(var(--bc) / 0.1);
+}
+
+.c-faq-neo__acc-arrow {
+  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1), color 500ms ease;
+}
+
+.c-faq-neo__accordion-item.open .c-faq-neo__acc-arrow {
+  transform: rotate(180deg);
+  color: hsl(var(--a));
+}
+
+.c-faq-neo__accordion-item.open .c-faq-neo__acc-trigger {
+  background: hsl(var(--a) / 0.05);
+  border-color: hsl(var(--a) / 0.15);
+}
+
+.c-faq-neo__acc-content {
+  animation: accordionExpandNeo 800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes accordionExpandNeo {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.c-faq-neo__cat-expanded {
+  animation: expandedFadeIn 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes expandedFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -1,0 +1,113 @@
+---
+title: 表单与验证
+description: 了解如何使用 Valibot 和 Astro Actions 构建安全且经过验证的表单。
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+本模板使用 **Valibot** 在客户端和服务端提供轻量级、类型安全的验证。我们设计了一种混合方案，为您提供：
+1.  **即时 UI 反馈**：使用极小的客户端脚本。
+2.  **服务端安全保障**：在 Astro Actions 中使用*同一套*验证模式（可选但强烈推荐）。
+
+## 快速上手
+
+要添加一个新的经过验证的表单：
+
+<Steps>
+1. **定义特定规则（可选）**
+   
+   如果您需要超出共享 `ContactSchema` 的自定义规则，请在 `src/lib/schemas/` 中创建一个新模式。
+
+2. **将表单添加到您的组件中**
+   
+   复制以下模式。关键在于严格命名输入字段和处理 `.input-error` 类。
+
+   ```astro title="Component.astro"
+   ---
+   import { createContactSchema } from '../../lib/schemas/contact';
+   // ... 其他导入
+   ---
+
+   <form class="my-form" novalidate>
+     <div class="form-control">
+       <input type="email" name="email" required />
+     </div>
+     <button type="submit">提交</button>
+   </form>
+
+   <script>
+     import { safeParse } from 'valibot';
+     import { createContactSchema } from '../../lib/schemas/contact';
+
+     const form = document.querySelector('.my-form');
+     // 传入翻译函数（或标识符）和选项
+     const schema = createContactSchema(key => key, { companyRequired: true });
+
+     form.addEventListener('submit', (e) => {
+       e.preventDefault();
+       const formData = new FormData(form);
+       const data = Object.fromEntries(formData);
+       
+       // 使用模式进行解析
+       const result = safeParse(schema, data);
+
+       if (!result.success) {
+         // 处理错误（例如显示红色边框）
+         console.log(result.issues);
+       }
+     });
+   </script>
+   ```
+</Steps>
+
+## 主题感知样式
+
+我们构建了一套 CSS 系统，可自动将验证样式适配到您当前激活的主题（Liquid、Glass、Minimal 等）。
+
+您只需在输入框上切换 `input-error` 或 `input-success` 类即可。
+
+| 类名 | 效果 |
+| :--- | :--- |
+| `input-error` | 添加**红色**边框/光晕（`--er` 颜色）。 |
+| `input-success`| 添加**绿色**边框（`--su` 颜色）。 |
+| `error-message`| 滑入式小型辅助提示文字。 |
+
+### 使用示例
+```javascript
+// 添加错误状态
+input.classList.add('input-error');
+
+// 移除错误状态
+input.classList.remove('input-error');
+```
+
+## 自定义验证规则
+
+编辑 `src/lib/schemas/contact.ts` 可更改默认联系表单的验证规则。
+
+```typescript
+// 使用 pipe() 的现代 Valibot v1 语法
+export const createContactSchema = (t, options = {}) => object({
+  name: pipe(
+    string(),
+    minLength(2, t('validation.nameShort'))
+  ),
+  message: pipe(
+    string(),
+    minLength(10, t('validation.messageShort')),
+    maxLength(1000)
+  ),
+  // 条件验证
+  company: options.companyRequired 
+    ? pipe(string(), minLength(1))
+    : optional(string())
+});
+```
+
+## 国际化 (i18n)
+
+验证消息已全面翻译。相关键值位于：
+-   `src/locales/en/contact.json`（在 `validation` 对象下）
+-   `src/locales/zh/contact.json`
+
+在客户端初始化模式时，您需要传入翻译函数 `t` 或查找映射表，如 `ContactGlass.astro` 中所示。

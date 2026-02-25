@@ -1,0 +1,148 @@
+---
+title: "AstroGlass 新手入门指南"
+description: "学习如何通过主题系统、国际化语言支持和云端部署来搭建以及自定义你的专属 Astro 模板站点。"
+order: 1
+category: guide
+tags: ["getting-started", "setup", "beginner"]
+---
+
+
+欢迎光临使用 **AstroGlass 专属模板项目**！这份快速指引说明将会带您一步步搭建并设立好本地开发环境，同时也说明了怎么去定制化改装模板以使其满足您的各项需求需要。
+
+## 预备必需条件
+
+在正式开始之前，请先确认一下你已经成功安装了如下这几个核心要员：
+
+- **Node.js** 请保持版本在 v20 或者是更加新版
+- （强烈建议使用）**pnpm** 又或者是 npm
+- 顺手好用的代码编辑器，首推无脑支持（强烈建议 VS Code）
+
+<Callout type="tip" title="进阶专家的小建议">
+  为了更快且能极度节省有效省下硬盘物理存储空间这些卓越的管理包效率表现着想，咱们最为推荐首选使用 [pnpm](https://pnpm.io/) 依赖包管理器。
+</Callout>
+
+## 开发部署安装
+
+<Steps>
+
+### 克隆获取项目代码库
+
+第一步自然是将这套完美模板的项目源文件代码获取从库中给克隆到你的本地电脑工作局域内机器之中：
+
+```bash title="Terminal" frame="terminal"
+git clone https://github.com/kamsqee/astroglass.git my-project
+cd my-project
+```
+
+### 安装各项核心依赖关联支持项目包
+
+就运用使用你随心最为顺手偏好的那包管理工序将整个运作所需的相依从属组件一并去全装上：
+
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash frame="terminal"
+pnpm install
+```
+```bash frame="terminal"
+npm install
+```
+```bash frame="terminal"
+yarn install
+```
+</CodeTabs>
+
+### 开启开发环境中的热运行服务监测节点
+
+运行起整个项目框架以便你可以在第一时间便能立马上在屏幕前观看到并验证那份正在执行当中那动感十足的项目真面实效：
+
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash frame="terminal"
+pnpm dev
+```
+```bash frame="terminal"
+npm run dev
+```
+```bash frame="terminal"
+yarn dev
+```
+</CodeTabs>
+
+</Steps>
+
+那么，您的网站这时铁定已经在 `http://localhost:4321` 这个测试的端口网页上火热展示运行着了 🎉
+
+## 项目解构及层级档案结构体系探究
+
+这是一份有关整个核心文件夹主干部署运作及各自代表负责着相关工作指引区域的项目分工结构树目录概览表述：
+
+<FileTree>
+- src/
+  - components/
+    - sections/
+      - hero/
+        - HeroLiquid.astro
+        - HeroGlass.astro
+        - HeroNeo.astro
+        - ...
+      - features/
+      - pricing/
+      - about/
+      - portfolio/
+      - ...
+    - layout/
+      - header/
+    - ui/
+    - docs/
+    - mdx/
+  - config/
+    - themes.ts
+    - locales.ts
+    - docs.ts
+    - navigation.ts
+  - content/
+    - docs/
+      - en/
+      - ru/
+    - blog/
+  - locales/
+    - en/
+    - ru/
+  - pages/
+    - index.astro
+    - [theme].astro
+    - docs/
+    - blog/
+  - styles/
+    - global.css
+    - _themes.css
+    - components/
+- public/
+- astro.config.mjs
+- package.json
+</FileTree>
+
+## 为站点选取换上一套主打的新主题
+
+本项目本身内置绑定并配置预加载准备完毕足有了 **6 套美到令人发指的优美精装款风格化主题** 随时供你开箱无脑拆包任选享用：
+
+| 专属主题名称 | 它能给人的整体感官特色描述 |
+|-------|-------------|
+| **Liquid (清泉液化)** | 如如水般顺畅的流畅顺滑动效，辅上光晕渐变背景 |
+| **Glass (幻彩琉璃玻璃)** | 毛玻璃特质那强效的弥撒玻璃感折射光学特效，带磨砂防渗漏面层的坚固感展板 |
+| **Neo (新锐先锋者)** | 无比强硬带极其粗旷惹眼的显瘦加粗字体结构艺术展示排版法，再搭载极致浓烈具有深层视觉侵略高反差感色系比对 |
+| **Luxury (奢侈华贵尊享)** | 以极具优雅及有着代表高贵黄金特质特调色系交织装点渲染修饰其中，溢出满屏的高尚质感 |
+| **Minimal (化零极造极简克制风)** | 不含一丝世俗杂质累赘感全线干净彻底扫清并以高度聚焦为己核心意念呈现去阻隔摒去全屏中可致使造成走神之分心可能 |
+| **Aurora (沉浸式极光霓虹极变)** | 身临其境般的全息色彩融汇层层晕染而出的沉溺渐变式铺展色块叠加于硬朗刚正且十分考究整齐并排规划得稳正四方带有严格切割分布规划的各式几何构架体系框架之间交叠缠绕之中 |
+
+欲意若想做皮肤替换只需到在页面首要头部位置最顶区操作寻摸出它的对应调切装置功能器开关就成，再要么更为原始和暴力点的操作则是干脆亲自人工跑趟在它的路径上面强行去访问专门对应的呈现页就好（借如可写成这一形式 `你的前端域名首页路径后面再追加/liquid` ， `/glass`，以及`/aurora`）。
+
+## 不可或缺将必须接着要完成往下实施的更进一步执行方针
+
+现在既已成功顺利布置安装调试好了咱们的主力用来作业搞事情用的后方本地基地据点营台了：
+
+1. [这极其引以豪强大的外装主题更换系统](/docs/zh/core-concepts/theming) — 细致透彻领悟掌握明了它是怎样用那极为奇妙具有活动力般生命脉息变幻能力支持这整个底层的强壮系统级技术骨架并如何生效。
+2. [路向定位定向的导航及国际语种的应对转化处理](/docs/zh/core-concepts/routing-i18n) — 看如何支持并添上容纳并收归扩充海纳下这地球之上许许多多人人种之声的各种新语种体系进我们的这体系里来。
+3. [如何借由那被誉为极巨拥有可怕抵御灾害防御工事实力强大的 Cloudflare 作为平台承托去推向世界进行云部展示并分发内容](/docs/zh/deployment/cloudflare) — 是怎么去完成实施在 Cloudflare Pages 下架设搭建并且被完全完美释放且展现的全数环节流过程。
+
+<Callout type="info" title="在此环节中遇到不顺有些受阻急需呼救指导帮助么？">
+  不妨移驾屈尊在内查看过目详细检阅下这份被准备妥当作为专解诸如一些在[撰改表单结构搭建与严守准出检测的表单规范核验处理方面问题向的排除守则与指引说明总集](/docs/zh/guides/forms-and-validation)。若是真不凑巧给碰遇上一些相当让人感觉头疼百思也解决不落不明奇绝古怪阻断你继续往前推行作业不可调解排解等大难题，[那请记得开创一条新反馈直接发往提交上报问题追踪中心去（Issue专区）告知大家前来一起设法援助啦](https://github.com/kamsqee/astroglass/issues)。
+</Callout>

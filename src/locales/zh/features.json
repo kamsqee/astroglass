@@ -1,0 +1,82 @@
+{
+  "title": "Astro Glass 核心特性",
+  "subtitle": "为您打造高端、沉浸式数字体验所需的一切。",
+  "badge": "功能",
+  "coreBadge": "核心特性",
+  "experience": "体验",
+  "explore": "探索",
+  "learnMore": "了解更多",
+  "pureTitle": "纯净",
+  "liquidTitle": "灵动",
+  "luxuryTitle": "你想构建什么？",
+  "luxurySubtitle": "选择你的目标，看看 Astro Glass 如何帮助你更快实现它。",
+  "minimalCtaTitle": "准备好体验所有功能了吗？",
+  "minimalCtaDesc": "今天就开始使用完整的 Astro Glass 工具包进行构建。",
+  "f1Title": "极致性能",
+  "f1Desc": "默认情况下的“零JS”架构确保您的网站在眨眼之间加载完毕。",
+  "f1LongDesc": "基于 Astro 5.0 的群岛架构构建，仅传输您需要的 JavaScript。这意味着不到一秒的加载时间和开箱即用满分的 Web 核心性能指标 (Core Web Vitals)。",
+  "f2Title": "深度玻璃拟物风格",
+  "f2Desc": "多层模糊和折射效果，打造真正的奢华视觉美学。",
+  "f2LongDesc": "我们的玻璃拟物系统使用经过精心校准的背景过滤器、分层透明度和微妙的渐变，在不牺牲性能的情况下创造出视觉深度。",
+  "f3Title": "极度流动的适应性",
+  "f3Desc": "每个组件都能优雅地响应任何屏幕尺寸或方向。",
+  "f3LongDesc": "移动优先的响应式设计，具有流体排版、自适应间距和上下文感知布局，从智能手表到超宽屏幕都能完美显示。",
+  "f4Title": "无限主题可能",
+  "f4Desc": "10+ 款内置调色板，或在几秒钟内创建您自己的标志性主题外观。",
+  "f4LongDesc": "由 CSS 自定义属性和 DaisyUI 提供支持，瞬间切换主题或创建专属调色板。深色模式、浅色模式，以及其间的一切可能。",
+  "f5Title": "边缘网络就绪",
+  "f5Desc": "使用 Cloudflare Workers 在全球范围内进行部署，以实现随时随地的即时访问。",
+  "useCases": {
+    "speed": "快速构建",
+    "speedHeadline": "在几小时内发布生产代码，而不是几周。",
+    "speedF2Title": "优化编译包",
+    "speedF2Desc": "自动代码分割和摇树优化（Tree shaking）可将负载降至最低。",
+    "design": "尊贵外观",
+    "designHeadline": "创建令人惊叹的界面，感觉高端和抛光。",
+    "scale": "全球扩展",
+    "scaleHeadline": "专为国际受众和任何设备打造。",
+    "scaleF2Title": "I18n 多语言就绪",
+    "scaleF2Desc": "提供全面的多语言国际化支持，甚至包括了从右向左的排版适配 (RTL) 以及多语言路由。"
+  },
+  "cta": "探索开发文档",
+  "home": {
+    "title": "为什么选择 AstroGlass？",
+    "subtitle": "纯粹的性能表现。水流般的灵动设计。",
+    "desc": "一个完整的工具包，轻松为您构建令人惊艳的高性能网站。",
+    "list": [
+      {
+        "title": "Astro 5.0",
+        "desc": "采用最先进的服务器端岛屿 (Server Islands) 和内容层 (Content Layer) 架构带来不凡的速度。"
+      },
+      {
+        "title": "Tailwind CSS 4.0",
+        "desc": "次时代原子化 CSS 引擎，零配置开箱即用，即时编译。"
+      },
+      {
+        "title": "Cloudflare 边缘分发网络",
+        "desc": "包含各种针对边缘部署优化的配置文件，可以无缝发布项目至全球网络。"
+      },
+      {
+        "title": "顶尖搜索体验",
+        "desc": "基于定制版的 Fuse.js 进行实现，不需要借助其他第三方服务也能用。"
+      },
+      {
+        "title": "自带国际化组件",
+        "desc": "从深层内核提供内置的国际化自动检测路由和翻译切换管控中心。"
+      },
+      {
+        "title": "React 19",
+        "desc": "动态渲染你的网页交互组件，同时仍然为你保持非激活状态下的纯静态表现以便获取满分 SEO 成绩。"
+      },
+      {
+        "title": "绝佳的类型安全",
+        "desc": "具有对 TypeScript 系统天生的完整支持体系与由 Zod 内容解析引擎推动的数据内容流系统保障。"
+      },
+      {
+        "title": "极强的搜索引擎优化底座",
+        "desc": "为你默认提供诸如社交平台元数据协议生成管理中心、智能的权威标准化自动抓取规则管理中心等等。"
+      }
+    ]
+  },
+  "exploreAll": "浏览全部功能"
+}

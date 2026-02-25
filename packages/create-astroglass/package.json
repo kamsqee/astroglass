@@ -1,0 +1,47 @@
+{
+  "name": "create-astroglass",
+  "version": "1.0.0",
+  "description": "Scaffold a new Astroglass project with your choice of themes, palettes, languages, and features.",
+  "type": "module",
+  "bin": {
+    "create-astroglass": "./dist/index.mjs"
+  },
+  "main": "./dist/index.mjs",
+  "files": [
+    "dist",
+    "templates",
+    "modules",
+    "content-lite"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --out-dir dist --clean",
+    "dev": "tsup src/index.ts --format esm --out-dir dist --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.9.1",
+    "citty": "^0.1.6",
+    "giget": "^1.2.3",
+    "picocolors": "^1.1.1",
+    "gradient-string": "^3.0.0",
+    "fast-glob": "^3.3.3",
+    "ejs": "^3.1.10",
+    "defu": "^6.1.4"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/gradient-string": "^1.1.6",
+    "@types/node": "^22.0.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.7.0"
+  },
+  "keywords": [
+    "astro",
+    "astroglass",
+    "create",
+    "scaffold",
+    "template",
+    "cli"
+  ],
+  "license": "MIT"
+}

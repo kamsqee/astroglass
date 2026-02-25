@@ -1,0 +1,64 @@
+/* HeroNeo.css */
+
+/* .visionary-badge */
+.c-hero-neo__visionary-badge {
+  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+}
+
+/* .title-word */
+.c-hero-neo__title-word {
+  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+  opacity: 0.01;
+  /* Use global animation */
+  animation: fade-in 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.c-hero-neo__title-word:hover {
+  transform: scale(1.05);
+}
+
+/* .hero-subtitle */
+.c-hero-neo__subtitle {
+  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+}
+
+.c-hero-neo__subtitle:hover {
+  color: hsl(var(--bc) / 0.6);
+}
+
+/* .btn-minimal */
+.c-hero-neo__btn-minimal {
+  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+}
+
+.c-hero-neo__btn-minimal:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15);
+}
+
+/* .btn-text */
+.c-hero-neo__btn-text {
+  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateZ(0);
+}
+
+/* .particle */
+.c-hero-neo__particle {
+  position: absolute;
+  background: radial-gradient(circle, hsl(var(--a) / 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  /* Use global animation */
+  animation: drift 20s infinite alternate ease-in-out;
+  will-change: transform;
+}
+
+/* Specific particles */
+.c-hero-neo__particle--1 { width: 300px; height: 300px; top: -5%; left: -5%; animation-delay: 0s; }
+.c-hero-neo__particle--2 { width: 350px; height: 350px; bottom: -5%; right: -5%; animation-delay: -5s; }
+.c-hero-neo__particle--3 { width: 250px; height: 250px; top: 40%; right: 10%; animation-delay: -10s; }
+.c-hero-neo__particle--4 { width: 280px; height: 280px; bottom: 20%; left: 10%; animation-delay: -15s; }

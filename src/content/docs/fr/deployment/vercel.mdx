@@ -1,0 +1,61 @@
+---
+title: "Déploiement Vercel"
+description: "Déployez votre site AstroGlass sur Vercel."
+order: 3
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass peut être déployé sur **Vercel** avec une configuration minimale.
+
+## Prérequis
+
+- Un compte [Vercel](https://vercel.com/).
+- **Node.js** v20+ installé localement.
+- La CLI Vercel installée (`npm install -g vercel`).
+
+## Méthodes de Déploiement
+
+### Option 1 : Intégration GitHub (Recommandée)
+
+<Steps>
+1. **Poussez votre code sur GitHub**
+   
+   Assurez-vous que votre projet se trouve dans un dépôt GitHub.
+
+2. **Importez vers Vercel**
+   
+   Allez sur [vercel.com/new](https://vercel.com/new) et importez votre dépôt GitHub.
+
+3. **Configurez les Paramètres de Build**
+   
+   Vercel devrait détecter automatiquement Astro. Si ce n'est pas le cas, utilisez :
+   - **Framework Preset** : Astro
+   - **Build Command** : `pnpm run build`
+   - **Output Directory** : `dist`
+
+4. **Déployez**
+   
+   Cliquez sur "Deploy" (Déployer) et attendez que la compilation (build) se termine.
+</Steps>
+
+### Option 2 : Déploiement via CLI
+
+<Steps>
+1. **Connectez-vous à Vercel**
+   
+   ```bash title="Terminal" frame="terminal"
+   npx vercel login
+   ```
+
+2. **Déployez**
+   
+   ```bash title="Terminal" frame="terminal"
+   pnpm run deploy:vercel
+   ```
+</Steps>
+
+<Callout type="info" title="Index de Recherche">
+  L'index de recherche est généré automatiquement pendant l'exécution de `pnpm run build`. Assurez-vous que l'étape de génération se termine avec succès pour que la recherche fonctionne sur le site déployé.
+</Callout>

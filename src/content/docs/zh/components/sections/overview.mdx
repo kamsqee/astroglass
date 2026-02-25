@@ -1,0 +1,112 @@
+---
+title: "区段组件总览 (Section Components Overview)"
+description: "AstroGlass 中所有可用区段组件的全面概览。"
+order: 1
+---
+
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+区段组件 (Section components) 是构建每个主题页面的基本构件。每个主题页面由 **12个及以上区段** 构成，每个区段在各个主题下都拥有专门的变体设计。
+
+## 可用区段
+
+<CardGrid>
+  <LinkCard
+    title="Hero (首屏展示)"
+    description="全屏首图区块，配有各主题特定的动画和展示效果。"
+    href="/docs/zh/components/sections/hero"
+  />
+  <LinkCard
+    title="关于 (About)"
+    description="用于公司或产品的介绍和展示区段。"
+    href="/docs/zh/components/sections/about"
+  />
+  <LinkCard
+    title="特性 (Features)"
+    description="通过网格、列表及卡片对产品特性进行的综合展示区段。"
+    href="/docs/zh/components/sections/features"
+  />
+  <LinkCard
+    title="作品集 (Portfolio)"
+    description="专门呈现项目画廊、作品展示示例的集合区块。"
+    href="/docs/zh/components/sections/portfolio"
+  />
+  <LinkCard
+    title="定价 (Pricing)"
+    description="包含多种计划版本及特色对比的定价表格区段。"
+    href="/docs/zh/components/sections/pricing"
+  />
+  <LinkCard
+    title="用户感言 (Testimonials)"
+    description="集中展现客户评价及社交平台口碑回馈的独立区段。"
+    href="/docs/zh/components/sections/testimonials"
+  />
+  <LinkCard
+    title="常见问题 (FAQ)"
+    description="使用原生折叠面板 (Accordion UI) 展示各个问题详情解释区段。"
+    href="/docs/zh/components/sections/faq"
+  />
+  <LinkCard
+    title="行动号召 (CTA)"
+    description="致力于驱动转化与注册引流为目的动作召唤页底区组件。"
+    href="/docs/zh/components/sections/cta"
+  />
+  <LinkCard
+    title="联系我们 (Contact)"
+    description="内嵌 Valibot 高效验证插件的反馈收集及客服通讯提交表单区块。"
+    href="/docs/zh/components/sections/contact"
+  />
+  <LinkCard
+    title="导航栏 (Navbar)"
+    description="配合特定主题风格制作出的网页顶部导航主菜单。"
+    href="/docs/zh/components/sections/navbar"
+  />
+  <LinkCard
+    title="页脚 (Footer)"
+    description="展现链接目录、社交账号跳转、商标设计的网站底端收尾区。"
+    href="/docs/zh/components/sections/footer"
+  />
+</CardGrid>
+
+## 运作原理简介
+
+以上每一区块皆相应保有 **6种特定的主题变体** —— 即分别对应系统内全部主题 (Liquid, Glass, Neo, Luxury, Minimal, Aurora)。在此之外动态主页面构建文档 `src/pages/[theme].astro` 便会通过对应组件地图映射表来加载对应确切变体：
+
+```astro
+---
+// 摘自 [theme].astro （简化版）
+const componentMap = {
+  liquid: { Hero: HeroLiquid, About: AboutLiquid, ... },
+  glass:  { Hero: HeroGlass,  About: AboutGlass,  ... },
+  // neo, luxury, minimal, aurora...
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Hero />
+<components.About />
+<components.Features />
+```
+
+<Callout type="info" title="不接受外部 Props 传参">
+  为避免冗余区段组件**全面舍弃了采用传入外部 Props 的接口**。一切显示文本信息全被内部所调用的 `useTranslations()` 根据针对相应的 `src/locales/{lang}/{section}.json` 中配置进行内嵌读取渲染应用呈现出来，因此改写此类具体内容需要直调整更新所针对语言内附文件即可完成操作。
+</Callout>
+
+## 目录及存储结构规范
+
+项目下的所有展现层分区内容都依据了一以贯之的同类文件夹归集布局规范存放：
+
+```
+src/components/sections/{section}/
+├── {Section}Liquid.astro
+├── {Section}Glass.astro
+├── {Section}Neo.astro
+├── {Section}Luxury.astro
+├── {Section}Minimal.astro
+└── {Section}Aurora.astro
+```
+
+每个主题组件对应的具体 CSS 排版样式布局指令文档被分别设立储藏在：`src/styles/components/{section}/` 下归档整合调用。

@@ -1,0 +1,77 @@
+---
+title: カスタマイズ
+description: スタイル、テーマ、そして設定のカスタマイズ方法。
+order: 2
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass では、`@tailwindcss/vite` プラグインを介してスタイリングに **Tailwind CSS v4** を使用しています。独立した `tailwind.config.mjs` ファイルはありません — すべてのカスタマイズは CSS を通じて行われます。
+
+## スタイリングの概要
+
+グローバルスタイルと CSS 変数は `src/styles/global.css` で定義されています。このファイルは以下を処理します：
+- ベースレイヤーのリセット
+- カスタムフォント（Inter & JetBrains Mono）
+- テーマの CSS 変数（HSL のカラー値）
+
+テーマ固有のオーバーライド（上書き）は `src/styles/_themes.css` に配置されます。
+
+<FileTree>
+- src/
+  - styles/
+    - **global.css** — ベーススタイル、フォント、ルート CSS 変数
+    - **_themes.css** — テーマごとのカラーオーバーライド
+    - **_animations.css** — 共有するアニメーションのキーフレーム
+    - **_forms.css** — フォーム入力のスタイル
+    - components/ — コンポーネント固有のスタイル（ヒーロー、料金表など）
+</FileTree>
+
+## カラーシステム
+
+このプロジェクトでは CSS 変数ベースのカラーシステムを使用しています。色は HSL 値（`hsl()` のラッパーなし）として定義され、Tailwind の透明度修飾子の構文が正しく機能するようにしています。
+
+```css title="global.css"
+/* src/styles/global.css */
+:root {
+  --p: 260 80% 60%;   /* プライマリ */
+  --s: 310 80% 60%;   /* セカンダリ */
+  --a: 190 90% 60%;   /* アクセント */
+  --b1: 220 20% 10%;  /* ベース 1 (背景) */
+  --b2: 220 18% 14%;  /* ベース 2 (サーフェス) */
+  --bc: 220 20% 90%;  /* ベースコンテンツ (テキスト) */
+  --er: 0 80% 60%;    /* エラー */
+  --su: 150 80% 50%;  /* 成功 */
+}
+```
+
+コンポーネントは、Tailwind ユーティリティクラスまたは `hsl()` を介してこれらの変数を消費します：
+
+```html
+<div class="bg-[hsl(var(--p))] text-[hsl(var(--bc))]">
+  プライマリ背景とベースコンテンツテキスト
+</div>
+```
+
+<Callout type="tip" title="色の変更">
+  サイトのカラースキームを変更するには、`global.css` 内の HSL 値を更新してください。テーマ固有のオーバーライド（ライト/ダークモード、テーマごとの色）を行うには、`_themes.css` 内で `[data-theme="..."]` セレクターを使用します。
+</Callout>
+
+## カスタムフォントの追加
+
+1.  フォントファイルを `public/fonts/` に配置するか、`global.css` で Google Fonts からインポートします。
+2.  `src/styles/global.css` で `@font-face` ルールを定義します。
+3.  必要に応じて、フォントファミリの CSS 変数または Tailwind ユーティリティを更新します。
+
+## コンポーネントのカスタマイズ
+
+各テーマには独自のコンポーネントバリアント（例：`HeroLiquid.astro`, `HeroGlass.astro`）があります。特定のセクションをカスタマイズするには：
+
+1.  `src/components/sections/{section}/` (例： `hero/`) に移動します。
+2.  テーマ固有のファイル (例： `HeroGlass.astro`) を直接編集します。
+3.  コンポーネント固有の CSS は `src/styles/components/{section}/` にあります。
+
+<Callout type="info" title="外部 Props なし">
+  セクションコンポーネントはテキストプロパティを受け付けません。すべてのコンテンツは `useTranslations()` を介した翻訳キーによって駆動されます。テキストを変更するには、`src/locales/{lang}/` 内の JSON ファイルを編集します。
+</Callout>

@@ -1,0 +1,92 @@
+---
+title: Жоба құрылымы
+description: AstroGlass кодтық базасының ұйымдастырылуына шолу.
+order: 3
+---
+
+import ProjectStructureGraph from '../../../../components/ui/diagrams/ProjectStructureGraph';
+
+AstroGlass стандартты Astro жоба құрылымын бірнеше негізгі ұйымдастырушылық шаблондарымен бірге ұстанады.
+
+<ProjectStructureGraph client:only="react" />
+
+## Негізгі каталогтар
+
+### `src/components/pages/`
+
+Портфолио беті сияқты динамикалық маршруттарға арналған толық беттік компоненттерді қамтиды. Бет түрі бойынша ұйымдастырылған:
+
+```
+pages/
+├── portfolio/
+│   ├── aurora/
+│   │   ├── PortfolioHeroAurora.astro
+│   │   ├── ...
+│   ├── liquid/
+│   │   ├── PortfolioHeroLiquid.astro
+│   │   ├── PortfolioGridLiquid.astro
+│   │   ├── PortfolioModalLiquid.astro
+│   │   ├── PortfolioCTALiquid.astro
+│   │   └── ...
+│   └── ...
+```
+
+### `src/components/sections/`
+
+Беттің барлық секциялық компоненттерін қамтиды, секция түрі бойынша ұйымдастырылған. Әр секцияның ішінде әр тақырыпқа бір нұсқасы (вариант) бар ішкі каталог бар:
+
+```
+sections/
+├── hero/
+│   ├── HeroLiquid.astro
+│   ├── HeroGlass.astro
+│   ├── HeroNeo.astro
+│   ├── HeroLuxury.astro
+│   ├── HeroMinimal.astro
+│   └── HeroAurora.astro
+├── about/
+├── features/
+├── portfolio/
+├── pricing/
+├── testimonial/
+├── faq/
+├── cta/
+├── contact/
+└── footer/
+```
+
+### `src/components/layout/header/`
+
+Тақырыпқа тән тақырыптама/навигация (header/navbar) компоненттері (мысалы, `HeaderGlass.astro`, `HeaderLuxury.astro`).
+
+### `src/components/ui/`
+
+Қайта қолдануға болатын UI примитивтері: `Button`, `Card`, `Badge`, `Avatar`, `Input`, `Tabs`, `Charts`, `ThemeSwitcher`, `LanguageSwitcher` және `Search`.
+
+### `src/config/`
+
+Орталық конфигурация файлдары:
+- `themes.ts` — Тақырыптар тізілімі (ID-лер, атаулар, қосылған мәртебесі, секциялар тізімдері)
+- `locales.ts` — Қолдау көрсетілетін тілдер және олардың метадеректері
+- `navigation.ts` — Сайттың негізгі навигациялық құрылымы
+- `docs.ts` — Құжаттаманың бүйірлік тақтасының конфигурациясы және нұсқаларды басқару
+
+### `src/content/`
+
+Құжаттар мен блог жазбаларына арналған Astro Content Collections. `docs/[lang]/` ішіндегі құрылым құжаттаманың URL жолдарын анықтайды.
+
+### `src/locales/`
+
+Тіл коды бойынша ұйымдастырылған орналасу JSON файлдары. Әр файл бет секциясына сәйкес келеді (мысалы, `hero.json`, `pricing.json`, `contact.json`).
+
+### `src/pages/`
+
+Файлға негізделген маршрутизация (File-based routing). `[theme].astro` динамикалық маршруты әрбір қосылған тақырыпқа арналған беттерді құрады. `[...lang]` каталог шаблондары бүкіл архитектура бойынша оқшауланған бет нұсқаларын өңдейді.
+
+### `src/styles/`
+
+Ауқымды (Global) CSS, тақырыпты үстінен жазулар (`_themes.css`), анимациялық кілт кадрлар және `components/` ішіндегі компоненттерге тән стильдер кестелері.
+
+### `src/utils/`
+
+i18n аудармалары (`i18n.ts`), тілді анықтау (`locale-utils.ts`) және құжаттар навигациясы (`docs-nav.ts`) үшін пайдаланылатын утилиталық функциялар.

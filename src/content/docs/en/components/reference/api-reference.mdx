@@ -1,0 +1,142 @@
+---
+title: "API Reference"
+description: "Technical API reference for AstroGlass components and utilities."
+order: 1
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Detailed reference for key functions, types, and configuration objects used in AstroGlass.
+
+## `useTranslations(locale)`
+
+Returns a translation getter function for the given locale.
+
+**Module**: `src/utils/i18n.ts`
+
+**Signature**:
+```typescript
+function useTranslations(locale: Locale): (key: string) => string;
+```
+
+**Parameters**:
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `locale` | `Locale` (`'en' \| 'ru'`) | The locale code to load translations for. |
+
+**Returns**: A function `t(key: string): string` that resolves a dot-notation key to its translated value. If the key is not found, it returns the key itself and logs a warning in development mode.
+
+**Usage**:
+```astro
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<h1>{t('hero.title')}</h1>
+<p>{t('hero.subtitle')}</p>
+```
+
+**Key Behavior**:
+- Keys from `common.json` are spread at root level (e.g., `t('title')`)
+- All other files are namespaced by filename (e.g., `t('hero.title')`, `t('pricing.plans.pro.name')`)
+- Missing keys return the key string in production, log warnings in dev
+
+---
+
+## `getLocaleFromUrl(url)`
+
+Extracts the locale code from the current URL.
+
+**Module**: `src/utils/locale-utils.ts`
+
+**Signature**:
+```typescript
+function getLocaleFromUrl(url: URL): Locale;
+```
+
+Returns the locale prefix from the URL path, defaulting to `'en'` if none is found.
+
+---
+
+## `buildNavLinks(locale, section)`
+
+Generates navigation links for the documentation sidebar.
+
+**Module**: `src/utils/docs-nav.ts`
+
+**Signature**:
+```typescript
+function buildNavLinks(locale: string, section?: string): NavLink[];
+```
+
+Returns an array of navigation link objects used by the docs sidebar component.
+
+---
+
+## `getEnabledThemes()`
+
+Returns all enabled theme definitions.
+
+**Module**: `src/config/themes.ts`
+
+**Signature**:
+```typescript
+function getEnabledThemes(): ThemeDefinition[];
+```
+
+---
+
+## `getThemeById(id)`
+
+Returns a specific theme definition by its ID.
+
+**Module**: `src/config/themes.ts`
+
+**Signature**:
+```typescript
+function getThemeById(id: string): ThemeDefinition | undefined;
+```
+
+---
+
+## Type: `ThemeDefinition`
+
+```typescript
+interface ThemeDefinition {
+  id: string;              // URL slug (e.g., 'liquid', 'aurora')
+  name: string;            // Display name
+  color: string;           // Tailwind gradient classes
+  icon: string;            // Emoji icon
+  sections: string[];      // Enabled sections
+  enabled: boolean;        // Whether theme is active
+  premium: boolean;        // Premium flag
+  description: string;     // One-line description
+}
+```
+
+## Type: `LocaleConfig`
+
+```typescript
+interface LocaleConfig {
+  code: string;            // ISO language code
+  name: string;            // English name
+  nativeName: string;      // Native name
+  flag: string;            // Flag emoji
+  direction: 'ltr' | 'rtl';
+  enabled: boolean;
+}
+```
+
+## Available Themes
+
+| ID | Name | Icon |
+|----|------|------|
+| `liquid` | Liquid | 💧 |
+| `glass` | Glass | 🪟 |
+| `neo` | Neo | ⚡ |
+| `luxury` | Luxury | 👑 |
+| `minimal` | Minimal | ✨ |
+| `aurora` | Aurora | 🌌 |

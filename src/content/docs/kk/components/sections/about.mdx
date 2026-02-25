@@ -1,0 +1,37 @@
+---
+title: "Туған жер (About) бөлімі"
+description: "Әрбір тақырыпқа арналған компанияны немесе өнімді таныстыру бөлімдері."
+order: 3
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+About (туралы) бөлімі компанияңызды, өніміңізді немесе тарихыңызды таныстырады. Әрбір тақырып (theme) әртүрлі визуалды элементтері бар бірегей макетті ұсынады.
+
+## Тақырып нұсқалары
+
+| Тақырып (Theme) | Компонент | Стилі |
+|-------|-----------|-------|
+| **Liquid** | `AboutLiquid.astro` | Атаусыз (fluid) макеті бар органикалық пішінді (blob) фондар |
+| **Glass** | `AboutGlass.astro` | Тереңдік әсері бар күңгірт шыны панельдер |
+| **Neo** | `AboutNeo.astro` | Жуан типографика және жоғары контрастты карталар |
+| **Luxury** | `AboutLuxury.astro` | Алтын бөлшектері бар талғампаз макет |
+| **Minimal** | `AboutMinimal.astro` | Таза, контентке бағытталған дизайн |
+| **Aurora** | `AboutAurora.astro` | Геометриялық құрылымы бар градиенттік тор (mesh) |
+
+Барлық нұсқалар `src/components/sections/about/` орналасқан.
+
+## Контент көзі
+
+About бөлімінің мәтіні `useTranslations()` арқылы `src/locales/{lang}/about.json` файлынан жүктеледі.
+
+<Callout type="info" title="Қасиеттер (Props) жоқ">
+  About компоненттері сыртқы қасиеттерді (props) қабылдамайды. About контентін өңдеу үшін `src/locales/{lang}/about.json` файлын жаңартыңыз.
+</Callout>
+
+## Баптау
+
+Баптау үшін:
+1. `src/components/sections/about/About{Theme}.astro` файлын өңдеңіз.
+2. Стильдерді `src/styles/components/about/` ішінде реттеңіз.
+3. Контентті `src/locales/{lang}/about.json` ішінде өзгертіңіз.

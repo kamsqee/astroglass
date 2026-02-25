@@ -1,0 +1,28 @@
+---
+title: "Секция Contact"
+description: "Контактные формы с валидацией Valibot для каждой темы."
+order: 10
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Секция Contact предоставляет валидированные контактные формы.
+
+## Варианты тем
+
+| Тема | Компонент | Стиль |
+|------|-----------|-------|
+| **Liquid** | `ContactLiquid.astro` | Плавный дизайн формы |
+| **Glass** | `ContactGlass.astro` | Стеклянная форма |
+| **Neo** | `ContactNeo.astro` | Контрастная форма |
+| **Luxury** | `ContactLuxury.astro` | Премиальная форма |
+| **Minimal** | `ContactMinimal.astro` | Простая форма |
+| **Aurora** | `ContactAurora.astro` | Градиентный фон |
+
+## Валидация
+
+Формы используют **Valibot** для типобезопасной валидации. Подробнее: [Руководство по формам](/docs/en/guides/forms-and-validation).
+
+<Callout type="info" title="Без пропсов">
+  Контент загружается из `src/locales/{lang}/contact.json`.
+</Callout>

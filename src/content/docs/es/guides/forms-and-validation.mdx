@@ -1,0 +1,113 @@
+---
+title: Formularios y Validación
+description: Aprenda a construir formularios seguros y validados utilizando Valibot y Astro Actions.
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+
+Esta plantilla utiliza **Valibot** para una validación ligera y segura de tipos tanto en el cliente como en el servidor. Hemos diseñado un enfoque híbrido que le proporciona:
+1.  **Retroalimentación instantánea en la interfaz de usuario**: Utilizando un script del lado del cliente muy pequeño.
+2.  **Seguridad del lado del servidor**: Usando el *mismo* esquema en Astro Actions (opcional pero recomendado).
+
+## Inicio rápido
+
+Para agregar un nuevo formulario validado:
+
+<Steps>
+1. **Definir reglas específicas (Opcional)**
+   
+   Si necesita reglas personalizadas más allá del esquema compartido `ContactSchema`, cree un nuevo esquema en `src/lib/schemas/`.
+
+2. **Agregar el formulario a su componente**
+   
+   Copie este patrón. La clave es el nombre estricto de las entradas y el manejo de la clase `.input-error`.
+
+   ```astro title="Component.astro"
+   ---
+   import { createContactSchema } from '../../lib/schemas/contact';
+   // ... importaciones
+   ---
+
+   <form class="my-form" novalidate>
+     <div class="form-control">
+       <input type="email" name="email" required />
+     </div>
+     <button type="submit">Enviar</button>
+   </form>
+
+   <script>
+     import { safeParse } from 'valibot';
+     import { createContactSchema } from '../../lib/schemas/contact';
+
+     const form = document.querySelector('.my-form');
+     // Pase la función de traducción (o el identificador) y las opciones
+     const schema = createContactSchema(key => key, { companyRequired: true });
+
+     form.addEventListener('submit', (e) => {
+       e.preventDefault();
+       const formData = new FormData(form);
+       const data = Object.fromEntries(formData);
+       
+       // Analizar usando el esquema
+       const result = safeParse(schema, data);
+
+       if (!result.success) {
+         // Manejar errores (p. ej., mostrar bordes rojos)
+         console.log(result.issues);
+       }
+     });
+   </script>
+   ```
+</Steps>
+
+## Estilos adaptados al tema
+
+Hemos construido un sistema CSS que adapta automáticamente los estilos de validación a su tema activo (Liquid, Glass, Minimal, etc.).
+
+Solo necesita alternar las clases `input-error` o `input-success` en sus entradas.
+
+| Clase | Efecto |
+| :--- | :--- |
+| `input-error` | Agrega un borde/resplandor **Rojo** (color `--er`). |
+| `input-success`| Agrega un borde **Verde** (color `--su`). |
+| `error-message`| Un pequeño texto de ayuda estilizado que se desliza. |
+
+### Ejemplo de uso
+```javascript
+// Agregar estado de error
+input.classList.add('input-error');
+
+// Eliminar estado de error
+input.classList.remove('input-error');
+```
+
+## Personalización de reglas de validación
+
+Edite `src/lib/schemas/contact.ts` para cambiar las reglas del formulario de contacto predeterminado.
+
+```typescript
+// Sintaxis moderna de Valibot v1 usando pipe()
+export const createContactSchema = (t, options = {}) => object({
+  name: pipe(
+    string(),
+    minLength(2, t('validation.nameShort'))
+  ),
+  message: pipe(
+    string(),
+    minLength(10, t('validation.messageShort')),
+    maxLength(1000)
+  ),
+  // Validación condicional
+  company: options.companyRequired 
+    ? pipe(string(), minLength(1))
+    : optional(string())
+});
+```
+
+## Internacionalización (i18n)
+
+Los mensajes de validación están completamente traducidos. Las claves se encuentran en:
+-   `src/locales/en/contact.json` (bajo el objeto `validation`)
+-   `src/locales/ru/contact.json`
+
+Al inicializar el esquema en el cliente, debe pasar una función de traducción `t` o un mapa de búsqueda, como se ve en `ContactGlass.astro`.

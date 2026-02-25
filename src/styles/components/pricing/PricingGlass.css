@@ -1,0 +1,45 @@
+/* PricingGlass.css */
+
+/* Wrapper for transitions */
+.c-pricing-glass__card, 
+.c-pricing-glass__card *, 
+.c-pricing-glass__toggle, 
+.c-pricing-glass__toggle-glider {
+  transition: all 1200ms var(--ease-glass);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* .pricing-card-glass */
+.c-pricing-glass__card:hover {
+  transform: translateY(-12px) scale(1.02);
+  background-color: hsl(var(--bc) / 0.06);
+  border-color: hsl(var(--bc) / 0.3);
+}
+
+/* .pricing-toggle-btn */
+.c-pricing-glass__toggle-btn.active { 
+  color: hsl(var(--b1)); 
+}
+
+/* .toggle-glass logic */
+.c-pricing-glass__toggle:has([data-period="yearly"].active) .c-pricing-glass__toggle-glider {
+  transform: translateX(100%);
+}
+
+/* Discount Animation States */
+.c-pricing-glass__section:has([data-period="yearly"].active) .c-pricing-glass__original-price { 
+   opacity: 1; 
+   transform: translateY(0); 
+}
+
+.c-pricing-glass__section:has([data-period="yearly"].active) .c-pricing-glass__discount-pill { 
+   opacity: 1; 
+   transform: scale(1);
+}
+
+/* .original-price, .discount-pill */
+.c-pricing-glass__original-price, 
+.c-pricing-glass__discount-pill {
+   transform: translateY(10px) scale(0.9);
+}

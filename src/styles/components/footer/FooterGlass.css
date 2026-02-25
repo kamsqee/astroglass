@@ -1,0 +1,72 @@
+/* FooterGlass — Glassmorphism footer */
+
+.footer-glass {
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-glass-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.footer-glass-bg::before {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse, oklch(0.6 0.2 300 / 0.08) 0%, transparent 70%);
+  filter: blur(100px);
+}
+
+.footer-glass-card {
+  background: hsl(var(--b1) / 0.6);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid hsl(var(--bc) / 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.5s ease;
+}
+
+.footer-glass-card:hover {
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+}
+
+.footer-glass-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.footer-glass-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: hsl(var(--a));
+  transition: width 0.4s var(--ease-glass);
+}
+
+.footer-glass-link:hover {
+  color: hsl(var(--a));
+}
+
+.footer-glass-link:hover::after {
+  width: 100%;
+}
+
+.footer-glass-social {
+  transition: all 0.4s var(--ease-glass);
+}
+
+.footer-glass-social:hover {
+  background: hsl(var(--a) / 0.12);
+  border-color: hsl(var(--a) / 0.25);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 24px hsl(var(--a) / 0.1);
+}

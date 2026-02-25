@@ -1,0 +1,61 @@
+---
+title: "Vercel-ге орналастыру (Deployment)"
+description: "AstroGlass сайтыңызды Vercel-ге орналастырыңыз."
+order: 3
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass минималды конфигурациямен **Vercel**-ге орналастырылуы мүмкін.
+
+## Алғышарттар
+
+- [Vercel](https://vercel.com/) аккаунты.
+- Жергілікті компьютерде орнатылған **Node.js** v20+.
+- Vercel CLI орнатылған (`npm install -g vercel`).
+
+## Орналастыру әдістері
+
+### 1-нұсқа: GitHub интеграциясы (Ұсынылады)
+
+<Steps>
+1. **Кодты GitHub-қа жүктеу**
+   
+   Жобаңыздың GitHub репозиторийінде екеніне көз жеткізіңіз.
+
+2. **Vercel-ге импорттау**
+   
+   [vercel.com/new](https://vercel.com/new) сайтына өтіп, GitHub репозиторийіңізді импорттаңыз.
+
+3. **Құрастыру (Build) баптауларын конфигурациялау**
+   
+   Vercel Astro-ны автоматты түрде анықтауы тиіс. Егер олай болмаса, мынаны пайдаланыңыз:
+   - **Framework Preset**: Astro
+   - **Build Command**: `pnpm run build`
+   - **Output Directory**: `dist`
+
+4. **Орналастыру (Deploy)**
+   
+   "Deploy" түймесін басып, құрастырудың аяқталуын күтіңіз.
+</Steps>
+
+### 2-нұсқа: CLI арқылы орналастыру
+
+<Steps>
+1. **Vercel-ге кіру**
+   
+   ```bash title="Терминал" frame="terminal"
+   npx vercel login
+   ```
+
+2. **Орналастыру**
+   
+   ```bash title="Терминал" frame="terminal"
+   pnpm run deploy:vercel
+   ```
+</Steps>
+
+<Callout type="info" title="Іздеу индексі">
+  Іздеу индексі `pnpm run build` орындалу барысында автоматты түрде жасалады. Орналастырылған сайтта іздеу жұмыс істеуі үшін құрастыру қадамының сәтті аяқталғанына көз жеткізіңіз.
+</Callout>

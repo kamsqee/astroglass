@@ -1,0 +1,58 @@
+/* HeroGlass.css - Infinite Tunnel Polished */
+
+.c-hero-glass__tunnel-container {
+  perspective: 2000px;
+}
+
+/* Glass Inner Sweep Animation */
+@keyframes sweep {
+  0% { transform: translateX(-150%) skewX(-30deg); opacity: 0; }
+  10% { opacity: 0.15; }
+  100% { transform: translateX(250%) skewX(-30deg); opacity: 0; }
+}
+
+.c-hero-glass__sweep {
+  animation: sweep 8s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+/* Floating Ambient Particles */
+@keyframes particle-drift {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  20% { opacity: 0.4; }
+  80% { opacity: 0.4; }
+  100% { transform: translateY(-120px) translateX(30px) scale(0.6); opacity: 0; }
+}
+
+.c-hero-glass__particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: hsl(var(--bc));
+  border-radius: 50%;
+  animation: particle-drift 12s linear infinite;
+  pointer-events: none;
+}
+
+/* Button variants styling */
+.c-hero-glass__btn-liquid-glass {
+  transition: all 800ms var(--ease-glass);
+}
+
+.c-hero-glass__btn-liquid-glass:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 40px -12px rgba(0,0,0,0.4);
+}
+
+.c-hero-glass__btn-liquid-secondary-glass {
+  transition: all 800ms var(--ease-glass);
+}
+
+.c-hero-glass__btn-liquid-secondary-glass:hover {
+  background-color: hsl(var(--bc) / 0.08);
+  border-color: hsl(var(--bc) / 0.2);
+}
+
+.c-hero-glass__play-icon {
+  transition: all 800ms var(--ease-glass);
+}

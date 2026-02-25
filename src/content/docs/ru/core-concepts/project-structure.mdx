@@ -1,0 +1,77 @@
+---
+title: Структура проекта
+description: Обзор организации кодовой базы AstroGlass.
+order: 3
+---
+
+## Ключевые директории
+
+### `src/components/pages/`
+
+Содержит полные компоненты страниц для динамических маршрутов, таких как Страница Портфолио.
+
+```
+pages/
+├── portfolio/
+│   ├── aurora/
+│   │   ├── PortfolioHeroAurora.astro
+│   │   ├── ...
+│   ├── liquid/
+│   │   ├── PortfolioHeroLiquid.astro
+│   │   ├── PortfolioGridLiquid.astro
+│   │   ├── PortfolioModalLiquid.astro
+│   │   ├── PortfolioCTALiquid.astro
+│   │   └── ...
+│   └── ...
+```
+
+### `src/components/sections/`
+
+Все секции страниц, организованные по типу. Каждая секция содержит по одному варианту на тему:
+
+```
+sections/
+├── hero/
+│   ├── HeroLiquid.astro
+│   ├── HeroGlass.astro
+│   ├── HeroNeo.astro
+│   ├── HeroLuxury.astro
+│   ├── HeroMinimal.astro
+│   └── HeroAurora.astro
+├── about/
+├── features/
+├── portfolio/
+└── ...
+```
+
+### `src/components/layout/header/`
+
+Тематические компоненты навигации (например, `HeaderGlass.astro`, `HeaderLuxury.astro`).
+
+### `src/components/ui/`
+
+Переиспользуемые UI-примитивы: `Button`, `Card`, `Badge`, `Avatar`, `Input`, `Tabs`, `Charts`, `ThemeSwitcher`, `LanguageSwitcher` и `Search`.
+
+### `src/config/`
+
+Центральные файлы конфигурации:
+- `themes.ts` — Реестр тем (ID, имена, статус, секции)
+- `locales.ts` — Поддерживаемые языки
+- `navigation.ts` — Структура навигации
+- `docs.ts` — Конфигурация боковой панели документации
+
+### `src/locales/`
+
+JSON-файлы переводов, организованные по коду языка. Каждый файл соответствует секции страницы (например, `hero.json`, `pricing.json`).
+
+### `src/pages/`
+
+Файловая маршрутизация. Страницы организованы внутри директории `[...lang]/` для динамической генерации локализованных маршрутов (включая темы через `[...lang]/[theme].astro`).
+
+### `src/styles/`
+
+Глобальные CSS, тематические переопределения (`_themes.css`), анимации и стили компонентов в `components/`.
+
+### `src/utils/`
+
+Утилиты для переводов (`i18n.ts`), определения локали (`locale-utils.ts`) и навигации документации (`docs-nav.ts`).

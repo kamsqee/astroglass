@@ -1,0 +1,165 @@
+/* PortfolioPageMinimal.css — Brutalist typographic portfolio page */
+
+/* ── Hero ── */
+.c-portfolio-page-minimal__hero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rem 1rem 4rem;
+  overflow: hidden;
+}
+
+.c-portfolio-page-minimal__hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: hsl(var(--a));
+  opacity: 0.08;
+  filter: blur(120px);
+  border-radius: 50%;
+}
+
+.c-portfolio-page-minimal__hero-title {
+  background: linear-gradient(135deg, hsl(var(--bc)) 0%, hsl(var(--bc) / 0.5) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── Project Row ── */
+.c-portfolio-page-minimal__row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5rem 1rem;
+  border-bottom: 1px solid hsl(var(--bc) / 0.05);
+  border-radius: 1rem;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  cursor: pointer;
+  transition: all var(--duration-minimal) var(--ease-minimal);
+}
+
+.c-portfolio-page-minimal__row.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.c-portfolio-page-minimal__num,
+.c-portfolio-page-minimal__title,
+.c-portfolio-page-minimal__arrow {
+  transition: all var(--duration-minimal) var(--ease-minimal);
+}
+
+@media (hover: hover) {
+  .c-portfolio-page-minimal__row:hover {
+    padding-left: 2rem;
+    background: hsl(var(--bc) / 0.02);
+  }
+
+  .c-portfolio-page-minimal__row:hover .c-portfolio-page-minimal__num {
+    color: hsl(var(--a));
+    font-weight: 900;
+  }
+
+  .c-portfolio-page-minimal__row:hover .c-portfolio-page-minimal__title {
+    transform: translateX(0.5rem);
+  }
+
+  .c-portfolio-page-minimal__row:hover .c-portfolio-page-minimal__arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Expandable Detail Panel ── */
+.c-portfolio-page-minimal__details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--duration-slow) var(--ease-minimal);
+}
+
+.c-portfolio-page-minimal__details.is-expanded {
+  max-height: 2000px;
+}
+
+.c-portfolio-page-minimal__details-inner {
+  padding: 2rem 0 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .c-portfolio-page-minimal__details-inner {
+    padding: 2.5rem 1rem 3rem;
+  }
+}
+
+/* ── Narrative Grid ── */
+.c-portfolio-page-minimal__narrative {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .c-portfolio-page-minimal__narrative {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.c-portfolio-page-minimal__narrative-block {
+  padding: 1.5rem;
+  border: 1px solid hsl(var(--bc) / 0.06);
+  background: hsl(var(--bc) / 0.02);
+  border-radius: 1rem;
+}
+
+/* ── Tech Pill ── */
+.c-portfolio-page-minimal__tech-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 1px solid hsl(var(--bc) / 0.1);
+  color: hsl(var(--bc) / 0.5);
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all var(--duration-fast) ease;
+}
+
+.c-portfolio-page-minimal__tech-pill:hover {
+  background: hsl(var(--a) / 0.1);
+  color: hsl(var(--a));
+  border-color: hsl(var(--a) / 0.3);
+}
+
+/* ── CTA Section ── */
+.c-portfolio-page-minimal__cta-title {
+  background: linear-gradient(135deg, hsl(var(--bc)) 0%, hsl(var(--bc) / 0.4) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                        PORTFOLIO MINIMAL SECTION                           */
+/* -------------------------------------------------------------------------- */
+
+.c-portfolio-page-minimal__row span, 
+.c-portfolio-page-minimal__row h3, 
+.c-portfolio-page-minimal__row div:not(.c-portfolio-expanded) {
+  transition: all var(--duration-minimal-slow) var(--ease-minimal);
+}
+
+.c-portfolio-expanded {
+   transition: max-height var(--duration-minimal-fast) ease-in-out, opacity var(--duration-minimal-fast) ease-in-out, margin-top var(--duration-minimal-fast) ease-in-out;
+}
+

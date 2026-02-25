@@ -1,0 +1,94 @@
+---
+title: "Cloudflare-ға орналастыру (Deployment)"
+description: "AstroGlass сайтыңызды Cloudflare Pages-ке орналастырыңыз."
+order: 1
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+Бұл жоба **Cloudflare Pages**-ке орналастыру үшін оңтайландырылған. Ол қажетті адаптер мен баптауларды алдын ала қамтиды.
+
+## Алғышарттар
+
+- [Cloudflare](https://dash.cloudflare.com/) аккаунты.
+- Жергілікті компьютерде орнатылған **Node.js** v20+.
+- **Wrangler** CLI орнатылған (`npm install -g wrangler`).
+
+## Орналастыру әдістері
+
+Сіз GitHub интеграциясын (ұсынылады) немесе CLI арқылы орналастыра аласыз.
+
+### 1-нұсқа: GitHub интеграциясы
+
+<Steps>
+1. **Кодты GitHub-қа жүктеу**
+   
+   Жобаңыздың GitHub репозиторийінде екеніне көз жеткізіңіз.
+
+2. **Cloudflare Pages-ке қосылу**
+   
+   Cloudflare басқару тақтасына (Dashboard) өтіңіз > Workers & Pages > Create Application > Pages > Connect to Git.
+
+3. **Репозиторийді таңдау**
+   
+   Өз репозиторийіңізді және тармақты (branch) таңдаңыз.
+
+4. **Құрастыру (Build) баптауларын конфигурациялау**
+   
+   Келесі параметрлерді пайдаланыңыз:
+   - **Framework Preset**: Astro
+   - **Build command**: `pnpm run build`
+   - **Build output directory**: `dist`
+   
+   <Callout type="warning" title="Іздеуді индекстеу">
+     `build` скрипті автоматты түрде `astro build && pnpm run index:content` пәрменін орындайды, бұл Fuse.js іздеу индексін жасайды. Осының сәтті аяқталғанына көз жеткізіңіз, әйтпесе орналастырылған сайтта іздеу жұмыс істемейді.
+   </Callout>
+
+5. **Сақтау және орналастыру (Deploy)**
+</Steps>
+
+### 2-нұсқа: Wrangler CLI
+
+Сонымен қатар терминалдан тікелей орналастыруға болады.
+
+<Steps>
+1. **Wrangler-ге кіру**
+   
+   ```bash title="Терминал" frame="terminal"
+   npx wrangler login
+   ```
+
+2. **Құрастыру және орналастыру**
+   
+   `package.json` ішінде көрсетілген deploy скриптін орындаңыз:
+   
+   ```bash title="Терминал" frame="terminal"
+   pnpm run deploy
+   ```
+   
+   Бұл пәрмен мынаны орындайды: `astro build && pnpm run index:content && wrangler pages deploy dist`.
+</Steps>
+
+## Іздеуді индекстеу
+
+Жоба іздеу үшін **Fuse.js** пайдаланады. Бұл мазмұн индексін жасау үшін құрастыру (build) кезіндегі қадамды қажет етеді.
+
+`package.json` ішіндегі `build` скрипті мұны автоматты түрде өңдейді:
+
+```json title="package.json"
+"scripts": {
+  "build": "astro build && pnpm run index:content",
+  "index:content": "node scripts/generate-search-index.mjs"
+}
+```
+
+Егер орналастырылған сайтта іздеу жұмыс істемесе, индекстеу қадамының сәтті орындалғанын тексеріңіз.
+
+## Ақаулықтарды жою
+
+### Орналастыру сәтсіз аяқталды
+Құрастыру журналдарын (build logs) тексеріңіз. Жиі кездесетін мәселелерге TypeScript қателері немесе жетіспейтін тәуелділіктер жатады.
+
+### Іздеу жұмыс істемейді
+Егер іздеу нәтиже бермесе, `public/search/` каталогында `en.json`, `kk.json` файлдарының бар-жоғын тексеріңіз. Олар құрастыру кезінде `pnpm run index:content` арқылы жасалады.

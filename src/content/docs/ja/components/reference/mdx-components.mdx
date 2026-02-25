@@ -1,0 +1,164 @@
+---
+title: "MDX コンポーネント"
+description: "ドキュメント内で使用できるカスタム MDX コンポーネント。"
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+import Badge from '../../../../../components/mdx/Badge.astro';
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+
+すべてのドキュメント ページで利用可能なカスタム MDX コンポーネントのライブラリです。これらはドキュメントのレンダリング パイプラインに自動的に登録されます。
+
+## Callout (コールアウト)
+
+重要な情報を強調するためにコールアウトを使用します。
+
+```mdx
+<Callout type="info" title="情報">
+  これは情報のコールアウトです。
+</Callout>
+
+<Callout type="warning" title="警告">
+  この操作には注意してください。
+</Callout>
+
+<Callout type="tip" title="ヒント">
+  ここに便利な提案を記載します。
+</Callout>
+```
+
+**種類 (Types)**: `info`, `warning`, `tip`, `error`
+
+---
+
+## Badge (バッジ)
+
+バージョンやステータスのインジケーターを表示します。
+
+```mdx
+<Badge text="New" variant="success" />
+<Badge text="Experimental" variant="warning" />
+<Badge text="Deprecated" variant="error" />
+```
+
+**プロパティ (Props)**:
+| プロパティ | 型 | 説明 |
+|------|------|-------------|
+| `text` | `string` | バッジのラベル |
+| `variant` | `'success' \| 'warning' \| 'error' \| 'info'` | カラー バリアント |
+
+---
+
+## Steps (ステップ)
+
+ステップ バイ ステップの指示のために、順序付きリストをラップします。
+
+```mdx
+<Steps>
+1. **最初のステップ**
+   
+   最初のステップの説明。
+
+2. **2 番目のステップ**
+   
+   2 番目のステップの説明。
+</Steps>
+```
+
+---
+
+## FileTree (ファイルツリー)
+
+ファイルとディレクトリの構造を表示します。
+
+```mdx
+<FileTree>
+- src/
+  - components/
+  - pages/
+    - index.astro
+    - **[theme].astro**
+- package.json
+</FileTree>
+```
+
+`**` で囲まれた太字の項目はハイライトされます。リスト項目には `-` を使用してください。
+
+---
+
+## CardGrid & LinkCard (カードグリッドとリンクカード)
+
+レスポンシブなグリッド内にリンク付きカードを表示します。
+
+```mdx
+<CardGrid>
+  <LinkCard
+    title="はじめに"
+    description="数分でプロジェクトをセットアップします。"
+    href="/docs/ja/getting-started/installation"
+  />
+  <LinkCard
+    title="テーマ設定"
+    description="テーマ システムについて学びます。"
+    href="/docs/ja/core-concepts/theming"
+  />
+</CardGrid>
+```
+
+**LinkCard のプロパティ**:
+| プロパティ | 型 | 説明 |
+|------|------|-------------|
+| `title` | `string` | カードのタイトル |
+| `description` | `string` | カードの説明 |
+| `href` | `string` | リンク先 |
+
+---
+
+## CodeTabs (コードタブ)
+
+複数のパッケージ マネージャーや言語向けのタブ付きコード ブロックを表示します。
+
+```mdx
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash
+pnpm install
+​```
+```bash
+npm install
+​```
+```bash
+yarn install
+​```
+</CodeTabs>
+```
+
+**プロパティ (Props)**:
+| プロパティ | 型 | 説明 |
+|------|------|-------------|
+| `labels` | `string[]` | 各コード ブロックの上に表示されるタブのラベル |
+
+<Callout type="info" title="コードブロック">
+  各コード ブロックは直接の子要素として配置してください。コード ブロックの数はラベルの数と一致する必要があります。
+</Callout>
+
+---
+
+## PropsTable (プロパティテーブル)
+
+コンポーネントのプロパティ (Props) ドキュメントをフォーマットされた表で表示します。
+
+```mdx
+<PropsTable component="Hero" />
+```
+
+---
+
+## ApiMethod (API メソッド)
+
+関数またはメソッドのシグネチャを文書化します。
+
+```mdx
+<ApiMethod name="useTranslations" params="locale: Locale" returns="(key: string) => string" />
+```

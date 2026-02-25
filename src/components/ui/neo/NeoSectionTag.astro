@@ -1,0 +1,24 @@
+---
+/**
+ * NeoSectionTag — Neo Theme
+ * Unified eyebrow / category tag for section headers.
+ *
+ * Pattern: — LABEL —
+ * Consistent with Neo's minimal editorial aesthetic.
+ *
+ * @prop label — Text content (required)
+ * @prop class — Additional classes (margins, responsive overrides, etc.)
+ */
+interface Props {
+  label: string;
+  class?: string;
+}
+
+const { label, class: className } = Astro.props;
+---
+
+<span class:list={["inline-flex items-center gap-4 text-accent font-bold text-[10px] tracking-[0.4em] uppercase", className]}>
+  <span class="w-8 h-px bg-accent/30" aria-hidden="true"></span>
+  {label}
+  <span class="w-8 h-px bg-accent/30" aria-hidden="true"></span>
+</span>

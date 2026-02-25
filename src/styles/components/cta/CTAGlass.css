@@ -1,0 +1,87 @@
+/* CTAGlass.css */
+
+/* Option Cards */
+.c-cta-glass__option {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.c-cta-glass__option:hover {
+  transform: translateY(var(--lift-amount));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.c-cta-glass__option.selected {
+  background: hsl(var(--a) / 0.1);
+  border-color: hsl(var(--a) / 0.3);
+}
+
+/* Steps Animation */
+.c-cta-glass__step {
+  transition: all var(--duration-slow) var(--ease-glass);
+}
+
+.c-cta-glass__step.hidden {
+  display: none;
+}
+
+.c-cta-glass__step:not(.hidden) {
+  animation: stepFadeIn var(--duration-slow) var(--ease-glass);
+}
+
+@keyframes stepFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Indicators */
+.c-cta-glass__indicator > div:first-child {
+  transition: all var(--duration-fast) ease;
+}
+
+.c-cta-glass__indicator.active > div:first-child {
+  background: hsl(var(--a));
+  color: hsl(var(--b1));
+}
+
+.c-cta-glass__indicator.active {
+  opacity: 1;
+}
+
+.c-cta-glass__indicator.completed > div:first-child {
+  background: hsl(var(--su));
+  color: hsl(var(--b1));
+}
+
+.c-cta-glass__connector {
+  transition: background var(--duration-fast) ease;
+}
+
+.c-cta-glass__connector.active {
+  background: hsl(var(--a) / 0.5);
+}
+
+/* Final Button Breathing Animation */
+.c-cta-glass__final-btn {
+  /* Restraint: Removed breathing animation */
+  /* animation: breathe 3s ease-in-out infinite; */
+  box-shadow: 0 0 0 0 hsl(var(--a) / 0.2);
+  transition: box-shadow var(--duration-normal) ease;
+}
+
+.c-cta-glass__final-btn:hover {
+  box-shadow: 0 0 20px 5px hsl(var(--a) / 0.15);
+}
+
+@keyframes breathe {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--a) / 0.2); }
+  50% { box-shadow: 0 0 20px 5px hsl(var(--a) / 0.15); }
+}
+
+

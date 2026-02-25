@@ -1,0 +1,252 @@
+---
+/**
+ * Luxury Desktop Controls
+ * 
+ * Vertical control cluster for the "Monolith" sidebar.
+ * Features hover-expandable menus for Theme and Language.
+ */
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+import LocalizedLink from '../../ui/LocalizedLink.astro';
+import { getEnabledLocales, getEnabledLocaleCodes } from '../../../config/locales';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+import { palettes } from '../../../config/palettes';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Language Logic — dynamic for all locales
+const currentPath = Astro.url.pathname;
+const localeCodes = getEnabledLocaleCodes();
+const localePattern = new RegExp(`^/(${localeCodes.join('|')})(/|$)`);
+const cleanPath = currentPath.replace(localePattern, '/$2').replace(/^\/\//, '/') || '/';
+
+const enabledLocales = getEnabledLocales();
+const localePaths = enabledLocales.map(loc => ({
+  code: loc.code,
+  nativeName: loc.nativeName,
+  href: getRelativeLocaleUrl(loc.code, cleanPath),
+  isActive: locale === loc.code,
+}));
+
+const themes = palettes.map(p => ({
+  id: p.id, label: p.id.charAt(0).toUpperCase() + p.id.slice(1), color: p.accentHex,
+}));
+---
+
+<div class="luxury-desktop-controls">
+  <!-- Language Group -->
+  <div class="luxury-accordion-group" data-accordion-group>
+    <button class="luxury-accordion-trigger" aria-expanded="false">
+      <div class="luxury-icon-wrap">
+        <span class="font-serif italic text-lg">{locale.toUpperCase()}</span>
+      </div>
+      <span class="luxury-label">{t('languageSwitcher.label')}</span>
+      <svg class="luxury-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <div class="luxury-accordion-content">
+      {localePaths.map(loc => (
+        <a href={loc.href} class={`luxury-accordion-item ${loc.isActive ? 'is-active' : ''}`}>
+          {loc.nativeName}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Theme Group -->
+  <div class="luxury-accordion-group" data-accordion-group>
+    <button class="luxury-accordion-trigger" aria-expanded="false">
+      <div class="luxury-icon-wrap">
+        <div class="w-4 h-4 rounded-full border border-current opacity-60"></div>
+      </div>
+      <span class="luxury-label">{t('themeSwitcher.label')}</span>
+      <svg class="luxury-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+    <div class="luxury-accordion-content">
+      {themes.map(theme => (
+        <button class="luxury-accordion-item" data-set-theme-desktop={theme.id}>
+          <span class="w-2 h-2 rounded-full mr-3" style={`background: ${theme.color}`}></span>
+          {theme.label}
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .luxury-desktop-controls {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-top: 16px;
+    border-top: 1px solid hsl(var(--bc) / 0.1);
+  }
+
+  /* Shared styles with HeaderLuxury.css links */
+  .luxury-accordion-trigger {
+    width: 100%;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    background: transparent;
+    border: none;
+    color: hsl(var(--bc) / 0.4);
+    cursor: pointer;
+    cursor: pointer;
+    transition: color var(--duration-luxury-fast) var(--ease-luxury), background var(--duration-luxury-fast) var(--ease-luxury);
+    text-align: left;
+    overflow: hidden; /* Hide label when collapsed sidebar */
+  }
+
+  .luxury-accordion-trigger:hover {
+    color: hsl(var(--bc));
+    background: hsl(var(--bc) / 0.03);
+  }
+
+  /* Icon Wrap - Matches main nav */
+  .luxury-icon-wrap {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 24px;
+  }
+
+  /* Label - Matches main nav */
+  .luxury-label {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(10px);
+    transform: translateX(10px);
+    transition: opacity var(--duration-luxury-fast) var(--ease-luxury) 0.1s, transform var(--duration-luxury-fast) var(--ease-luxury) 0.1s;
+    flex: 1;
+  }
+
+  /* Show labels on hover of parent container (handled by .luxury-container:hover in CSS) */
+  /* We need to mimic that behavior here or assume CSS handles it globally? 
+     HeaderLuxury.css handles .luxury-container:hover .luxury-label. 
+     Since this component is inside .luxury-container, standard class names work!
+  */
+
+  .luxury-chevron {
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transform: translateX(-10px);
+    transition: all var(--duration-luxury-medium) var(--ease-luxury) 0.1s;
+  }
+  
+  /* Reveal on sidebar hover */
+  :global(.luxury-container:hover) .luxury-label,
+  :global(.luxury-container:hover) .luxury-chevron {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Accordion Content */
+  .luxury-accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--duration-luxury-medium) var(--ease-luxury);
+    overflow: hidden;
+    overflow: hidden;
+    background: hsl(var(--bc) / 0.02);
+  }
+
+  .luxury-accordion-group.is-open .luxury-accordion-content {
+    grid-template-rows: 1fr;
+  }
+  
+  .luxury-accordion-group.is-open .luxury-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Inner items */
+  .luxury-accordion-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px 12px 64px; /* Indented to align with text */
+    color: hsl(var(--bc) / 0.6);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-size: 0.95rem;
+    transition: color var(--duration-luxury-fast) var(--ease-luxury), background var(--duration-luxury-fast) var(--ease-luxury);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    min-height: 0; /* Important for grid transition */
+    overflow: hidden;
+  }
+
+  .luxury-accordion-item:hover {
+    color: hsl(var(--bc));
+    background: hsl(var(--bc) / 0.05);
+  }
+
+  .luxury-accordion-item.is-active {
+    color: hsl(var(--a));
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  function initLuxuryDesktop() {
+    // Accordion Logic
+    document.querySelectorAll('[data-accordion-group]').forEach(group => {
+      const trigger = group.querySelector('.luxury-accordion-trigger');
+      
+      trigger?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        const isOpen = group.classList.contains('is-open');
+        
+        // Close others? Optional. Let's keep them independent or auto-close?
+        // User wants "clean", usually implies auto-close others.
+        document.querySelectorAll('[data-accordion-group]').forEach(g => {
+          if (g !== group) {
+            g.classList.remove('is-open');
+            g.querySelector('.luxury-accordion-trigger')?.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        group.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', (!isOpen).toString());
+      });
+    });
+
+    // Theme Selection Logic
+    document.querySelectorAll('[data-set-theme-desktop]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent closing accordion immediately
+        const theme = (e.currentTarget as HTMLElement).dataset.setThemeDesktop;
+        if (theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+          
+          // Visual feedback
+          document.querySelectorAll('[data-set-theme-desktop]').forEach(b => b.classList.remove('is-active'));
+          (e.currentTarget as HTMLElement).classList.add('is-active');
+          
+          window.dispatchEvent(new Event('theme-changed'));
+        }
+      });
+    });
+  }
+
+  initLuxuryDesktop();
+  document.addEventListener('astro:after-swap', initLuxuryDesktop);
+</script>

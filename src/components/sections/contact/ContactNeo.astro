@@ -1,0 +1,496 @@
+---
+/**
+ * Contact Neo - The Split Screen
+ * Left: Context/benefits/trust. Right: Clean form.
+ * Professional B2B aesthetic.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+  // Validation config
+  const validationMessages = {
+    nameShort: t('contact.validation.nameShort'),
+    nameLong: t('contact.validation.nameLong'),
+    emailInvalid: t('contact.validation.emailInvalid'),
+    messageShort: t('contact.validation.messageShort'),
+  };
+import '../../../styles/components/contact/ContactNeo.css';
+import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
+---
+
+<section id="contact" class="relative py-16 lg:py-0 overflow-hidden bg-base-100">
+  <div class="lg:min-h-[600px] lg:grid lg:grid-cols-2">
+    
+    <!-- Left: Context Side -->
+    <div class="contact-neo-left relative px-6 py-12 lg:py-20 lg:px-12 xl:px-20 bg-base-content/[0.02] overflow-hidden">
+      <!-- Particle flow field canvas -->
+      <canvas class="contact-neo-canvas absolute inset-0 w-full h-full pointer-events-none" id="contact-neo-particles"></canvas>
+      
+      <!-- Ambient glow overlay -->
+      <div class="absolute inset-0 pointer-events-none z-[1]">
+        <div class="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-accent/10 rounded-full blur-[100px]"></div>
+      </div>
+
+      <div class="relative z-10 max-w-md mx-auto lg:mx-0">
+        <!-- Eyebrow -->
+        <NeoSectionTag label={t('contact.salesEyebrow')} class="mb-4" />
+        
+        <!-- Headline -->
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-base-content tracking-tight mb-4 leading-tight">
+          {t('contact.salesTitle')}
+        </h2>
+        
+        <!-- Description -->
+        <p class="text-sm sm:text-base text-base-content/75 mb-8 leading-relaxed">
+          {t('contact.salesSubtitle')}
+        </p>
+
+        <!-- Benefits -->
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-base-content">{t('contact.benefits.response24h')}</p>
+              <p class="text-xs text-base-content/75">{t('contact.benefits.response24hDesc')}</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-base-content">{t('contact.benefits.dedicatedSupport')}</p>
+              <p class="text-xs text-base-content/75">{t('contact.benefits.dedicatedSupportDesc')}</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center text-accent shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-base-content">{t('contact.benefits.security')}</p>
+              <p class="text-xs text-base-content/75">{t('contact.benefits.securityDesc')}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust logos -->
+        <div class="pt-6 border-t border-base-content/10">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-base-content/80 mb-4">{t('contact.trustedBy')}</p>
+          <div class="flex items-center gap-6 opacity-40">
+            <div class="text-2xl">🏢</div>
+            <div class="text-2xl">🏗️</div>
+            <div class="text-2xl">🏭</div>
+            <div class="text-2xl">🏛️</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Form Side -->
+    <div class="px-6 py-12 lg:py-20 lg:px-12 xl:px-20 flex items-center">
+      <div class="contact-neo-form-container w-full max-w-md mx-auto lg:mx-0" data-validation-messages={JSON.stringify(validationMessages)}>
+        <form class="contact-neo-form space-y-5" novalidate>
+          <!-- Name -->
+          <div>
+            <label class="block text-xs font-bold text-base-content/75 uppercase tracking-wider mb-2">{t('contact.form.name')}</label>
+            <input 
+              type="text" 
+              name="name"
+              required
+              class="w-full px-4 py-3.5 rounded-xl bg-base-content/[0.03] border border-base-content/10 text-sm text-base-content placeholder:text-base-content/80 focus:outline-none focus:border-accent/40 focus:bg-base-content/[0.05] transition-all duration-300"
+              placeholder={t('contact.placeholders.johnSmith')}
+            />
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-xs font-bold text-base-content/75 uppercase tracking-wider mb-2">{t('contact.form.email')}</label>
+            <input 
+              type="email" 
+              name="email"
+              required
+              inputmode="email"
+              class="w-full px-4 py-3.5 rounded-xl bg-base-content/[0.03] border border-base-content/10 text-sm text-base-content placeholder:text-base-content/80 focus:outline-none focus:border-accent/40 focus:bg-base-content/[0.05] transition-all duration-300"
+              placeholder={t('contact.placeholders.yourEmail')}
+            />
+          </div>
+
+          <!-- Company -->
+          <div>
+            <label class="block text-xs font-bold text-base-content/75 uppercase tracking-wider mb-2">{t('contact.form.company')}</label>
+            <input 
+              type="text" 
+              name="company"
+              class="w-full px-4 py-3.5 rounded-xl bg-base-content/[0.03] border border-base-content/10 text-sm text-base-content placeholder:text-base-content/80 focus:outline-none focus:border-accent/40 focus:bg-base-content/[0.05] transition-all duration-300"
+              placeholder={t('contact.placeholders.acmeInc')}
+            />
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label class="block text-xs font-bold text-base-content/75 uppercase tracking-wider mb-2">{t('contact.form.message')}</label>
+            <textarea 
+              name="message"
+              required
+              rows="4"
+              class="w-full px-4 py-3.5 rounded-xl bg-base-content/[0.03] border border-base-content/10 text-sm text-base-content placeholder:text-base-content/80 focus:outline-none focus:border-accent/40 focus:bg-base-content/[0.05] transition-all duration-300 resize-none"
+              placeholder={t('contact.placeholders.tellUs')}
+            ></textarea>
+          </div>
+
+          <!-- Submit -->
+          <button 
+            type="submit"
+            class="contact-neo-submit w-full px-6 py-4 rounded-xl bg-accent text-base-100 font-bold text-sm flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_4px_20px_rgba(var(--a),0.3)]"
+          >
+            <span>{t('contact.form.send')}</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </button>
+
+          <!-- Privacy -->
+          <p class="text-[10px] text-center text-base-content/80">
+            {t('contact.form.privacy')} <a href={`/${locale}/privacy`} class="underline hover:text-accent transition-colors">{t('contact.form.privacyPolicy')}</a>
+          </p>
+        </form>
+
+        <!-- Success State -->
+        <div class="contact-neo-success hidden text-center py-12">
+          <div class="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center text-3xl mx-auto mb-4">✓</div>
+          <h3 class="text-xl font-bold text-base-content mb-2">{t('contact.successTitle')}</h3>
+          <p class="text-sm text-base-content/75">{t('contact.successDesc')}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+/**
+ * Contact Neo Particle Flow Field
+ * Adapts to theme accent color automatically
+ */
+
+// Module-scoped cleanup function for View Transitions
+let particleCleanup: (() => void) | null = null;
+
+function initContactNeoParticles() {
+  // Clean up any previous instance first
+  particleCleanup?.();
+  
+  // Query DOM elements FRESH every time (critical for View Transitions)
+  const canvas = document.getElementById('contact-neo-particles') as HTMLCanvasElement;
+  const container = document.querySelector('.contact-neo-left') as HTMLElement;
+  if (!canvas || !container) return;
+  
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  
+  // Check reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    canvas.style.display = 'none';
+    return;
+  }
+  
+  // Config
+  const PARTICLE_COUNT = 60;
+  const PARTICLE_SIZE_MIN = 1.5;
+  const PARTICLE_SIZE_MAX = 4;
+  const VISCOSITY = 0.03;
+  const FRICTION = 0.96;
+  const CURSOR_RADIUS = 150;
+  const TRAIL_OPACITY = 0.12;
+  
+  // State - scoped to this init call
+  interface Particle {
+    x: number;
+    y: number;
+    vx: number;
+    vy: number;
+    size: number;
+    hue: number;
+    alpha: number;
+    baseX: number;
+    baseY: number;
+  }
+  
+  let particles: Particle[] = [];
+  let mouse = { x: -1000, y: -1000 };
+  let isVisible = true;
+  let animationId: number;
+  let dpr = 1;
+  let accentHue = 262;
+  let accentSat = 80;
+  let isMonoTheme = false;
+  
+  function updateAccentColor() {
+    const computedStyle = getComputedStyle(document.documentElement);
+    const accentHsl = computedStyle.getPropertyValue('--a').trim();
+    const parts = accentHsl.split(/\s+/);
+    if (parts.length >= 2) {
+      accentHue = parseFloat(parts[0]) || 0;
+      accentSat = parseFloat(parts[1]) || 0;
+      isMonoTheme = accentSat < 15;
+    }
+  }
+  
+  const themeObserver = new MutationObserver(() => {
+    updateAccentColor();
+    particles.forEach(p => {
+      p.hue = accentHue + (Math.random() - 0.5) * 25;
+    });
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = container.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    if (!ctx) return;
+    ctx.scale(dpr, dpr);
+    initParticles(rect.width, rect.height);
+  }
+  
+  function initParticles(w: number, h: number) {
+    updateAccentColor();
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const x = Math.random() * w;
+      const y = Math.random() * h;
+      particles.push({
+        x, y,
+        vx: 0, vy: 0,
+        size: PARTICLE_SIZE_MIN + Math.random() * (PARTICLE_SIZE_MAX - PARTICLE_SIZE_MIN),
+        hue: accentHue + (Math.random() - 0.5) * 25,
+        alpha: 0.25 + Math.random() * 0.45,
+        baseX: x, baseY: y,
+      });
+    }
+  }
+  
+  function update(w: number, h: number) {
+    particles.forEach(p => {
+      const dx = mouse.x - p.x;
+      const dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      if (dist < CURSOR_RADIUS && dist > 0) {
+        const force = (1 - dist / CURSOR_RADIUS) * VISCOSITY;
+        p.vx += (dx / dist) * force * 6;
+        p.vy += (dy / dist) * force * 6;
+      }
+      
+      p.vx += (p.baseX - p.x) * 0.0008;
+      p.vy += (p.baseY - p.y) * 0.0008;
+      p.vx += (Math.random() - 0.5) * 0.08;
+      p.vy += (Math.random() - 0.5) * 0.08;
+      p.vx *= FRICTION;
+      p.vy *= FRICTION;
+      p.x += p.vx;
+      p.y += p.vy;
+      
+      if (p.x < -p.size) p.x = w + p.size;
+      if (p.x > w + p.size) p.x = -p.size;
+      if (p.y < -p.size) p.y = h + p.size;
+      if (p.y > h + p.size) p.y = -p.size;
+    });
+  }
+  
+  function getBaseColor(): string {
+    const computedStyle = getComputedStyle(document.documentElement);
+    const baseHsl = computedStyle.getPropertyValue('--b1').trim();
+    if (baseHsl) {
+      const parts = baseHsl.split(/\s+/);
+      if (parts.length >= 3) {
+        const h = parts[0];
+        const s = parts[1];
+        const l = parts[2];
+        return `hsla(${h}, ${s}, ${l}, ${TRAIL_OPACITY})`;
+      }
+    }
+    return `hsla(0, 0%, 98%, ${TRAIL_OPACITY})`;
+  }
+  
+  function draw(w: number, h: number) {
+    if (!ctx) return;
+    ctx.fillStyle = getBaseColor();
+    ctx.fillRect(0, 0, w, h);
+    
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      if (isMonoTheme) {
+        ctx.fillStyle = `hsla(0, 0%, 20%, ${p.alpha * 0.6})`;
+      } else {
+        ctx.fillStyle = `hsla(${p.hue}, 65%, 55%, ${p.alpha * 0.5})`;
+      }
+      ctx.fill();
+      
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * 1.8, 0, Math.PI * 2);
+      if (isMonoTheme) {
+        ctx.fillStyle = `hsla(0, 0%, 15%, ${p.alpha * 0.1})`;
+      } else {
+        ctx.fillStyle = `hsla(${p.hue}, 75%, 50%, ${p.alpha * 0.08})`;
+      }
+      ctx.fill();
+    });
+    
+    // Connections
+    if (isMonoTheme) {
+      ctx.strokeStyle = `hsla(0, 0%, 20%, 0.06)`;
+    } else {
+      ctx.strokeStyle = `hsla(${accentHue}, 50%, 50%, 0.04)`;
+    }
+    ctx.lineWidth = 0.8;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        if (Math.sqrt(dx * dx + dy * dy) < 60) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+  
+  function animate() {
+    if (!isVisible) {
+      animationId = requestAnimationFrame(animate);
+      return;
+    }
+    const rect = container.getBoundingClientRect();
+    update(rect.width, rect.height);
+    draw(rect.width, rect.height);
+    animationId = requestAnimationFrame(animate);
+  }
+  
+  function onMouseMove(e: MouseEvent) {
+    const rect = container.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  }
+  
+  function onTouchMove(e: TouchEvent) {
+    if (e.touches.length > 0) {
+      const rect = container.getBoundingClientRect();
+      mouse.x = e.touches[0].clientX - rect.left;
+      mouse.y = e.touches[0].clientY - rect.top;
+    }
+  }
+  
+  function onMouseLeave() {
+    mouse.x = -1000;
+    mouse.y = -1000;
+  }
+  
+  const visibilityObserver = new IntersectionObserver(
+    (entries) => entries.forEach(entry => { isVisible = entry.isIntersecting; }),
+    { threshold: 0.1 }
+  );
+  
+  // Start animation
+  resize();
+  container.addEventListener('mousemove', onMouseMove);
+  container.addEventListener('touchmove', onTouchMove, { passive: true });
+  container.addEventListener('mouseleave', onMouseLeave);
+  window.addEventListener('resize', resize);
+  visibilityObserver.observe(container);
+  animate();
+  
+  // Store cleanup function at module scope
+  particleCleanup = () => {
+    cancelAnimationFrame(animationId);
+    container.removeEventListener('mousemove', onMouseMove);
+    container.removeEventListener('touchmove', onTouchMove);
+    container.removeEventListener('mouseleave', onMouseLeave);
+    window.removeEventListener('resize', resize);
+    visibilityObserver.disconnect();
+    themeObserver.disconnect();
+    particleCleanup = null;
+  };
+}
+
+// Initialize on first load
+initContactNeoParticles();
+
+// Handle View Transitions
+document.addEventListener('astro:before-swap', () => particleCleanup?.());
+document.addEventListener('astro:after-swap', initContactNeoParticles);
+</script>
+
+<script>
+  import { createContactSchema } from '../../../lib/schemas/contact';
+  import { validateSingleField, validateForm } from '../../../utils/form-validation';
+
+  let contactNeoController: AbortController | null = null;
+
+  function initContactNeo() {
+    contactNeoController?.abort();
+    contactNeoController = new AbortController();
+    const signal = contactNeoController.signal;
+
+    const container = document.querySelector('.contact-neo-form-container') as HTMLElement;
+    if (!container) return;
+
+    const validationMessages = JSON.parse(container.dataset.validationMessages || '{}');
+    const t = (key: string) => validationMessages[key.split('.')[1]] || key;
+    // B2B form requires company name
+    const schema = createContactSchema(t, { companyRequired: true });
+
+    const form = container.querySelector('.contact-neo-form') as HTMLFormElement;
+    const success = container.querySelector('.contact-neo-success');
+
+    // Field Validation Helper
+    const validateField = (input: HTMLInputElement | HTMLTextAreaElement) => {
+       validateSingleField(input, { form, schema });
+    };
+
+    // Attach listeners
+    form.querySelectorAll('input, textarea').forEach(input => {
+      const el = input as HTMLInputElement;
+      el.addEventListener('blur', () => validateField(el), { signal });
+      el.addEventListener('input', () => {
+        if (el.classList.contains('input-error')) validateField(el);
+      }, { signal });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const result = validateForm({ form, schema });
+
+      if (!result.success) {
+        return;
+      }
+      
+
+      form.classList.add('hidden');
+      success?.classList.remove('hidden');
+    }, { signal });
+  }
+
+  initContactNeo();
+  document.addEventListener('astro:after-swap', initContactNeo);
+</script>

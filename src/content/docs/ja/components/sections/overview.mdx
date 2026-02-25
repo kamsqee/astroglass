@@ -1,0 +1,112 @@
+---
+title: "セクションコンポーネントの概要"
+description: "AstroGlassで利用可能なすべてのセクションコンポーネントの概要。"
+order: 1
+---
+
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+セクションコンポーネントは、各テーマページの構成要素です。各テーマページは**12以上のセクション**で構成されており、それぞれにテーマごとの専用バリアントがあります。
+
+## 利用可能なセクション
+
+<CardGrid>
+  <LinkCard
+    title="ヒーロー (Hero)"
+    description="テーマ固有のアニメーションを備えたフルスクリーンのランディングセクション。"
+    href="/docs/ja/components/sections/hero"
+  />
+  <LinkCard
+    title="について (About)"
+    description="会社や製品の紹介セクション。"
+    href="/docs/ja/components/sections/about"
+  />
+  <LinkCard
+    title="特徴 (Features)"
+    description="グリッド、リスト、カードを使用した製品機能の紹介。"
+    href="/docs/ja/components/sections/features"
+  />
+  <LinkCard
+    title="ポートフォリオ (Portfolio)"
+    description="プロジェクトのギャラリーとショーケース。"
+    href="/docs/ja/components/sections/portfolio"
+  />
+  <LinkCard
+    title="料金体系 (Pricing)"
+    description="プランと機能比較を含む料金表。"
+    href="/docs/ja/components/sections/pricing"
+  />
+  <LinkCard
+    title="お客様の声 (Testimonials)"
+    description="社会的証明と顧客のレビュー。"
+    href="/docs/ja/components/sections/testimonials"
+  />
+  <LinkCard
+    title="よくある質問 (FAQ)"
+    description="アコーディオンUIを使用したよくある質問。"
+    href="/docs/ja/components/sections/faq"
+  />
+  <LinkCard
+    title="コールトゥアクション (CTA)"
+    description="コンバージョンを促進するためのコールトゥアクションセクション。"
+    href="/docs/ja/components/sections/cta"
+  />
+  <LinkCard
+    title="お問い合わせ (Contact)"
+    description="Valibotバリデーションを備えたお問い合わせフォーム。"
+    href="/docs/ja/components/sections/contact"
+  />
+  <LinkCard
+    title="ナビゲーションバー (Navbar)"
+    description="テーマ固有のヘッダーとナビゲーションバー。"
+    href="/docs/ja/components/sections/navbar"
+  />
+  <LinkCard
+    title="フッター (Footer)"
+    description="リンク、SNS、ブランディングを含むサイトのフッター。"
+    href="/docs/ja/components/sections/footer"
+  />
+</CardGrid>
+
+## 仕組み
+
+各セクションには、各テーマ（Liquid、Glass、Neo、Luxury、Minimal、Aurora）に対応する**6つのテーマバリアント**があります。`src/pages/[theme].astro` の動的ページは、コンポーネントマップを使用して正しいバリアントをレンダリングします：
+
+```astro
+---
+// [theme].astro からの簡略化
+const componentMap = {
+  liquid: { Hero: HeroLiquid, About: AboutLiquid, ... },
+  glass:  { Hero: HeroGlass,  About: AboutGlass,  ... },
+  // neo, luxury, minimal, aurora...
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Hero />
+<components.About />
+<components.Features />
+```
+
+<Callout type="info" title="外部Propsなし">
+  セクションコンポーネントは**Propsを受け取りません**。すべてのテキストコンテンツは、`src/locales/{lang}/{section}.json` から `useTranslations()` を介して内部的にロードされます。任意のセクションのコンテンツを変更するには、対応するロケールのJSONファイルを編集してください。
+</Callout>
+
+## ファイル構造
+
+各セクションは、一貫したディレクトリパターンに従っています：
+
+```
+src/components/sections/{section}/
+├── {Section}Liquid.astro
+├── {Section}Glass.astro
+├── {Section}Neo.astro
+├── {Section}Luxury.astro
+├── {Section}Minimal.astro
+└── {Section}Aurora.astro
+```
+
+各セクションのCSSは `src/styles/components/{section}/` にあります。

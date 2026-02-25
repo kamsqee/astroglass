@@ -1,0 +1,59 @@
+---
+title: "Sección Principal (Hero)"
+description: "Secciones principales de pantalla completa para cada tema."
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La sección Principal (Hero) es lo primero que ven los visitantes. Cada tema posee su propio diseño de Hero exclusivo con animaciones personalizadas, fondos y diseño propios.
+
+## Variantes del Tema
+
+| Tema | Componente | Diseño |
+|-------|-----------|--------|
+| **Liquid** | `HeroLiquid.astro` | Formas (blobs) SVG animadas líquidas, texto en degradado |
+| **Glass** | `HeroGlass.astro` | Tarjeta principal de cristal esmerilado con fondos desenfocados |
+| **Neo** | `HeroNeo.astro` | Tipografía llamativa, alto contraste |
+| **Luxury** | `HeroLuxury.astro` | Acentos dorados, diseño premium |
+| **Minimal** | `HeroMinimal.astro` | Limpio, centrado, sin distracciones |
+| **Aurora** | `HeroAurora.astro` | Malla en degradado, elementos geométricos |
+
+Todas las variantes se encuentran en `src/components/sections/hero/`.
+
+## Cómo Funciona
+
+Cada variante Hero es un componente Astro autónomo que:
+
+1. Importa e inicializa `useTranslations()` para el idioma actual.
+2. Renderiza su propia estructura HTML única con CSS específico para el tema.
+3. Carga claves (keys) de traducción como `hero.title`, `hero.subtitle`, `hero.cta` y `hero.liveBadge` desde `src/locales/{lang}/hero.json`.
+
+```astro title="HeroLiquid.astro (simplificado)"
+---
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section>
+  <h1>{t('hero.title')}</h1>
+  <p>{t('hero.subtitle')}</p>
+  <a href="#explore">{t('hero.cta')}</a>
+</section>
+```
+
+<Callout type="info" title="Sin Propiedades (Props)">
+  Los componentes Hero no reciben propiedades externas. Para cambiar el titular, subtitular o texto del CTA, edita `src/locales/es/hero.json` (o el archivo de idioma correspondiente).
+</Callout>
+
+## Personalizando un Hero
+
+Para personalizar el componente Hero de un tema específico:
+
+1. Abre `src/components/sections/hero/Hero{Theme}.astro`.
+2. Modifica la estructura HTML, las clases o las animaciones según tus necesidades.
+3. Para los cambios en CSS, edita `src/styles/components/hero/Hero{Theme}.css`.
+4. Para los cambios de texto, edita `src/locales/{lang}/hero.json`.

@@ -1,0 +1,72 @@
+---
+title: "Конфигурация"
+description: "Настройка AstroGlass под ваш бренд."
+order: 3
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass настраивается через файлы в `src/config/` и стандартные CSS-переменные.
+
+## Файлы конфигурации
+
+<FileTree>
+- src/
+  - config/
+    - **themes.ts** — Определения тем (имя, цвета, секции, флаг premium)
+    - **locales.ts** — Поддерживаемые языки и метаданные локалей
+    - **navigation.ts** — Структура навигации сайта
+    - **docs.ts** — Боковая панель документации и версии
+</FileTree>
+
+## Стилизация с Tailwind CSS v4
+
+Этот проект использует **Tailwind CSS v4** через плагин `@tailwindcss/vite`. Файла `tailwind.config.mjs` нет — вся конфигурация осуществляется через CSS.
+
+Цвета и переменные тем определены как CSS-переменные в `src/styles/global.css` и `src/styles/_themes.css`:
+
+```css title="global.css"
+:root {
+  --p: 260 80% 60%;   /* Primary (HSL) */
+  --s: 310 80% 60%;   /* Secondary */
+  --a: 190 90% 60%;   /* Accent */
+  --b1: 220 20% 10%;  /* Фон */
+  --bc: 220 20% 90%;  /* Текст */
+}
+```
+
+<Callout type="tip" title="Изменение цветов">
+  Чтобы изменить цветовую схему сайта, обновите значения HSL в `src/styles/global.css`. Тематические переопределения находятся в `src/styles/_themes.css` с использованием селекторов `[data-theme="..."]`.
+</Callout>
+
+## Конфигурация тем
+
+Каждая тема зарегистрирована в `src/config/themes.ts`. Здесь централизованы все метаданные тем:
+
+```typescript title="themes.ts"
+export const themes: ThemeDefinition[] = [
+  {
+    id: 'liquid',
+    name: 'Liquid',
+    color: 'from-blue-500 to-cyan-400',
+    icon: '💧',
+    sections: ['Header', 'Hero', 'About', 'Features', 'Portfolio', 'Pricing', 'Testimonial', 'FAQ', 'CTA', 'Contact', 'Footer'],
+    enabled: true,
+    premium: false,
+    description: 'Fluid, organic design with smooth animations',
+  },
+  // ... ещё 5 тем (Glass, Neo, Luxury, Minimal, Aurora)
+];
+```
+
+## Конфигурация языков
+
+Для добавления нового языка в `src/config/locales.ts` добавьте запись с `enabled: true`:
+
+```typescript title="locales.ts"
+export const localesConfig: LocaleConfig[] = [
+  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧', direction: 'ltr', enabled: true },
+  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺', direction: 'ltr', enabled: true },
+];
+```

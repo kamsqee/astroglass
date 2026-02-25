@@ -1,0 +1,164 @@
+---
+title: "MDX компоненттері"
+description: "Құжаттамада пайдалануға болатын реттелетін MDX компоненттері."
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+import Badge from '../../../../../components/mdx/Badge.astro';
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+
+Барлық құжаттама беттерінде қолжетімді реттелетін MDX компоненттер кітапханасы. Олар құжаттарды визуализациялау (rendering pipeline) жүйесінде автоматты түрде тіркеледі.
+
+## Callout (Хабарлама тақтасы)
+
+Маңызды ақпаратты бөліп көрсету үшін callout қолданыңыз.
+
+```mdx
+<Callout type="info" title="Ақпарат">
+  Бұл ақпараттық хабарлама тақтасы.
+</Callout>
+
+<Callout type="warning" title="Ескерту">
+  Бұл әрекетті орындағанда абай болыңыз.
+</Callout>
+
+<Callout type="tip" title="Кеңес">
+  Мұнда пайдалы ұсыныс берілген.
+</Callout>
+```
+
+**Түрлері (Types)**: `info`, `warning`, `tip`, `error`
+
+---
+
+## Badge (Белгіше/Төсбелгі)
+
+Нұсқаны немесе күй көрсеткіштерін (status indicators) көрсетіңіз.
+
+```mdx
+<Badge text="Жаңа" variant="success" />
+<Badge text="Эксперименттік" variant="warning" />
+<Badge text="Ескірген" variant="error" />
+```
+
+**Қасиеттері (Props)**:
+| Қасиет | Типі | Сипаттамасы |
+|------|------|-------------|
+| `text` | `string` | Белгішенің мәтіні (label) |
+| `variant` | `'success' \| 'warning' \| 'error' \| 'info'` | Түс нұсқасы (Color variant) |
+
+---
+
+## Steps (Қадамдар)
+
+Қадамдық нұсқаулар жасау үшін реттелген тізімдерді ораңыз.
+
+```mdx
+<Steps>
+1. **Бірінші қадам**
+   
+   Бірінші қадамның сипаттамасы.
+
+2. **Екінші қадам**
+   
+   Екінші қадамның сипаттамасы.
+</Steps>
+```
+
+---
+
+## FileTree (Файлдар ағашы)
+
+Файлдар мен каталогтардың құрылымын көрсетіңіз.
+
+```mdx
+<FileTree>
+- src/
+  - components/
+  - pages/
+    - index.astro
+    - **[theme].astro**
+- package.json
+</FileTree>
+```
+
+`**` белгісімен (bold) қоршалған элементтер ерекшеленіп көрсетіледі. Тізім элементтері үшін `-` белгісін қолданыңыз.
+
+---
+
+## CardGrid & LinkCard (Карталар торы және Сілтеме картасы)
+
+Сілтемелері бар карталарды адаптивті тор (responsive grid) түрінде көрсетіңіз.
+
+```mdx
+<CardGrid>
+  <LinkCard
+    title="Жұмысты бастау"
+    description="Жобаңызды бірнеше минут ішінде орнатыңыз."
+    href="/docs/kk/getting-started/installation"
+  />
+  <LinkCard
+    title="Тақырыпты баптау"
+    description="Тақырыптар жүйесі туралы біліңіз."
+    href="/docs/kk/core-concepts/theming"
+  />
+</CardGrid>
+```
+
+**LinkCard қасиеттері**:
+| Қасиет | Типі | Сипаттамасы |
+|------|------|-------------|
+| `title` | `string` | Картаның тақырыбы |
+| `description` | `string` | Картаның сипаттамасы |
+| `href` | `string` | Сілтеменің баратын жері |
+
+---
+
+## CodeTabs (Код қойындылары)
+
+Бірнеше пакет менеджерлері немесе тілдер үшін қойындылары бар (tabbed) код блоктарын көрсетіңіз.
+
+```mdx
+<CodeTabs labels={['pnpm', 'npm', 'yarn']}>
+```bash
+pnpm install
+​```
+```bash
+npm install
+​```
+```bash
+yarn install
+​```
+</CodeTabs>
+```
+
+**Қасиеттері (Props)**:
+| Қасиет | Типі | Сипаттамасы |
+|------|------|-------------|
+| `labels` | `string[]` | Әр код блогының үстінде көрсетілетін қойынды белгілері |
+
+<Callout type="info" title="Код блоктары">
+  Әр код блогын тікелей ішкі (child) элемент ретінде орналастырыңыз. Код блоктарының саны белгілер (labels) санына сәйкес болуы керек.
+</Callout>
+
+---
+
+## PropsTable (Қасиеттер кестесі)
+
+Компоненттің қасиеттері (props) туралы құжаттаманы пішімделген кесте түрінде көрсетіңіз.
+
+```mdx
+<PropsTable component="Hero" />
+```
+
+---
+
+## ApiMethod (API әдісі)
+
+Функцияның немесе әдістің қолтаңбасын (signature) құжаттаңыз.
+
+```mdx
+<ApiMethod name="useTranslations" params="locale: Locale" returns="(key: string) => string" />
+```

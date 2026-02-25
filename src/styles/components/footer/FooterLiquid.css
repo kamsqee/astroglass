@@ -1,0 +1,131 @@
+/* FooterLiquid.css — SVG wave separator, droplet icon, ripple links */
+
+.footer-liquid {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── SVG Wave Separator (replaces straight divider) ── */
+.footer-liquid-wave {
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.footer-liquid-wave svg {
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  animation: footerLiquidWaveScroll 10s linear infinite;
+}
+
+@keyframes footerLiquidWaveScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Glow ── */
+.footer-liquid-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.footer-liquid-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, var(--color-accent, oklch(0.7 0.15 250)) 0%, transparent 70%);
+  opacity: 0.06;
+  filter: blur(80px);
+}
+
+/* ── Links — Ripple Hover Effect ── */
+.footer-liquid a {
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease;
+  overflow: hidden;
+}
+
+.footer-liquid a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent, oklch(0.7 0.15 250));
+  transform: translateX(-50%);
+  border-radius: 30% 70% 70% 30% / 50% 50% 50% 50%;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.5;
+}
+
+.footer-liquid a:hover {
+  color: var(--color-accent, oklch(0.7 0.15 250));
+  transform: translateX(2px);
+}
+
+.footer-liquid a:hover::before {
+  width: 100%;
+}
+
+/* ── Divider (kept as fallback) ── */
+.footer-liquid-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-base-content, #fff) 50%,
+    transparent 100%
+  );
+  opacity: 0.08;
+}
+
+/* ── Social Icons ── */
+.footer-liquid-social-icon {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.footer-liquid-social-icon:hover {
+  background-color: color-mix(in oklch, var(--color-accent, oklch(0.7 0.15 250)) 15%, transparent);
+  border-color: color-mix(in oklch, var(--color-accent, oklch(0.7 0.15 250)) 30%, transparent);
+  transform: translateY(-2px);
+  border-radius: 50%;
+}
+
+/* ── Animated Droplet Brand Icon ── */
+.footer-liquid-droplet {
+  display: inline-block;
+  animation: footerLiquidDrip 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px hsl(var(--a, 200 80% 60%) / 0.3));
+}
+
+@keyframes footerLiquidDrip {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  30% {
+    transform: translateY(-3px) scale(1.05);
+  }
+  60% {
+    transform: translateY(2px) scale(0.95);
+  }
+}
+
+/* ── Heart (kept) ── */
+.footer-liquid-heart {
+  display: inline-block;
+  animation: footer-liquid-pulse 2s ease-in-out infinite;
+}
+
+@keyframes footer-liquid-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}

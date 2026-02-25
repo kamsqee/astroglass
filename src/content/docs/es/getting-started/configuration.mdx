@@ -1,0 +1,72 @@
+---
+title: "Configuración"
+description: "Personalice AstroGlass para que coincida con su marca."
+order: 3
+---
+
+import Callout from '../../../../components/mdx/Callout.astro';
+import FileTree from '../../../../components/mdx/FileTree.astro';
+
+AstroGlass se configura a través de archivos en `src/config/` y propiedades personalizadas estándar de CSS.
+
+## Archivos de Configuración
+
+<FileTree>
+- src/
+  - config/
+    - **themes.ts** — Definiciones de los temas (nombre, colores, secciones, indicador premium)
+    - **locales.ts** — Idiomas compatibles y metadatos regionales
+    - **navigation.ts** — Estructura de navegación principal del sitio
+    - **docs.ts** — Configuración de la barra lateral de documentación y de la versión
+</FileTree>
+
+## Estilos con Tailwind CSS v4
+
+Este proyecto utiliza **Tailwind CSS v4** a través del complemento `@tailwindcss/vite`. No hay un archivo `tailwind.config.mjs` — toda la configuración se realiza a través de CSS.
+
+Los colores y las variables de tema se definen como propiedades personalizadas de CSS en `src/styles/global.css` y `src/styles/_themes.css`:
+
+```css title="global.css"
+:root {
+  --p: 260 80% 60%;   /* Primario (HSL) */
+  --s: 310 80% 60%;   /* Secundario */
+  --a: 190 90% 60%;   /* Acento */
+  --b1: 220 20% 10%;  /* Fondo base */
+  --bc: 220 20% 90%;  /* Contenido base (texto) */
+}
+```
+
+<Callout type="tip" title="Cambiando Colores">
+  Para cambiar el esquema de colores del sitio, actualice los valores HSL en `src/styles/global.css`. Las anulaciones específicas del tema se encuentran en `src/styles/_themes.css` utilizando selectores `[data-theme="..."]`.
+</Callout>
+
+## Configuración del Tema
+
+Cada tema está registrado en `src/config/themes.ts`. Esto centraliza todos los metadatos del tema:
+
+```typescript title="themes.ts"
+export const themes: ThemeDefinition[] = [
+  {
+    id: 'liquid',
+    name: 'Liquid',
+    color: 'from-blue-500 to-cyan-400',
+    icon: '💧',
+    sections: ['Header', 'Hero', 'About', 'Features', 'Portfolio', 'Pricing', 'Testimonial', 'FAQ', 'CTA', 'Contact', 'Footer'],
+    enabled: true,
+    premium: false,
+    description: 'Diseño fluido y orgánico con animaciones suaves',
+  },
+  // ... 5 temas más (Glass, Neo, Luxury, Minimal, Aurora)
+];
+```
+
+## Configuración Regional (Locales)
+
+Los idiomas se gestionan en `src/config/locales.ts`. Para agregar un nuevo idioma, agregue una entrada y establezca `enabled: true`:
+
+```typescript title="locales.ts"
+export const localesConfig: LocaleConfig[] = [
+  { code: 'en', name: 'English', nativeName: 'English', flag: '🇬🇧', direction: 'ltr', enabled: true },
+  { code: 'ru', name: 'Russian', nativeName: 'Русский', flag: '🇷🇺', direction: 'ltr', enabled: true },
+];
+```

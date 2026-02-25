@@ -1,0 +1,60 @@
+---
+title: "Netlify-ге орналастыру (Deployment)"
+description: "AstroGlass сайтыңызды Netlify-ге орналастырыңыз."
+order: 2
+---
+
+import Steps from '../../../../components/mdx/Steps.astro';
+import Callout from '../../../../components/mdx/Callout.astro';
+
+AstroGlass минималды конфигурациямен **Netlify**-ге орналастырылуы мүмкін.
+
+## Алғышарттар
+
+- [Netlify](https://www.netlify.com/) аккаунты.
+- Жергілікті компьютерде орнатылған **Node.js** v20+.
+- Netlify CLI орнатылған (`npm install -g netlify-cli`).
+
+## Орналастыру әдістері
+
+### 1-нұсқа: GitHub интеграциясы (Ұсынылады)
+
+<Steps>
+1. **Кодты GitHub-қа жүктеу**
+   
+   Жобаңыздың GitHub репозиторийінде екеніне көз жеткізіңіз.
+
+2. **Netlify-ге импорттау**
+   
+   [app.netlify.com](https://app.netlify.com/) сайтына өтіңіз > Add new site (Жаңа сайт қосу) > Import an existing project (Бар жобаны импорттау).
+
+3. **Құрастыру (Build) баптауларын конфигурациялау**
+   
+   Келесі параметрлерді пайдаланыңыз:
+   - **Build Command**: `pnpm run build`
+   - **Publish Directory**: `dist`
+
+4. **Орналастыру (Deploy)**
+   
+   "Deploy site" түймесін басып, құрастырудың аяқталуын күтіңіз.
+</Steps>
+
+### 2-нұсқа: CLI арқылы орналастыру
+
+<Steps>
+1. **Netlify-ге кіру**
+   
+   ```bash title="Терминал" frame="terminal"
+   npx netlify login
+   ```
+
+2. **Орналастыру**
+   
+   ```bash title="Терминал" frame="terminal"
+   pnpm run deploy:netlify
+   ```
+</Steps>
+
+<Callout type="info" title="Іздеу индексі">
+  Іздеу индексі `pnpm run build` орындалу барысында автоматты түрде жасалады. Орналастырылған сайтта іздеу жұмыс істеуі үшін құрастыру қадамының сәтті аяқталғанына көз жеткізіңіз.
+</Callout>

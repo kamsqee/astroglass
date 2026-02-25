@@ -1,0 +1,22 @@
+{
+  "label": "Тақырып",
+  "hint": "Көру үшін сырғытыңыз",
+  "categories": {
+    "light": "Ашық",
+    "dark": "Қараңғы",
+    "colorful": "Түрлі-түсті"
+  },
+  "themes": {
+    "azure": "Көгілдір",
+    "nordic": "Солтүстік",
+    "solaris": "Күн",
+    "abyss": "Тұңғиық",
+    "neonoir": "Неон",
+    "synthwave": "Ретро",
+    "evergreen": "Орман",
+    "rose": "Розе",
+    "aquatica": "Су",
+    "monochrome": "Моно",
+    "default": "Әдепкі"
+  }
+}

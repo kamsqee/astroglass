@@ -1,0 +1,142 @@
+---
+title: "Référence de l'API"
+description: "Référence API technique pour les composants et utilitaires AstroGlass."
+order: 1
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Référence détaillée des fonctions clés, des types et des objets de configuration utilisés dans AstroGlass.
+
+## `useTranslations(locale)`
+
+Renvoie une fonction de récupération de traduction pour les paramètres régionaux (locale) donnés.
+
+**Module** : `src/utils/i18n.ts`
+
+**Signature** :
+```typescript
+function useTranslations(locale: Locale): (key: string) => string;
+```
+
+**Paramètres** :
+| Paramètre | Type | Description |
+|-----------|------|-------------|
+| `locale` | `Locale` (`'en' \| 'ru'`) | Le code de la langue pour laquelle charger les traductions. |
+
+**Retours** : Une fonction `t(key: string): string` qui résout une clé en notation pointillée vers sa valeur traduite. Si la clé n'est pas trouvée, elle renvoie la clé elle-même et consigne un avertissement en mode développement.
+
+**Utilisation** :
+```astro
+---
+import { useTranslations } from '../utils/i18n';
+import { getLocaleFromUrl } from '../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+<h1>{t('hero.title')}</h1>
+<p>{t('hero.subtitle')}</p>
+```
+
+**Comportement Clé** :
+- Les clés de `common.json` sont réparties au niveau racine (par exemple, `t('title')`)
+- Tous les autres fichiers sont espacés par nom de fichier (par exemple, `t('hero.title')`, `t('pricing.plans.pro.name')`)
+- Les clés manquantes renvoient la chaîne de la clé en production, et génèrent des avertissements en développement
+
+---
+
+## `getLocaleFromUrl(url)`
+
+Extrait le code de la langue à partir de l'URL actuelle.
+
+**Module** : `src/utils/locale-utils.ts`
+
+**Signature** :
+```typescript
+function getLocaleFromUrl(url: URL): Locale;
+```
+
+Renvoie le préfixe de la langue à partir du chemin de l'URL, avec la valeur par défaut `'en'` si aucun n'est trouvé.
+
+---
+
+## `buildNavLinks(locale, section)`
+
+Génère des liens de navigation pour la barre latérale de la documentation.
+
+**Module** : `src/utils/docs-nav.ts`
+
+**Signature** :
+```typescript
+function buildNavLinks(locale: string, section?: string): NavLink[];
+```
+
+Renvoie un tableau d'objets de lien de navigation utilisés par le composant de la barre latérale de la documentation.
+
+---
+
+## `getEnabledThemes()`
+
+Renvoie toutes les définitions de thèmes activées.
+
+**Module** : `src/config/themes.ts`
+
+**Signature** :
+```typescript
+function getEnabledThemes(): ThemeDefinition[];
+```
+
+---
+
+## `getThemeById(id)`
+
+Renvoie une définition de thème spécifique par son identifiant (ID).
+
+**Module** : `src/config/themes.ts`
+
+**Signature** :
+```typescript
+function getThemeById(id: string): ThemeDefinition | undefined;
+```
+
+---
+
+## Type : `ThemeDefinition`
+
+```typescript
+interface ThemeDefinition {
+  id: string;              // Slug d'URL (par ex., 'liquid', 'aurora')
+  name: string;            // Nom d'affichage
+  color: string;           // Classes de dégradé Tailwind
+  icon: string;            // Icône Emoji
+  sections: string[];      // Sections activées
+  enabled: boolean;        // Si le thème est actif
+  premium: boolean;        // Indicateur Premium
+  description: string;     // Description sur une ligne
+}
+```
+
+## Type : `LocaleConfig`
+
+```typescript
+interface LocaleConfig {
+  code: string;            // Code de langue ISO
+  name: string;            // Nom en anglais
+  nativeName: string;      // Nom natif
+  flag: string;            // Emoji de drapeau
+  direction: 'ltr' | 'rtl';
+  enabled: boolean;
+}
+```
+
+## Thèmes Disponibles
+
+| ID | Nom | Icône |
+|----|------|------|
+| `liquid` | Liquid | 💧 |
+| `glass` | Glass | 🪟 |
+| `neo` | Neo | ⚡ |
+| `luxury` | Luxury | 👑 |
+| `minimal` | Minimal | ✨ |
+| `aurora` | Aurora | 🌌 |

@@ -1,0 +1,112 @@
+---
+title: "Section Components Overview"
+description: "An overview of all section components available in AstroGlass."
+order: 1
+---
+
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Section components are the building blocks of each theme page. Every theme page is composed of **12+ sections**, each with a dedicated variant per theme.
+
+## Available Sections
+
+<CardGrid>
+  <LinkCard
+    title="Hero"
+    description="Full-screen landing sections with theme-specific animations."
+    href="/docs/en/components/sections/hero"
+  />
+  <LinkCard
+    title="About"
+    description="Company or product introduction sections."
+    href="/docs/en/components/sections/about"
+  />
+  <LinkCard
+    title="Features"
+    description="Product feature showcases with grids, lists, and cards."
+    href="/docs/en/components/sections/features"
+  />
+  <LinkCard
+    title="Portfolio"
+    description="Project galleries and showcases."
+    href="/docs/en/components/sections/portfolio"
+  />
+  <LinkCard
+    title="Pricing"
+    description="Pricing tables with plans and comparisons."
+    href="/docs/en/components/sections/pricing"
+  />
+  <LinkCard
+    title="Testimonials"
+    description="Social proof and customer reviews."
+    href="/docs/en/components/sections/testimonials"
+  />
+  <LinkCard
+    title="FAQ"
+    description="Frequently asked questions with accordion UI."
+    href="/docs/en/components/sections/faq"
+  />
+  <LinkCard
+    title="CTA"
+    description="Call to action sections to drive conversions."
+    href="/docs/en/components/sections/cta"
+  />
+  <LinkCard
+    title="Contact"
+    description="Contact forms with Valibot validation."
+    href="/docs/en/components/sections/contact"
+  />
+  <LinkCard
+    title="Navbar"
+    description="Theme-specific header and navigation bars."
+    href="/docs/en/components/sections/navbar"
+  />
+  <LinkCard
+    title="Footer"
+    description="Site footers with links, socials, and branding."
+    href="/docs/en/components/sections/footer"
+  />
+</CardGrid>
+
+## How It Works
+
+Each section has **6 theme variants** — one for each theme (Liquid, Glass, Neo, Luxury, Minimal, Aurora). The dynamic page at `src/pages/[theme].astro` uses a component map to render the correct variant:
+
+```astro
+---
+// Simplified from [theme].astro
+const componentMap = {
+  liquid: { Hero: HeroLiquid, About: AboutLiquid, ... },
+  glass:  { Hero: HeroGlass,  About: AboutGlass,  ... },
+  // neo, luxury, minimal, aurora...
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Hero />
+<components.About />
+<components.Features />
+```
+
+<Callout type="info" title="No External Props">
+  Section components accept **no props**. All text content is loaded internally via `useTranslations()` from `src/locales/{lang}/{section}.json`. To change the content of any section, edit the corresponding locale JSON file.
+</Callout>
+
+## File Structure
+
+Each section follows a consistent directory pattern:
+
+```
+src/components/sections/{section}/
+├── {Section}Liquid.astro
+├── {Section}Glass.astro
+├── {Section}Neo.astro
+├── {Section}Luxury.astro
+├── {Section}Minimal.astro
+└── {Section}Aurora.astro
+```
+
+CSS for each section lives in `src/styles/components/{section}/`.

@@ -1,0 +1,112 @@
+---
+title: "Resumen de componentes de sección"
+description: "Una descripción general de todos los componentes de sección disponibles en AstroGlass."
+order: 1
+---
+
+import CardGrid from '../../../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../../../components/mdx/LinkCard.astro';
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Los componentes de sección son los bloques de construcción de cada página de tema. Cada página de tema está compuesta de **12+ secciones**, cada una con una variante dedicada por tema.
+
+## Secciones disponibles
+
+<CardGrid>
+  <LinkCard
+    title="Hero"
+    description="Secciones de inicio de pantalla completa con animaciones específicas del tema."
+    href="/docs/es/components/sections/hero"
+  />
+  <LinkCard
+    title="Acerca de (About)"
+    description="Secciones de presentación de la empresa o el producto."
+    href="/docs/es/components/sections/about"
+  />
+  <LinkCard
+    title="Características (Features)"
+    description="Muestras de características del producto con cuadrículas, listas y tarjetas."
+    href="/docs/es/components/sections/features"
+  />
+  <LinkCard
+    title="Portafolio (Portfolio)"
+    description="Galerías de proyectos y presentaciones."
+    href="/docs/es/components/sections/portfolio"
+  />
+  <LinkCard
+    title="Precios (Pricing)"
+    description="Tablas de precios con planes y comparaciones."
+    href="/docs/es/components/sections/pricing"
+  />
+  <LinkCard
+    title="Testimonios (Testimonials)"
+    description="Prueba social y opiniones de los clientes."
+    href="/docs/es/components/sections/testimonials"
+  />
+  <LinkCard
+    title="FAQ"
+    description="Preguntas frecuentes con interfaz de usuario en acordeón."
+    href="/docs/es/components/sections/faq"
+  />
+  <LinkCard
+    title="Llamado a la acción (CTA)"
+    description="Secciones de llamado a la acción para impulsar las conversiones."
+    href="/docs/es/components/sections/cta"
+  />
+  <LinkCard
+    title="Contacto (Contact)"
+    description="Formularios de contacto con validación de Valibot."
+    href="/docs/es/components/sections/contact"
+  />
+  <LinkCard
+    title="Barra de navegación (Navbar)"
+    description="Encabezados y barras de navegación específicos del tema."
+    href="/docs/es/components/sections/navbar"
+  />
+  <LinkCard
+    title="Pie de página (Footer)"
+    description="Pies de página del sitio con enlaces, redes sociales y marca."
+    href="/docs/es/components/sections/footer"
+  />
+</CardGrid>
+
+## Cómo funciona
+
+Cada sección tiene **6 variantes de tema** — una para cada tema (Liquid, Glass, Neo, Luxury, Minimal, Aurora). La página dinámica en `src/pages/[theme].astro` utiliza un mapa de componentes para mostrar la variante correcta:
+
+```astro
+---
+// Simplificado de [theme].astro
+const componentMap = {
+  liquid: { Hero: HeroLiquid, About: AboutLiquid, ... },
+  glass:  { Hero: HeroGlass,  About: AboutGlass,  ... },
+  // neo, luxury, minimal, aurora...
+};
+
+const components = componentMap[themeId];
+---
+
+<components.Hero />
+<components.About />
+<components.Features />
+```
+
+<Callout type="info" title="Sin propiedades externas">
+  Los componentes de sección no aceptan **ninguna propiedad (props)**. Todo el contenido de texto se carga internamente a través de `useTranslations()` desde `src/locales/{lang}/{section}.json`. Para cambiar el contenido de cualquier sección, edite el archivo JSON de idioma correspondiente.
+</Callout>
+
+## Estructura de archivos
+
+Cada sección sigue un patrón de directorio coherente:
+
+```
+src/components/sections/{section}/
+├── {Section}Liquid.astro
+├── {Section}Glass.astro
+├── {Section}Neo.astro
+├── {Section}Luxury.astro
+├── {Section}Minimal.astro
+└── {Section}Aurora.astro
+```
+
+El CSS para cada sección se encuentra en `src/styles/components/{section}/`.

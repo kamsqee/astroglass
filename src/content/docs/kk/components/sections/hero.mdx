@@ -1,0 +1,59 @@
+---
+title: "Басты (Hero) бөлімі"
+description: "Әрбір тақырыпқа арналған толық экранды басты (hero) бөлімдері."
+order: 2
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Басты (Hero) бөлім - бұл келушілер көретін бірінші нәрсе. Әрбір тақырыпта реттелетін анимациялар, фондар және макет (layout) бар өзінің ерекше басты дизайны бар.
+
+## Тақырып нұсқалары
+
+| Тақырып | Компонент | Дизайн |
+|-------|-----------|--------|
+| **Liquid** | `HeroLiquid.astro` | Анимациялық SVG сұйық тамшылары, градиенттік мәтін |
+| **Glass** | `HeroGlass.astro` | Бұлыңғыр фоны бар аязды әйнек басты картасы |
+| **Neo** | `HeroNeo.astro` | Қалың типография, жоғары контраст |
+| **Luxury** | `HeroLuxury.astro` | Алтын екпіндер, премиум орналасу (layout) |
+| **Minimal** | `HeroMinimal.astro` | Таза, ортаға орналасқан, алаңдаушылықсыз (distraction-free) |
+| **Aurora** | `HeroAurora.astro` | Градиенттік тор, геометриялық элементтер |
+
+Барлық нұсқалар `src/components/sections/hero/` мекенжайында орналасқан.
+
+## Бұл қалай жұмыс істейді
+
+Басты нұсқалардың әрқайсысы өзін-өзі қамтитын Astro компоненті болып табылады:
+
+1. Ағымдағы тіл үшін `useTranslations()` импорттайды және инициализациялайды.
+2. Тақырыпқа тән CSS-пен өзінің бірегей HTML құрылымын көрсетеді (renders).
+3. `hero.title`, `hero.subtitle`, `hero.cta` және `hero.liveBadge` сияқты аударма кілттерін `src/locales/{lang}/hero.json` файлынан жүктейді.
+
+```astro title="HeroLiquid.astro (жеңілдетілген)"
+---
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section>
+  <h1>{t('hero.title')}</h1>
+  <p>{t('hero.subtitle')}</p>
+  <a href="#explore">{t('hero.cta')}</a>
+</section>
+```
+
+<Callout type="info" title="Қосымша параметрлер (Props) жоқ">
+  Hero компоненттері сыртқы props қабылдамайды. Тақырыпты, субтитрды (subtitle) немесе CTA мәтінін өзгерту үшін `src/locales/kk/hero.json` (немесе сәйкес тіл файлын) өңдеңіз.
+</Callout>
+
+## Басты бөлімді баптау
+
+Белгілі бір тақырыптың басты бөлімін реттеу үшін:
+
+1. `src/components/sections/hero/Hero{Theme}.astro` файлын ашыңыз.
+2. Қажетінше HTML құрылымын, сыныптарды немесе анимацияларды өзгертіңіз.
+3. CSS өзгерістері үшін `src/styles/components/hero/Hero{Theme}.css` файлын өңдеңіз.
+4. Мәтін өзгерістері үшін `src/locales/{lang}/hero.json` файлын өңдеңіз.

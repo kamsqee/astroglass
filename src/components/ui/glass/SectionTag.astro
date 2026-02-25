@@ -1,0 +1,47 @@
+---
+/**
+ * SectionTag — Glass Theme
+ * Unified eyebrow / category label for section headers.
+ * 
+ * Consistent styling: accent-colored dash + uppercase text.
+ * Clean and minimal — works in every context (hero, centered, left-aligned).
+ *
+ * @prop label   — Text content (required)
+ * @prop icon    — Optional leading emoji (placed between dash and text)
+ * @prop class   — Additional classes (margins, alignment overrides, etc.)
+ */
+interface Props {
+  label: string;
+  icon?: string;
+  class?: string;
+}
+
+const { label, icon, class: className } = Astro.props;
+---
+
+<div class:list={["section-tag", className]}>
+  <span class="section-tag__dash" aria-hidden="true"></span>
+  {icon && <span>{icon}</span>}
+  {label}
+</div>
+
+<style>
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: var(--text-tag-glass);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-tag-glass);
+    color: hsl(var(--a));
+  }
+  .section-tag__dash {
+    display: inline-block;
+    width: 1.25rem;
+    height: 2px;
+    background: hsl(var(--a));
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+</style>

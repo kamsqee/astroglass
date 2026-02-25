@@ -1,0 +1,63 @@
+---
+title: "作品集页面"
+description: "为每个主题提供的功能完备、支持筛选的作品集页面。"
+order: 1
+---
+
+# 作品集页面
+
+**AstroGlass** 新增的作品集页面是一个专用的动态路由，提供丰富的项目展示功能。它具有分类筛选、详细项目视图以及适配当前主题的设计。
+
+## 架构
+
+作品集页面的路由为 `/[theme]/portfolio`（例如 `/liquid/portfolio`、`/glass/portfolio`），使用与主题页面类似的动态路由策略。
+
+### 文件结构
+
+- **路由**: `src/pages/[theme]/portfolio.astro` — 动态路由处理器。
+- **组件**: `src/components/pages/portfolio/{theme}/` — 主题特定的模块化实现（例如 `PortfolioHeroLiquid.astro`、`PortfolioGridLiquid.astro`）。
+- **内容**: `src/locales/{lang}/portfolioPage.json` — 所有文本内容、项目数据和分类。
+
+## 自定义
+
+与特定的落地页区块不同，作品集页面完全由本地化文件驱动，无需修改代码即可添加项目。
+
+### 管理项目
+
+编辑 `src/locales/en/portfolioPage.json` 来管理您的项目。
+
+```json title="src/locales/en/portfolioPage.json"
+{
+  "projects": {
+    "p1": {
+      "title": "项目名称",
+      "description": "卡片上的简短描述。",
+      "longDescription": "详细视图的更长描述...",
+      "category": "webapp",
+      "techStack": ["React", "Node.js"],
+      "color": "from-violet-500 to-fuchsia-500"
+    }
+  }
+}
+```
+
+### 分类
+
+分类在同一 JSON 文件中定义，用于筛选。
+
+```json
+{
+  "filterAll": "全部",
+  "categoryLabels": {
+    "webapp": "Web 应用",
+    "mobile": "移动应用"
+  }
+}
+```
+
+## 功能特点
+
+- **动态筛选**: 客户端按分类筛选，带有流畅动画。
+- **详情视图**: 每个项目可展开的详情面板，展示"挑战"、"解决方案"和"影响"。
+- **主题适配**: 自动使用当前主题的正确页头、页脚和样式。
+- **响应式**: 完全响应式布局，适配手机、平板和桌面端。

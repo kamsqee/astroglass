@@ -1,0 +1,46 @@
+---
+/**
+ * Props Table Component
+ * Standardized table for API reference documentation.
+ */
+import { getLocaleFromUrl, useTranslations } from '../../utils/i18n';
+
+interface PropDefinition {
+  name: string;
+  type: string;
+  default?: string;
+  description: string;
+}
+
+interface Props {
+  props: PropDefinition[];
+}
+
+const { props } = Astro.props;
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<div class="overflow-x-auto my-8 border border-base-content/10 rounded-xl bg-base-content/[0.02]">
+  <table class="w-full text-left border-collapse">
+    <thead>
+      <tr class="border-b border-base-content/10 bg-base-content/[0.03]">
+        <th class="p-4 text-xs font-bold uppercase tracking-wider text-base-content/75">{t('docs.propsTable.prop')}</th>
+        <th class="p-4 text-xs font-bold uppercase tracking-wider text-base-content/75">{t('docs.propsTable.type')}</th>
+        <th class="p-4 text-xs font-bold uppercase tracking-wider text-base-content/75">{t('docs.propsTable.default')}</th>
+        <th class="p-4 text-xs font-bold uppercase tracking-wider text-base-content/75">{t('docs.propsTable.description')}</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-base-content/5">
+      {props.map(prop => (
+        <tr class="hover:bg-base-content/[0.02] transition-colors">
+          <td class="p-4 font-mono text-sm text-accent font-bold">{prop.name}</td>
+          <td class="p-4 font-mono text-xs text-base-content/70 bg-base-content/5 rounded m-2 inline-block">{prop.type}</td>
+          <td class="p-4 font-mono text-xs text-base-content/75">{prop.default || '-'}</td>
+          <td class="p-4 text-sm text-base-content/80 leading-relaxed">{prop.description}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,47 @@
+---
+title: "Tarjetas (Cards)"
+description: "Tarjetas con efecto de glassmorphism para funciones y blogs."
+order: 2
+---
+
+import { Card } from '../../../../../components/ui/card.tsx';
+
+Las tarjetas son el bloque de construcción fundamental del sistema de diseño de cristal (glass design).
+
+## Variantes
+
+Admitimos múltiples estilos de tarjetas a través de la propiedad (prop) `variant`.
+
+| Variante | Descripción | Estilo Visual |
+| :--- | :--- | :--- |
+| `glass` | Cristal esmerilado estándar | Desenfoque + Borde |
+| `solid` | Fondo opaco | Alto contraste |
+| `outline` | Solo borde | Minimalista |
+
+## Ejemplos en Vivo
+
+<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 not-prose my-8">
+  <Card variant="glass" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Tarjeta de Cristal (Glass)</h3>
+    <p className="text-sm opacity-80">Efecto de cristal esmerilado estándar con desenfoque y un borde sutil.</p>
+  </Card>
+
+  <Card variant="solid" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Tarjeta Sólida (Solid)</h3>
+    <p className="text-sm opacity-80">Fondo opaco para alto contraste.</p>
+  </Card>
+
+  <Card variant="outline" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">Tarjeta Contorno (Outline)</h3>
+    <p className="text-sm opacity-80">Estilo minimalista solo con borde.</p>
+  </Card>
+</div>
+
+## Uso del Código
+
+```tsx
+<Card variant="glass" className="p-6">
+  <h3>Tarjeta de Cristal (Glass Card)</h3>
+  <p>Esto crea un hermoso efecto de profundidad.</p>
+</Card>
+```

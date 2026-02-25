@@ -1,0 +1,41 @@
+{
+  "title": "Blog",
+  "description": "Últimas actualizaciones",
+  "subtitle": "Últimas ideas y actualizaciones",
+  "featured": "Destacado",
+  "featuredBadge": "Artículo destacado",
+  "allPosts": "Todas las publicaciones",
+  "filterByTag": "Filtrar por etiqueta",
+  "readMore": "Leer más",
+  "backToBlog": "← Volver al Blog",
+  "publishedOn": "Publicado el",
+  "author": "Autor",
+  "tags": "Etiquetas",
+  "noPosts": "No se encontraron publicaciones",
+  "relatedPosts": "Publicaciones relacionadas",
+  "minRead": "min de lectura",
+  "tableOfContents": "Tabla de contenido",
+  "share": "Compartir",
+  "copyLink": "Copiar enlace",
+  "linkCopied": "¡Enlace copiado!",
+  "nextPost": "Siguiente publicación",
+  "prevPost": "Publicación anterior",
+  "writtenBy": "Escrito por",
+  "newsletter": {
+    "title": "Mantente informado",
+    "description": "Recibe una notificación cuando publiquemos algo nuevo",
+    "placeholder": "Tu correo electrónico",
+    "cta": "Suscribirse"
+  },
+  "dashboard": {
+    "source": "Fuente",
+    "visits": "Visitas",
+    "topPages": "Páginas principales",
+    "systemUptime": "Tiempo de actividad del sistema (90 días)",
+    "apiAvailability": "Disponibilidad de la API",
+    "operational": "Operativo",
+    "degraded": "Rendimiento degradado",
+    "downtime": "Tiempo de inactividad",
+    "last24h": "Últimas 24 horas"
+  }
+}

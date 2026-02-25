@@ -1,0 +1,37 @@
+---
+title: "お客様の声セクション"
+description: "各テーマのお客様の声セクション。"
+order: 7
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+お客様の声 (Testimonials) セクションでは、社会的証明と顧客のレビューを表示します。
+
+## テーマバリアント
+
+| テーマ | コンポーネント | スタイル |
+|-------|-----------|-------|
+| **Liquid** | `TestimonialLiquid.astro` | 流動的なお客様の声カード |
+| **Glass** | `TestimonialGlass.astro` | すりガラスの引用カード |
+| **Neo** | `TestimonialNeo.astro` | 大胆でハイコントラストなお客様の声 |
+| **Luxury** | `TestimonialLuxury.astro` | ゴールドアクセントのあるエレガントなレビュー |
+| **Minimal** | `TestimonialMinimal.astro` | クリーンでミニマルな引用レイアウト |
+| **Aurora** | `TestimonialAurora.astro` | グラデーション背景のお客様の声 |
+
+すべてのバリアントは `src/components/sections/testimonial/` にあります。
+
+## コンテンツソース
+
+お客様の声データは、`useTranslations()` を介して `src/locales/{lang}/testimonial.json` からロードされます。JSONには通常、レビュアーの名前、役職、引用、アバター情報が含まれています。
+
+<Callout type="info" title="Propsなし">
+  お客様の声コンポーネントは外部のPropsを受け取りません。引用テキスト、名前、または構造を変更するには、`src/locales/{lang}/testimonial.json` を編集してください。
+</Callout>
+
+## カスタマイズ
+
+カスタマイズするには：
+1. `src/components/sections/testimonial/Testimonial{Theme}.astro` を編集します。
+2. `src/styles/components/testimonial/` のスタイルを調整します。
+3. `src/locales/{lang}/testimonial.json` のコンテンツを変更します。

@@ -1,0 +1,47 @@
+---
+title: "Cards (卡片组件)"
+description: "专为功能展示区以及博客文章所设计的毛玻璃效果玻璃拟态卡片。"
+order: 2
+---
+
+import { Card } from '../../../../../components/ui/card.tsx';
+
+卡片组件是构建起整套基于毛玻璃视觉设计规范（系统）的最为基础的基石模块部件。
+
+## 组件变体 (Variants)
+
+我们借由设定在 `variant` 参数属性来为您提供且全面支持多种迥异的卡片表现样式风格。
+
+| 变体样式 | 描述说明 | 界面视觉风貌 |
+| :--- | :--- | :--- |
+| `glass` | 标准式磨砂半透明毛玻璃 | 模糊处理背景 + 外侧边框 |
+| `solid` | 满色不透明纯色底背景 | 鲜明的强烈高对比度展现 |
+| `outline` | 仅保留外轮廓式边框线 | 简约极简主义气息 |
+
+## 实时示例演示区
+
+<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 not-prose my-8">
+  <Card variant="glass" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">毛玻璃卡片 (Glass Card)</h3>
+    <p className="text-sm opacity-80">这就是那带有着模糊背景与那细腻隐约的细腻边框线条线条交织并存的标配版经典款磨砂玻璃效果体验。</p>
+  </Card>
+
+  <Card variant="solid" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">坚实纯色底卡片 (Solid Card)</h3>
+    <p className="text-sm opacity-80">拥有极其致密不透明的深邃用作展现极强对比度效果的背景底色。</p>
+  </Card>
+
+  <Card variant="outline" className="p-6">
+    <h3 className="text-lg font-bold mb-2 text-white">纯轮廓线条卡片 (Outline Card)</h3>
+    <p className="text-sm opacity-80">仅仅只有一层最纯粹外部线条所勾勒也就是极简这描边这是最简约的呈现边框风尚。</p>
+  </Card>
+</div>
+
+## 组件代码调用示例
+
+```tsx
+<Card variant="glass" className="p-6">
+  <h3>毛玻璃卡片展示区 (Glass Card)</h3>
+  <p>利用这个变体您将能够随心所欲轻易创造出一个带有着及其绝妙华美这景深纵深质感的这效果版面。</p>
+</Card>
+```

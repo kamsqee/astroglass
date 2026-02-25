@@ -1,0 +1,37 @@
+---
+title: "Section Portefeuille (Portfolio)"
+description: "Sections de présentation de projets pour chaque thème."
+order: 5
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+La section Portefeuille (Portfolio) présente des projets, des études de cas ou des exemples de travaux. Chaque thème propose une disposition de galerie unique.
+
+## Variantes de thème
+
+| Thème | Composant | Style |
+|-------|-----------|-------|
+| **Liquid** | `PortfolioLiquid.astro` | Grille fluide avec des animations au survol |
+| **Glass** | `PortfolioGlass.astro` | Cartes de projet en verre givré |
+| **Neo** | `PortfolioNeo.astro` | Disposition en maçonnerie audacieuse |
+| **Luxury** | `PortfolioLuxury.astro` | Présentations de projets élégantes |
+| **Minimal** | `PortfolioMinimal.astro` | Grille de projets simple et épurée |
+| **Aurora** | `PortfolioAurora.astro` | Galerie sur fond dégradé |
+
+Toutes les variantes se trouvent dans `src/components/sections/portfolio/`.
+
+## Source du contenu
+
+Les éléments du portefeuille sont chargés à partir de `src/locales/{lang}/portfolio.json` via `useTranslations()`.
+
+<Callout type="info" title="Pas de props">
+  Les composants du portefeuille n'acceptent aucune prop externe. Pour modifier les titres, les descriptions ou les images des projets, mettez à jour `src/locales/{lang}/portfolio.json`.
+</Callout>
+
+## Personnalisation
+
+Pour personnaliser :
+1. Modifiez `src/components/sections/portfolio/Portfolio{Theme}.astro`.
+2. Ajustez les styles dans `src/styles/components/portfolio/`.
+3. Modifiez le contenu dans `src/locales/{lang}/portfolio.json`.

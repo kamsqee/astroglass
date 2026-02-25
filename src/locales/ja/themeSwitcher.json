@@ -1,0 +1,22 @@
+{
+  "label": "テーマ",
+  "hint": "スワイプして探索",
+  "categories": {
+    "light": "ライト",
+    "dark": "ダーク",
+    "colorful": "カラフル"
+  },
+  "themes": {
+    "azure": "アジュール",
+    "nordic": "ノルディック",
+    "solaris": "ソラリス",
+    "abyss": "アビス",
+    "neonoir": "ネオノワール",
+    "synthwave": "シンセ",
+    "evergreen": "森",
+    "rose": "ロゼ",
+    "aquatica": "アクア",
+    "monochrome": "モノ",
+    "default": "デフォルト"
+  }
+}

@@ -1,0 +1,50 @@
+---
+import { getCollection } from 'astro:content';
+import DocsLayout from '../../../components/docs/DocsLayout.astro';
+import Callout from '../../../components/mdx/Callout.astro';
+import CardGrid from '../../../components/mdx/CardGrid.astro';
+import LinkCard from '../../../components/mdx/LinkCard.astro';
+import PropsTable from '../../../components/docs/PropsTable.astro';
+import CodeTabs from '../../../components/mdx/CodeTabs.astro';
+import Steps from '../../../components/mdx/Steps.astro';
+import ApiMethod from '../../../components/mdx/ApiMethod.astro';
+import FileTree from '../../../components/mdx/FileTree.astro';
+import Badge from '../../../components/mdx/Badge.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const { getEnabledLocaleCodes, defaultLocale } = await import('../../../config/locales');
+  const docs = await getCollection('docs');
+  return docs.map(doc => {
+    const [lang, ...slugParts] = doc.slug.split('/');
+    const slug = slugParts.join('/');
+    return {
+      params: { 
+        lang: lang === defaultLocale ? undefined : lang,
+        slug 
+      },
+      props: { doc, locale: lang },
+    };
+  });
+}
+
+const { doc, locale } = Astro.props;
+const { Content, headings } = await doc.render();
+
+const components = {
+  Callout,
+  CardGrid,
+  LinkCard,
+  PropsTable,
+  CodeTabs,
+  Steps,
+  ApiMethod,
+  FileTree,
+  Badge,
+};
+---
+
+<DocsLayout doc={doc} headings={headings} locale={locale as 'en' | 'ru'}>
+  <Content components={components} />
+</DocsLayout>

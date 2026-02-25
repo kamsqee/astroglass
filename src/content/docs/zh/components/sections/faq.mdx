@@ -1,0 +1,37 @@
+---
+title: "常见问题解答 (FAQ) 区块"
+description: "各主题常见问题解答区，采用了风琴式可折叠式界面 UI 所架构构筑。"
+order: 8
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+此常见问题解答部分（FAQ 区块）采用且借由此等风琴式可折叠展开面板的方式来排版以集中展出回答罗列出这些常被访客高频问起的问题与回答。
+
+## 各大主题变体
+
+| 主题风格 | 对应组件 | 样式描述 |
+|-------|-----------|-------|
+| **Liquid** | `FAQLiquid.astro` | 如丝滑顺畅动画般的带那动态折页那折叠面板 |
+| **Glass** | `FAQGlass.astro` | 全由毛玻璃质感打造的那风琴可折叠手风琴面板 |
+| **Neo** | `FAQNeo.astro` | 张狂且有着高对比那反差张力的强悍粗犷式问答问与答那布局排版展现呈现格式 |
+| **Luxury** | `FAQLuxury.astro` | 装点点缀了各类金色奢华高贵配饰之高雅奢华典雅的折叠那手风琴面板布局排版 |
+| **Minimal** | `FAQMinimal.astro` | 纯净十分简单明快极其纯粹之极尽极简那种折叠式展开这折叠手风琴版面排版 |
+| **Aurora** | `FAQAurora.astro` | 带有着附着于这是这各类极光般网格如梦幻渐变般渐变底背景渐变这样渐变底色的解答卡片面板解答的问与答卡解答片等 |
+
+所有上述提及的各主题变体均可在于 `src/components/sections/faq/` 路径内寻得。
+
+## 内容数据读取来源
+
+FAQ各项相关项目的数据都全均是由 `useTranslations()` 从存放位于属于这之 `src/locales/{lang}/faq.json` 这途径获取取得。这种这里之里的这类通常其 JSON 内部此这就由于这一套JSON内是由这此类这种这种由于是一类也就是一套数组，内含了各组一问一答这类配对组对等等之各项各类信息集合等那些各种各类元素组成的。
+
+<Callout type="info" title="不接受外部属性传参 (No Props)">
+  FAQ 各类组件并不接受外部 Props 参数传递调用传入外部这等等外部任何这外部调用。要想修改编辑删减或是新增 FAQ 项目列表内容，请直接编辑并更新位于这里之这处的这个 `src/locales/{lang}/faq.json` 文件这此中的配置。
+</Callout>
+
+## 进行自定义修改配置
+
+如果需要进行自定义：
+1. 请编辑修改位于 `src/components/sections/faq/FAQ{Theme}.astro` 内的文件。
+2. 可以在 `src/styles/components/faq/` 里自定义调配调整样式设计。
+3. 请在 `src/locales/{lang}/faq.json` 里调整和变更所有与此等展示那这部分展示内容。

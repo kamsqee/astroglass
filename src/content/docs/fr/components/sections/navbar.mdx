@@ -1,0 +1,41 @@
+---
+title: "Barre de navigation (Navbar / Header)"
+description: "Composants de barre de navigation spécifiques au thème."
+order: 11
+---
+
+import Callout from '../../../../../components/mdx/Callout.astro';
+
+Le composant de barre de navigation (Header) apparaît en haut de chaque page de thème. Chaque thème possède son propre design d'en-tête avec des modèles de navigation différents, des implémentations de menus mobiles et des styles visuels.
+
+## Variantes de thème
+
+| Thème | Composant | Style |
+|-------|-----------|-------|
+| **Liquid** | `HeaderLiquid.astro` | En-tête transparent avec toile de fond floue |
+| **Glass** | `HeaderGlass.astro` | Barre de navigation en verre givré |
+| **Neo** | `HeaderNeo.astro` | En-tête audacieux et à fort contraste |
+| **Luxury** | `HeaderLuxury.astro` | En-tête premium avec des accents dorés |
+| **Minimal** | `HeaderMinimal.astro` | Navigation épurée et minimaliste |
+| **Aurora** | `HeaderAurora.astro` | En-tête avec un accent dégradé |
+
+Toutes les variantes se trouvent dans `src/components/layout/header/`.
+
+## Fonctionnalités
+
+Chaque variante d'en-tête comprend généralement :
+- **Navigation sur bureau** : Navigation horizontale avec des menus déroulants
+- **Navigation sur mobile** : Menu hamburger avec un tiroir latéral
+- **Sélecteur de thème** : Composant sélecteur de thème intégré
+- **Sélecteur de langue** : Sélecteur de langue avec des drapeaux
+- **Logo** : Composant de logo de la marque
+
+## Configuration de la navigation
+
+Les liens de navigation sont configurés dans `src/config/navigation.ts` (y compris la navigation étendue du thème Luxury).
+
+Les étiquettes de navigation sont traduites via `src/locales/{lang}/nav.json`.
+
+<Callout type="info" title="Pas de props">
+  Les composants d'en-tête n'acceptent aucune prop externe. Les éléments de navigation sont définis dans les fichiers de configuration et les étiquettes sont chargées à partir des fichiers JSON locaux.
+</Callout>

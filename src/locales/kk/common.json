@@ -1,0 +1,25 @@
+{
+  "greeting": "Сәлем, Әлем!",
+  "title": "AstroGlass",
+  "description": "Astro-glass дизайны бар заманауи Astro үлгісі",
+  "siteName": "AstroGlass",
+  "learnMore": "Толығырақ білу",
+  "back": "Артқа",
+  "next": "Алға",
+  "submit": "Жіберу",
+  "cancel": "Болдырмау",
+  "close": "Жабу",
+  "loading": "Жүктелуде...",
+  "error": "Қате",
+  "success": "Сәтті",
+  "required": "Міндетті",
+  "optional": "Міндетті емес",
+  "notFound": {
+    "title": "Бет табылған жоқ \u2014 AstroGlass",
+    "code": "404",
+    "heading": "Шыны ішінде адастыңыз",
+    "message": "Сіз іздеген бет жоқ немесе жылжытылған.",
+    "suggestion": "Сілтемені тексеріп көріңіз немесе басты бетке оралыңыз.",
+    "homeButton": "Басты бетке өту"
+  }
+}
