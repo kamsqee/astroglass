@@ -4,9 +4,9 @@
   "description": "Scaffold a new Astroglass project with your choice of themes, palettes, languages, and features.",
   "type": "module",
   "bin": {
-    "create-astroglass": "./dist/index.mjs"
+    "create-astroglass": "./dist/index.js"
   },
-  "main": "./dist/index.mjs",
+  "main": "./dist/index.js",
   "files": [
     "dist",
     "templates",
@@ -43,5 +43,11 @@
     "template",
     "cli"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kamsqee/astroglass.git",
+    "directory": "packages/create-astroglass"
+  },
+  "author": "kamsqee"
 }
