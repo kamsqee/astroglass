@@ -1,0 +1,288 @@
+/* ============================================
+   Theme Switcher Styles
+   Desktop categorized grid + mobile horizontal scroll
+   ============================================ */
+
+/* Theme Switcher Desktop - Refined Categorized Layout */
+.theme-menu {
+  width: 300px;
+  --menu-padding: 10px;
+}
+
+/* Category Sections with subtle dividers */
+.theme-category {
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid hsl(var(--bc) / 0.05);
+}
+.theme-category:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.theme-category-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 4px 8px;
+}
+.theme-category-icon {
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.85;
+}
+.theme-category-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: hsl(var(--bc) / 0.35);
+}
+
+/* Theme Grid - Tighter */
+.theme-category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+.theme-category-grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Theme Cards - Theme-Aware with glow */
+.theme-option-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 6px 8px;
+  border-radius: 10px;
+  border: 1px solid rgb(var(--glass-border, var(--bc) / 0.05));
+  background: hsl(var(--bc) / 0.02);
+  color: hsl(var(--bc) / 0.55);
+  cursor: pointer;
+  transition: background-color var(--motion-quick), border-color var(--motion-quick), color var(--motion-quick), transform var(--motion-quick), box-shadow var(--motion-quick);
+}
+/* Inner glow effect - theme-aware */
+.theme-option-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top, hsl(var(--glow-color, var(--a)) / 0) 0%, transparent 70%);
+  transition: background var(--motion-quick) ease;
+  border-radius: inherit;
+}
+.theme-option-card:hover {
+  border-color: hsl(var(--glow-color, var(--a)) / 0.3);
+  background: hsl(var(--a) / 0.08);
+  color: hsl(var(--a));
+  transform: translateY(-1px);
+  box-shadow:
+    0 3px 12px -2px hsl(var(--glow-color, var(--a)) / calc(var(--glow-intensity, 0.15) * 1.2)),
+    0 0 20px -4px hsl(var(--glow-color, var(--a)) / calc(var(--glow-intensity, 0.15) * 0.8)),
+    inset 0 1px 0 hsl(var(--a) / 0.1);
+}
+.theme-option-card:hover::before {
+  background: radial-gradient(ellipse at top, hsl(var(--glow-color, var(--a)) / 0.15) 0%, transparent 70%);
+}
+.theme-option-card:hover .theme-card-emoji {
+  /* Restraint: Removed rotation and scale */
+  transform: none;
+}
+.theme-option-card:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: none;
+}
+
+/* Active Theme State - Enhanced glow ring */
+.theme-option-card.is-active {
+  border-color: hsl(var(--a) / 0.5);
+  background: hsl(var(--a) / 0.12);
+  color: hsl(var(--a));
+  box-shadow:
+    0 0 0 2px hsl(var(--glow-color, var(--a)) / 0.2),
+    0 0 16px -2px hsl(var(--glow-color, var(--a)) / calc(var(--glow-intensity, 0.15) * 1.5)),
+    inset 0 1px 0 hsl(var(--a) / 0.12);
+}
+.theme-option-card.is-active::before {
+  background: radial-gradient(ellipse at top, hsl(var(--glow-color, var(--a)) / 0.12) 0%, transparent 70%);
+}
+.theme-option-card.is-active .theme-card-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Card Elements */
+.theme-card-emoji {
+  font-size: 20px;
+  line-height: 1;
+  transition: transform var(--motion-quick) cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  z-index: 1;
+}
+.theme-card-label {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+  transition: opacity var(--motion-instant) ease;
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+.theme-option-card:hover .theme-card-label,
+.theme-option-card.is-active .theme-card-label {
+  opacity: 1;
+}
+
+
+.theme-card-check {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity var(--motion-quick), transform var(--motion-quick);
+  color: hsl(var(--a));
+}
+
+/* ============================================
+   Theme Switcher Mobile - Refined Horizontal Scroll
+   ============================================ */
+
+.theme-switcher-mobile {
+  position: relative;
+  /* Negative margin to allow full-width scroll but keep content aligned */
+  margin: 0 -20px;
+  /* Enhanced Mask for smoother fade at edges */
+  mask-image: linear-gradient(to right, transparent 0%, black 32px, black calc(100% - 32px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 32px, black calc(100% - 32px), transparent 100%);
+  /* Prevent scroll chaining */
+  overscroll-behavior-x: contain;
+}
+
+.theme-scroll-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 32px; /* Padding matches mask width + extra for first item visibility */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab; /* Desktop hint */
+}
+.theme-scroll-container:active {
+  cursor: grabbing;
+}
+
+.theme-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+/* Mobile Theme Option - Pill Style */
+.theme-option-mobile {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  height: 48px;
+  border-radius: 100px; /* Pill shape */
+  
+  /* Glass Background */
+  background: hsl(var(--bc) / 0.05);
+  border: 1px solid hsl(var(--bc) / 0.08);
+  color: hsl(var(--bc) / 0.6);
+  
+  transition: background var(--motion-quick), border-color var(--motion-quick), color var(--motion-quick), box-shadow var(--motion-quick), transform var(--motion-quick), padding-right var(--motion-quick);
+  cursor: pointer;
+  scroll-snap-align: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover state (on devices that support hover) */
+@media (hover: hover) {
+  .theme-option-mobile:hover {
+    background: hsl(var(--bc) / 0.08);
+    transform: translateY(-1px);
+  }
+}
+
+/* Active State - Illuminated Glass */
+.theme-option-mobile.is-active {
+  background: hsl(var(--a) / 0.15);
+  border-color: hsl(var(--a) / 0.3);
+  color: hsl(var(--a));
+  box-shadow: 
+    0 4px 12px -2px hsl(var(--a) / 0.2),
+    inset 0 0 0 1px hsl(var(--a) / 0.1);
+  padding-right: 20px; /* Slightly wider when active */
+}
+
+/* Emoji Icon */
+.theme-option-mobile .theme-emoji {
+  font-size: 18px;
+  line-height: 1;
+  filter: grayscale(0.5);
+  transition: filter var(--motion-quick) ease, transform var(--motion-quick) ease;
+}
+
+.theme-option-mobile.is-active .theme-emoji {
+  filter: grayscale(0);
+  transform: scale(1.1);
+}
+
+/* Label Text */
+.theme-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: font-weight var(--motion-instant) ease;
+}
+
+
+/* Animation: Staggered Entry */
+@keyframes slideInScale {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Only animate when panel is open */
+.panel-glass.is-open .theme-option-mobile {
+  animation: slideInScale 0.5s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+  opacity: 0; /* Star hidden */
+}
+
+/* Stagger delays manually for the first 10 items */
+.panel-glass.is-open .theme-option-mobile:nth-child(1) { animation-delay: 100ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(2) { animation-delay: 140ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(3) { animation-delay: 180ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(4) { animation-delay: 220ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(5) { animation-delay: 260ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(6) { animation-delay: 300ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(7) { animation-delay: 340ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(8) { animation-delay: 380ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(9) { animation-delay: 420ms; }
+.panel-glass.is-open .theme-option-mobile:nth-child(10) { animation-delay: 460ms; }
+/* Generic delay for any beyond 10 */
+.panel-glass.is-open .theme-option-mobile:nth-child(n+11) { animation-delay: 500ms; }

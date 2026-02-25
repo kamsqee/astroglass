@@ -1,0 +1,22 @@
+/* Azure (Default Light) - Crisp, clean, modern
+   Clear blue sky clarity and depth */
+[data-theme="azure"] {
+  /* Core palette */
+  --p: 215 30% 96%;
+  --s: 215 25% 91%;
+  --a: 215 90% 43%;
+  --n: 215 15% 45%;
+  --b1: 220 20% 99%;
+  --b2: 215 25% 95%;
+  --bc: 220 35% 20%;
+  /* Unique characteristics */
+  --glass-blur: 20px;
+  --glass-opacity: 0.7;
+  --glass-border: 255 255 255 / 0.3;
+  --glow-color: 215 90% 43%;
+  --glow-intensity: 0.15;
+  --shadow-color: 220 50% 15%;
+  --selection-bg: 215 90% 55% / 0.25;
+  --scrollbar-thumb: 215 30% 75%;
+  --scrollbar-track: 215 20% 92%;
+}

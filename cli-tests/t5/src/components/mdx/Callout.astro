@@ -1,0 +1,37 @@
+---
+/**
+ * Callout Component
+ * Rich alert boxes for documentation.
+ */
+import '../../styles/components/mdx/Callout.css';
+
+interface Props {
+  type?: 'info' | 'warning' | 'error' | 'success' | 'tip' | 'note' | 'danger';
+  title?: string;
+}
+
+const { type = 'info', title } = Astro.props;
+
+const variants: Record<string, { icon: string; color: string }> = {
+  info: { icon: 'ℹ️', color: 'bg-accent/10 border-accent/20 text-accent' },
+  warning: { icon: '⚠️', color: 'bg-yellow-500/10 border-yellow-500/20 text-yellow-500' },
+  error: { icon: '🚫', color: 'bg-red-500/10 border-red-500/20 text-red-500' },
+  success: { icon: '✅', color: 'bg-green-500/10 border-green-500/20 text-green-500' },
+  tip: { icon: '💡', color: 'bg-green-500/10 border-green-500/20 text-green-600' },
+  note: { icon: '📝', color: 'bg-blue-500/10 border-blue-500/20 text-blue-500' },
+  danger: { icon: '🔴', color: 'bg-red-500/10 border-red-500/20 text-red-500' },
+};
+
+// Fallback to 'info' if unknown type
+const variant = variants[type] || variants.info;
+---
+
+<div class={`my-6 p-4 rounded-xl border flex gap-4 ${variant.color}`}>
+  <div class="text-xl flex-shrink-0 select-none">{variant.icon}</div>
+  <div class="flex-1 min-w-0">
+    {title && <div class="font-bold mb-1 opacity-90">{title}</div>}
+    <div class="text-sm opacity-80 leading-relaxed c-callout__content">
+      <slot />
+    </div>
+  </div>
+</div>

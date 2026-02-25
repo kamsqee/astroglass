@@ -1,0 +1,491 @@
+/* -------------------------------------------------------------------------- */
+/*                            HERO AURORA — CANVAS                            */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(100px + var(--nav-offset, 0px)) 24px 140px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .hero-aurora {
+    padding: calc(120px + var(--nav-offset, 0px)) 32px 160px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          MESH GRADIENT BACKGROUND                          */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hero-aurora-mesh {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  animation: aurora-float-1 12s ease-in-out infinite alternate;
+  transition: transform 0.1s linear;
+}
+
+.hero-aurora-mesh:first-child {
+  top: -10%;
+  left: -10%;
+  background: radial-gradient(circle, hsl(var(--a)) 0%, transparent 70%);
+  transform: translate(var(--mx, 0), var(--my, 0));
+}
+
+.hero-aurora-mesh--2 {
+  bottom: -20%;
+  right: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, hsl(var(--a) / 0.6) 0%, transparent 70%);
+  animation: aurora-float-2 15s ease-in-out infinite alternate;
+  transform: translate(calc(var(--mx, 0) * -0.6), calc(var(--my, 0) * -0.6));
+}
+
+.hero-aurora-mesh--3 {
+  top: 30%;
+  left: 40%;
+  width: 40%;
+  height: 40%;
+  background: radial-gradient(circle, hsl(var(--a) / 0.3) 0%, transparent 70%);
+  animation: aurora-float-3 10s ease-in-out infinite alternate;
+  transform: translate(calc(var(--mx, 0) * 1.2), calc(var(--my, 0) * 1.2));
+}
+
+@keyframes aurora-float-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(5%, 8%) scale(1.15); }
+}
+
+@keyframes aurora-float-2 {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-8%, -5%) scale(1.1); }
+}
+
+@keyframes aurora-float-3 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+  100% { transform: translate(10%, -10%) scale(1.2); opacity: 0.4; }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             GRID OVERLAY                                   */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(hsl(var(--bc) / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--bc) / 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 30%, transparent 80%);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             AURORA BAND                                    */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-band {
+  position: absolute;
+  top: 15%;
+  left: -10%;
+  right: -10%;
+  height: 200px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--a) / 0.08),
+    hsl(var(--a) / 0.15),
+    hsl(var(--a) / 0.08),
+    transparent
+  );
+  filter: blur(60px);
+  transform: rotate(-5deg);
+  animation: aurora-band-undulate 8s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-band-undulate {
+  0% { transform: rotate(-5deg) translateY(0); opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { transform: rotate(-3deg) translateY(30px); opacity: 0.6; }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               CONTENT                                      */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-content {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .hero-aurora-content {
+    gap: 32px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                               BADGE                                        */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: hsl(var(--a));
+  background: hsl(var(--a) / 0.08);
+  border: 1px solid hsl(var(--a) / 0.15);
+  border-radius: 999px;
+  animation: aurora-fade-in 0.8s ease-out both;
+}
+
+.hero-aurora-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: hsl(var(--a));
+  animation: aurora-dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes aurora-dot-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 hsl(var(--a) / 0.4); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px hsl(var(--a) / 0); }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              HEADLINE                                      */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-title {
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: hsl(var(--bc));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Per-word staggered gradient reveal */
+.hero-aurora-word {
+  display: inline-block;
+  opacity: 0.01;
+  transform: translateY(24px);
+  animation: aurora-word-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--bc)) 0%,
+    hsl(var(--bc)) 50%,
+    hsl(var(--a)) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes aurora-word-reveal {
+  0% {
+    opacity: 0.01;
+    transform: translateY(24px);
+    background-position: 100% 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    background-position: 0% 0;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              SUBTITLE                                      */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.6;
+  color: hsl(var(--bc) / 0.6);
+  max-width: 560px;
+  font-weight: 400;
+  animation: aurora-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              CTA BUTTONS                                   */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  animation: aurora-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@media (min-width: 480px) {
+  .hero-aurora-ctas {
+    flex-direction: row;
+    gap: 16px;
+  }
+}
+
+.hero-aurora-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 14px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+/* Primary CTA */
+.hero-aurora-btn--primary {
+  color: hsl(var(--b1));
+  background: hsl(var(--bc));
+}
+
+.hero-aurora-btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 8px 30px hsl(var(--a) / 0.3),
+    0 0 60px hsl(var(--a) / 0.15);
+}
+
+.hero-aurora-btn-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background: linear-gradient(
+    135deg,
+    hsl(var(--a)) 0%,
+    transparent 50%,
+    hsl(var(--a)) 100%
+  );
+  transition: opacity 0.4s ease;
+}
+
+.hero-aurora-btn--primary:hover .hero-aurora-btn-glow {
+  opacity: 0.2;
+  animation: aurora-btn-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes aurora-btn-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.hero-aurora-btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+/* Secondary CTA */
+.hero-aurora-btn--secondary {
+  color: hsl(var(--bc) / 0.8);
+  background: hsl(var(--bc) / 0.05);
+  border: 1px solid hsl(var(--bc) / 0.1);
+}
+
+.hero-aurora-btn--secondary:hover {
+  color: hsl(var(--a));
+  border-color: hsl(var(--a) / 0.3);
+  background: hsl(var(--a) / 0.05);
+  transform: translateY(-2px);
+}
+
+.hero-aurora-btn-arrow {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.hero-aurora-btn--secondary:hover .hero-aurora-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                            TRUST STRIP                                     */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-trust {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  animation: aurora-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+.hero-aurora-trust-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: hsl(var(--bc) / 0.3);
+}
+
+.hero-aurora-trust-logos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .hero-aurora-trust-logos {
+    gap: 12px;
+  }
+}
+
+.hero-aurora-trust-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: hsl(var(--bc) / 0.35);
+  letter-spacing: 0.04em;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--a) / 0.12);
+  background: hsl(var(--a) / 0.04);
+  transition: all 0.4s ease;
+}
+
+.hero-aurora-trust-pill:hover {
+  color: hsl(var(--a));
+  border-color: hsl(var(--a) / 0.3);
+  background: hsl(var(--a) / 0.08);
+  box-shadow: 0 0 16px hsl(var(--a) / 0.1);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                           SCROLL INDICATOR                                 */
+/* -------------------------------------------------------------------------- */
+
+.hero-aurora-scroll {
+  position: absolute;
+  bottom: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+  animation: aurora-fade-in 1s ease 1s both;
+}
+
+.hero-aurora-scroll-ring {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.hero-aurora-scroll-ring svg {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-aurora-ring-track {
+  fill: none;
+  stroke: hsl(var(--bc) / 0.08);
+  stroke-width: 1.5;
+}
+
+.hero-aurora-ring-glow {
+  fill: none;
+  stroke: hsl(var(--a));
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 28 85;
+  transform-origin: center;
+  animation: aurora-ring-spin 3s linear infinite;
+}
+
+@keyframes aurora-ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+.hero-aurora-scroll-chevron {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  color: hsl(var(--a) / 0.6);
+  animation: aurora-chevron-bob 2s ease-in-out infinite;
+}
+
+@keyframes aurora-chevron-bob {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50% { transform: translate(-50%, -40%); }
+}
+
+.hero-aurora-scroll-text {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: hsl(var(--bc) / 0.25);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          SHARED ANIMATIONS                                 */
+/* -------------------------------------------------------------------------- */
+
+@keyframes aurora-fade-in {
+  from { opacity: 0.01; }
+  to { opacity: 1; }
+}
+
+@keyframes aurora-slide-up {
+  from {
+    opacity: 0.01;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

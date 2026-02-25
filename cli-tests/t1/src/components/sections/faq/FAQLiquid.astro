@@ -1,0 +1,378 @@
+---
+/**
+ * FAQ Liquid - The Guided Journey
+ * Step-by-step progressive disclosure with breadcrumb navigation.
+ * Mobile: Full-screen steps. Desktop: Split view with navigation tree.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/faq/FAQLiquid.css';
+import LiquidSectionTag from '../../ui/liquid/LiquidSectionTag.astro';
+
+const categories = [
+  {
+    id: 'getting-started',
+    icon: '🚀',
+    title: t('faq.cat_getting_started'),
+    description: t('faq.cat_getting_started_desc'),
+    questions: [
+      { q: t('faq.q_create_project'), a: t('faq.a_create_project') },
+      { q: t('faq.q_sys_req'), a: t('faq.a_sys_req') },
+      { q: t('faq.q2'), a: t('faq.a2') },
+    ]
+  },
+  {
+    id: 'billing',
+    icon: '💳',
+    title: t('faq.cat_billing'),
+    description: t('faq.cat_billing_desc'),
+    questions: [
+      { q: t('faq.q_billing'), a: t('faq.a_billing') },
+      { q: t('faq.q_refund'), a: t('faq.a_refund') },
+      { q: t('faq.q_team_discount'), a: t('faq.a_team_discount') },
+    ]
+  },
+  {
+    id: 'technical',
+    icon: '⚙️',
+    title: t('faq.cat_technical'),
+    description: t('faq.cat_technical_desc'),
+    questions: [
+      { q: t('faq.q5'), a: t('faq.a5') },
+      { q: t('faq.q9'), a: t('faq.a9') },
+      { q: t('faq.q6'), a: t('faq.a6') },
+    ]
+  },
+  {
+    id: 'account',
+    icon: '👤',
+    title: t('faq.cat_account'),
+    description: t('faq.cat_account_desc'),
+    questions: [
+      { q: t('faq.q8'), a: t('faq.a8') },
+      { q: t('faq.q7'), a: t('faq.a7') },
+      { q: t('faq.q_delete_account'), a: t('faq.a_delete_account') },
+    ]
+  },
+];
+
+const categoriesJson = JSON.stringify(categories);
+---
+
+<section id="faq" class="relative py-24 lg:py-32 px-6 overflow-hidden bg-base-100">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12 lg:mb-16">
+       <LiquidSectionTag label={t('faq.support')} class="mb-4" />
+       <h2 class="text-4xl md:text-6xl font-black text-base-content tracking-tighter">{t('faq.title')}</h2>
+       <p class="text-base text-base-content/75 mt-4">{t('faq.subtitle')}</p>
+    </div>
+
+    <!-- Mobile: Step-by-step Journey -->
+    <div class="lg:hidden">
+       <div class="c-faq-liquid__journey" data-step="categories" data-categories={categoriesJson} data-i18n={JSON.stringify({ topics: t('faq.topics'), answer: t('faq.answer') })}>
+          <!-- Breadcrumb -->
+          <div class="c-faq-liquid__breadcrumb flex items-center gap-2 mb-6 text-sm">
+             <button class="c-faq-liquid__home text-accent font-bold">{t('faq.topics')}</button>
+          </div>
+
+          <!-- Categories View -->
+          <div class="c-faq-liquid__categories-view grid grid-cols-2 gap-4">
+             {categories.map(cat => (
+                <button 
+                  class="c-faq-liquid__category-btn c-faq-liquid__category-card p-6 bg-base-content/[0.03] border border-base-content/10 text-left hover:bg-base-content/[0.06] hover:border-base-content/20 transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  data-category={cat.id}
+                >
+                   <span class="text-2xl mb-3 block">{cat.icon}</span>
+                   <p class="text-sm font-bold text-base-content mb-1">{cat.title}</p>
+                   <p class="text-xs text-base-content/75">{t('faq.questionsCount').replace('{count}', cat.questions.length.toString())}</p>
+                </button>
+             ))}
+          </div>
+
+          <!-- Questions View (hidden by default) -->
+          <div class="c-faq-liquid__questions-view hidden">
+             <div class="space-y-3" id="mobile-liquid-questions-list"></div>
+          </div>
+
+          <!-- Answer View (hidden by default) -->
+          <div class="c-faq-liquid__answer-view hidden">
+             <div class="p-6 rounded-2xl bg-base-content/[0.03] border border-base-content/10">
+                <p id="mobile-liquid-answer-text" class="text-base text-base-content/70 leading-relaxed"></p>
+             </div>
+             <div class="mt-6 pt-6 border-t border-base-content/5">
+                <p class="text-xs text-base-content/80 mb-3">{t('faq.wasHelpful')}</p>
+                <div class="flex gap-3 c-faq-liquid__feedback-btns">
+                   <button class="c-faq-liquid__feedback-btn c-faq-liquid__feedback-yes px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-bold hover:bg-accent/20 hover:scale-105 active:scale-95 transition-all duration-500" data-vote="yes">👍 {t('faq.yes')}</button>
+                   <button class="c-faq-liquid__feedback-btn c-faq-liquid__feedback-no px-4 py-2 rounded-full bg-base-content/5 text-base-content/75 text-sm font-bold hover:bg-base-content/10 hover:scale-105 active:scale-95 transition-all duration-500" data-vote="no">👎 {t('faq.no')}</button>
+                </div>
+                <p class="c-faq-liquid__feedback-thanks hidden text-xs text-accent mt-3">{t('faq.feedbackThanks')}</p>
+             </div>
+          </div>
+       </div>
+    </div>
+
+    <!-- Desktop: Split View -->
+    <div class="hidden lg:grid grid-cols-12 gap-8">
+       <!-- Navigation Tree -->
+       <div class="col-span-4">
+          <div class="sticky top-8 space-y-2">
+             {categories.map(cat => (
+                <div class="c-faq-liquid__tree-category" data-category={cat.id}>
+                   <button class="c-faq-liquid__tree-toggle w-full flex items-center gap-3 p-4 rounded-xl bg-base-content/[0.02] border border-base-content/5 hover:bg-base-content/[0.05] transition-all duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] text-left">
+                      <span class="text-lg">{cat.icon}</span>
+                      <span class="text-sm font-bold text-base-content">{cat.title}</span>
+                      <svg class="w-4 h-4 ml-auto text-base-content/80 transition-transform duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)] c-faq-liquid__tree-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                   </button>
+                   <div class="c-faq-liquid__tree-questions hidden pl-4 mt-2 space-y-1">
+                      {cat.questions.map((q, i) => (
+                         <button 
+                           class="c-faq-liquid__tree-question w-full text-left px-4 py-3 rounded-lg text-sm text-base-content/75 hover:text-base-content hover:bg-base-content/[0.03] transition-all duration-500"
+                           data-category={cat.id}
+                           data-index={i}
+                         >
+                            {q.q}
+                         </button>
+                      ))}
+                   </div>
+                </div>
+             ))}
+          </div>
+       </div>
+
+       <!-- Content Area -->
+       <div class="col-span-8">
+          <div class="c-faq-liquid__content-area p-8 rounded-[2rem] bg-base-content/[0.02] border border-base-content/10 min-h-[400px]">
+             <div class="c-faq-liquid__content-placeholder text-center py-16">
+                <div class="mb-4">
+                  <svg class="w-10 h-10 mx-auto text-base-content/20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C12 2 5.5 11 5.5 15.5C5.5 19.09 8.41 22 12 22C15.59 22 18.5 19.09 18.5 15.5C18.5 11 12 2 12 2Z" opacity="0.3"/>
+                    <path d="M12 5C12 5 8 11 8 14C8 16.21 9.79 18 12 18C14.21 18 16 16.21 16 14C16 11 12 5 12 5Z"/>
+                  </svg>
+                </div>
+                <p class="text-base text-base-content/75">{t('faq.selectQuestion')}</p>
+             </div>
+             <div class="c-faq-liquid__content-answer hidden">
+                <p class="text-xs text-accent font-bold uppercase tracking-widest mb-4" id="desktop-liquid-category-label"></p>
+                <h3 class="text-xl font-bold text-base-content mb-6" id="desktop-liquid-question-text"></h3>
+                <p class="text-base text-base-content/70 leading-relaxed" id="desktop-liquid-answer-text"></p>
+                
+                <div class="mt-8 pt-8 border-t border-base-content/5 flex items-center justify-between">
+                   <div class="relative">
+                      <p class="text-xs text-base-content/80 mb-2">{t('faq.wasHelpful')}</p>
+                      <div class="flex gap-2 c-faq-liquid__feedback-btns">
+                         <button class="c-faq-liquid__feedback-btn c-faq-liquid__feedback-yes px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-bold hover:bg-accent/20 hover:scale-105 active:scale-95 transition-all duration-500" data-vote="yes">👍 {t('faq.yes')}</button>
+                         <button class="c-faq-liquid__feedback-btn c-faq-liquid__feedback-no px-4 py-2 rounded-full bg-base-content/5 text-base-content/75 text-sm font-bold hover:bg-base-content/10 hover:scale-105 active:scale-95 transition-all duration-500" data-vote="no">👎 {t('faq.no')}</button>
+                      </div>
+                      <p class="c-faq-liquid__feedback-thanks hidden absolute top-full left-0 mt-2 text-xs text-accent whitespace-nowrap">{t('faq.feedbackThanks')}</p>
+                   </div>
+                   <a href={`/${locale}/contact`} class="text-sm text-accent hover:underline shrink-0">{t('faq.stillNeedHelp')}</a>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let faqLiquidController: AbortController | null = null;
+
+  function initFAQLiquidJourney() {
+    // Abort previous listeners
+    faqLiquidController?.abort();
+    faqLiquidController = new AbortController();
+    const signal = faqLiquidController.signal;
+
+    // Mobile functionality
+    const journey = document.querySelector('.c-faq-liquid__journey') as HTMLElement;
+    if (!journey) return;
+
+    const categories = JSON.parse(journey.dataset.categories || '[]');
+    const i18n = JSON.parse(journey.dataset.i18n || '{"topics":"Topics","answer":"Answer"}');
+    const breadcrumb = journey.querySelector('.c-faq-liquid__breadcrumb');
+    const categoriesView = journey.querySelector('.c-faq-liquid__categories-view');
+    const questionsView = journey.querySelector('.c-faq-liquid__questions-view');
+    const answerView = journey.querySelector('.c-faq-liquid__answer-view');
+    const questionsList = document.getElementById('mobile-liquid-questions-list');
+    const answerText = document.getElementById('mobile-liquid-answer-text');
+    
+    let currentCategory: any = null;
+
+    function showCategories() {
+      categoriesView?.classList.remove('hidden');
+      questionsView?.classList.add('hidden');
+      answerView?.classList.add('hidden');
+      if (breadcrumb) breadcrumb.innerHTML = `<button class="c-faq-liquid__home text-accent font-bold">${i18n.topics}</button>`;
+      currentCategory = null;
+    }
+
+    function showQuestions(categoryId: string) {
+      const cat = categories.find((c: any) => c.id === categoryId);
+      if (!cat || !questionsList) return;
+      
+      currentCategory = cat;
+      categoriesView?.classList.add('hidden');
+      questionsView?.classList.remove('hidden');
+      answerView?.classList.add('hidden');
+      
+      if (breadcrumb) {
+        breadcrumb.innerHTML = `
+          <button class="c-faq-liquid__home text-base-content/75 hover:text-accent transition-colors duration-500">${i18n.topics}</button>
+          <span class="text-base-content/20">→</span>
+          <span class="text-accent font-bold">${cat.title}</span>
+        `;
+      }
+      
+      questionsList.innerHTML = cat.questions.map((q: any, i: number) => `
+        <button class="c-faq-liquid__question-btn w-full text-left p-5 rounded-xl bg-base-content/[0.03] border border-base-content/10 hover:bg-base-content/[0.06] transition-all duration-500" data-index="${i}">
+          <p class="text-sm font-medium text-base-content">${q.q}</p>
+        </button>
+      `).join('');
+      
+      questionsList.querySelectorAll('.c-faq-liquid__question-btn').forEach((btn: Element) => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt((btn as HTMLElement).dataset.index || '0');
+          showAnswer(idx);
+        }, { signal });
+      });
+    }
+
+    function showAnswer(index: number) {
+      if (!currentCategory || !answerText) return;
+      const q = currentCategory.questions[index];
+      
+      questionsView?.classList.add('hidden');
+      answerView?.classList.remove('hidden');
+      answerText.textContent = q.a;
+      
+      if (breadcrumb) {
+        breadcrumb.innerHTML = `
+          <button class="c-faq-liquid__home text-base-content/75 hover:text-accent transition-colors duration-500">${i18n.topics}</button>
+          <span class="text-base-content/20">→</span>
+          <button class="c-faq-liquid__back-cat text-base-content/75 hover:text-accent transition-colors duration-500">${currentCategory.title}</button>
+          <span class="text-base-content/20">→</span>
+          <span class="text-accent font-bold">${i18n.answer}</span>
+        `;
+        breadcrumb.querySelector('.c-faq-liquid__back-cat')?.addEventListener('click', () => showQuestions(currentCategory.id), { signal });
+      }
+    }
+
+    // Category button clicks
+    document.querySelectorAll('.c-faq-liquid__category-btn').forEach(btn => {
+      btn.addEventListener('click', () => showQuestions((btn as HTMLElement).dataset.category || ''), { signal });
+    });
+
+    // Home/Topics click
+    document.addEventListener('click', (e) => {
+      if ((e.target as Element).classList?.contains('c-faq-liquid__home')) showCategories();
+    }, { signal });
+
+    // Desktop functionality
+    document.querySelectorAll('.c-faq-liquid__tree-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const parent = btn.closest('.c-faq-liquid__tree-category');
+        const questions = parent?.querySelector('.c-faq-liquid__tree-questions');
+        const isActive = parent?.classList.contains('active');
+        
+        // Close all
+        document.querySelectorAll('.c-faq-liquid__tree-category').forEach(c => {
+          c.classList.remove('active');
+          c.querySelector('.c-faq-liquid__tree-questions')?.classList.add('hidden');
+        });
+        
+        // Open this one if wasn't active
+        if (!isActive) {
+          parent?.classList.add('active');
+          questions?.classList.remove('hidden');
+        }
+      }, { signal });
+    });
+
+    document.querySelectorAll('.c-faq-liquid__tree-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const catId = (btn as HTMLElement).dataset.category;
+        const idx = parseInt((btn as HTMLElement).dataset.index || '0');
+        const cat = categories.find((c: any) => c.id === catId);
+        if (!cat) return;
+        
+        const q = cat.questions[idx];
+        
+        // Update active state
+        document.querySelectorAll('.c-faq-liquid__tree-question').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Show answer
+        document.querySelector('.c-faq-liquid__content-placeholder')?.classList.add('hidden');
+        document.querySelector('.c-faq-liquid__content-answer')?.classList.remove('hidden');
+        
+        const categoryLabel = document.getElementById('desktop-liquid-category-label');
+        const questionText = document.getElementById('desktop-liquid-question-text');
+        const answerTextEl = document.getElementById('desktop-liquid-answer-text');
+        
+        if (categoryLabel) categoryLabel.textContent = cat.title;
+        if (questionText) questionText.textContent = q.q;
+        if (answerTextEl) answerTextEl.textContent = q.a;
+
+        // Reset feedback buttons state
+        resetFeedbackButtons();
+      }, { signal });
+    });
+
+    // Feedback button functionality
+    function resetFeedbackButtons() {
+      document.querySelectorAll('.c-faq-liquid__feedback-btns').forEach(container => {
+        container.classList.remove('hidden');
+        container.querySelectorAll('.c-faq-liquid__feedback-btn').forEach(btn => {
+          btn.classList.remove('opacity-30', 'pointer-events-none', 'chosen', 'text-accent', 'font-bold', 'scale-105');
+          btn.classList.add('text-accent', 'bg-accent/10'); // Reset to default styling
+        });
+        // Reset No button styling
+        container.querySelectorAll('.c-faq-liquid__feedback-no').forEach(btn => {
+          btn.classList.remove('text-accent');
+          btn.classList.add('text-base-content/75', 'bg-base-content/5');
+        });
+      });
+      document.querySelectorAll('.c-faq-liquid__feedback-thanks').forEach(el => el.classList.add('hidden'));
+    }
+
+    document.querySelectorAll('.c-faq-liquid__feedback-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const button = e.currentTarget as HTMLElement;
+        const container = button.closest('.c-faq-liquid__feedback-btns') || button.parentElement;
+        const thanksMsg = container?.parentElement?.querySelector('.c-faq-liquid__feedback-thanks');
+        const isYes = button.dataset.vote === 'yes';
+        
+        // Style buttons based on selection
+        container?.querySelectorAll('.c-faq-liquid__feedback-btn').forEach(b => {
+          if (b === button) {
+            // Chosen one: bold, bright, slightly scaled
+            b.classList.add('chosen', 'font-bold', 'scale-105', 'pointer-events-none');
+            if (isYes) {
+              b.classList.add('text-accent', 'bg-accent/20');
+            } else {
+              b.classList.add('text-base-content', 'bg-base-content/10');
+            }
+          } else {
+            // Not chosen: faded out
+            b.classList.add('opacity-30', 'pointer-events-none');
+          }
+        });
+        
+        // Show thanks message
+        setTimeout(() => {
+          thanksMsg?.classList.remove('hidden');
+        }, 300);
+      }, { signal });
+    });
+  }
+
+  initFAQLiquidJourney();
+  document.addEventListener('astro:after-swap', initFAQLiquidJourney);
+</script>

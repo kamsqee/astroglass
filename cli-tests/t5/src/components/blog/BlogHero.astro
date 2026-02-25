@@ -1,0 +1,51 @@
+---
+import { useTranslations } from '../../utils/i18n';
+import { getLocaleFromUrl } from '../../utils/locale-utils';
+import LocalizedLink from '../ui/LocalizedLink.astro';
+import '../../styles/components/blog/BlogHero.css';
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const slug = post.slug.replace(/^[a-z]{2}\//, '');
+const href = `/blog/${slug}/`;
+const date = new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(post.data.date);
+
+// Calculate reading time (rough estimate: 200 words/min)
+const readingTime = post.data.readingTime || Math.max(1, Math.ceil(post.body.split(/\s+/).length / 200));
+
+const hasCover = !!post.data.cover;
+---
+
+<section class={`blog-hero ${hasCover ? '' : 'blog-hero--no-image'}`}>
+  {hasCover && (
+    <div class="blog-hero__image-wrap">
+      <img src={post.data.cover.src} alt="" loading="eager" />
+      <div class="blog-hero__overlay" />
+    </div>
+  )}
+  <LocalizedLink href={href} class="blog-hero__link">
+    <div class="blog-hero__content">
+      {post.data.category && (
+        <span class="blog-hero__badge">{t('blog.featured')} · {post.data.category}</span>
+      )}
+      {!post.data.category && (
+        <span class="blog-hero__badge">{t('blog.featured')}</span>
+      )}
+      <h2 class="blog-hero__title">{post.data.title}</h2>
+      <p class="blog-hero__description">{post.data.description}</p>
+      <div class="blog-hero__meta">
+        <span>{post.data.author}</span>
+        <span class="blog-hero__meta-dot">·</span>
+        <time datetime={post.data.date.toISOString()}>{date}</time>
+        <span class="blog-hero__meta-dot">·</span>
+        <span>{readingTime} {t('blog.minRead')}</span>
+      </div>
+    </div>
+  </LocalizedLink>
+</section>

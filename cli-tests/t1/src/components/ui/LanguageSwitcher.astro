@@ -1,0 +1,146 @@
+---
+/**
+ * LanguageSwitcher Component
+ * Emoji flag switcher - inline buttons on mobile, dropdown on desktop
+ */
+import { getLocaleFromUrl, type Locale } from '../../utils/i18n';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getEnabledLocales } from '../../config/locales';
+
+export interface Props {
+  class?: string;
+  variant?: 'default' | 'mobile';
+}
+
+const { class: className, variant = 'default' } = Astro.props;
+
+const currentLocale = getLocaleFromUrl(Astro.url);
+const enabledLocales = getEnabledLocales();
+
+// Build locale data from config
+const localeData = Object.fromEntries(
+  enabledLocales.map((l) => [
+    l.code,
+    { flag: l.flag, label: l.nativeName, short: l.code.toUpperCase() },
+  ])
+) as Record<Locale, { flag: string; label: string; short: string }>;
+
+const pathname = Astro.url.pathname;
+let cleanPath = pathname;
+if (pathname.startsWith(`/${currentLocale}/`)) {
+  cleanPath = pathname.replace(`/${currentLocale}/`, '/');
+} else if (pathname === `/${currentLocale}`) {
+  cleanPath = '/';
+}
+
+function getSwitchPath(targetLocale: Locale) {
+  return getRelativeLocaleUrl(targetLocale, cleanPath);
+}
+
+// Get locale codes for iteration
+const locales = enabledLocales.map((l) => l.code) as Locale[];
+---
+
+{variant === 'mobile' ? (
+  <!-- Mobile: Inline button group -->
+  <div class="lang-switcher-mobile" data-lang-switcher-mobile>
+    {locales.map((locale) => (
+      <a
+          href={getSwitchPath(locale)}
+        class:list={['lang-option-mobile', locale === currentLocale && 'is-active']}
+        aria-current={locale === currentLocale ? 'page' : undefined}
+        aria-label={localeData[locale].label}
+      >
+        <span class="lang-flag">{localeData[locale].flag}</span>
+        <span class="lang-code">{localeData[locale].short}</span>
+      </a>
+    ))}
+  </div>
+) : (
+  <!-- Desktop: Dropdown -->
+  <div class:list={['lang-switcher relative', className]} data-lang-switcher>
+    <button
+      type="button"
+      class="lang-trigger switcher-btn"
+      aria-label="Select language"
+      aria-expanded="false"
+    >
+      <span class="switcher-emoji">{localeData[currentLocale].flag}</span>
+      <svg class="switcher-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+
+    <div class="lang-menu switcher-menu">
+      {locales.map((locale) => (
+        <a
+            href={getSwitchPath(locale)}
+          class:list={['lang-option-desktop', locale === currentLocale && 'is-active']}
+          aria-current={locale === currentLocale ? 'page' : undefined}
+          aria-label={localeData[locale].label}
+        >
+          <span class="lang-flag">{localeData[locale].flag}</span>
+          <span class="lang-name">{localeData[locale].label}</span>
+          <svg class="check-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  </div>
+)}
+
+<script>
+  let langSwitcherController: AbortController | null = null;
+
+  function initLangSwitcher() {
+    langSwitcherController?.abort();
+    langSwitcherController = new AbortController();
+    const { signal } = langSwitcherController;
+
+    // Store language preference when user clicks a language link
+    document.querySelectorAll('.lang-option-desktop, .lang-option-mobile').forEach(link => {
+      link.addEventListener('click', () => {
+        const href = link.getAttribute('href');
+        if (href) {
+            if (navigator.vibrate) navigator.vibrate(10);
+            const match = href.match(/^\/([a-z]{2})(\/|$)/);
+            const locale = match ? match[1] : 'en';
+            localStorage.setItem('preferred-locale', locale);
+        }
+      }, { signal });
+    });
+
+    document.querySelectorAll('[data-lang-switcher]').forEach(switcher => {
+      const trigger = switcher.querySelector('.lang-trigger');
+      if (!trigger) return;
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = switcher.classList.contains('is-open');
+        // Close all switchers (theme and language)
+        document.querySelectorAll('[data-theme-switcher].is-open, [data-lang-switcher].is-open').forEach(s => {
+          s.classList.remove('is-open');
+          s.querySelector('.theme-trigger, .lang-trigger')?.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          switcher.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        } else {
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      }, { signal });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', () => {
+      document.querySelectorAll('[data-lang-switcher].is-open').forEach(s => {
+        s.classList.remove('is-open');
+        s.querySelector('.lang-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+    }, { signal });
+  }
+
+  initLangSwitcher();
+  document.addEventListener('astro:after-swap', initLangSwitcher);
+</script>

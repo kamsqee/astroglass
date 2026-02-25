@@ -1,0 +1,222 @@
+---
+/**
+ * FAQ Luxury - The Search Hero
+ * Large prominent search bar with instant filtering.
+ * Mobile: Sticky search with filtered results. Desktop: Centered search with grid.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import LuxurySectionLabel from '../../ui/luxury/LuxurySectionLabel.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/faq/FAQLuxury.css';
+
+const faqs = [
+  { q: t('faq.q1'), a: t('faq.a1'), tags: ["basics", "new"] },
+  { q: t('faq.q2'), a: t('faq.a2'), tags: ["basics", "pricing"] },
+  { q: t('faq.q3'), a: t('faq.a3'), tags: ["pricing", "plans"] },
+  { q: t('faq.q4'), a: t('faq.a4'), tags: ["pricing", "billing"] },
+  { q: t('faq.q5'), a: t('faq.a5'), tags: ["technical", "developer"] },
+  { q: t('faq.q9'), a: t('faq.a9'), tags: ["technical", "integrations"] },
+  { q: t('faq.q6'), a: t('faq.a6'), tags: ["technical", "security"] },
+  { q: t('faq.q7'), a: t('faq.a7'), tags: ["team", "account"] },
+  { q: t('faq.q8'), a: t('faq.a8'), tags: ["account", "login"] },
+  { q: t('faq.q10'), a: t('faq.a10'), tags: ["support", "help"] },
+  { q: t('faq.q11'), a: t('faq.a11'), tags: ["support", "docs"] },
+  { q: t('faq.q12'), a: t('faq.a12'), tags: ["account", "data"] },
+];
+
+const popularTags = ["basics", "pricing", "technical", "account", "support"];
+---
+
+<section id="faq" class="relative py-20 md:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-base-100">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header with Search -->
+    <div class="text-center mb-12">
+       <div class="mb-4 flex justify-center">
+         <LuxurySectionLabel text={t('faq.helpCenter')} />
+       </div>
+       <h2 class="text-4xl md:text-6xl font-normal font-serif text-base-content tracking-tighter mb-8">{t('faq.title')}</h2>
+       
+       <!-- Search Bar -->
+       <div class="relative max-w-xl mx-auto">
+          <div class="c-faq-luxury__search-wrapper flex items-center gap-3 p-4 lg:p-5 rounded-full bg-base-content/[0.03] border border-base-content/10 focus-within:border-accent/50 focus-within:bg-base-content/[0.05] focus-within:shadow-[0_0_40px_rgba(var(--a),0.1)] transition-luxury-slow">
+             <svg class="w-5 h-5 text-base-content/80 transition-colors duration-luxury-medium" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+             </svg>
+             <input 
+               type="text" 
+               id="faq-luxury-search"
+               placeholder={t('faq.searchPlaceholder')} 
+               class="flex-1 bg-transparent text-base-content placeholder:text-base-content/80 outline-none border-none ring-0 focus:outline-none focus:border-none focus:ring-0 text-base"
+             />
+             <button id="faq-luxury-clear" class="hidden px-3 py-1 rounded-lg bg-base-content/5 text-xs text-base-content/75 hover:bg-base-content/10 transition-luxury">
+                {t('faq.clear')}
+             </button>
+          </div>
+          
+          <!-- Quick Tags (clickable filters) -->
+          <div class="flex flex-wrap justify-center gap-2 mt-4">
+             {popularTags.map(tag => (
+                <button 
+                  class="c-faq-luxury__tag-btn px-4 py-2 rounded-full bg-base-content/[0.04] border border-base-content/10 text-xs font-medium text-base-content/75 hover:bg-accent/10 hover:border-accent/30 hover:text-accent hover:scale-105 active:scale-95 transition-luxury-slow capitalize cursor-pointer"
+                  data-tag={tag}
+                >
+                   <span class="mr-1 opacity-50">#</span>{t(`faq.tags.${tag}`)}
+                </button>
+             ))}
+          </div>
+       </div>
+    </div>
+
+    <!-- Results -->
+    <div class="c-faq-luxury__results space-y-3" id="faq-luxury-results">
+       {faqs.map((faq, i) => (
+          <div 
+            class="c-faq-luxury__result-item" 
+            data-question={faq.q.toLowerCase()}
+            data-answer={faq.a.toLowerCase()}
+            data-tags={faq.tags.join(' ')}
+            style={`animation-delay: ${i * 50}ms`}
+          >
+             <button class="c-faq-luxury__result-trigger w-full flex items-center justify-between p-5 lg:p-6 rounded-2xl bg-gradient-to-br from-base-content/[0.05] to-base-content/[0.01] border border-base-content/10 hover:bg-base-content/[0.06] hover:border-base-content/20 hover:shadow-xl transition-luxury-slow text-left group backdrop-blur-xl ring-1 ring-white/5 ring-inset">
+                <span class="text-sm lg:text-base text-base-content font-medium pr-4 group-hover:text-accent transition-colors duration-luxury-medium">{faq.q}</span>
+                <div class="w-8 h-8 rounded-full bg-base-content/5 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/10 transition-luxury">
+                   <svg class="w-4 h-4 text-base-content/20 transition-luxury group-hover:text-accent c-faq-luxury__result-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                   </svg>
+                </div>
+             </button>
+             <div class="c-faq-luxury__result-content hidden p-5 lg:p-6">
+                <p class="text-sm text-base-content/75 leading-relaxed">{faq.a}</p>
+                <div class="flex gap-2 mt-4">
+                   {faq.tags.map(tag => (
+                      <span class="c-faq-luxury__label px-2 py-1 rounded-md bg-base-content/[0.02] text-[10px] text-base-content/25 capitalize italic">{t(`faq.tags.${tag}`)}</span>
+                   ))}
+                </div>
+             </div>
+          </div>
+       ))}
+    </div>
+
+    <!-- No results message -->
+    <div class="faq-luxury-no-results hidden text-center py-12">
+       <span class="text-4xl mb-4 block">🔍</span>
+       <p class="text-base text-base-content/75 mb-2">{t('faq.noResults')}</p>
+       <p class="text-sm text-base-content/80">{t('faq.tryDifferent')} <a href={`/${locale}/contact`} class="text-accent hover:underline">{t('faq.contactSupport')}</a></p>
+    </div>
+
+    <!-- Result count -->
+    <div class="text-center mt-8">
+       <p class="text-xs text-base-content/80" id="faq-luxury-count" data-template={t('faq.showingQuestions')}>{t('faq.showingQuestions').replace('{count}', faqs.length.toString())}</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  let faqLuxuryController: AbortController | null = null;
+
+  function initFAQLuxurySearch() {
+    // Abort previous listeners
+    faqLuxuryController?.abort();
+    faqLuxuryController = new AbortController();
+    const signal = faqLuxuryController.signal;
+
+    const searchInput = document.getElementById('faq-luxury-search') as HTMLInputElement;
+    const clearBtn = document.getElementById('faq-luxury-clear');
+    const results = document.querySelectorAll('.c-faq-luxury__result-item');
+    const noResults = document.querySelector('.faq-luxury-no-results');
+    const countEl = document.getElementById('faq-luxury-count');
+    const tagBtns = document.querySelectorAll('.c-faq-luxury__tag-btn');
+    
+    let activeTag = '';
+
+    function filterResults() {
+      const query = searchInput?.value.toLowerCase().trim() || '';
+      let visibleCount = 0;
+
+      results.forEach(item => {
+        const q = (item as HTMLElement).dataset.question || '';
+        const a = (item as HTMLElement).dataset.answer || '';
+        const tags = (item as HTMLElement).dataset.tags || '';
+        
+        const matchesSearch = !query || q.includes(query) || a.includes(query);
+        const matchesTag = !activeTag || tags.includes(activeTag);
+        
+        if (matchesSearch && matchesTag) {
+          item.classList.remove('hidden-by-search');
+          visibleCount++;
+        } else {
+          item.classList.add('hidden-by-search');
+        }
+      });
+
+      // Show/hide no results
+      noResults?.classList.toggle('hidden', visibleCount > 0);
+      
+      // Update count
+      if (countEl) {
+        const template = countEl.dataset.template || "Showing {count} questions";
+        countEl.textContent = template.replace('{count}', visibleCount.toString());
+      }
+
+      // Show/hide clear button
+      clearBtn?.classList.toggle('hidden', !query && !activeTag);
+    }
+
+    // Search input
+    searchInput?.addEventListener('input', filterResults, { signal });
+
+    // Clear button
+    clearBtn?.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      activeTag = '';
+      tagBtns.forEach(b => b.classList.remove('active'));
+      filterResults();
+    }, { signal });
+
+    // Tag buttons
+    tagBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = (btn as HTMLElement).dataset.tag || '';
+        
+        if (activeTag === tag) {
+          activeTag = '';
+          btn.classList.remove('active');
+        } else {
+          activeTag = tag;
+          tagBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        }
+        
+        filterResults();
+      }, { signal });
+    });
+
+    // Accordion expand/collapse
+    document.querySelectorAll('.c-faq-luxury__result-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.c-faq-luxury__result-item');
+        const content = item?.querySelector('.c-faq-luxury__result-content');
+        const isOpen = item?.classList.contains('open');
+        
+        // Close all others
+        results.forEach(r => {
+          if (r !== item) {
+            r.classList.remove('open');
+            r.querySelector('.c-faq-luxury__result-content')?.classList.add('hidden');
+          }
+        });
+        
+        // Toggle this
+        item?.classList.toggle('open', !isOpen);
+        content?.classList.toggle('hidden', isOpen);
+      }, { signal });
+    });
+  }
+
+  initFAQLuxurySearch();
+  document.addEventListener('astro:after-swap', initFAQLuxurySearch);
+</script>

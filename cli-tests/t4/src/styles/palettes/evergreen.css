@@ -1,0 +1,21 @@
+/* Evergreen - Calm, natural, harmonious
+   Forest canopy and morning dew */
+[data-theme="evergreen"] {
+  --p: 140 35% 95%;
+  --s: 140 30% 89%;
+  --a: 155 70% 40%;
+  --n: 145 20% 42%;
+  --b1: 135 40% 97%;
+  --b2: 140 35% 93%;
+  --bc: 150 45% 15%;
+  /* Unique: organic, dappled light feel */
+  --glass-blur: 14px;
+  --glass-opacity: 0.78;
+  --glass-border: 180 220 180 / 0.35;
+  --glow-color: 155 70% 45%;
+  --glow-intensity: 0.12;
+  --shadow-color: 150 35% 20%;
+  --selection-bg: 155 70% 40% / 0.22;
+  --scrollbar-thumb: 145 30% 70%;
+  --scrollbar-track: 140 35% 92%;
+}

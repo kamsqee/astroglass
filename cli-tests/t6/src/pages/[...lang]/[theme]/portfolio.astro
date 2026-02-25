@@ -1,0 +1,102 @@
+---
+/**
+ * Portfolio Page — Dynamic Route
+ *
+ * Generates /{theme}/portfolio for each enabled theme.
+ *
+ * HOW TO ADD A PORTFOLIO PAGE FOR A NEW THEME:
+ *   1. Create the portfolio page component (e.g. PortfolioPageMinimal.astro)
+ *   2. Export it as 'PortfolioPage' from the theme's barrel file
+ *      (src/components/sections/themes/{theme}.ts)
+ *   3. Register the theme in themeModules below
+ *
+ * If no PortfolioPage is exported by the theme barrel, the route falls back
+ * to a "coming soon" placeholder — no build errors, no broken routes.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import { getThemeById } from '../../../config/themes';
+
+// Theme barrel files — same source of truth used by [theme].astro.
+// Typed via src/types/theme-sections.d.ts
+import * as LiquidSections  from '../../../components/sections/themes/liquid';
+import * as GlassSections   from '../../../components/sections/themes/glass';
+import * as NeoSections     from '../../../components/sections/themes/neo';
+import * as LuxurySections  from '../../../components/sections/themes/luxury';
+import * as MinimalSections from '../../../components/sections/themes/minimal';
+import * as AuroraSections  from '../../../components/sections/themes/aurora';
+
+export async function getStaticPaths() {
+  const { getEnabledThemes } = await import('../../../config/themes');
+  const { getEnabledLocaleCodes, defaultLocale } = await import('../../../config/locales');
+  const themes = getEnabledThemes();
+  const langs = getEnabledLocaleCodes();
+  const paths = [];
+
+  for (const lang of langs) {
+    for (const theme of themes) {
+      paths.push({
+        params: {
+          lang: lang === defaultLocale ? undefined : lang,
+          theme: theme.id
+        },
+        props: { themeId: theme.id }
+      });
+    }
+  }
+  return paths;
+}
+
+interface Props {
+  themeId: string;
+}
+
+const { themeId } = Astro.props;
+const theme = getThemeById(themeId);
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Map of all theme section modules — add a new entry here when adding a new theme.
+const themeModules: Record<string, Record<string, unknown>> = {
+  liquid:  LiquidSections,
+  glass:   GlassSections,
+  neo:     NeoSections,
+  luxury:  LuxurySections,
+  minimal: MinimalSections,
+  aurora:  AuroraSections,
+};
+
+const sections = themeModules[themeId] ?? LiquidSections;
+
+const Header       = sections['Header']       as (_props: Record<string, unknown>) => unknown;
+const PortfolioPage = (sections['PortfolioPage'] ?? null) as ((_props: Record<string, unknown>) => unknown) | null;
+const Footer       = sections['Footer']       as (_props: Record<string, unknown>) => unknown;
+---
+
+<BaseLayout
+  title={`${t('portfolioPage.pageTitle')} - ${theme?.name}`}
+  description={t('portfolioPage.pageSubtitle')}
+  showHeader={false}
+>
+  <Header />
+  <main>
+    {PortfolioPage ? (
+      <PortfolioPage />
+    ) : (
+      <section class="min-h-screen flex items-center justify-center px-4 pt-32">
+        <div class="text-center">
+          <h1 class="text-4xl font-black text-base-content mb-4">{t('portfolioPage.pageTitle')}</h1>
+          <p class="text-base-content/50 mb-8">{t('portfolioPage.comingSoon')}</p>
+          <a
+            href={`/${themeId}`}
+            class="inline-flex items-center gap-2 text-accent font-bold hover:gap-4 transition-all duration-300"
+          >
+            ← {t('portfolioPage.backToHome')}
+          </a>
+        </div>
+      </section>
+    )}
+  </main>
+  <Footer />
+</BaseLayout>

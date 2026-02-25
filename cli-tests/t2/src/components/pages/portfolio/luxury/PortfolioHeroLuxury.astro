@@ -1,0 +1,60 @@
+---
+/**
+ * Luxury Portfolio — Hero Section
+ * Serif hero with diamond dividers, ambient glow, and luxury-styled filters.
+ */
+import LuxurySectionLabel from '../../../ui/luxury/LuxurySectionLabel.astro';
+
+interface Props {
+  categories: Array<{ id: string; label: string }>;
+  caseStudiesLabel: string;
+  pageTitle: string;
+  pageSubtitle: string;
+}
+
+const { categories, caseStudiesLabel, pageTitle, pageSubtitle } = Astro.props;
+---
+
+<section class="c-portfolio-page-luxury__hero">
+  <div class="c-portfolio-page-luxury__hero-glow"></div>
+
+  <div class="relative z-10 w-full max-w-5xl mx-auto text-center px-4">
+
+    <!-- Badge -->
+    <div class="flex justify-center mb-8">
+      <LuxurySectionLabel text={caseStudiesLabel} />
+    </div>
+
+    <!-- Title — serif luxury font -->
+    <h1 class="text-5xl sm:text-7xl md:text-8xl xl:text-[9rem] font-serif font-normal text-base-content mb-6 tracking-tight leading-[0.95]">
+      {pageTitle}
+    </h1>
+
+    <!-- Diamond divider -->
+    <div class="c-portfolio-page-luxury__diamond-line mb-8">
+      <span class="text-accent/40 text-xs">◆</span>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="text-lg sm:text-xl text-base-content/75 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+      {pageSubtitle}
+    </p>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap gap-2 justify-center" id="pp-luxury-filters">
+      {categories.map((cat, i) => (
+        <button
+          class:list={[
+            'px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] border transition-all duration-500 cursor-pointer',
+            i === 0
+              ? 'border-accent/30 text-accent bg-accent/[0.08]'
+              : 'border-base-content/8 text-base-content/80 hover:border-accent/20 hover:text-accent hover:bg-accent/[0.05]'
+          ]}
+          data-filter={cat.id}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>

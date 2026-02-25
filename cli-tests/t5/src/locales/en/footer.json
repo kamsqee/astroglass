@@ -1,0 +1,29 @@
+{
+  "company": "AstroGlass",
+  "tagline": "Beautiful templates for the modern web",
+
+  "copyright": "© 2026 AstroGlass",
+  "allRightsReserved": "All rights reserved",
+  "backToTop": "Back to top",
+  "links": {
+    "product": "Product",
+    "features": "Features",
+    "pricing": "Pricing",
+    "demos": "Demos",
+    "company": "Project",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact",
+    "resources": "Resources",
+    "docs": "Documentation",
+    "faq": "FAQ",
+    "support": "Support",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  },
+  "social": {
+    "github": "GitHub",
+    "twitter": "Twitter",
+    "discord": "Discord"
+  }
+}

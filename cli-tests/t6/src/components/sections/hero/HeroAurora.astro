@@ -1,0 +1,128 @@
+---
+/**
+ * Hero Aurora - Aurora Canvas
+ * Full-screen hero with animated mesh gradient background, 
+ * geometric grid overlay, and stagger-animated typography.
+ */
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+import '../../../styles/components/hero/HeroAurora.css';
+---
+
+<section class="hero-aurora" id="hero-aurora-section">
+  <!-- Mesh gradient background (mouse-reactive) -->
+  <div class="hero-aurora-bg" id="hero-aurora-bg">
+    <div class="hero-aurora-mesh"></div>
+    <div class="hero-aurora-mesh hero-aurora-mesh--2"></div>
+    <div class="hero-aurora-mesh hero-aurora-mesh--3"></div>
+  </div>
+
+  <!-- Grid overlay -->
+  <div class="hero-aurora-grid"></div>
+
+  <!-- Aurora band -->
+  <div class="hero-aurora-band"></div>
+
+  <!-- Content -->
+  <div class="hero-aurora-content">
+    <!-- Badge -->
+    <div class="hero-aurora-badge">
+      <span class="hero-aurora-badge-dot"></span>
+      <span>{t('hero.liveBadge')}</span>
+    </div>
+
+    <!-- Headline — per-word gradient reveal -->
+    <h1 class="hero-aurora-title">
+      {t('hero.title').split(' ').map((word: string, i: number) => (
+        <span class="hero-aurora-word" style={`animation-delay: ${0.1 + i * 0.08}s`}>{word}&nbsp;</span>
+      ))}
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="hero-aurora-subtitle">
+      {t('hero.subtitle')}
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-aurora-ctas">
+      <a href="#features" class="hero-aurora-btn hero-aurora-btn--primary">
+        <span class="hero-aurora-btn-glow"></span>
+        <span class="hero-aurora-btn-text">{t('hero.cta')}</span>
+      </a>
+      <a href="#about" class="hero-aurora-btn hero-aurora-btn--secondary">
+        <span class="hero-aurora-btn-text">{t('hero.secondaryCta')}</span>
+        <svg class="hero-aurora-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Trust strip — glowing pill badges -->
+    <div class="hero-aurora-trust">
+      <span class="hero-aurora-trust-label">{t('hero.trustedBy')}</span>
+      <div class="hero-aurora-trust-logos">
+        <span class="hero-aurora-trust-pill">Stripe</span>
+        <span class="hero-aurora-trust-pill">Linear</span>
+        <span class="hero-aurora-trust-pill">Vercel</span>
+        <span class="hero-aurora-trust-pill">Notion</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator — aurora ring -->
+  <a href="#about" class="hero-aurora-scroll hover:scale-110 transition-transform duration-300">
+    <div class="hero-aurora-scroll-ring">
+      <svg viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="18" class="hero-aurora-ring-track"/>
+        <circle cx="20" cy="20" r="18" class="hero-aurora-ring-glow"/>
+      </svg>
+      <svg class="hero-aurora-scroll-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M7 10l5 5 5-5"/>
+      </svg>
+    </div>
+    <span class="hero-aurora-scroll-text">{t('hero.scrollToExplore')}</span>
+  </a>
+</section>
+
+<script>
+  function initHeroAuroraParallax() {
+    const section = document.getElementById('hero-aurora-section');
+    const bg = document.getElementById('hero-aurora-bg');
+    if (!section || !bg) return;
+
+    let rafId: number | null = null;
+    let targetX = 0.5;
+    let targetY = 0.5;
+    let currentX = 0.5;
+    let currentY = 0.5;
+
+    const onMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      targetX = (e.clientX - rect.left) / rect.width;
+      targetY = (e.clientY - rect.top) / rect.height;
+    };
+
+    const animate = () => {
+      currentX += (targetX - currentX) * 0.04;
+      currentY += (targetY - currentY) * 0.04;
+      bg.style.setProperty('--mx', `${(currentX - 0.5) * 40}px`);
+      bg.style.setProperty('--my', `${(currentY - 0.5) * 40}px`);
+      rafId = requestAnimationFrame(animate);
+    };
+
+    section.addEventListener('mousemove', onMove, { passive: true });
+    rafId = requestAnimationFrame(animate);
+
+    // Cleanup on page transition
+    const cleanup = () => {
+      section.removeEventListener('mousemove', onMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
+  }
+
+  initHeroAuroraParallax();
+  document.addEventListener('astro:after-swap', initHeroAuroraParallax);
+</script>

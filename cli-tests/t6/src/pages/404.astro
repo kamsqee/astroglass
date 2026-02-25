@@ -1,0 +1,44 @@
+---
+/**
+ * 404 — Catch-all Not Found
+ *
+ * Astro serves this page for any URL that doesn't match a static route.
+ * At build time Astro.url is "/404", so we can't detect the user's requested
+ * locale server-side. Instead, a thin client script detects the locale prefix
+ * and redirects to the locale-specific /xx/404 page (which is pre-rendered).
+ *
+ * The page body is hidden until the redirect check completes to prevent
+ * a visible flash / "double render".
+ */
+import NotFoundPage from '../components/pages/NotFoundPage.astro';
+import { getEnabledLocaleCodes, defaultLocale } from '../config/locales';
+
+const locales = getEnabledLocaleCodes().filter(l => l !== defaultLocale);
+---
+
+<style is:global>
+  /* Hide body until locale redirect check completes */
+  body.locale-checking { opacity: 0; }
+</style>
+
+<script is:inline define:vars={{ locales }}>
+  // Immediately hide the page while we check locale
+  document.documentElement.style.opacity = '0';
+
+  (function checkLocaleRedirect() {
+    const pathname = window.location.pathname;
+    const segments = pathname.split('/');
+    if (segments.length > 1) {
+      const lang = segments[1];
+      if (locales.includes(lang) && pathname !== '/' + lang + '/404') {
+        // Redirect to the locale-specific 404 page — page stays hidden
+        window.location.replace('/' + lang + '/404');
+        return;
+      }
+    }
+    // No redirect needed — show the page
+    document.documentElement.style.opacity = '';
+  })();
+</script>
+
+<NotFoundPage />

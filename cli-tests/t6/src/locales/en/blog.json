@@ -1,0 +1,41 @@
+{
+  "title": "Blog",
+  "description": "Latest updates",
+  "subtitle": "Latest thoughts and updates",
+  "featured": "Featured",
+  "featuredBadge": "Featured",
+  "allPosts": "All Posts",
+  "filterByTag": "Filter by tag",
+  "readMore": "Read More",
+  "backToBlog": "← Back to Blog",
+  "publishedOn": "Published on",
+  "author": "Author",
+  "tags": "Tags",
+  "noPosts": "No posts found",
+  "relatedPosts": "Related Posts",
+  "minRead": "min read",
+  "tableOfContents": "Table of Contents",
+  "share": "Share",
+  "copyLink": "Copy link",
+  "linkCopied": "Link copied!",
+  "nextPost": "Next Post",
+  "prevPost": "Previous Post",
+  "writtenBy": "Written by",
+  "newsletter": {
+    "title": "Stay in the loop",
+    "description": "Get notified when we publish something new",
+    "placeholder": "Your email",
+    "cta": "Subscribe"
+  },
+  "dashboard": {
+    "source": "Source",
+    "visits": "Visits",
+    "topPages": "Top Pages",
+    "systemUptime": "System Uptime (90 Days)",
+    "apiAvailability": "API Availability",
+    "operational": "Operational",
+    "degraded": "Degraded Performance",
+    "downtime": "Downtime",
+    "last24h": "Last 24h"
+  }
+}

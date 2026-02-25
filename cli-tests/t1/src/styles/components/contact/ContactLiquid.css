@@ -1,0 +1,155 @@
+/* ContactLiquid.css — Liquid chat bubbles, droplet typing, ripple send */
+
+/* ── Chat Container ── */
+.contact-liquid-chat {
+  transition: all 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Messages — Liquid Bubble Shapes ── */
+.contact-liquid-msg {
+  animation: contact-msg-slide 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes contact-msg-slide {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Bot messages — organic left bubble */
+.contact-liquid-msg > div:last-child {
+  border-radius: 1.5rem 1.5rem 1.5rem 0.5rem;
+  transition: border-radius 500ms ease;
+}
+
+.contact-liquid-msg:hover > div:last-child {
+  border-radius: 1rem 1.5rem 1.5rem 0.25rem;
+}
+
+/* User messages — organic right bubble */
+.contact-liquid-msg.user {
+  justify-content: flex-end;
+}
+
+.contact-liquid-msg.user > div:last-child {
+  background: hsl(var(--a));
+  color: hsl(var(--b1));
+  border-radius: 1.5rem 1.5rem 0.5rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Liquid shimmer inside user bubbles */
+.contact-liquid-msg.user > div:last-child::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  animation: contactLiquidShimmer 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes contactLiquidShimmer {
+  0% { transform: translateX(-100%) rotate(-10deg); }
+  100% { transform: translateX(100%) rotate(-10deg); }
+}
+
+/* ── Typing Indicator — Droplet Shapes ── */
+.contact-liquid-typing {
+  display: flex;
+  gap: 5px;
+  padding: 8px 16px;
+}
+
+.contact-liquid-typing span {
+  width: 8px;
+  height: 10px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: hsl(var(--a) / 0.4);
+  animation: contact-typing-drip 1.4s ease-in-out infinite;
+}
+
+.contact-liquid-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+  width: 9px;
+  height: 11px;
+}
+
+.contact-liquid-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+  width: 7px;
+  height: 9px;
+}
+
+@keyframes contact-typing-drip {
+  0%, 60%, 100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-8px) scaleY(0.85);
+    opacity: 1;
+  }
+  45% {
+    transform: translateY(2px) scaleY(1.15);
+    opacity: 0.7;
+  }
+}
+
+/* ── Send Button — Ripple Effect ── */
+.contact-liquid-send-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.contact-liquid-send-btn:hover {
+  border-radius: 50%;
+  transform: scale(1.1);
+}
+
+.contact-liquid-send-btn:active {
+  transform: scale(0.9);
+}
+
+.contact-liquid-send-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 hsl(var(--a) / 0.4);
+  transition: box-shadow 0.5s ease;
+}
+
+.contact-liquid-send-btn:active::after {
+  box-shadow: 0 0 0 12px hsl(var(--a) / 0);
+}
+
+/* ── Chips ── */
+.contact-liquid-chip {
+  transform: translateZ(0);
+  border-radius: 2rem;
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-liquid-chip:hover {
+  border-radius: 1rem 2rem 2rem 1rem;
+}
+
+/* ── Scrollbar ── */
+.contact-liquid-messages::-webkit-scrollbar {
+  width: 4px;
+}
+.contact-liquid-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+.contact-liquid-messages::-webkit-scrollbar-thumb {
+  background: hsl(var(--bc) / 0.1);
+  border-radius: 10px;
+}

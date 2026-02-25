@@ -1,0 +1,245 @@
+---
+/**
+ * Features Minimal - Progressive Reveal Stack
+ * Scroll-driven cinematic feature presentation, one feature at a time.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import '../../../styles/components/tag/TagMinimal.css';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const features = [
+  { 
+    id: 1, 
+    title: t('features.f1Title'), 
+    desc: t('features.f1Desc'), 
+    longDesc: t('features.f1LongDesc'),
+    icon: '🚀',
+    color: 'from-violet-500 to-purple-600',
+    bgColor: 'bg-violet-500/10'
+  },
+  { 
+    id: 2, 
+    title: t('features.f2Title'), 
+    desc: t('features.f2Desc'),
+    longDesc: t('features.f2LongDesc'),
+    icon: '💎',
+    color: 'from-cyan-500 to-blue-600',
+    bgColor: 'bg-cyan-500/10'
+  },
+  { 
+    id: 3, 
+    title: t('features.f3Title'), 
+    desc: t('features.f3Desc'),
+    longDesc: t('features.f3LongDesc'),
+    icon: '📱',
+    color: 'from-emerald-500 to-teal-600',
+    bgColor: 'bg-emerald-500/10'
+  },
+  { 
+    id: 4, 
+    title: t('features.f4Title'), 
+    desc: t('features.f4Desc'),
+    longDesc: t('features.f4LongDesc'),
+    icon: '🎨',
+    color: 'from-amber-500 to-orange-600',
+    bgColor: 'bg-amber-500/10'
+  },
+];
+---
+
+<section id="services" class="features-minimal relative overflow-hidden">
+  <!-- Sticky Header -->
+  <div class="sticky top-0 z-20 py-6 sm:py-8 px-4 sm:px-6 bg-base-100/80 backdrop-blur-xl border-b border-base-content/5">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div>
+        <span class="c-tag-minimal"><span class="c-tag-minimal__dash"></span>{t('features.badge')}</span>
+        <h2 class="text-3xl sm:text-5xl md:text-6xl font-black text-base-content tracking-tighter">
+          {t('features.title')}
+        </h2>
+      </div>
+      
+      <!-- Progress dots -->
+      <div class="flex items-center gap-2">
+        {features.map((f, i) => (
+          <div 
+            class="progress-dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-base-content/20 transition-all duration-500"
+            data-feature-dot={i}
+          ></div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature Sections -->
+  <div class="feature-stack">
+    {features.map((f, i) => (
+      <div 
+        class="feature-section relative min-h-[70vh] sm:min-h-[80vh] flex items-center px-4 sm:px-6 py-16 sm:py-24"
+        data-feature-section={i}
+      >
+        <!-- Background gradient -->
+        <div class={`absolute inset-0 ${f.bgColor} opacity-0 transition-opacity duration-700`} data-feature-bg={i}></div>
+        
+        <!-- Decorative orbs -->
+        <div class={`absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-br ${f.color} rounded-full blur-[100px] opacity-0 transition-opacity duration-1000`} data-feature-orb={i}></div>
+        
+        <div class="max-w-6xl mx-auto w-full relative z-10">
+          <div class={`grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+            <!-- Icon/Visual Side -->
+            <div class={`feature-visual flex justify-center ${i % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
+              <div class="relative">
+                <!-- Main icon container -->
+                <div class={`w-32 h-32 sm:w-40 sm:h-40 lg:w-52 lg:h-52 rounded-3xl lg:rounded-[2.5rem] bg-gradient-to-br ${f.color} flex items-center justify-center text-6xl sm:text-7xl lg:text-8xl shadow-2xl shadow-black/20`} data-feature-icon-bg>
+                  {f.icon}
+                </div>
+                
+                <!-- Floating badge -->
+                <div class={`absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 px-4 py-2 rounded-xl bg-base-100 border border-base-content/10 shadow-lg`}>
+                  <span class="text-xs sm:text-sm font-black text-base-content">0{i + 1}</span>
+                </div>
+                
+                <!-- Glow ring -->
+                <div class={`absolute inset-0 rounded-3xl lg:rounded-[2.5rem] bg-gradient-to-br ${f.color} blur-xl opacity-30 -z-10 scale-110`} data-feature-glow></div>
+              </div>
+            </div>
+
+            <!-- Content Side -->
+            <div class={`feature-content ${i % 2 === 1 ? 'lg:order-1 lg:text-right' : 'lg:order-2'}`}>
+              <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black text-base-content mb-4 sm:mb-6 tracking-tight">
+                {f.title}
+              </h3>
+              <p class="text-lg sm:text-xl text-base-content/70 font-medium mb-4 leading-relaxed">
+                {f.desc}
+              </p>
+              <p class="text-base sm:text-lg text-base-content/75 leading-relaxed mb-6 sm:mb-8">
+                {f.longDesc}
+              </p>
+              
+              <!-- CTA -->
+              <a href={`/${locale}/docs`} class={`inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r ${f.color} text-white font-bold text-sm shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 group ${i % 2 === 1 ? 'lg:flex-row-reverse' : ''}`} data-feature-cta>
+                {t('cta.learnMore')}
+                <span class="sr-only"> {f.title}</span>
+                <svg class={`w-4 h-4 ${i % 2 === 1 ? 'lg:rotate-180' : ''} group-hover:translate-x-1 transition-transform duration-300`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Final CTA -->
+  <div class="relative py-16 sm:py-24 px-4 sm:px-6 bg-base-content/[0.02] border-t border-base-content/5">
+    <div class="max-w-3xl mx-auto text-center">
+      <h3 class="text-2xl sm:text-3xl font-black text-base-content mb-4">{t('features.minimalCtaTitle')}</h3>
+      <p class="text-base sm:text-lg text-base-content/75 mb-8">{t('features.minimalCtaDesc')}</p>
+      <a href={`/${locale}/docs`} class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-base-content text-base-100 font-bold shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 group">
+        {t('features.exploreAll')}
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-section {
+    opacity: 0.3;
+    transform: scale(0.98);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .feature-section.in-view {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .feature-section.in-view [data-feature-bg] {
+    opacity: 0.5;
+  }
+
+  .feature-section.in-view [data-feature-orb] {
+    opacity: 0.2;
+  }
+
+  .feature-visual {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+  }
+
+  .feature-content {
+    transform: translateY(30px);
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+  }
+
+  .feature-section.in-view .feature-visual,
+  .feature-section.in-view .feature-content {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .progress-dot.active {
+    background-color: hsl(var(--a));
+    transform: scale(1.3);
+    box-shadow: 0 0 10px hsl(var(--a) / 0.5);
+  }
+
+  /* Monochrome visual overrides */
+  :global([data-theme="monochrome"]) .feature-section [data-feature-bg],
+  :global([data-theme="monochrome"]) .feature-section [data-feature-orb],
+  :global([data-theme="monochrome"]) .feature-section [data-feature-icon-bg],
+  :global([data-theme="monochrome"]) .feature-section [data-feature-glow] {
+    background: none;
+    background-color: hsl(var(--bc) / 0.05);
+  }
+
+  :global([data-theme="monochrome"]) .feature-section [data-feature-cta] {
+    background: none;
+    background-color: hsl(var(--bc));
+  }
+</style>
+
+<script>
+  function initFeaturesMinimal() {
+    const sections = document.querySelectorAll('[data-feature-section]');
+    const dots = document.querySelectorAll('[data-feature-dot]');
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const index = entry.target.getAttribute('data-feature-section');
+        
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          
+          if (index !== null) {
+            // Update dots
+            dots.forEach((dot, i) => {
+              dot.classList.toggle('active', i <= parseInt(index));
+            });
+          }
+        }
+      });
+    }, {
+      threshold: 0.4,
+      rootMargin: '-10% 0px -10% 0px'
+    });
+
+    sections.forEach(section => observer.observe(section));
+  }
+
+  // Initialize
+  initFeaturesMinimal();
+
+  // Re-init on Astro navigation
+  document.addEventListener('astro:after-swap', initFeaturesMinimal);
+</script>

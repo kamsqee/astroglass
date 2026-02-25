@@ -1,0 +1,71 @@
+---
+/**
+ * 404 — Page Not Found
+ * 
+ * Theme-adaptive error page. Uses CSS custom properties from _themes.css
+ * so it automatically matches whichever color theme the user has active.
+ * Works with all 6 landing-page design families.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeaderDefault from '../layout/header/HeaderDefault.astro';
+import { useTranslations } from '../../utils/i18n';
+import { getLocaleFromUrl } from '../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const homeHref = locale === 'en' ? '/' : `/${locale}/`;
+---
+
+<BaseLayout title={t('notFound.title')} description={t('notFound.message')} showHeader={false}>
+  <HeaderDefault />
+
+  <section class="not-found" aria-label={t('notFound.heading')}>
+    <!-- Animated background layers -->
+    <div class="not-found-bg" aria-hidden="true">
+      <!-- Gradient mesh -->
+      <div class="not-found-mesh"></div>
+      <!-- Conic light rays -->
+      <div class="not-found-rays"></div>
+      <!-- Grid overlay -->
+      <div class="not-found-grid"></div>
+      <!-- Morphing blobs -->
+      <div class="not-found-blob not-found-blob--1"></div>
+      <div class="not-found-blob not-found-blob--2"></div>
+      <div class="not-found-blob not-found-blob--3"></div>
+      <!-- Orbiting ring -->
+      <div class="not-found-ring"></div>
+      <!-- Floating particles -->
+      <div class="not-found-particles">
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+        <div class="not-found-particle"></div>
+      </div>
+    </div>
+
+    <!-- Glass card -->
+    <div class="not-found-card">
+      <p class="not-found-code" aria-hidden="true">{t('notFound.code')}</p>
+      <div class="not-found-divider"></div>
+      <h1 class="not-found-heading">{t('notFound.heading')}</h1>
+      <p class="not-found-message">{t('notFound.message')}</p>
+      <p class="not-found-suggestion">{t('notFound.suggestion')}</p>
+
+      <div class="not-found-actions">
+        <a href={homeHref} class="not-found-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          {t('notFound.homeButton')}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

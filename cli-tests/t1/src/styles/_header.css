@@ -1,0 +1,134 @@
+/* ============================================
+   Header Glass Effect (Theme-Aware)
+   ============================================ */
+.header-liquid {
+  --_blur: var(--glass-blur, 20px);
+  --_opacity: var(--glass-opacity, 0.7);
+
+  background: linear-gradient(
+    180deg,
+    hsl(var(--b1) / var(--_opacity)) 0%,
+    hsl(var(--b1) / calc(var(--_opacity) - 0.15)) 100%
+  );
+  backdrop-filter: blur(var(--_blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--_blur)) saturate(180%);
+  border-bottom: 1px solid rgb(var(--glass-border, var(--bc) / 0.06));
+  box-shadow:
+    0 1px 0 0 hsl(var(--shadow-color, 0 0% 0%) / 0.03),
+    0 4px 16px -4px hsl(var(--shadow-color, 0 0% 0%) / 0.1),
+    inset 0 1px 0 0 rgb(var(--glass-border, 255 255 255 / 0.1));
+  transition: background var(--motion-natural) ease, backdrop-filter var(--motion-natural) ease;
+}
+
+/* Logo styles */
+.logo-link {
+  transition: all var(--motion-quick) cubic-bezier(0.16, 1, 0.3, 1);
+}
+.logo-link:hover {
+  transform: translateY(-1px);
+}
+.logo-link:active {
+  transform: scale(0.98);
+}
+.logo-icon {
+  transition: all var(--motion-quick) cubic-bezier(0.32, 0.72, 0, 1);
+  box-shadow: 0 4px 12px -2px hsl(var(--a) / calc(var(--glow-intensity, 0.15) * 1.5));
+}
+.logo-link:hover .logo-icon {
+  box-shadow:
+    0 8px 24px -4px hsl(var(--glow-color, var(--a)) / calc(var(--glow-intensity, 0.15) * 2.5)),
+    0 0 0 1px hsl(var(--a) / 0.15),
+    0 0 20px 0 hsl(var(--glow-color, var(--a)) / calc(var(--glow-intensity, 0.15) * 1.2));
+  transform: rotate(-3deg) scale(1.02);
+}
+.logo-link:active .logo-icon {
+  transform: rotate(-3deg) scale(0.98);
+}
+.logo-text {
+  background: linear-gradient(135deg, hsl(var(--bc)) 0%, hsl(var(--bc) / 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: opacity var(--motion-instant) ease;
+}
+.logo-link:hover .logo-text {
+  opacity: 0.85;
+}
+
+/* Navigation pills container */
+.nav-pills {
+  backdrop-filter: blur(8px);
+}
+.nav-item {
+  position: relative;
+}
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 16px;
+  height: 2px;
+  background: hsl(var(--a));
+  border-radius: 2px;
+  opacity: 0;
+  transition:
+    transform var(--motion-quick) cubic-bezier(0.32, 0.72, 0, 1),
+    opacity var(--motion-quick) ease;
+}
+.nav-item:hover::after {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+/* Dropdown item hover effects */
+.dropdown-item {
+  position: relative;
+  overflow: hidden;
+}
+.dropdown-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: hsl(var(--a) / 0);
+  background: hsl(var(--a) / 0);
+  transition: background var(--motion-instant) ease;
+  border-radius: inherit;
+  border-radius: inherit;
+}
+.dropdown-item:hover::before {
+  background: hsl(var(--a) / 0.08);
+}
+.dropdown-item:hover {
+  color: hsl(var(--a));
+}
+.dropdown-item:hover .dropdown-dot,
+.dropdown-item:hover > span > .dropdown-dot {
+  transform: scale(1.4);
+  background: hsl(var(--a));
+  box-shadow: 0 0 8px hsl(var(--a) / 0.5);
+}
+.dropdown-dot {
+  transition: all var(--motion-quick) cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Nested dropdown arrow hover */
+.nested-trigger svg {
+  transition: all var(--motion-quick) cubic-bezier(0.32, 0.72, 0, 1);
+}
+.nested-dropdown:hover > .nested-trigger svg {
+  transform: translateX(2px);
+  opacity: 0.8;
+}
+
+
+/* Fixed header when menu is open (prevents scrolling away) */
+header.is-menu-open {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 50; 
+}

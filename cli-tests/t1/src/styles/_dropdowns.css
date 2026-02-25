@@ -1,0 +1,172 @@
+/* ============================================
+   Desktop Dropdown Styles (Theme-Aware)
+   ============================================ */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  --_blur: var(--glass-blur, 20px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(var(--lift-hover)); /* Starts slightly lifted */
+  transition:
+    opacity var(--motion-instant) ease,
+    transform var(--motion-instant) cubic-bezier(0.32, 0.72, 0, 1),
+    visibility var(--motion-instant) ease;
+  pointer-events: none;
+  backdrop-filter: blur(var(--_blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--_blur)) saturate(180%);
+  box-shadow:
+    0 8px 32px -4px hsl(var(--shadow-color, 0 0% 0%) / 0.15),
+    0 0 0 1px rgb(var(--glass-border, var(--bc) / 0.05)),
+    inset 0 1px 0 0 rgb(var(--glass-border, 255 255 255 / 0.1));
+}
+
+.dropdown:hover > .dropdown-menu,
+.dropdown.is-open > .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  visibility: visible;
+  transform: translateY(var(--lift-rest));
+  pointer-events: auto;
+  transition:
+    opacity var(--motion-quick) ease,
+    transform var(--motion-quick) cubic-bezier(0.32, 0.72, 0, 1),
+    visibility var(--motion-quick) ease;
+  pointer-events: auto;
+}
+
+/* Dropdown trigger hover state */
+.dropdown-trigger {
+  transition: all var(--motion-quick) ease;
+}
+.dropdown-trigger svg {
+  transition: transform var(--motion-quick) cubic-bezier(0.32, 0.72, 0, 1);
+}
+.dropdown:hover > .dropdown-trigger,
+.dropdown.is-open > .dropdown-trigger {
+  background: hsl(var(--bc) / 0.08);
+  color: hsl(var(--bc));
+}
+.dropdown:hover > .dropdown-trigger svg,
+.dropdown.is-open > .dropdown-trigger svg {
+  transform: rotate(180deg);
+}
+/* Remove underline for dropdown triggers */
+.nav-item.dropdown-trigger::after {
+  display: none;
+}
+
+/* Nested Dropdown Styles */
+.nested-dropdown {
+  position: relative;
+}
+
+.nested-menu {
+  --_blur: var(--glass-blur, 20px);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(var(--lift-hover));
+  transition:
+    opacity var(--motion-quick) ease,
+    transform var(--motion-quick) cubic-bezier(0.32, 0.72, 0, 1),
+    visibility var(--motion-quick) ease;
+  pointer-events: none;
+  backdrop-filter: blur(var(--_blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--_blur)) saturate(180%);
+  box-shadow:
+    0 8px 24px -4px hsl(var(--shadow-color, 0 0% 0%) / 0.12),
+    0 0 0 1px rgb(var(--glass-border, var(--bc) / 0.05)),
+    inset 0 1px 0 0 rgb(var(--glass-border, 255 255 255 / 0.08));
+}
+
+.nested-dropdown:hover > .nested-menu {
+  opacity: 1;
+  visibility: visible;
+  visibility: visible;
+  transform: translateX(var(--lift-rest));
+  pointer-events: auto;
+  transition:
+    opacity var(--motion-quick) ease,
+    transform var(--motion-quick) cubic-bezier(0.32, 0.72, 0, 1),
+    visibility var(--motion-quick) ease;
+  pointer-events: auto;
+}
+
+.nested-trigger {
+  transition: all var(--motion-quick) ease;
+}
+.nested-dropdown:hover > .nested-trigger {
+  color: hsl(var(--a));
+  background: hsl(var(--a) / 0.1);
+}
+
+.nested-dropdown:hover > .nested-trigger .dropdown-dot {
+  background: hsl(var(--a));
+  transform: scale(1.4);
+  box-shadow: 0 0 8px hsl(var(--a) / 0.5);
+}
+
+/* ============================================
+   Mobile Dropdown Styles
+   ============================================ */
+.mobile-dropdown-menu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height var(--motion-natural) cubic-bezier(0.16, 1, 0.3, 1),
+    opacity var(--motion-quick) ease;
+}
+
+.mobile-dropdown.is-open > .mobile-dropdown-menu {
+  max-height: 600px;
+  opacity: 1;
+}
+
+.mobile-dropdown.is-open > .mobile-dropdown-trigger .mobile-nav-chevron {
+  transform: rotate(180deg);
+  color: hsl(var(--a));
+}
+
+.mobile-dropdown.is-open > .mobile-dropdown-trigger {
+  background: hsl(var(--a) / 0.08);
+}
+.mobile-dropdown.is-open > .mobile-dropdown-trigger .mobile-nav-icon {
+  background: linear-gradient(135deg, hsl(var(--a) / 0.3) 0%, hsl(var(--a) / 0.15) 100%);
+}
+
+/* Mobile Nested Dropdown Styles */
+.mobile-nested-dropdown {
+  position: relative;
+}
+
+.mobile-nested-menu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height var(--motion-natural) cubic-bezier(0.16, 1, 0.3, 1),
+    opacity var(--motion-quick) ease;
+}
+
+.mobile-nested-dropdown.is-open > .mobile-nested-menu {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.mobile-nested-dropdown.is-open > .mobile-nested-trigger {
+  color: hsl(var(--a));
+  background: hsl(var(--a) / 0.06);
+}
+
+.mobile-nested-dropdown.is-open > .mobile-nested-trigger .subnav-dot {
+  background: hsl(var(--a));
+}
+
+.mobile-nested-dropdown.is-open > .mobile-nested-trigger svg {
+  transform: rotate(180deg);
+  opacity: 0.7;
+}
+

@@ -1,0 +1,17 @@
+{
+  "version": "1.0.0",
+  "themes": [
+    "minimal"
+  ],
+  "palettes": [
+    "monochrome",
+    "nordic"
+  ],
+  "locales": [
+    "en"
+  ],
+  "features": [],
+  "deployTarget": "netlify",
+  "defaultPalette": "monochrome",
+  "createdAt": "2026-02-25T22:17:02.644Z"
+}

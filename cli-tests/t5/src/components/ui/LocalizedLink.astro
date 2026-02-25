@@ -1,0 +1,69 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLocaleFromUrl, locales } from '../../utils/locale-utils';
+import type { Locale } from '../../config/locales';
+
+interface Props extends HTMLAttributes<'a'> {
+  href: string | URL | null | undefined;
+}
+
+const { href: rawHref, class: className, ...props } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+
+let resolvedHref = rawHref?.toString();
+
+if (
+  resolvedHref &&
+  resolvedHref.startsWith('/') && 
+  !resolvedHref.startsWith('//')
+) {
+  // Extract hash and query to preserve them
+  const hashIndex = resolvedHref.indexOf('#');
+  const queryIndex = resolvedHref.indexOf('?');
+  
+  let hash = '';
+  let query = '';
+  let pathOnly = resolvedHref;
+
+  if (hashIndex !== -1) {
+    hash = resolvedHref.slice(hashIndex);
+    pathOnly = resolvedHref.slice(0, hashIndex);
+  }
+  
+  // Re-check query on the pathOnly in case hash was also present
+  const updatedQueryIndex = pathOnly.indexOf('?');
+  if (updatedQueryIndex !== -1) {
+    query = pathOnly.slice(updatedQueryIndex);
+    pathOnly = pathOnly.slice(0, updatedQueryIndex);
+  }
+
+  // Check if it already has a valid locale prefix
+  const segments = pathOnly.split('/');
+  const firstPathSegment = segments[1];
+  
+  // If the path already has a locale prefix (e.g. /ru/docs or /en/docs), strip it
+  if (locales.includes(firstPathSegment as Locale)) {
+    segments.splice(1, 1);
+  }
+  
+  let cleanPath = segments.join('/') || '/';
+  
+  // Construct the final href using Astro's native i18n
+  // Astro often appends a trailing slash. We clean it before re-attaching the query/hash
+  let localizedPath = getRelativeLocaleUrl(locale, cleanPath);
+  
+  if (localizedPath.endsWith('/') && localizedPath !== '/') {
+    // Check if the original path requested a trailing slash
+    if (!pathOnly.endsWith('/')) {
+      localizedPath = localizedPath.slice(0, -1);
+    }
+  }
+
+  resolvedHref = `${localizedPath}${query}${hash}`;
+}
+---
+
+<a href={resolvedHref} class={className} {...props}>
+  <slot />
+</a>

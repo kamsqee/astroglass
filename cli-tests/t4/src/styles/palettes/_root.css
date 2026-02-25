@@ -1,0 +1,51 @@
+/* ============================================
+   Theme Defaults (Root)
+   Global fallbacks and motion/elevation system
+   ============================================ */
+
+:root {
+  /* Global Defaults (Fallback) */
+  --er: 0 72% 51%;   /* Red */
+  --su: 142 71% 45%; /* Green */
+
+  /* Global Duration Scale */
+  --duration-fast: 250ms;
+  --duration-normal: 400ms;
+  --duration-slow: 700ms;
+  --duration-long: 1200ms;
+
+  /* Global Shadow Scale (Default) */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  
+  /* Lift on hover */
+  --lift-amount: -4px;
+
+  /* ============================================
+     Motion System (Physics-Based)
+     ============================================ */
+  --motion-instant: 100ms;   /* Color changes, active states */
+  --motion-quick: 250ms;     /* Micro-interactions (hover, toggle) */
+  --motion-natural: 400ms;   /* UI movement (modals, dropdowns) */
+  --motion-fluid: 700ms;     /* Large layout shifts */
+  --motion-sustained: 1200ms; /* Ambient loops */
+
+  /* ============================================
+     Elevation System (Lift Model)
+     Strict correlation between Y-axis and Shadow
+     ============================================ */
+  --lift-rest: 0px;
+  --lift-hover: -4px;
+  --lift-float: -8px;
+  
+  --scale-rest: 1;
+  --scale-hover: 1.02;
+  --scale-float: 1.04;
+  
+  /* Semantic Shadows (Map to lifts) */
+  --shadow-rest: var(--shadow-sm);
+  --shadow-hover: var(--shadow-md);
+  --shadow-float: var(--shadow-lg);
+}

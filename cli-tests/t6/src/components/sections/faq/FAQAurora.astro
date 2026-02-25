@@ -1,0 +1,88 @@
+---
+/**
+ * FAQ Aurora - Aurora Accordion
+ * Clean accordion with gradient accent and expand animations.
+ */
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+import '../../../styles/components/faq/FAQAurora.css';
+
+const faqs = [
+  { q: t('faq.q1'), a: t('faq.a1') },
+  { q: t('faq.q2'), a: t('faq.a2') },
+  { q: t('faq.q3'), a: t('faq.a3') },
+  { q: t('faq.q4'), a: t('faq.a4') },
+  { q: t('faq.q5'), a: t('faq.a5') },
+  { q: t('faq.q6'), a: t('faq.a6') },
+];
+---
+
+<section class="faq-aurora" id="faq">
+  <div class="faq-aurora-inner">
+    <!-- Left: header -->
+    <div class="faq-aurora-header">
+      <span class="faq-aurora-terminal-label">> {t('faq.support')}</span>
+      <h2 class="faq-aurora-title">{t('faq.title')}</h2>
+      <p class="faq-aurora-subtitle">{t('faq.subtitle')}</p>
+      <p class="faq-aurora-contact">{t('faq.stillQuestions')} <a href="#contact">{t('faq.contactSupport')}</a></p>
+    </div>
+
+    <!-- Right: accordion -->
+    <div class="faq-aurora-list" id="aurora-faq-list">
+      {faqs.map((faq, i) => (
+        <div class="faq-aurora-item" data-index={i}>
+          <button class="faq-aurora-question" aria-expanded="false">
+            <span class="faq-aurora-q-num">0{i + 1}</span>
+            <span class="faq-aurora-q-text">{faq.q}</span>
+            <span class="faq-aurora-q-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </span>
+          </button>
+          <div class="faq-aurora-answer">
+            <p>{faq.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  let faqAuroraController: AbortController | null = null;
+
+  function initFAQAurora() {
+    faqAuroraController?.abort();
+    faqAuroraController = new AbortController();
+    const { signal } = faqAuroraController;
+
+    const list = document.getElementById('aurora-faq-list');
+    if (!list) return;
+
+    list.querySelectorAll('.faq-aurora-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-aurora-item');
+        if (!item) return;
+        const isOpen = item.classList.contains('is-open');
+
+        // Close all
+        list.querySelectorAll('.faq-aurora-item').forEach(i => {
+          i.classList.remove('is-open');
+          i.querySelector('.faq-aurora-question')?.setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked (if wasn't already open)
+        if (!isOpen) {
+          item.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      }, { signal });
+    });
+  }
+
+  initFAQAurora();
+  document.addEventListener('astro:after-swap', initFAQAurora);
+</script>

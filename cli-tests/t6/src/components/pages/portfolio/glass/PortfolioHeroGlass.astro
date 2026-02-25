@@ -1,0 +1,56 @@
+---
+/**
+ * Glass Portfolio — Hero Section
+ * 
+ * Glassmorphism hero with ambient glow, page title,
+ * subtitle, and category filter buttons.
+ */
+import SectionTag from '../../../ui/glass/SectionTag.astro';
+import SectionHeading from '../../../ui/glass/SectionHeading.astro';
+
+interface Props {
+  categories: Array<{ id: string; label: string }>;
+  galleryLabel: string;
+  pageTitle: string;
+  pageSubtitle: string;
+}
+
+const { categories, galleryLabel, pageTitle, pageSubtitle } = Astro.props;
+---
+
+<section class="c-portfolio-page-glass__hero">
+  <div class="c-portfolio-page-glass__hero-glow"></div>
+  <div class="c-portfolio-page-glass__hero-glow-2"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto text-center px-4">
+    <!-- Badge -->
+    <SectionTag label={galleryLabel} class="mb-8 animate-fade-in" />
+
+    <!-- Title -->
+    <SectionHeading tag="h1" size="xl" align="center" class="text-5xl sm:text-6xl md:text-8xl mb-6 leading-[0.95]">
+      {pageTitle}
+    </SectionHeading>
+
+    <!-- Subtitle -->
+    <p class="text-base sm:text-lg md:text-xl text-base-content/75 max-w-2xl mx-auto mb-12 leading-relaxed font-medium">
+      {pageSubtitle}
+    </p>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap gap-2 justify-center" id="pp-glass-filters">
+      {categories.map((cat, i) => (
+        <button
+          class:list={[
+            'px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider border backdrop-blur-sm transition-all duration-400 cursor-pointer',
+            i === 0
+              ? 'bg-accent/10 border-accent/20 text-accent'
+              : 'bg-base-content/[0.02] border-base-content/8 text-base-content/75 hover:bg-accent/10 hover:border-accent/20 hover:text-accent'
+          ]}
+          data-filter={cat.id}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>

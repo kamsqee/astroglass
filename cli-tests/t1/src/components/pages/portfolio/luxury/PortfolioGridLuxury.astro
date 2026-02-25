@@ -1,0 +1,93 @@
+---
+/**
+ * Luxury Portfolio — Card Grid
+ * Glass cards with number watermarks, gradient accents, and spotlight hover.
+ */
+import LuxuryCard from '../../../ui/luxury/LuxuryCard.astro';
+
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  longDescription: string;
+  category: string;
+  categoryLabel: string;
+  challenge: string;
+  solution: string;
+  impact: string;
+  techStack: string[];
+  metric: string;
+  metricLabel: string;
+  color: string;
+  num: string;
+}
+
+interface Props {
+  projects: Project[];
+  viewDetailsLabel: string;
+}
+
+const { projects, viewDetailsLabel } = Astro.props;
+---
+
+<section class="relative pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6" id="pp-luxury-projects">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+    {projects.map((p, i) => (
+      <LuxuryCard
+        class="group c-portfolio-page-luxury__card"
+        data-category={p.category}
+        data-project-id={p.id}
+        spotlight={true}
+        hover={true}
+      >
+        <!-- Background gradient hover -->
+        <div class={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-0 group-hover:opacity-[0.04] transition-opacity duration-700 pointer-events-none`}></div>
+
+        <!-- Large number watermark -->
+        <div class="absolute -bottom-6 -right-2 text-[120px] sm:text-[160px] font-black text-base-content/[0.03] leading-none select-none pointer-events-none">
+          {p.num}
+        </div>
+
+        <!-- Card main content -->
+        <div class="relative z-10 p-5 sm:p-6 lg:p-8 min-h-[260px] sm:min-h-[280px] flex flex-col">
+          <!-- Top: Category + Color dot -->
+          <div class="flex items-center justify-between mb-5">
+            <span class="px-3 py-1.5 rounded-lg bg-base-content/5 text-base-content/75 text-[10px] font-bold uppercase tracking-wider">
+              {p.categoryLabel}
+            </span>
+            <div class={`w-7 h-7 rounded-lg bg-gradient-to-br ${p.color} opacity-60`}></div>
+          </div>
+
+          <!-- Middle: Metric -->
+          <div class="mb-5">
+            <div class={`text-3xl sm:text-4xl lg:text-5xl font-black bg-gradient-to-r ${p.color} bg-clip-text text-transparent mb-1`}>
+              {p.metric}
+            </div>
+            <span class="text-xs text-base-content/45 font-medium">{p.metricLabel}</span>
+          </div>
+
+          <!-- Bottom: Title + Description -->
+          <div class="mt-auto">
+            <h3 class="text-lg sm:text-xl font-serif font-normal text-base-content mb-2 tracking-tight">
+              {p.title}
+            </h3>
+            <p class="text-sm text-base-content/75 leading-relaxed mb-4 line-clamp-2">
+              {p.description}
+            </p>
+
+            <!-- CTA -->
+            <button
+              class="inline-flex items-center gap-2 text-accent text-xs font-bold cursor-pointer hover:gap-3 transition-all duration-300"
+              data-open-luxury-modal={i}
+            >
+              {viewDetailsLabel}
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </LuxuryCard>
+    ))}
+  </div>
+</section>

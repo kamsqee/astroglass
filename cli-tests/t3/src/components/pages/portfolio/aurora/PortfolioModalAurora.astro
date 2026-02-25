@@ -1,0 +1,78 @@
+---
+/**
+ * Aurora Portfolio — Modal + Pre-rendered Templates
+ * 
+ * Replaces the old innerHTML approach with safe Astro <template> elements.
+ * Modal JS clones the matching template into the content area on open.
+ */
+interface Project {
+  id: string;
+  title: string;
+  category: string;
+  categoryLabel: string;
+  challenge: string;
+  solution: string;
+  impact: string;
+  techStack: string[];
+  metric: string;
+  metricLabel: string;
+}
+
+interface Props {
+  projects: Project[];
+  challengeLabel: string;
+  solutionLabel: string;
+  impactLabel: string;
+  techStackLabel: string;
+}
+
+const { projects, challengeLabel, solutionLabel, impactLabel, techStackLabel } = Astro.props;
+---
+
+<!-- Modal shell -->
+<div class="pp-aurora__modal-backdrop" id="pp-aurora-modal">
+  <div class="pp-aurora__modal">
+    <button class="pp-aurora__modal-close" id="pp-aurora-modal-close">
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <div class="pp-aurora__modal-body" id="pp-aurora-modal-content"></div>
+  </div>
+</div>
+
+<!-- Pre-rendered templates (replaces innerHTML XSS risk) -->
+{projects.map((p, i) => (
+  <template data-aurora-modal-index={i}>
+    <h3 class="text-2xl sm:text-3xl font-bold text-base-content mb-4 pr-10">{p.title}</h3>
+
+    <div class="pp-aurora__modal-metric mb-6">
+      <span class="pp-aurora__modal-metric-value">{p.metric}</span>
+      <span class="pp-aurora__modal-metric-label">{p.metricLabel}</span>
+    </div>
+
+    <div class="pp-aurora__narrative mb-5">
+      <div class="pp-aurora__narrative-block">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-accent mb-2">{challengeLabel}</h4>
+        <p class="text-sm text-base-content/45 leading-relaxed">{p.challenge}</p>
+      </div>
+      <div class="pp-aurora__narrative-block">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-accent mb-2">{solutionLabel}</h4>
+        <p class="text-sm text-base-content/45 leading-relaxed">{p.solution}</p>
+      </div>
+      <div class="pp-aurora__narrative-block">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-accent mb-2">{impactLabel}</h4>
+        <p class="text-sm text-base-content/45 leading-relaxed">{p.impact}</p>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="text-xs font-bold uppercase tracking-wider text-base-content/25 mb-2">{techStackLabel}</h4>
+      <div class="flex flex-wrap gap-1.5">
+        {p.techStack.map((tech) => (
+          <span class="pp-aurora__tech-pill">{tech}</span>
+        ))}
+      </div>
+    </div>
+  </template>
+))}

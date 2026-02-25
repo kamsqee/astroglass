@@ -1,0 +1,510 @@
+[
+  {
+    "url": "/docs/getting-started",
+    "locale": "en",
+    "title": "Getting Started with AstroGlass",
+    "description": "Learn how to set up and customize your Astro template with themes, internationalization, and cloud deployment.",
+    "section": "Getting Started",
+    "sectionIcon": "⚡",
+    "sectionOrder": 1,
+    "headings": [
+      "Prerequisites",
+      "Installation",
+      "Project Structure",
+      "Choosing a Theme",
+      "Next Steps"
+    ],
+    "content": "Welcome to the AstroGlass Template! This guide will walk you through setting up your development environment and customizing the template to fit your needs. Prerequisites Before you begin, make sure you have the following installed: - Node.js v20 or higher - pnpm (recommended) or npm - A code editor (VS Code recommended) We recommend using pnpm for faster, disk-efficient package management. Installation Clone the Repository First, clone the template repository to your local machine: Install Dependencies Install the project dependencies using your preferred package manager: Start the Development Server Run the development server to see your template in action: Your site should now be running at 🎉 Project Structure Here's an overview of the project's folder structure: - src/ - components/ - sections/ - hero/ - HeroLiquid.astro - HeroGlass.astro - HeroNeo.astro - ... - features/ - pricing/ - about/ - portfolio/ - ... - layout/ - header/ - ui/ - docs/ - mdx/ - config/ - themes.ts - locales.ts - docs.ts - navigation.ts - content/ - docs/ - en/ - ru/ - blog/ - locales/ - en/ - ru/ - pages/ - index.astro - [theme].astro - docs/ - blog/ - styles/ - global.css - _themes.css - components/ - public/ - astro.config.mjs - package.json Choosing a Theme The template comes with 6 beautiful themes out of the box: | Theme | Description | |-------|-------------| | Liquid | Fluid animations, gradient backgrounds | | Glass | Glassmorphism effects, frosted panels | | Neo | Bold typography, strong contrast | | Luxury | Elegant gold accents, premium feel | | Minimal | Clean, focused, distraction-free | | Aurora | Immersive gradients, geometric structure | To switch themes, simply navigate to the theme switcher in the header or visit the theme demo pages directly (e.g., , , ). Next Steps Now that you have your development environment set up: 1. Theming System — Learn how the dynamic theming architecture works 2. Routing & i18n — Add support for more languages 3. Cloudflare Deployment — Dep",
+    "order": 1
+  },
+  {
+    "url": "/docs/getting-started/introduction",
+    "locale": "en",
+    "title": "Introduction",
+    "description": "Welcome to the AstroGlass documentation.",
+    "section": "Getting Started",
+    "sectionIcon": "⚡",
+    "sectionOrder": 1,
+    "headings": [
+      "Why AstroGlass?",
+      "What's Included?"
+    ],
+    "content": "AstroGlass is a premium Astro theme designed for startups and creators who want to stand out. It features a unique Glassmorphism design system built on top of Tailwind CSS v4. Why AstroGlass? - Premium Design: 6 complete theme variants with depth and blur effects. - Hybrid Performance: Statically generated content with server-side capabilities. - Developer Experience: Type-safe content collections and easy configuration. - Full i18n: Built-in support for 7 languages, easily extensible. What's Included? The template comes with 6 fully designed themes, each providing 12+ page sections (Hero, About, Features, Pricing, Testimonials, FAQ, CTA, Contact, Header, Footer, plus new Landing Page sections), a dedicated Portfolio Page, a custom 404 page, plus a blog system and full documentation.",
+    "order": 1
+  },
+  {
+    "url": "/docs/getting-started/installation",
+    "locale": "en",
+    "title": "Installation",
+    "description": "How to set up your new AstroGlass project.",
+    "section": "Getting Started",
+    "sectionIcon": "⚡",
+    "sectionOrder": 1,
+    "headings": [
+      "Prerequisites",
+      "Quick Start"
+    ],
+    "content": "Getting started is easy. Clone the repository and install dependencies. Prerequisites - Node.js v20.0.0 or higher - pnpm v8+ (recommended) or npm/yarn Quick Start 1. Clone the repository 2. Enter the directory 3. Install dependencies 4. Start development server Visit to see your new site.",
+    "order": 2
+  },
+  {
+    "url": "/docs/getting-started/configuration",
+    "locale": "en",
+    "title": "Configuration",
+    "description": "Customize AstroGlass to match your brand.",
+    "section": "Getting Started",
+    "sectionIcon": "⚡",
+    "sectionOrder": 1,
+    "headings": [
+      "Configuration Files",
+      "Styling with Tailwind CSS v4",
+      "Theme Configuration",
+      "Locale Configuration"
+    ],
+    "content": "AstroGlass is configured via files in and standard CSS custom properties. Configuration Files - src/ - config/ - themes.ts — Theme definitions (name, colors, sections, premium flag) - locales.ts — Supported languages and locale metadata - navigation.ts — Main site navigation structure - docs.ts — Documentation sidebar and version config Styling with Tailwind CSS v4 This project uses Tailwind CSS v4 via the plugin. There is no file — all configuration is done through CSS. Colors and theme variables are defined as CSS custom properties in and : To change the site's color scheme, update the HSL values in . Theme-specific overrides live in using selectors. Theme Configuration Each theme is registered in . This centralizes all theme metadata: Locale Configuration Languages are managed in . To add a new language, add an entry and set :",
+    "order": 3
+  },
+  {
+    "url": "/docs/components/pages/portfolio-page",
+    "locale": "en",
+    "title": "Portfolio Page",
+    "description": "A full-featured, filtering-enabled portfolio page available for every theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Architecture",
+      "Customization",
+      "Features"
+    ],
+    "content": "Portfolio Page New in AstroGlass, the Portfolio Page is a dedicated, dynamic route that provides a rich showcase for your projects. It features category filtering, detailed project views, and a design that adapts to your active theme. Architecture The portfolio page is served at (e.g., , ). It uses a dynamic routing strategy similar to the main theme pages. File Structure - Route: - The dynamic route handler. - Components: - Theme-specific modular section implementations (e.g., , ). - Content: - All text content, project data, and categories. Customization Unlike the specific landing page sections, the Portfolio Page is entirely data-driven via localization files. This makes it easy to add projects without touching the code. Managing Projects Edit to manage your projects. Categories Categories are defined in the same JSON file and used for filtering. Features - Dynamic Filtering: Client-side filtering by category with smooth animations. - Detail View: Expandable details panel for each project showing \"Challenge\", \"Solution\", and \"Impact\". - Theme Adaptation: Automatically uses the correct header, footer, and styling for the active theme. - Responsive: Fully responsive layout that works on mobile, tablet, and desktop.",
+    "order": 1
+  },
+  {
+    "url": "/docs/components/reference/api-reference",
+    "locale": "en",
+    "title": "API Reference",
+    "description": "Technical API reference for AstroGlass components and utilities.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "`useTranslations(locale)`",
+      "`getLocaleFromUrl(url)`",
+      "`buildNavLinks(locale, section)`",
+      "`getEnabledThemes()`",
+      "`getThemeById(id)`",
+      "Type: `ThemeDefinition`",
+      "Type: `LocaleConfig`",
+      "Available Themes"
+    ],
+    "content": "Detailed reference for key functions, types, and configuration objects used in AstroGlass. Returns a translation getter function for the given locale. Module: Signature: Parameters: | Parameter | Type | Description | |-----------|------|-------------| | | () | The locale code to load translations for. | Returns: A function that resolves a dot-notation key to its translated value. If the key is not found, it returns the key itself and logs a warning in development mode. Usage: Key Behavior: - Keys from are spread at root level (e.g., ) - All other files are namespaced by filename (e.g., , ) - Missing keys return the key string in production, log warnings in dev --- Extracts the locale code from the current URL. Module: Signature: Returns the locale prefix from the URL path, defaulting to if none is found. --- Generates navigation links for the documentation sidebar. Module: Signature: Returns an array of navigation link objects used by the docs sidebar component. --- Returns all enabled theme definitions. Module: Signature: --- Returns a specific theme definition by its ID. Module: Signature: --- Type: Type: Available Themes | ID | Name | Icon | |----|------|------| | | Liquid | 💧 | | | Glass | 🪟 | | | Neo | ⚡ | | | Luxury | 👑 | | | Minimal | ✨ | | | Aurora | 🌌 |",
+    "order": 1
+  },
+  {
+    "url": "/docs/components/sections/overview",
+    "locale": "en",
+    "title": "Section Components Overview",
+    "description": "An overview of all section components available in AstroGlass.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Available Sections",
+      "How It Works",
+      "File Structure"
+    ],
+    "content": "Section components are the building blocks of each theme page. Every theme page is composed of 12+ sections, each with a dedicated variant per theme. Available Sections How It Works Each section has 6 theme variants — one for each theme (Liquid, Glass, Neo, Luxury, Minimal, Aurora). The dynamic page at uses a component map to render the correct variant: Section components accept no props. All text content is loaded internally via from . To change the content of any section, edit the corresponding locale JSON file. File Structure Each section follows a consistent directory pattern: CSS for each section lives in .",
+    "order": 1
+  },
+  {
+    "url": "/docs/components/pages/landing",
+    "locale": "en",
+    "title": "Landing Page Sections",
+    "description": "Specialized sections used on the main landing page.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Stats Strip",
+      "Template Showcase",
+      "FAQ Home",
+      "How It Works"
+    ],
+    "content": "Landing Page Sections The main entry point of the template () uses several specialized sections designed to showcase the template's features. These are located in . Stats Strip A horizontal strip that displays key metrics about your project (e.g., \"6 Themes\", \"66+ Components\"). - Features: Animated count-up numbers when scrolled into view. - Configuration: Edit the array in the component frontmatter or use for labels. Template Showcase A \"Bento grid\" style layout that provides visual navigation to different parts of the template (Themes, Components, Blog, Docs, etc.). - Features: Hover effects, glassmorphism cards, responsive grid layout. - Content: Managed via under . FAQ Home A lightweight, accordion-style FAQ section designed for the landing page. - Features: Smooth expand/collapse animations, accessible ARIA attributes. - Content: Questions and answers are stored in under . How It Works A 3-step visualization of the workflow (e.g., Clone -> Customize -> Deploy). - Features: Numbered steps with icons and gradient backgrounds. - Content: Steps text in .",
+    "order": 2
+  },
+  {
+    "url": "/docs/components/reference/mdx-components",
+    "locale": "en",
+    "title": "MDX Components",
+    "description": "Custom MDX components available for use in documentation.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Callout",
+      "Badge",
+      "Steps",
+      "FileTree",
+      "CardGrid & LinkCard",
+      "CodeTabs",
+      "PropsTable",
+      "ApiMethod"
+    ],
+    "content": "A library of custom MDX components available in all documentation pages. These are automatically registered in the docs rendering pipeline. Callout Use callouts to highlight important information. Types: , , , --- Badge Display version or status indicators. Props: | Prop | Type | Description | |------|------|-------------| | | | Badge label | | | | Color variant | --- Steps Wrap ordered lists for step-by-step instructions. --- FileTree Display file and directory structures. Bold items with are highlighted. Use for list items. --- CardGrid & LinkCard Display linked cards in a responsive grid. LinkCard Props: | Prop | Type | Description | |------|------|-------------| | | | Card title | | | | Card description | | | | Link destination | --- CodeTabs Display tabbed code blocks for multiple package managers or languages. bash pnpm install ​bash npm install ​bash yarn install ​ Props: | Prop | Type | Description | |------|------|-------------| | | | Tab labels displayed above each code block | Place each code block as a direct child. The number of code blocks must match the number of labels. --- PropsTable Display component prop documentation in a formatted table. --- ApiMethod Document a function or method signature.",
+    "order": 2
+  },
+  {
+    "url": "/docs/components/sections/hero",
+    "locale": "en",
+    "title": "Hero Section",
+    "description": "Full-screen hero sections for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "How It Works",
+      "Customizing a Hero"
+    ],
+    "content": "The Hero section is the first thing visitors see. Each theme has its own unique hero design with custom animations, backgrounds, and layout. Theme Variants | Theme | Component | Design | |-------|-----------|--------| | Liquid | | Animated SVG liquid blobs, gradient text | | Glass | | Frosted card hero with blur backgrounds | | Neo | | Bold typography, high contrast | | Luxury | | Gold accents, premium layout | | Minimal | | Clean, centered, distraction-free | | Aurora | | Gradient mesh, geometric elements | All variants are located at . How It Works Each Hero variant is a self-contained Astro component that: 1. Imports and initializes for the current locale. 2. Renders its own unique HTML structure with theme-specific CSS. 3. Loads translation keys like , , , and from . Hero components take no external props. To change the headline, subtitle, or CTA text, edit (or the appropriate locale file). Customizing a Hero To customize a specific theme's hero: 1. Open . 2. Modify the HTML structure, classes, or animations as needed. 3. For CSS changes, edit . 4. For text changes, edit .",
+    "order": 2
+  },
+  {
+    "url": "/docs/components/ui/cards",
+    "locale": "en",
+    "title": "Cards",
+    "description": "Glassmorphic cards for features and blogs.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Variants",
+      "Live Examples",
+      "Code Usage"
+    ],
+    "content": "Cards are the fundamental building block of the glass design system. Variants We support multiple card styles via the prop. | Variant | Description | Visual Style | | :--- | :--- | :--- | | | Standard frosted glass | Blur + Border | | | Opaque background | High contrast | | | Border only | Minimalist | Live Examples Glass Card Standard frosted glass effect with blur and subtle border. Solid Card Opaque background for high contrast. Outline Card Minimalist border-only style. Code Usage",
+    "order": 2
+  },
+  {
+    "url": "/docs/components/pages/404",
+    "locale": "en",
+    "title": "404 Page",
+    "description": "Theme-adaptive error page.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Architecture",
+      "Features",
+      "Usage"
+    ],
+    "content": "404 Page AstroGlass includes a sophisticated 404 Error page that automatically adapts to the user's selected theme. Architecture Located at . The page uses CSS variables defined in to render standard 404 visuals (floating particles, glowing orbs, glass cards) that match the active color palette. Features - Theme Adaptive: If a user is browsing with the \"Luxury\" theme and hits a 404, the error page will be Gold/Black. If they are on \"Neo\", it will be Black/Cyan. - Interactive Background: Features animated elements like floating particles and morphing blobs. - Localization: Fully translated messages via (keys starting with ). Usage This page is automatically served by Astro (and most deployment platforms like Cloudflare/Vercel) when a user requests a non-existent route. No configuration is required.",
+    "order": 3
+  },
+  {
+    "url": "/docs/components/sections/about",
+    "locale": "en",
+    "title": "About Section",
+    "description": "Company or product introduction sections for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Content Source",
+      "Customizing"
+    ],
+    "content": "The About section introduces your company, product, or story. Each theme provides a unique layout with different visual elements. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Organic blob backgrounds with fluid layout | | Glass | | Frosted glass panels with depth | | Neo | | Bold typography and high contrast cards | | Luxury | | Elegant layout with gold accents | | Minimal | | Clean, content-focused design | | Aurora | | Gradient mesh with geometric structure | All variants are located at . Content Source About section text is loaded from via . About components take no external props. To edit the about content, update . Customizing To customize: 1. Edit . 2. Adjust styles in . 3. Change content in .",
+    "order": 3
+  },
+  {
+    "url": "/docs/components/sections/features",
+    "locale": "en",
+    "title": "Features Section",
+    "description": "Feature showcase sections for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Content Source",
+      "Customizing"
+    ],
+    "content": "The Features section highlights product or service benefits. Each theme provides a unique layout — from card grids to animated lists. Theme Variants | Theme | Component | Layout | |-------|-----------|--------| | Liquid | | Animated feature cards with liquid hover effects | | Glass | | Frosted glass feature cards | | Neo | | Bold grid layout with sharp edges | | Luxury | | Elegant grid with gold highlights | | Minimal | | Clean, simple list format | | Aurora | | Gradient mesh background with card grid | All variants are located at . Content Source Feature data is loaded from via . The JSON structure typically contains: Features components take no external props. To edit feature items, titles, or descriptions, update . Customizing To customize: 1. Edit the theme variant in . 2. Adjust styles in . 3. Change content in .",
+    "order": 4
+  },
+  {
+    "url": "/docs/components/sections/portfolio",
+    "locale": "en",
+    "title": "Portfolio Section",
+    "description": "Project showcase sections for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Content Source",
+      "Customizing"
+    ],
+    "content": "The Portfolio section showcases projects, case studies, or work samples. Each theme provides a unique gallery layout. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Fluid grid with hover animations | | Glass | | Frosted glass project cards | | Neo | | Bold masonry layout | | Luxury | | Elegant project presentations | | Minimal | | Clean, simple project grid | | Aurora | | Gradient background gallery | All variants are located at . Content Source Portfolio items are loaded from via . Portfolio components take no external props. To edit project titles, descriptions, or images, update . Customizing To customize: 1. Edit . 2. Adjust styles in . 3. Change content in .",
+    "order": 5
+  },
+  {
+    "url": "/docs/components/sections/pricing",
+    "locale": "en",
+    "title": "Pricing Section",
+    "description": "Pricing table sections for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Content Source",
+      "Customizing"
+    ],
+    "content": "The Pricing section displays product plans and tiers. Each theme has its own visual treatment. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Fluid card layout with gradient accents | | Glass | | Frosted pricing cards | | Neo | | High-contrast pricing grid | | Luxury | | Gold accent pricing with premium feel | | Minimal | | Clean, simple pricing list | | Aurora | | Gradient background pricing cards | All variants are located at . Content Source Pricing data is loaded from via . The JSON contains plan names, descriptions, prices, features, and CTA text. Pricing components take no external props. To change plans, prices, or features, edit . Customizing To customize: 1. Edit . 2. Adjust styles in . 3. Change content in .",
+    "order": 6
+  },
+  {
+    "url": "/docs/components/sections/testimonials",
+    "locale": "en",
+    "title": "Testimonials Section",
+    "description": "Customer testimonial sections for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Content Source",
+      "Customizing"
+    ],
+    "content": "The Testimonials section displays social proof and customer reviews. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Flowing testimonial cards | | Glass | | Frosted glass quote cards | | Neo | | Bold, high-contrast testimonials | | Luxury | | Elegant gold-accent reviews | | Minimal | | Clean, minimal quote layout | | Aurora | | Gradient background testimonials | All variants are located at . Content Source Testimonial data is loaded from via . The JSON typically contains reviewer names, titles, quotes, and avatar info. Testimonial components take no external props. To change quote text, names, or structure, edit . Customizing To customize: 1. Edit . 2. Adjust styles in . 3. Change content in .",
+    "order": 7
+  },
+  {
+    "url": "/docs/components/sections/faq",
+    "locale": "en",
+    "title": "FAQ Section",
+    "description": "Frequently asked questions sections with accordion UI for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Content Source",
+      "Customizing"
+    ],
+    "content": "The FAQ section displays common questions and answers in an accordion format. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Smooth animated accordions | | Glass | | Frosted glass accordions | | Neo | | Bold, high-contrast Q&A | | Luxury | | Elegant accordions with gold accents | | Minimal | | Clean, simple accordions | | Aurora | | Gradient background FAQ cards | All variants are located at . Content Source FAQ items are loaded from via . The JSON structure typically contains an array of question-answer pairs. FAQ components take no external props. To add, remove, or edit FAQ items, update . Customizing To customize: 1. Edit . 2. Adjust styles in . 3. Change content in .",
+    "order": 8
+  },
+  {
+    "url": "/docs/components/sections/cta",
+    "locale": "en",
+    "title": "CTA Section",
+    "description": "Call to action sections for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Content Source",
+      "Customizing"
+    ],
+    "content": "The Call to Action (CTA) section encourages visitors to take the next step — sign up, get a demo, or explore further. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Animated liquid background with gradient CTA | | Glass | | Frosted glass CTA card | | Neo | | Bold, terminal-style CTA | | Luxury | | Gold-accented premium CTA | | Minimal | | Clean, centered CTA | | Aurora | | Gradient mesh background CTA | All variants are located at . Content Source CTA data is loaded from via . CTA components take no external props. To change CTA text or button labels, edit . Customizing To customize: 1. Edit . 2. Adjust styles in . 3. Change content in .",
+    "order": 9
+  },
+  {
+    "url": "/docs/components/sections/contact",
+    "locale": "en",
+    "title": "Contact Section",
+    "description": "Contact form sections with Valibot validation for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Validation",
+      "Content Source"
+    ],
+    "content": "The Contact section provides validated contact forms. Each theme has its own visual style, but they all share the same Valibot-based validation logic. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Fluid form design with gradient accents | | Glass | | Frosted glass form card | | Neo | | Bold, high-contrast form | | Luxury | | Premium form with gold details | | Minimal | | Clean, simple contact form | | Aurora | | Gradient background form | All variants are located at . Validation Contact forms use Valibot for lightweight, type-safe validation on both client and server. - Client-side validation provides instant UI feedback. - The shared schema lives at . - Validation error messages are fully translated via . See the Forms & Validation Guide for details. Content Source Contact content and validation messages are loaded from . Contact components take no external props. To edit form labels or validation messages, update .",
+    "order": 10
+  },
+  {
+    "url": "/docs/components/sections/navbar",
+    "locale": "en",
+    "title": "Navbar / Header",
+    "description": "Theme-specific navigation bar components.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Features",
+      "Navigation Configuration"
+    ],
+    "content": "The Navbar (Header) component appears at the top of every theme page. Each theme has its own unique header design with different navigation patterns, mobile menu implementations, and visual styles. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Transparent header with blur backdrop | | Glass | | Frosted glass navigation bar | | Neo | | Bold, high-contrast header | | Luxury | | Premium header with gold accents | | Minimal | | Clean, minimalist navigation | | Aurora | | Gradient-accent header | All variants are located at . Features Each header variant typically includes: - Desktop Navigation: Horizontal nav with dropdown menus - Mobile Navigation: Hamburger menu with slide-in drawer - Theme Switcher: Integrated theme selector component - Language Switcher: Locale selector with flag icons - Logo: Brand logo component Navigation Configuration Navigation links are configured in (including the Luxury theme's extended navigation). Navigation labels are translated via . Header components take no external props. Navigation items are defined in config files and labels are loaded from locale JSON.",
+    "order": 11
+  },
+  {
+    "url": "/docs/components/sections/footer",
+    "locale": "en",
+    "title": "Footer Section",
+    "description": "Site footer sections for each theme.",
+    "section": "Components",
+    "sectionIcon": "🧩",
+    "sectionOrder": 2,
+    "headings": [
+      "Theme Variants",
+      "Content Source"
+    ],
+    "content": "The Footer section appears at the bottom of every theme page. Each theme provides its own footer variant with navigation links, social icons, and branding. Theme Variants | Theme | Component | Style | |-------|-----------|-------| | Liquid | | Fluid gradient footer | | Glass | | Frosted glass footer | | Neo | | Bold, high-contrast footer | | Luxury | | Premium footer with gold accents | | Minimal | | Clean, simple footer | | Aurora | | Gradient mesh footer | All variants are located at . Content Source Footer text and links are loaded from and via . Footer components take no external props. To edit footer links or text, update .",
+    "order": 12
+  },
+  {
+    "url": "/docs/core-concepts/theming",
+    "locale": "en",
+    "title": "Theming System",
+    "description": "Understand the core architecture of the dynamic theming system, including CSS variables, theme registry, and variant rendering.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "Architecture Overview",
+      "Theme Registry",
+      "CSS Variables",
+      "Dynamic Component Rendering",
+      "Creating a New Theme"
+    ],
+    "content": "AstroGlass features a highly flexible dynamic theming system built on top of Tailwind CSS v4 and Astro's component architecture. Architecture Overview The theming system consists of three main layers: 1. Theme Registry: Definitions for each theme in . 2. CSS Custom Properties: Theme-aware variables defined in . 3. Dynamic Rendering: The page dynamically renders the correct component variant for each section. Theme Registry Every theme is registered in . This centralizes theme metadata and makes it available to the entire application. - src/ - config/ - themes.ts Each theme definition includes: CSS Variables Theme-specific colors and effects are controlled through CSS custom properties. Variables are scoped to a attribute on the or tag. Components consume these via or Tailwind utilities: Variables use short names (, , , , , , ) to stay consistent with the DaisyUI-inspired naming convention used throughout the project. Dynamic Component Rendering Theme pages are rendered by . This file uses a component map to dynamically select the correct variant for each section: Each section variant is a self-contained Astro component. It uses internally for all text — no external props are needed. This allows each theme to have completely different HTML structures while maintaining a uniform API. Creating a New Theme 1. Add Theme Definition Add the theme definition object to . 2. Define CSS Variables Define the new theme's CSS variables in . 3. Create Section Components Create theme-specific component variants for each section, e.g., . 4. Register in Component Map Add the new theme's components to the in . 5. Add Translations Add any new localized strings to the JSON files in .",
+    "order": 1
+  },
+  {
+    "url": "/docs/core-concepts/customization",
+    "locale": "en",
+    "title": "Customization",
+    "description": "How to customize styles, themes, and configuration.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "Styling Overview",
+      "Color System",
+      "Adding Custom Fonts",
+      "Component Customization"
+    ],
+    "content": "AstroGlass uses Tailwind CSS v4 for styling via the plugin. There is no separate — all customization happens through CSS. Styling Overview Global styles and CSS variables are defined in . This file handles: - Base layer resets - Custom fonts (Inter & JetBrains Mono) - CSS variables for theming (HSL color values) Theme-specific overrides live in . - src/ - styles/ - global.css — Base styles, fonts, root CSS variables - themes.css — Per-theme color overrides - animations.css — Shared animation keyframes - _forms.css — Form input styles - components/ — Component-specific styles (hero, pricing, etc.) Color System The project uses a CSS variable-based color system. Colors are defined as HSL values (without the wrapper), allowing Tailwind's opacity modifier syntax to work correctly. Components consume these variables via Tailwind utility classes or : To change the site's color scheme, update the HSL values in . For theme-specific overrides (light/dark mode, per-theme colors), use selectors in . Adding Custom Fonts 1. Place font files in or import from Google Fonts in . 2. Define rules in . 3. Update the font-family CSS variables or Tailwind utilities as needed. Component Customization Each theme has its own component variants (e.g., , ). To customize a specific section: 1. Navigate to (e.g., ). 2. Edit the theme-specific file directly (e.g., ). 3. Component-specific CSS lives in . Section components do not accept text props. All content is driven by translation keys via . To change text, edit the JSON files in .",
+    "order": 2
+  },
+  {
+    "url": "/docs/core-concepts/project-structure",
+    "locale": "en",
+    "title": "Project Structure",
+    "description": "Overview of the AstroGlass codebase organization.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "Key Directories"
+    ],
+    "content": "AstroGlass follows a standard Astro project structure with a few key organizational patterns. Key Directories Contains full-page components for dynamic routes, such as the Portfolio Page. Organized by page type: Contains all page section components, organized by section type. Each section has a subdirectory with one variant per theme: Theme-specific header/navbar components (e.g., , ). Reusable UI primitives: , , , , , , , , , and . Central configuration files: - — Theme registry (IDs, names, enabled status, section lists) - — Supported languages and their metadata - — Main site navigation structure - — Documentation sidebar config and version management Astro Content Collections for docs and blog posts. Structure inside determines the URL paths for documentation. JSON translation files organized by language code. Each file corresponds to a page section (e.g., , , ). File-based routing. The dynamic route generates pages for each enabled theme. The directory patterns handle localized page variants across the entire architecture. Global CSS, theme overrides (), animation keyframes, and component-specific stylesheets in . Utility functions for i18n translations (), locale detection (), and documentation navigation ().",
+    "order": 3
+  },
+  {
+    "url": "/docs/core-concepts/routing-i18n",
+    "locale": "en",
+    "title": "Routing & Internationalization",
+    "description": "Understand how pages and languages work in AstroGlass.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "Page Routing",
+      "Documentation Routing",
+      "Internationalization (i18n)"
+    ],
+    "content": "AstroGlass uses Astro's file-based routing system combined with a custom internationalization (i18n) strategy. Page Routing Pages are located in . The folder structure determines the URL path. For localized pages, we use separate directories: - src/ - pages/ - [...lang]/ — Dynamic Locale Routing - index.astro — Homepage (All Languages) - [theme].astro — Dynamic theme demo pages (e.g., /liquid, /ru/glass) - [theme]/portfolio.astro — Dynamic portfolio pages - blog/ — Blog pages - docs/ — Documentation pages - privacy.astro — Privacy Policy - terms.astro — Terms of Service - 404.astro — /404 Error page - about.astro — /about (Unlocalized) Theme Demo Routing Theme pages are generated dynamically from the theme registry. Adding a theme to with automatically creates a route at . Documentation Routing Documentation pages live in : - src/ - content/ - docs/ - en/ - ru/ - fr/ - es/ - ja/ - zh/ - kk/ The URL for documentation is automatically generated based on the file path, e.g., . Internationalization (i18n) Translations are handled in two ways: 1. Dynamic Page Routing: A centralized directory handles all route permutations dynamically via . 2. UI Strings: Centralized JSON files in . UI Translations Common strings (nav items, buttons, section text, etc.) are stored as JSON files organized by section: Use the helper in components: Translation keys support dot notation for nested values. The keys are spread at the root level, while other files are namespaced by their filename (e.g., , ). Adding a New Language 1. Register the locale Add an entry to with . 2. Create translation files Create directory with JSON files matching the English structure. 3. Create documentation content Create with translated MDX files. (e.g., ) 4. Create blog content Create with translated Markdown/MDX files. (e.g., ) The i18n system uses Vite's to automatically discover all JSON files in . No manual imports are needed — just create the files and they're available via .",
+    "order": 4
+  },
+  {
+    "url": "/docs/core-concepts/glassmorphism",
+    "locale": "en",
+    "title": "Glassmorphism",
+    "description": "Understanding the design philosophy behind AstroGlass.",
+    "section": "Core Concepts",
+    "sectionIcon": "📚",
+    "sectionOrder": 3,
+    "headings": [
+      "The Recipe",
+      "Practical Usage",
+      "Theme Variations"
+    ],
+    "content": "AstroGlass implements a modern take on glassmorphism — creating interfaces that feel layered, transparent, and premium. The Recipe The glassmorphism effect is achieved through four key CSS properties working together: 1. Backdrop Blur: We use for the frosted effect. 2. Translucency: Background colors use alpha channels (e.g., ). 3. Borders: Subtle 1px borders () define the edges. 4. Shadows: Soft, colored shadows create depth and elevation. This combination creates a sense of hierarchy and modernity. Practical Usage In AstroGlass components, you'll see this pattern applied as Tailwind utility classes: For dark themes, the effect is often layered with gradient backgrounds: Theme Variations Each theme in AstroGlass interprets glassmorphism differently: | Theme | Glass Style | |-------|-------------| | Liquid | Organic shapes with fluid blob backgrounds | | Glass | Classic frosted panels with depth | | Neo | Bold contrast with sharp edges | | Luxury | Gold-tinted translucency with premium shadows | | Minimal | Subtle, barely-there transparency | | Aurora | Gradient mesh backgrounds with geometric structure | The intensity of blur, opacity, and border effects can be adjusted per-theme through the CSS variables in . Look for , , and related custom properties.",
+    "order": 5
+  },
+  {
+    "url": "/docs/deployment/cloudflare",
+    "locale": "en",
+    "title": "Cloudflare Deployment",
+    "description": "Deploy your AstroGlass site to Cloudflare Pages.",
+    "section": "Deployment",
+    "sectionIcon": "🚀",
+    "sectionOrder": 5,
+    "headings": [
+      "Prerequisites",
+      "Deployment Methods",
+      "Search Indexing",
+      "Troubleshooting"
+    ],
+    "content": "This project is optimized for deployment on Cloudflare Pages. It includes the necessary adapter and configuration out of the box. Prerequisites - A Cloudflare account. - Node.js v20+ installed locally. - Wrangler CLI installed (). Deployment Methods You can deploy using GitHub integration (recommended) or via CLI. Option 1: GitHub Integration 1. Push your code to GitHub Ensure your project is in a GitHub repository. 2. Connect to Cloudflare Pages Go to the Cloudflare Dashboard > Workers & Pages > Create Application > Pages > Connect to Git. 3. Select Repository Choose your repository and branch. 4. Configure Build Settings Use the following settings: - Framework Preset: Astro - Build command: - Build output directory: The script automatically runs , which generates the Fuse.js search index. Ensure this completes successfully or search will not work on the deployed site. 5. Save and Deploy Option 2: Wrangler CLI You can also deploy directly from your terminal. 1. Login to Wrangler 2. Build and Deploy Run the deploy script defined in : This command executes: . Search Indexing The project uses Fuse.js for search. This requires a build-time step to generate the content index. The script in handles this automatically: If search isn't working on your deployed site, ensure that the indexing step ran successfully. Troubleshooting Deployment Fails Check the build logs. Common issues include TypeScript errors or missing dependencies. Search Not Working If search returns no results, check if the directory contains and files. These are generated during build by .",
+    "order": 99
+  },
+  {
+    "url": "/docs/deployment/netlify",
+    "locale": "en",
+    "title": "Netlify Deployment",
+    "description": "Deploy your AstroGlass site to Netlify.",
+    "section": "Deployment",
+    "sectionIcon": "🚀",
+    "sectionOrder": 5,
+    "headings": [
+      "Prerequisites",
+      "Deployment Methods"
+    ],
+    "content": "AstroGlass can be deployed to Netlify with minimal configuration. Prerequisites - A Netlify account. - Node.js v20+ installed locally. - Netlify CLI installed (). Deployment Methods Option 1: GitHub Integration (Recommended) 1. Push your code to GitHub Ensure your project is in a GitHub repository. 2. Import to Netlify Go to app.netlify.com > Add new site > Import an existing project. 3. Configure Build Settings Use the following settings: - Build Command: - Publish Directory: 4. Deploy Click \"Deploy site\" and wait for the build to complete. Option 2: CLI Deployment 1. Login to Netlify 2. Deploy The search index is generated automatically during . Ensure the build step completes successfully for search to work on the deployed site.",
+    "order": 99
+  },
+  {
+    "url": "/docs/deployment/vercel",
+    "locale": "en",
+    "title": "Vercel Deployment",
+    "description": "Deploy your AstroGlass site to Vercel.",
+    "section": "Deployment",
+    "sectionIcon": "🚀",
+    "sectionOrder": 5,
+    "headings": [
+      "Prerequisites",
+      "Deployment Methods"
+    ],
+    "content": "AstroGlass can be deployed to Vercel with minimal configuration. Prerequisites - A Vercel account. - Node.js v20+ installed locally. - Vercel CLI installed (). Deployment Methods Option 1: GitHub Integration (Recommended) 1. Push your code to GitHub Ensure your project is in a GitHub repository. 2. Import to Vercel Go to vercel.com/new and import your GitHub repository. 3. Configure Build Settings Vercel should auto-detect Astro. If not, use: - Framework Preset: Astro - Build Command: - Output Directory: 4. Deploy Click \"Deploy\" and wait for the build to complete. Option 2: CLI Deployment 1. Login to Vercel 2. Deploy The search index is generated automatically during . Ensure the build step completes successfully for search to work on the deployed site.",
+    "order": 99
+  },
+  {
+    "url": "/docs/guides/forms-and-validation",
+    "locale": "en",
+    "title": "Forms & Validation",
+    "description": "Learn how to build secure, validated forms using Valibot and Astro Actions.",
+    "section": "Documentation",
+    "sectionIcon": "📄",
+    "sectionOrder": 99,
+    "headings": [
+      "Quick Start",
+      "Theme-Aware Styles",
+      "Customizing Validation Rules",
+      "Internationalization (i18n)"
+    ],
+    "content": "This template uses Valibot for lightweight, type-safe validation on both the client and server. We've designed a hybrid approach that gives you: 1. Instant UI Feedback: Using a tiny client-side script. 2. Server-Side Security: Using the same schema in Astro Actions (optional but recommended). Quick Start To add a new validated form: 1. Define specific rules (Optional) If you need custom rules beyond the shared , create a new schema in . 2. Add the Form to your Component Copy this pattern. The key is strict naming of inputs and the class handling. Theme-Aware Styles We've built a CSS system that automatically adapts validation styles to your active theme (Liquid, Glass, Minimal, etc.). You just need to toggle the or classes on your inputs. | Class | Effect | | :--- | :--- | | | Adds a Red border/glow ( color). | | | Adds a Green border ( color). | | | A styled small text helper that slides in. | Example Usage Customizing Validation Rules Edit to change the rules for the default contact form. Internationalization (i18n) Validation messages are fully translated. Keys are located in: - (under object) - When initializing the schema on the client, you must pass a translation function or a lookup map, as seen in .",
+    "order": 99
+  }
+]

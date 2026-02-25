@@ -1,0 +1,69 @@
+---
+/**
+ * Aurora Portfolio — Card Grid
+ * 3-column grid with gradient-border frames, category badges, and floating metrics.
+ */
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  categoryLabel: string;
+  challenge: string;
+  solution: string;
+  impact: string;
+  techStack: string[];
+  metric: string;
+  metricLabel: string;
+}
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section class="relative py-12 sm:py-16 px-4 sm:px-6" id="pp-aurora-grid-section">
+  <div class="max-w-[1100px] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6" id="pp-aurora-grid">
+    {projects.map((p) => (
+      <div
+        class="pp-aurora__card"
+        data-category={p.category}
+        data-project-id={p.id}
+        data-project-title={p.title}
+        data-project-challenge={p.challenge}
+        data-project-solution={p.solution}
+        data-project-impact={p.impact}
+        data-project-tech={p.techStack.join(',')}
+      >
+        <!-- Visual placeholder (clickable to expand) -->
+        <div class="pp-aurora__visual" data-toggle-aurora={p.id}>
+          <div class="pp-aurora__visual-mesh"></div>
+          <div class="pp-aurora__visual-grid"></div>
+          <span class="pp-aurora__visual-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.5C12 2.5 4 10 4 14.5C4 18.92 7.58 22.5 12 22.5C16.42 22.5 20 18.92 20 14.5C20 10 12 2.5 12 2.5Z"/>
+              <path d="M8.5 14L12 8L15.5 14L12 18Z"/>
+            </svg>
+          </span>
+
+          <!-- Badge (top-left) -->
+          <div class="pp-aurora__badge">{p.categoryLabel}</div>
+
+          <!-- Floating metric (bottom-right) -->
+          <div class="pp-aurora__float-metric">
+            <span class="pp-aurora__float-metric-value">{p.metric}</span>
+            <span class="pp-aurora__float-metric-label">{p.metricLabel}</span>
+          </div>
+        </div>
+
+        <!-- Card Info -->
+        <div class="px-5 py-4">
+          <h3 class="text-lg font-bold text-base-content mb-1">{p.title}</h3>
+          <p class="text-sm text-base-content/45 leading-relaxed line-clamp-2">{p.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

@@ -1,0 +1,300 @@
+---
+/**
+ * Pricing Luxury - The Perspective Gallery
+ * 3D cards that rotate on scroll/hover.
+ * Mobile: Swipeable cards. Desktop: 3D Coverflow.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import LuxuryButton from '../../ui/luxury/LuxuryButton.astro';
+import LuxuryCard from '../../ui/luxury/LuxuryCard.astro';
+import LuxurySectionLabel from '../../ui/luxury/LuxurySectionLabel.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/pricing/PricingLuxury.css';
+
+const plans = [
+   {
+      name: t('pricing.plans.starter.name'),
+      tagline: t('pricing.plans.starter.tagline'),
+      desc: t('pricing.plans.starter.desc'),
+      price: "$299",
+      period: "/mo",
+      features: [t('pricing.plans.starter.f1'), t('pricing.plans.starter.f2'), t('pricing.plans.starter.f3')],
+      cta: t('pricing.startBuilding'),
+      primary: false
+   },
+   {
+      name: t('pricing.plans.pro.name'),
+      tagline: t('pricing.plans.pro.tagline'),
+      desc: t('pricing.plans.pro.desc'),
+      price: "$599",
+      period: "/mo",
+      features: [
+         t('pricing.plans.pro.f1'), 
+         t('pricing.plans.pro.f2'), 
+         t('pricing.plans.pro.f3'),
+         t('pricing.plans.pro.f4')
+      ],
+      cta: t('pricing.getPro'),
+      primary: true,
+      popular: t('pricing.mostPopular')
+   },
+   {
+      name: t('pricing.plans.enterprise.name'),
+      tagline: t('pricing.plans.enterprise.tagline'),
+      desc: t('pricing.plans.enterprise.desc'),
+      price: t('pricing.custom'),
+      period: "",
+      features: [t('pricing.plans.enterprise.f1'), t('pricing.plans.enterprise.f2'), t('pricing.plans.enterprise.f3')],
+      cta: t('pricing.contactSales'),
+      primary: false
+   }
+];
+---
+
+<section id="pricing" class="relative py-20 lg:py-32 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-screen flex items-center bg-base-100/50">
+   <div class="max-w-7xl mx-auto w-full relative z-10">
+      <div class="text-center mb-20 lg:mb-32">
+         <div class="mb-4 flex justify-center">
+            <LuxurySectionLabel text={t('pricing.selectScale')} />
+         </div>
+         <h2 class="text-5xl md:text-7xl lg:text-9xl font-normal font-serif text-base-content tracking-tighter leading-none">{t('pricing.title')}</h2>
+      </div>
+
+      <!-- Desktop: Perspective Gallery -->
+      <div class="hidden lg:block relative h-[720px]">
+         <div class="c-pricing-luxury__stage" data-active="1">
+            <div class="c-pricing-luxury__track">
+               {plans.map((p, i) => (
+                  <article class="c-pricing-luxury__card" data-index={i}>
+                     <div class="c-pricing-luxury__card-inner js-spotlight" data-popular={p.popular}>
+                        
+                        {/* Popular Badge */}
+                        {p.popular && (
+                           <div class="absolute -top-px left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+                              <div class="px-6 py-2 bg-accent text-base-100 text-[9px] font-black uppercase tracking-[0.4em] rounded-b-xl shadow-lg shadow-accent/20">
+                                 {t('pricing.mostPopular')}
+                              </div>
+                           </div>
+                        )}
+
+                        {/* Card Content */}
+                        <div class="relative z-10 flex-1 flex flex-col h-full pointer-events-none">
+                           <div class="mb-10">
+                              <h3 class="text-[10px] font-black uppercase tracking-[0.4em] text-accent mb-6 flex items-center gap-2">
+                                 {p.name}
+                                 {p.popular && <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>}
+                              </h3>
+                              <div class="flex items-baseline gap-1 mb-4">
+                                 <span class="text-5xl lg:text-7xl font-light font-serif text-base-content tracking-tighter">{p.price}</span>
+                                 <span class="text-sm text-base-content/75 font-bold tracking-widest uppercase">{p.period}</span>
+                              </div>
+                              <p class="text-sm text-base-content/75 leading-relaxed max-w-[90%] font-light">{p.desc}</p>
+                           </div>
+
+                           <div class="w-full h-px bg-gradient-to-r from-transparent via-base-content/10 to-transparent mb-10"></div>
+
+                           <ul class="space-y-5 mb-auto">
+                              {p.features.map(f => (
+                                 <li class="flex items-start gap-4 text-sm text-base-content/80 group">
+                                    <div class="mt-0.5 w-4 h-4 rounded-full bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
+                                       <svg class="w-2.5 h-2.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                       </svg>
+                                    </div>
+                                    <span class="font-medium tracking-wide">{f}</span>
+                                 </li>
+                              ))}
+                           </ul>
+
+                           <div class="pt-8 mt-auto pointer-events-auto">
+                              <LuxuryButton 
+                                 href={`/${locale}/contact`} 
+                                 variant={p.primary ? "primary" : "secondary"} 
+                                 class="w-full"
+                              >
+                                 {p.cta}
+                              </LuxuryButton>
+                           </div>
+                        </div>
+                     </div>
+                  </article>
+               ))}
+            </div>
+
+            {/* Click zones */}
+            <button class="c-pricing-luxury__nav-zone c-pricing-luxury__nav-zone--left" data-nav="prev" aria-label={t('pricing.prevPlan')}></button>
+            <button class="c-pricing-luxury__nav-zone c-pricing-luxury__nav-zone--right" data-nav="next" aria-label={t('pricing.nextPlan')}></button>
+         </div>
+
+         {/* Navigation Dots */}
+         <div class="flex items-center justify-center gap-4 mt-12">
+            {plans.map((p, i) => (
+               <button 
+                 class:list={["c-pricing-luxury__dot", i === 1 ? "active" : ""]}
+                 data-target={i}
+                 aria-label={t('pricing.viewPlan').replace('{plan}', p.name)}
+               ></button>
+            ))}
+         </div>
+      </div>
+
+      <!-- Mobile: Tab View (Simplified) -->
+      <div class="lg:hidden">
+         <div class="flex justify-center mb-8">
+            <div class="inline-flex p-1 bg-base-content/5 rounded-xl">
+               {plans.map((plan, i) => (
+                  <button 
+                     class:list={[
+                        "c-pricing-luxury__mobile-tab px-6 py-2.5 rounded-lg text-xs font-bold transition-all duration-300",
+                        i === 1 ? "active" : ""
+                     ]}
+                     data-step={i}
+                  >
+                     {plan.name}
+                  </button>
+               ))}
+            </div>
+         </div>
+
+         <div class="relative min-h-[500px]">
+            {plans.map((p, i) => (
+               <div 
+                  class:list={[
+                     "c-pricing-luxury__mobile-card absolute inset-0 w-full transition-all duration-500",
+                     i === 1 ? "active" : ""
+                  ]}
+                  data-card={i}
+               >
+                  <div class:list={[
+                     "h-full p-8 rounded-3xl border bg-base-100/50 backdrop-blur-xl flex flex-col",
+                     p.primary ? "border-accent/30 shadow-xl" : "border-base-content/10"
+                  ]}>
+                     <h3 class="text-[10px] font-black uppercase tracking-[0.4em] text-accent mb-6 flex items-center gap-2">
+                        {p.name}
+                        {p.popular && <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>}
+                     </h3>
+                     <div class="flex items-baseline gap-1 mb-4">
+                        <span class="text-5xl font-light font-serif text-base-content">{p.price}</span>
+                        <span class="text-sm text-base-content/75 font-bold tracking-widest uppercase">{p.period}</span>
+                     </div>
+                     <p class="text-sm text-base-content/75 mb-8 leading-relaxed font-light">{p.desc}</p>
+                     
+                     <div class="w-full h-px bg-gradient-to-r from-transparent via-base-content/10 to-transparent mb-8"></div>
+
+                     <ul class="space-y-5 mb-auto">
+                        {p.features.map(f => (
+                           <li class="flex items-start gap-3 text-sm text-base-content/80">
+                              <div class="mt-0.5 w-4 h-4 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
+                                 <svg class="w-2.5 h-2.5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                                 </svg>
+                              </div>
+                              <span class="font-medium tracking-wide">{f}</span>
+                           </li>
+                        ))}
+                     </ul>
+
+                     <div class="mt-8">
+                        <LuxuryButton href={`/${locale}/contact`} variant={p.primary ? "primary" : "secondary"} class="w-full">
+                           {p.cta}
+                        </LuxuryButton>
+                     </div>
+                  </div>
+               </div>
+            ))}
+         </div>
+      </div>
+   </div>
+</section>
+
+<script>
+  import { Spotlight } from '../../../scripts/luxury-interactions';
+
+  let pricingLuxuryController: AbortController | null = null;
+
+  function initPerspectiveGallery() {
+    // Init Spotlight
+    new Spotlight('.c-pricing-luxury__stage .js-spotlight');
+
+    // Abort previous listeners
+    pricingLuxuryController?.abort();
+    pricingLuxuryController = new AbortController();
+    const signal = pricingLuxuryController.signal;
+
+    const stage = document.querySelector('.c-pricing-luxury__stage') as HTMLElement;
+    const cards = document.querySelectorAll('.c-pricing-luxury__card');
+    const dots = document.querySelectorAll('.c-pricing-luxury__dot');
+    const navZones = document.querySelectorAll('.c-pricing-luxury__nav-zone');
+
+    // Mobile tab navigation
+    const tabBtns = document.querySelectorAll('.c-pricing-luxury__mobile-tab');
+    const focusCards = document.querySelectorAll('.c-pricing-luxury__mobile-card');
+
+    if (!stage) return;
+
+    let currentIndex = 1;
+    const maxIndex = 2;
+
+    function setActive(index: number) {
+      // Clamp index
+      index = Math.max(0, Math.min(maxIndex, index));
+      currentIndex = index;
+      
+      stage.dataset.active = String(index);
+      
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+
+      if ('vibrate' in navigator) navigator.vibrate(10);
+    }
+
+    function setMobileActive(index: number) {
+      tabBtns.forEach((btn, i) => btn.classList.toggle('active', i === index));
+      focusCards.forEach((card, i) => card.classList.toggle('active', i === index));
+    }
+
+    // Card Clicks (Desktop)
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const index = Number(card.getAttribute('data-index'));
+        setActive(index);
+      }, { signal });
+    });
+
+    // Navigation zone clicks
+    navZones.forEach((zone) => {
+      zone.addEventListener('click', () => {
+        const direction = zone.getAttribute('data-nav');
+        if (direction === 'prev') {
+          setActive(currentIndex - 1);
+        } else if (direction === 'next') {
+          setActive(currentIndex + 1);
+        }
+      }, { signal });
+    });
+
+    // Dot clicks
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => setActive(i), { signal });
+    });
+
+    // Mobile tab clicks
+    tabBtns.forEach((btn, i) => {
+      btn.addEventListener('click', () => setMobileActive(i), { signal });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') setActive(currentIndex - 1);
+      if (e.key === 'ArrowRight') setActive(currentIndex + 1);
+    }, { signal });
+  }
+
+  initPerspectiveGallery();
+  document.addEventListener('astro:after-swap', initPerspectiveGallery);
+</script>

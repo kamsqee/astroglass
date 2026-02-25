@@ -1,0 +1,156 @@
+---
+/**
+ * Features Aurora - Aurora Horizontal Scroll Cards
+ * Editorial header with a horizontally scrolling card carousel.
+ * Cards feature gradient icons, numbered indicators, and hover glow effects.
+ */
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+import '../../../styles/components/features/FeaturesAurora.css';
+
+const features = [
+  {
+    num: '01',
+    title: t('features.f1Title'),
+    desc: t('features.f1Desc'),
+    longDesc: t('features.f1LongDesc'),
+    icon: 'M13 10v4h7v7l9-11h-7z', // lightning bolt
+  },
+  {
+    num: '02',
+    title: t('features.f2Title'),
+    desc: t('features.f2Desc'),
+    longDesc: t('features.f2LongDesc'),
+    icon: 'M12 2.5C12 2.5 4 10 4 14.5C4 18.92 7.58 22.5 12 22.5C16.42 22.5 20 18.92 20 14.5C20 10 12 2.5 12 2.5ZM8.5 14L12 8L15.5 14L12 18Z', // liquid glass prism
+  },
+  {
+    num: '03',
+    title: t('features.f3Title'),
+    desc: t('features.f3Desc'),
+    longDesc: t('features.f3LongDesc'),
+    icon: 'M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1vzM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z', // layout
+  },
+  {
+    num: '04',
+    title: t('features.f4Title'),
+    desc: t('features.f4Desc'),
+    longDesc: t('features.f4LongDesc'),
+    icon: 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z', // sun/theme
+  },
+];
+---
+
+<section class="features-aurora" id="services">
+  <!-- Header -->
+  <div class="features-aurora-header">
+    <div class="features-aurora-label">
+      <span class="features-aurora-label-num">(01)</span>
+      <span class="features-aurora-label-line"></span>
+      <span>{t('features.badge')}</span>
+    </div>
+    <h2 class="features-aurora-title">
+      <span class="features-aurora-title-pure">{t('features.pureTitle')}</span>
+      <span class="features-aurora-title-accent">{t('features.liquidTitle')}</span>
+    </h2>
+    <p class="features-aurora-subtitle">{t('features.subtitle')}</p>
+  </div>
+
+  <!-- Scroll container -->
+  <div class="features-aurora-scroll-wrapper">
+    <!-- Navigation arrows -->
+    <button class="features-aurora-arrow features-aurora-arrow--left" id="aurora-feat-prev" aria-label="Previous">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <button class="features-aurora-arrow features-aurora-arrow--right" id="aurora-feat-next" aria-label="Next">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </button>
+
+    <!-- Cards track -->
+    <div class="features-aurora-track" id="aurora-feat-track">
+      {features.map((f, idx) => (
+        <div class={`features-aurora-card ${idx % 3 === 1 ? 'features-aurora-card--tall' : ''}`} data-aurora-hue={idx % 5}>
+          {/* Grid overlay inside card */}
+          <div class="features-aurora-card-grid"></div>
+
+          {/* Number — watermark */}
+          <span class="features-aurora-card-num">{f.num}</span>
+
+          {/* Icon with rotating border */}
+          <div class="features-aurora-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d={f.icon}/>
+            </svg>
+          </div>
+
+          {/* Text */}
+          <h3 class="features-aurora-card-title">{f.title}</h3>
+          <p class="features-aurora-card-desc">{f.desc}</p>
+
+          {/* Expanded text on hover */}
+          <p class="features-aurora-card-long">{f.longDesc}</p>
+
+          {/* Top accent line — per-card color */}
+          <div class="features-aurora-card-accent"></div>
+          {/* Glow accent */}
+          <div class="features-aurora-card-glow"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="features-aurora-bottom">
+    <a href="#portfolio" class="features-aurora-cta">
+      {t('features.cta')}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<script>
+  let featuresAuroraController: AbortController | null = null;
+
+  function initFeaturesAurora() {
+    featuresAuroraController?.abort();
+    featuresAuroraController = new AbortController();
+    const { signal } = featuresAuroraController;
+
+    const track = document.getElementById('aurora-feat-track');
+    const prevBtn = document.getElementById('aurora-feat-prev');
+    const nextBtn = document.getElementById('aurora-feat-next');
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const scrollAmount = 340;
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    }, { signal });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }, { signal });
+
+    // Update arrow visibility
+    const updateArrows = () => {
+      const atStart = track.scrollLeft <= 10;
+      const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 10;
+      prevBtn.classList.toggle('is-hidden', atStart);
+      nextBtn.classList.toggle('is-hidden', atEnd);
+    };
+
+    track.addEventListener('scroll', updateArrows, { passive: true, signal });
+    updateArrows();
+  }
+
+  initFeaturesAurora();
+  document.addEventListener('astro:after-swap', initFeaturesAurora);
+</script>

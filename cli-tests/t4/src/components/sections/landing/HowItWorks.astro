@@ -1,0 +1,109 @@
+---
+/**
+ * How It Works — 3-step getting started section
+ * Shows: Clone → Customize → Deploy flow with visual numbered steps
+ */
+import '../../../styles/components/landing/HowItWorks.css';
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const steps = [
+  {
+    num: '01',
+    icon: '📦',
+    key: 'clone',
+    cmd: 'npx degit kamsqee/astroglass my-site',
+    gradient: 'from-violet-500/15 to-blue-500/15',
+  },
+  {
+    num: '02',
+    icon: '🎨',
+    key: 'customize',
+    cmd: null,
+    gradient: 'from-amber-500/15 to-orange-500/15',
+  },
+  {
+    num: '03',
+    icon: '🚀',
+    key: 'deploy',
+    cmd: 'npm run build && npx wrangler pages deploy',
+    gradient: 'from-emerald-500/15 to-teal-500/15',
+  },
+];
+---
+
+<section id="how-it-works" class="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-base-100 overflow-hidden">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-12 sm:mb-16 md:mb-20">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-accent/20 bg-accent/[0.06] text-base-content/80 text-[10px] font-bold uppercase tracking-[0.3em] mb-4">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+        {t('landing.howItWorks.eyebrow')}
+      </div>
+      <h2 class="text-4xl sm:text-5xl md:text-7xl font-black text-base-content tracking-tighter leading-[0.95] mb-6">
+        {t('landing.howItWorks.title')}
+      </h2>
+      <p class="text-base sm:text-lg text-base-content/75 max-w-xl mx-auto">
+        {t('landing.howItWorks.desc')}
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+      {steps.map((step, i) => (
+        <div
+          class="hiw-card group relative rounded-2xl sm:rounded-3xl overflow-hidden border border-base-content/5 transition-all duration-700 hover:border-accent/20"
+          style={`animation-delay: ${i * 120}ms`}
+        >
+          {/* Background gradient */}
+          <div class={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} data-hiw-bg></div>
+          
+          {/* Glass overlay */}
+          <div class="absolute inset-0 bg-base-content/[0.02] group-hover:bg-base-content/[0.04] transition-colors duration-700"></div>
+
+          <div class="relative z-10 p-6 sm:p-8 lg:p-10 flex flex-col min-h-[280px] sm:min-h-[320px]">
+            {/* Top: Number + Icon */}
+            <div class="flex items-start justify-between mb-auto">
+              <span data-content={step.num} class="hiw-value text-5xl sm:text-6xl font-black text-base-content/5 group-hover:text-base-content/10 transition-colors duration-500 tracking-tighter">
+              </span>
+              <div class="text-3xl sm:text-4xl transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                {step.icon}
+              </div>
+            </div>
+
+            {/* Connector line (not on last step) */}
+            {i < steps.length - 1 && (
+              <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20">
+                <svg class="w-6 h-6 text-base-content/10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </div>
+            )}
+
+            {/* Bottom: Content */}
+            <div>
+              <h3 class="text-xl sm:text-2xl font-black text-base-content group-hover:text-accent tracking-tight transition-colors duration-500 mb-2">
+                {t(`landing.howItWorks.${step.key}`)}
+              </h3>
+              <p class="text-sm text-base-content/75 group-hover:text-base-content/75 leading-relaxed transition-colors duration-500 mb-4">
+                {t(`landing.howItWorks.${step.key}Desc`)}
+              </p>
+              
+              {/* Command snippet */}
+              {step.cmd && (
+                <div class="bg-base-content/[0.04] rounded-lg px-3 py-2 font-mono text-[11px] text-base-content/80 group-hover:text-base-content/75 transition-colors duration-500 overflow-x-auto">
+                  <span class="text-accent/80">❯</span> {step.cmd}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+

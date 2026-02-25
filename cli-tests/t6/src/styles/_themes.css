@@ -1,0 +1,12 @@
+
+/* ============================================
+   Theme Definitions
+   Each palette has unique visual characteristics.
+   ============================================ */
+
+@import "./palettes/_root.css";
+
+@import "./palettes/synthwave.css";
+
+@import "./palettes/neonoir.css";
+

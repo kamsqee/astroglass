@@ -1,0 +1,56 @@
+---
+import { useTranslations } from '../../utils/i18n';
+import { getLocaleFromUrl } from '../../utils/locale-utils';
+import LocalizedLink from '../ui/LocalizedLink.astro';
+import '../../styles/components/blog/PostHero.css';
+
+interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const date = new Intl.DateTimeFormat(locale, { dateStyle: 'long' }).format(post.data.date);
+const readingTime = post.data.readingTime || Math.max(1, Math.ceil(post.body.split(/\s+/).length / 200));
+const hasCover = !!post.data.cover;
+
+const blogBase = '/blog';
+const tagBase = '/blog/tag';
+---
+
+<header class={`post-hero ${hasCover ? 'post-hero--cover' : 'post-hero--text'}`}>
+  {hasCover && (
+    <div class="post-hero__image-wrap">
+      <img src={post.data.cover.src} alt="" loading="eager" />
+      <div class="post-hero__overlay" />
+    </div>
+  )}
+  <div class="post-hero__content">
+    <LocalizedLink href={blogBase} class="post-hero__back-link">
+      {t('blog.backToBlog')}
+    </LocalizedLink>
+    {post.data.category && (
+      <span class="post-hero__category">{post.data.category}</span>
+    )}
+    <h1 class="post-hero__title">{post.data.title}</h1>
+    {post.data.description && (
+      <p class="post-hero__description">{post.data.description}</p>
+    )}
+    <div class="post-hero__meta">
+      <span>{t('blog.writtenBy')} <strong>{post.data.author}</strong></span>
+      <span class="post-hero__meta-separator">·</span>
+      <time datetime={post.data.date.toISOString()}>{date}</time>
+      <span class="post-hero__meta-separator">·</span>
+      <span>{readingTime} {t('blog.minRead')}</span>
+    </div>
+    {post.data.tags.length > 0 && (
+      <div class="post-hero__tags">
+        {post.data.tags.map((tag: string) => (
+          <LocalizedLink href={`${tagBase}/${tag}/`} class="post-hero__tag">{tag}</LocalizedLink>
+        ))}
+      </div>
+    )}
+  </div>
+</header>

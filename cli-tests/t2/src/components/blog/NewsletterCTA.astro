@@ -1,0 +1,99 @@
+---
+import { useTranslations } from '../../utils/i18n';
+import { getLocaleFromUrl } from '../../utils/locale-utils';
+import '../../styles/components/blog/NewsletterCTA.css';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+<section class="newsletter-cta" aria-label={t('blog.newsletter.title')}>
+  <div class="newsletter-cta__glow" aria-hidden="true" />
+  <h2 class="newsletter-cta__title">{t('blog.newsletter.title')}</h2>
+  <p class="newsletter-cta__description">{t('blog.newsletter.description')}</p>
+  <form class="newsletter-cta__form" id="newsletter-form" novalidate>
+    <div class="newsletter-cta__input-wrap">
+      <input
+        type="email"
+        id="newsletter-email"
+        class="newsletter-cta__input"
+        placeholder={t('blog.newsletter.placeholder')}
+        required
+        autocomplete="email"
+        aria-label={t('blog.newsletter.placeholder')}
+      />
+      <span class="newsletter-cta__error" id="newsletter-error" aria-live="polite"></span>
+    </div>
+    <button type="submit" class="newsletter-cta__btn" id="newsletter-btn">
+      <span class="newsletter-cta__btn-text">{t('blog.newsletter.cta')}</span>
+      <svg class="newsletter-cta__btn-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </form>
+  <p class="newsletter-cta__success" id="newsletter-success">{t('blog.linkCopied')}</p>
+</section>
+
+<script
+  define:vars={{
+    emailInvalid: t('contact.validation.emailInvalid'),
+    required: t('contact.validation.required'),
+    successMsg: t('blog.newsletter.cta'),
+  }}
+>
+function initNewsletter() {
+  const form = document.getElementById('newsletter-form');
+  if (!form) return;
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const input = document.getElementById('newsletter-email');
+  const errorEl = document.getElementById('newsletter-error');
+  const successEl = document.getElementById('newsletter-success');
+  const btn = document.getElementById('newsletter-btn');
+
+  function showError(msg) {
+    if (errorEl) errorEl.textContent = msg;
+    if (input) input.classList.add('newsletter-cta__input--error');
+  }
+
+  function clearError() {
+    if (errorEl) errorEl.textContent = '';
+    if (input) input.classList.remove('newsletter-cta__input--error');
+  }
+
+  function validate() {
+    const val = input?.value.trim() || '';
+    if (!val) { showError(required); return false; }
+    if (!emailRegex.test(val)) { showError(emailInvalid); return false; }
+    clearError();
+    return true;
+  }
+
+  if (input) {
+    input.addEventListener('blur', validate);
+    input.addEventListener('input', () => {
+      if (input.classList.contains('newsletter-cta__input--error')) validate();
+    });
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!validate()) { input?.focus(); return; }
+
+    // Simulate successful subscription
+    if (btn) btn.disabled = true;
+    form.classList.add('newsletter-cta__form--success');
+    if (successEl) successEl.classList.add('newsletter-cta__success--visible');
+    form.reset();
+
+    setTimeout(() => {
+      if (btn) btn.disabled = false;
+      form.classList.remove('newsletter-cta__form--success');
+      if (successEl) successEl.classList.remove('newsletter-cta__success--visible');
+    }, 4000);
+  });
+}
+
+initNewsletter();
+document.addEventListener('astro:after-swap', initNewsletter);
+</script>

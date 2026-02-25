@@ -1,0 +1,37 @@
+/* FAQHome.css — Lightweight FAQ accordion for the index page */
+
+.faq-home-item {
+  opacity: 0;
+  animation: faq-home-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  background: hsl(var(--bc) / 0.02);
+}
+
+.faq-home-item:hover {
+  background: hsl(var(--bc) / 0.04);
+  border-color: hsl(var(--bc) / 0.08);
+}
+
+.faq-home-item.open {
+  background: hsl(var(--bc) / 0.04);
+  border-color: hsl(var(--a) / 0.15);
+}
+
+.faq-home-item.open .faq-home-chevron {
+  transform: rotate(180deg);
+  color: hsl(var(--a));
+}
+
+.faq-home-item.open .faq-home-trigger span:first-child {
+  color: hsl(var(--a));
+}
+
+@keyframes faq-home-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

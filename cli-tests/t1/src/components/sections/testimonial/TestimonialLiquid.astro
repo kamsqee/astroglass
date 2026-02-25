@@ -1,0 +1,143 @@
+---
+/**
+ * Testimonial Liquid - Liquid Bubbles (Distinctive)
+ * Organic bubble-shaped cards with floating offset layout and avatar ripple effect.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+import '../../../styles/components/testimonial/TestimonialLiquid.css';
+import LiquidSectionTag from '../../ui/liquid/LiquidSectionTag.astro';
+
+const testimonials = [
+  {
+    quote: t('testimonial.q1'),
+    author: "Sarah Chen",
+    role: t('testimonial.roles.cto'),
+    company: t('testimonial.companies.quantum'),
+    avatar: "https://i.pravatar.cc/60?img=1",
+    gradient: "from-violet-500/20 to-fuchsia-500/20"
+  },
+  {
+    quote: t('testimonial.q2'),
+    author: "Marcus Rivera",
+    role: t('testimonial.roles.founder'),
+    company: t('testimonial.companies.velocity'),
+    avatar: "https://i.pravatar.cc/60?img=3",
+    gradient: "from-cyan-500/20 to-blue-500/20"
+  },
+  {
+    quote: t('testimonial.q3'),
+    author: "Emily Watson",
+    role: t('testimonial.roles.vp'),
+    company: t('testimonial.companies.scaleup'),
+    avatar: "https://i.pravatar.cc/60?img=5",
+    gradient: "from-amber-500/20 to-orange-500/20"
+  },
+  {
+    quote: t('testimonial.q4'),
+    author: "David Kim",
+    role: t('testimonial.roles.lead'),
+    company: t('testimonial.companies.nexgen'),
+    avatar: "https://i.pravatar.cc/60?img=8",
+    gradient: "from-emerald-500/20 to-teal-500/20"
+  },
+];
+---
+
+<section class="relative py-24 lg:py-32 px-6 overflow-hidden bg-base-100">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+       <LiquidSectionTag label={t('testimonial.stories')} class="mb-6" />
+       <h2 class="text-4xl md:text-6xl font-black text-base-content tracking-tighter">{t('testimonial.title')}</h2>
+    </div>
+
+    <!-- Mobile: Horizontal Swipe Carousel -->
+    <div class="lg:hidden">
+       <div class="c-testimonial-liquid__carousel overflow-x-auto pb-6 -mx-6 px-6 snap-x snap-mandatory scrollbar-hide">
+          <div class="flex gap-4" style="width: max-content;">
+             {testimonials.map((item, i) => (
+                <div 
+                  class="c-testimonial-liquid__card-mobile snap-center flex-shrink-0 w-[85vw] max-w-[340px] relative overflow-hidden bg-base-content/[0.03] border border-base-content/10"
+                  style="min-height: 420px;"
+                >
+                   <!-- Gradient Background -->
+                   <div class:list={["absolute inset-0 bg-gradient-to-br opacity-30 pointer-events-none", item.gradient]} data-testimonial-bg></div>
+                   
+                   <div class="relative z-10 h-full flex flex-col items-center justify-center p-8 text-center">
+                      <!-- Quote mark -->
+                      <div class="c-testimonial-liquid__quote-mark mb-2">❝</div>
+
+                      <!-- Avatar with ripple -->
+                      <div class="c-testimonial-liquid__avatar w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white/20 shadow-xl">
+                         <img src={item.avatar} alt={item.author} class="w-full h-full object-cover" />
+                      </div>
+
+                      <!-- Quote -->
+                      <p class="text-lg font-semibold text-base-content leading-relaxed mb-6">
+                         {item.quote}
+                      </p>
+
+                      <!-- Attribution -->
+                      <div class="mt-auto">
+                         <p class="text-base font-black text-base-content">{item.author}</p>
+                         <p class="text-sm text-base-content">{item.role} at {item.company}</p>
+                      </div>
+                   </div>
+                </div>
+             ))}
+          </div>
+       </div>
+       
+       <!-- Scroll hint -->
+       <div class="flex justify-center gap-2 mt-4">
+          {testimonials.map((_, i) => (
+             <div class="w-2 h-2 rounded-full bg-base-content/20"></div>
+          ))}
+       </div>
+       <p class="text-center text-xs text-base-content/80 mt-2">{t('testimonial.swipe')}</p>
+    </div>
+
+    <!-- Desktop: Floating Bubble Cards -->
+    <div class="hidden lg:grid grid-cols-4 gap-6 items-start">
+       {testimonials.map((item, i) => (
+          <div class="c-testimonial-liquid__wrapper group">
+             <div class="c-testimonial-liquid__card relative p-8 bg-base-content/[0.02] border border-base-content/10 overflow-hidden group-hover:bg-base-content/[0.05]">
+                <!-- Gradient -->
+                <div class:list={["absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-30 transition-opacity duration-700 pointer-events-none", item.gradient]} data-testimonial-bg></div>
+             
+             <div class="relative z-10">
+                <!-- Quote mark -->
+                <div class="c-testimonial-liquid__quote-mark mb-4">❝</div>
+
+                <!-- Avatar with ripple ring -->
+                <div class="c-testimonial-liquid__avatar w-14 h-14 rounded-full overflow-hidden border-2 border-base-content/10 mb-6">
+                   <img src={item.avatar} alt={item.author} class="w-full h-full object-cover" />
+                </div>
+
+                <p class="text-base text-base-content/70 font-medium leading-relaxed mb-6 line-clamp-4">
+                   {item.quote}
+                </p>
+                <div>
+                   <p class="text-sm font-bold text-base-content">{item.author}</p>
+                   <p class="text-xs text-base-content">{item.role}, {item.company}</p>
+                </div>
+             </div>
+          </div>
+          </div>
+       ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Monochrome visual overrides */
+  :global([data-theme="monochrome"]) .c-testimonial-liquid__card-mobile [data-testimonial-bg],
+  :global([data-theme="monochrome"]) .c-testimonial-liquid__card [data-testimonial-bg] {
+    background-image: none;
+  }
+</style>

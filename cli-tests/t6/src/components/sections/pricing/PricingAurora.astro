@@ -1,0 +1,193 @@
+---
+/**
+ * Pricing Aurora - Aurora Comparison Columns
+ * Three-tier pricing with gradient-border recommended plan,
+ * monthly/yearly toggle, and gradient checkmarks.
+ */
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+import '../../../styles/components/pricing/PricingAurora.css';
+
+const plans = [
+  {
+    id: 'starter',
+    name: t('pricing.plans.starter.name'),
+    tagline: t('pricing.plans.starter.tagline'),
+    desc: t('pricing.plans.starter.desc'),
+    priceMonthly: '0',
+    priceYearly: '0',
+    isFree: true,
+    cta: t('pricing.plans.starter.cta'),
+    featured: false,
+    features: [
+      { name: t('pricing.features.projects'), value: '3' },
+      { name: t('pricing.features.teamMembers'), value: '1' },
+      { name: t('pricing.features.storage'), value: '1 GB' },
+      { name: t('pricing.features.support'), value: t('pricing.values.community') },
+      { name: t('pricing.features.customThemes'), value: false },
+      { name: t('pricing.features.apiAccess'), value: false },
+    ],
+  },
+  {
+    id: 'pro',
+    name: t('pricing.plans.pro.name'),
+    tagline: t('pricing.plans.pro.tagline'),
+    desc: t('pricing.plans.pro.desc'),
+    priceMonthly: '29',
+    priceYearly: '23',
+    isFree: false,
+    cta: t('pricing.plans.pro.cta'),
+    featured: true,
+    features: [
+      { name: t('pricing.features.projects'), value: t('pricing.values.unlimited') },
+      { name: t('pricing.features.teamMembers'), value: '10' },
+      { name: t('pricing.features.storage'), value: '50 GB' },
+      { name: t('pricing.features.support'), value: t('pricing.values.priorityEmail') },
+      { name: t('pricing.features.customThemes'), value: true },
+      { name: t('pricing.features.apiAccess'), value: true },
+    ],
+  },
+  {
+    id: 'enterprise',
+    name: t('pricing.plans.enterprise.name'),
+    tagline: t('pricing.plans.enterprise.tagline'),
+    desc: t('pricing.plans.enterprise.desc'),
+    priceMonthly: '99',
+    priceYearly: '79',
+    isFree: false,
+    cta: t('pricing.plans.enterprise.cta'),
+    featured: false,
+    features: [
+      { name: t('pricing.features.projects'), value: t('pricing.values.unlimited') },
+      { name: t('pricing.features.teamMembers'), value: t('pricing.values.unlimited') },
+      { name: t('pricing.features.storage'), value: t('pricing.values.unlimited') },
+      { name: t('pricing.features.support'), value: t('pricing.values.phone247') },
+      { name: t('pricing.features.customThemes'), value: true },
+      { name: t('pricing.features.apiAccess'), value: true },
+    ],
+  },
+];
+---
+
+<section class="pricing-aurora" id="pricing">
+  <!-- Header -->
+  <div class="pricing-aurora-header">
+    <div class="pricing-aurora-label">
+      <span class="pricing-aurora-label-icon">◆</span>
+      <span>{t('pricing.simplePlans')}</span>
+    </div>
+    <h2 class="pricing-aurora-title">{t('pricing.title')}</h2>
+    <p class="pricing-aurora-subtitle">{t('pricing.subtitle')}</p>
+
+    <!-- Toggle -->
+    <div class="pricing-aurora-toggle" id="aurora-pricing-toggle">
+      <span class="pricing-aurora-toggle-label is-active" data-period="monthly">{t('pricing.monthly')}</span>
+      <button class="pricing-aurora-toggle-switch" id="aurora-pricing-switch" aria-label="Toggle billing period">
+        <span class="pricing-aurora-toggle-knob"></span>
+      </button>
+      <span class="pricing-aurora-toggle-label" data-period="yearly">
+        {t('pricing.yearly')}
+        <span class="pricing-aurora-save-badge">{t('pricing.save')}</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Plans Grid -->
+  <div class="pricing-aurora-grid">
+    {plans.map((plan) => (
+      <div class:list={['pricing-aurora-plan', plan.featured ? 'pricing-aurora-plan--featured' : '']}>
+        {plan.featured && (
+          <div class="pricing-aurora-plan-badge">{t('pricing.recommended')}</div>
+        )}
+
+        <div class="pricing-aurora-plan-header">
+          <h3 class="pricing-aurora-plan-name">{plan.name}</h3>
+          <p class="pricing-aurora-plan-tagline">{plan.tagline}</p>
+        </div>
+
+        <div class="pricing-aurora-plan-price">
+          {plan.isFree ? (
+            <span class="pricing-aurora-price-free">{t('pricing.freeForever')}</span>
+          ) : (
+            <>
+              <span class="pricing-aurora-price-currency">$</span>
+              <span class="pricing-aurora-price-amount" data-monthly={plan.priceMonthly} data-yearly={plan.priceYearly}>{plan.priceMonthly}</span>
+              <span class="pricing-aurora-price-period">{t('pricing.perMonth')}</span>
+            </>
+          )}
+        </div>
+
+        <p class="pricing-aurora-plan-desc">{plan.desc}</p>
+
+        <a href="#contact" class:list={['pricing-aurora-plan-cta', plan.featured ? 'pricing-aurora-plan-cta--featured' : '']}>
+          {plan.cta}
+        </a>
+
+        <ul class="pricing-aurora-feature-list">
+          {plan.features.map((f) => (
+            <li class:list={['pricing-aurora-feature', typeof f.value === 'boolean' && !f.value ? 'is-disabled' : '']}>
+              {typeof f.value === 'boolean' ? (
+                f.value ? (
+                  <span class="pricing-aurora-check">✓</span>
+                ) : (
+                  <span class="pricing-aurora-cross">—</span>
+                )
+              ) : (
+                <span class="pricing-aurora-check">✓</span>
+              )}
+              <span class="pricing-aurora-feature-name">{f.name}</span>
+              {typeof f.value === 'string' && (
+                <span class="pricing-aurora-feature-value">{f.value}</span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  let pricingAuroraController: AbortController | null = null;
+
+  function initPricingAurora() {
+    pricingAuroraController?.abort();
+    pricingAuroraController = new AbortController();
+    const { signal } = pricingAuroraController;
+
+    const toggle = document.getElementById('aurora-pricing-switch');
+    const container = document.getElementById('aurora-pricing-toggle');
+    if (!toggle || !container) return;
+
+    let isYearly = false;
+
+    toggle.addEventListener('click', () => {
+      isYearly = !isYearly;
+      toggle.classList.toggle('is-yearly', isYearly);
+
+      // Update labels
+      container.querySelectorAll('.pricing-aurora-toggle-label').forEach(label => {
+        const period = label.getAttribute('data-period');
+        label.classList.toggle('is-active', (period === 'yearly') === isYearly);
+      });
+
+      // Update prices
+      document.querySelectorAll('.pricing-aurora-price-amount').forEach(el => {
+        const amount = el as HTMLElement;
+        amount.textContent = isYearly 
+          ? amount.getAttribute('data-yearly') || '' 
+          : amount.getAttribute('data-monthly') || '';
+      });
+
+      // Update period labels
+      document.querySelectorAll('.pricing-aurora-price-period').forEach(el => {
+        el.textContent = isYearly ? '/ mo (billed yearly)' : '/ month';
+      });
+    }, { signal });
+  }
+
+  initPricingAurora();
+  document.addEventListener('astro:after-swap', initPricingAurora);
+</script>

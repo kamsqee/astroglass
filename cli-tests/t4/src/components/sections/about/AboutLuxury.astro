@@ -1,0 +1,112 @@
+---
+/**
+ * About Luxury - The Journey Timeline (Redesigned)
+ * A stunning vertical timeline with glowing nodes, flowing connections, and immersive cards.
+ */
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+import '../../../styles/components/about/AboutLuxury.css';
+import LuxurySectionLabel from '../../ui/luxury/LuxurySectionLabel.astro';
+
+export interface Props {
+  isFirst?: boolean;
+}
+
+const { isFirst = false } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const milestones = [
+  { year: '2021', icon: '💡', title: t('about.timeline.m1Title'), desc: t('about.timeline.m1Desc'), color: 'from-violet-500 to-purple-600' },
+  { year: '2022', icon: '🛠', title: t('about.timeline.m2Title'), desc: t('about.timeline.m2Desc'), color: 'from-blue-500 to-cyan-500' },
+  { year: '2023', icon: '🚀', title: t('about.timeline.m3Title'), desc: t('about.timeline.m3Desc'), color: 'from-emerald-500 to-teal-500' },
+  { year: '2024', icon: '✨', title: t('about.timeline.m4Title'), desc: t('about.timeline.m4Desc'), color: 'from-amber-500 to-orange-500' },
+  { year: t('about.timeline.today'), icon: '👋', title: t('about.timeline.m5Title'), desc: t('about.timeline.m5Desc'), color: 'from-rose-500 to-pink-500', isCta: true },
+];
+---
+
+<section id="about" class:list={["c-about-luxury__section relative px-4 sm:px-6 lg:px-8 lg:px-8 overflow-hidden", isFirst ? "pt-[calc(40px+var(--nav-offset))] pb-20 md:pb-32 md:pt-[calc(80px+var(--nav-offset))]" : "py-20 md:py-32"]}>
+  <!-- Background ambient -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[100px]"></div>
+  </div>
+
+  <div class="max-w-5xl mx-auto relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-16 lg:mb-24">
+      <div class="mb-6 flex justify-center">
+        <LuxurySectionLabel text={t('about.ourJourney')} />
+      </div>
+      <h2 class="text-4xl sm:text-5xl lg:text-7xl font-normal font-serif text-base-content tracking-tight mb-6">
+        {t('about.timelineTitle')}
+      </h2>
+      <p class="text-lg sm:text-xl text-base-content/75 max-w-2xl mx-auto leading-relaxed">
+        {t('about.timelineSubtitle')}
+      </p>
+    </div>
+
+    <!-- Timeline Container -->
+    <div class="c-about-luxury__container relative">
+      <!-- Central flowing line -->
+      <div class="c-about-luxury__line absolute left-6 sm:left-8 lg:left-1/2 top-0 bottom-0 w-[2px] lg:-translate-x-1/2">
+        <div class="absolute inset-0 bg-gradient-to-b from-accent via-primary to-accent/20 rounded-full"></div>
+        <div class="c-about-luxury__glow absolute inset-0 bg-gradient-to-b from-accent via-primary to-accent/20 rounded-full blur-sm opacity-50"></div>
+      </div>
+
+      <!-- Milestones -->
+      <div class="space-y-12 lg:space-y-0">
+        {milestones.map((m, i) => (
+          <div 
+            class={`c-about-luxury__wrapper relative lg:grid lg:grid-cols-2 lg:gap-12 ${i > 0 ? 'lg:mt-20' : ''}`}
+            data-index={i}
+          >
+            <!-- Timeline Node -->
+            <div class="c-about-luxury__node absolute left-6 sm:left-8 lg:left-1/2 -translate-x-1/2 z-20">
+              <div class="c-about-luxury__node-outer relative w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-base-100 border-2 border-base-content/10 flex items-center justify-center shadow-xl">
+                <div class={`c-about-luxury__node-inner w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br ${m.color} flex items-center justify-center text-lg sm:text-xl shadow-lg`}>
+                   {m.icon}
+                </div>
+                <!-- Pulse ring -->
+                <div class={`absolute inset-0 rounded-full bg-gradient-to-br ${m.color} opacity-20 animate-ping`} style="animation-duration: 2s;"></div>
+              </div>
+              <!-- Year badge attached to node -->
+              <div class="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                <span class={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-black tracking-wider bg-gradient-to-r ${m.color} text-white shadow-lg`}>
+                  {m.year}
+                </span>
+              </div>
+            </div>
+
+            <!-- Content Card -->
+            <div class={`c-about-luxury__card ml-20 sm:ml-24 lg:ml-0 ${i % 2 === 0 ? 'lg:col-start-1 lg:pr-16 lg:text-right' : 'lg:col-start-2 lg:pl-16 lg:text-left'}`}>
+              <div class={`c-about-luxury__card-inner relative p-6 sm:p-8 rounded-2xl backdrop-blur-xl border ring-1 ring-white/5 ring-inset shadow-xl transition-all duration-700 ${m.isCta ? 'bg-gradient-to-br from-accent/10 to-primary/10 border-accent/30 ring-accent/10' : 'bg-gradient-to-br from-base-content/[0.05] to-base-content/[0.01] border-base-content/10 hover:bg-base-content/[0.06] hover:border-base-content/20'}`}>
+                <!-- Gradient accent line -->
+                <div class={`absolute ${i % 2 === 0 ? 'lg:right-0 lg:left-auto left-0' : 'left-0'} top-6 bottom-6 w-1 rounded-full bg-gradient-to-b ${m.color} opacity-60`}></div>
+                
+                <h3 class="text-xl sm:text-2xl font-black text-base-content mb-3">
+                  {m.title}
+                </h3>
+                <p class="text-sm sm:text-base text-base-content/75 leading-relaxed">
+                  {m.desc}
+                </p>
+
+                {m.isCta && (
+                  <div class={`mt-6 ${i % 2 === 0 ? 'lg:text-right' : ''}`}>
+                    <a href="#services" class="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-gradient-to-r from-accent to-primary text-white font-bold text-sm shadow-lg shadow-accent/25 hover:shadow-xl hover:shadow-accent/30 hover:scale-105 active:scale-95 transition-all duration-300">
+                      {t('hero.startBuilding')}
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

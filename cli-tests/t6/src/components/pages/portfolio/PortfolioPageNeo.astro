@@ -1,0 +1,190 @@
+---
+/**
+ * Portfolio Page — Neo Theme (Composition Layer)
+ * 
+ * Wires data ↔ sub-components:
+ *   - PortfolioHeroNeo  → hero + particles + filters
+ *   - PortfolioCardsNeo → vertical card stack + inline detail panels
+ *   - PortfolioCTANeo   → bottom CTA
+ */
+import '../../../styles/components/portfolio/PortfolioPageNeo.css';
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+import PortfolioHeroNeo from './neo/PortfolioHeroNeo.astro';
+import PortfolioCardsNeo from './neo/PortfolioCardsNeo.astro';
+import PortfolioCTANeo from './neo/PortfolioCTANeo.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+const localePrefix = locale === 'en' ? '' : `/${locale}`;
+const neoBase = `${localePrefix}/neo`;
+
+const categories = [
+  { id: 'all', label: t('portfolioPage.filterAll') },
+  { id: 'webapp', label: t('portfolio.categories.webapp') },
+  { id: 'dashboard', label: t('portfolio.categories.dashboard') },
+  { id: 'mobile', label: t('portfolio.categories.mobile') },
+  { id: 'branding', label: t('portfolio.categories.branding') },
+];
+
+const projects = [
+  {
+    id: 'p1',
+    title: t('portfolioPage.projects.p1.title'),
+    description: t('portfolioPage.projects.p1.description'),
+    longDescription: t('portfolioPage.projects.p1.longDescription'),
+    category: 'webapp',
+    categoryLabel: t('portfolioPage.projects.p1.category'),
+    challenge: t('portfolioPage.projects.p1.challenge'),
+    solution: t('portfolioPage.projects.p1.solution'),
+    impact: t('portfolioPage.projects.p1.impact'),
+    techStack: ['React', 'Node.js', 'GraphQL', 'Redis', 'AWS'],
+    metric: t('portfolioPage.projects.p1.metric'),
+    metricLabel: t('portfolioPage.projects.p1.metricLabel'),
+    color: 'from-violet-500 to-purple-600',
+    num: '01',
+  },
+  {
+    id: 'p2',
+    title: t('portfolioPage.projects.p2.title'),
+    description: t('portfolioPage.projects.p2.description'),
+    longDescription: t('portfolioPage.projects.p2.longDescription'),
+    category: 'dashboard',
+    categoryLabel: t('portfolioPage.projects.p2.category'),
+    challenge: t('portfolioPage.projects.p2.challenge'),
+    solution: t('portfolioPage.projects.p2.solution'),
+    impact: t('portfolioPage.projects.p2.impact'),
+    techStack: ['Vue.js', 'D3.js', 'Python', 'PostgreSQL', 'Docker'],
+    metric: t('portfolioPage.projects.p2.metric'),
+    metricLabel: t('portfolioPage.projects.p2.metricLabel'),
+    color: 'from-cyan-500 to-blue-600',
+    num: '02',
+  },
+  {
+    id: 'p3',
+    title: t('portfolioPage.projects.p3.title'),
+    description: t('portfolioPage.projects.p3.description'),
+    longDescription: t('portfolioPage.projects.p3.longDescription'),
+    category: 'mobile',
+    categoryLabel: t('portfolioPage.projects.p3.category'),
+    challenge: t('portfolioPage.projects.p3.challenge'),
+    solution: t('portfolioPage.projects.p3.solution'),
+    impact: t('portfolioPage.projects.p3.impact'),
+    techStack: ['Swift', 'SwiftUI', 'Firebase', 'Lottie', 'CoreData'],
+    metric: t('portfolioPage.projects.p3.metric'),
+    metricLabel: t('portfolioPage.projects.p3.metricLabel'),
+    color: 'from-emerald-500 to-teal-600',
+    num: '03',
+  },
+  {
+    id: 'p4',
+    title: t('portfolioPage.projects.p4.title'),
+    description: t('portfolioPage.projects.p4.description'),
+    longDescription: t('portfolioPage.projects.p4.longDescription'),
+    category: 'branding',
+    categoryLabel: t('portfolioPage.projects.p4.category'),
+    challenge: t('portfolioPage.projects.p4.challenge'),
+    solution: t('portfolioPage.projects.p4.solution'),
+    impact: t('portfolioPage.projects.p4.impact'),
+    techStack: ['Three.js', 'GSAP', 'WebGL', 'Astro', 'Cloudflare'],
+    metric: t('portfolioPage.projects.p4.metric'),
+    metricLabel: t('portfolioPage.projects.p4.metricLabel'),
+    color: 'from-amber-500 to-orange-600',
+    num: '04',
+  },
+  {
+    id: 'p5',
+    title: t('portfolioPage.projects.p5.title'),
+    description: t('portfolioPage.projects.p5.description'),
+    longDescription: t('portfolioPage.projects.p5.longDescription'),
+    category: 'webapp',
+    categoryLabel: t('portfolioPage.projects.p5.category'),
+    challenge: t('portfolioPage.projects.p5.challenge'),
+    solution: t('portfolioPage.projects.p5.solution'),
+    impact: t('portfolioPage.projects.p5.impact'),
+    techStack: ['Next.js', 'OpenAI', 'Prisma', 'Supabase', 'Vercel'],
+    metric: t('portfolioPage.projects.p5.metric'),
+    metricLabel: t('portfolioPage.projects.p5.metricLabel'),
+    color: 'from-rose-500 to-pink-600',
+    num: '05',
+  },
+  {
+    id: 'p6',
+    title: t('portfolioPage.projects.p6.title'),
+    description: t('portfolioPage.projects.p6.description'),
+    longDescription: t('portfolioPage.projects.p6.longDescription'),
+    category: 'dashboard',
+    categoryLabel: t('portfolioPage.projects.p6.category'),
+    challenge: t('portfolioPage.projects.p6.challenge'),
+    solution: t('portfolioPage.projects.p6.solution'),
+    impact: t('portfolioPage.projects.p6.impact'),
+    techStack: ['Remix', 'Shopify Hydrogen', 'Three.js', 'Stripe', 'Edge Functions'],
+    metric: t('portfolioPage.projects.p6.metric'),
+    metricLabel: t('portfolioPage.projects.p6.metricLabel'),
+    color: 'from-indigo-500 to-violet-600',
+    num: '06',
+  },
+];
+---
+
+<PortfolioHeroNeo
+  categories={categories}
+  badgeLabel={t('portfolio.badge')}
+  pageTitle={t('portfolioPage.pageTitle')}
+  pageSubtitle={t('portfolioPage.pageSubtitle')}
+/>
+
+<PortfolioCardsNeo
+  projects={projects}
+  viewDetailsLabel={t('portfolioPage.viewDetails')}
+  challengeLabel={t('portfolioPage.theChallenge')}
+  solutionLabel={t('portfolioPage.theSolution')}
+  impactLabel={t('portfolioPage.theImpact')}
+  techStackLabel={t('portfolioPage.techStackLabel')}
+  closeDetailsLabel={t('portfolioPage.closeDetails')}
+/>
+
+<PortfolioCTANeo
+  startProjectLabel={t('portfolioPage.startProject')}
+  startProjectSubLabel={t('portfolioPage.startProjectSub')}
+  backToHomeLabel={t('portfolioPage.backToHome')}
+  contactHref={`${neoBase}#contact`}
+  homeHref={neoBase}
+/>
+
+<script>
+  import { registerAstroPage } from '../../../utils/lifecycle';
+  import { initScrollReveal } from '../../../utils/animations';
+  import { initCategoryFilter, initDetailPanels } from '../../../utils/portfolio';
+
+  registerAstroPage((signal) => {
+    if (!document.querySelector('.c-portfolio-page-neo__card')) return;
+
+    initScrollReveal('.c-portfolio-page-neo__card', {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px',
+      staggerMs: 60,
+      signal,
+    });
+
+    initDetailPanels({
+      toggleSelector: '[data-toggle-details]',
+      closeSelector: '[data-close-details]',
+      panelBaseSelector: '.c-portfolio-page-neo__details',
+      cardSelector: '.c-portfolio-page-neo__card',
+      signal,
+    });
+
+    initCategoryFilter({
+      filtersId: 'pp-neo-filters',
+      cardSelector: '.c-portfolio-page-neo__card',
+      activeClasses: ['border-accent/20', 'text-accent', 'bg-accent/[0.05]'],
+      inactiveClasses: ['border-base-content/8', 'text-base-content/80'],
+      twoStepAnimation: true,
+      hideTransform: 'translateY(20px) scale(0.98)',
+      signal,
+    });
+  });
+</script>

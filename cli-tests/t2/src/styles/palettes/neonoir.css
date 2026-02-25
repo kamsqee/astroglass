@@ -1,0 +1,23 @@
+/* Neonoir - Edgy, futuristic, bold
+   Cyberpunk nights with electric highlights */
+[data-theme="neonoir"] {
+  --p: 280 45% 10%;
+  --s: 280 40% 16%;
+  --a: 315 100% 60%;
+  --n: 280 25% 50%;
+  --b1: 280 50% 6%;
+  --b2: 280 45% 10%;
+  --bc: 300 30% 90%;
+  /* Unique: neon glow, electric atmosphere */
+  --glass-blur: 28px;
+  --glass-opacity: 0.4;
+  --glass-border: 315 100% 60% / 0.15;
+  --glow-color: 315 100% 60%;
+  --glow-intensity: 0.35;
+  --shadow-color: 280 60% 5%;
+  --selection-bg: 315 100% 60% / 0.35;
+  --scrollbar-thumb: 315 60% 40%;
+  --scrollbar-track: 280 45% 8%;
+  --ambient-glow: radial-gradient(ellipse 50% 80% at 20% 100%, hsl(315 100% 50% / 0.1), transparent),
+                  radial-gradient(ellipse 40% 60% at 80% 80%, hsl(180 100% 50% / 0.05), transparent);
+}

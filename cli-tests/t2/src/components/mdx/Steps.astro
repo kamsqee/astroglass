@@ -1,0 +1,43 @@
+---
+/**
+ * Steps Component
+ * 
+ * Numbered step-by-step instructions with visual indicators.
+ * 
+ * Usage in MDX:
+ * <Steps>
+ *   ### Install dependencies
+ *   Run the install command...
+ *   
+ *   ### Configure the project
+ *   Create a config file...
+ *   
+ *   ### Start development
+ *   Run the dev server...
+ * </Steps>
+ */
+
+import '../../styles/components/mdx/Steps.css';
+
+export interface Props {
+  startFrom?: number;
+}
+
+const { startFrom = 1 } = Astro.props;
+---
+
+<div class="c-steps" data-steps data-start-from={startFrom}>
+  <slot />
+</div>
+
+<script>
+  function initSteps() {
+    document.querySelectorAll('[data-steps]').forEach((container) => {
+      const startFrom = parseInt((container as HTMLElement).dataset.startFrom || '1', 10);
+      (container as HTMLElement).style.setProperty('--start-from', String(startFrom));
+    });
+  }
+  
+  initSteps();
+  document.addEventListener('astro:after-swap', initSteps);
+</script>

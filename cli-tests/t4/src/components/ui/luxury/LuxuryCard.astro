@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+  spotlight?: boolean;
+  hover?: boolean;
+}
+
+const { class: className, spotlight = false, hover = true, ...rest } = Astro.props;
+---
+
+<div class:list={[
+  "relative overflow-hidden rounded-2xl",
+  "bg-gradient-to-br from-base-content/[0.05] to-base-content/[0.01]",
+  "border border-base-content/10",
+  "backdrop-blur-luxury-md",
+  "transition-all duration-500 ease-luxury",
+  hover ? "hover:translate-y-[-4px]" : "",
+  spotlight ? "js-spotlight" : "",
+  className
+]} {...rest}>
+  {spotlight && (
+    <div class="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+  )}
+  
+  <slot />
+  
+  <!-- Hover Glow Border -->
+  <div class="absolute inset-0 rounded-2xl border border-transparent group-hover:border-accent/20 pointer-events-none transition-colors duration-500"></div>
+</div>

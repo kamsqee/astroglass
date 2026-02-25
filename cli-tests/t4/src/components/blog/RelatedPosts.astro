@@ -1,0 +1,57 @@
+---
+import { useTranslations } from '../../utils/i18n';
+import { getLocaleFromUrl } from '../../utils/locale-utils';
+import BlogCard from './BlogCard.astro';
+
+interface Props {
+  posts: any[];
+}
+
+const { posts } = Astro.props;
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+---
+
+{posts.length > 0 && (
+  <section class="related-posts">
+    <h2 class="related-posts__heading">{t('blog.relatedPosts')}</h2>
+    <div class="related-posts__grid">
+      {posts.slice(0, 3).map(post => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  .related-posts {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid hsl(var(--bc) / 0.06);
+  }
+
+  .related-posts__heading {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: hsl(var(--bc));
+    margin-bottom: 1.5rem;
+  }
+
+  .related-posts__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .related-posts__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .related-posts__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

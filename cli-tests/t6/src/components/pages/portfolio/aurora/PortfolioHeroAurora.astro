@@ -1,0 +1,53 @@
+---
+/**
+ * Aurora Portfolio — Hero Section
+ * Mesh gradient hero with aurora bands, badge, title, subtitle, and pill-shaped filters.
+ */
+interface Props {
+  categories: Array<{ id: string; label: string }>;
+  badgeLabel: string;
+  pageTitle: string;
+  pageSubtitle: string;
+}
+
+const { categories, badgeLabel, pageTitle, pageSubtitle } = Astro.props;
+---
+
+<section class="pp-aurora__hero">
+  <div class="pp-aurora__hero-mesh"></div>
+  <div class="pp-aurora__hero-mesh pp-aurora__hero-mesh--2"></div>
+  <div class="pp-aurora__hero-band"></div>
+
+  <div class="relative z-10 max-w-3xl mx-auto px-4">
+    <!-- Badge -->
+    <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent mb-8">
+      <span class="portfolio-aurora-label-frame">▮▯▮</span>
+      <span>{badgeLabel}</span>
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-base-content leading-tight mb-5">
+      {pageTitle}
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="text-base sm:text-lg text-base-content/75 leading-relaxed mb-10 max-w-2xl mx-auto">
+      {pageSubtitle}
+    </p>
+
+    <!-- Category Filters (pill-shaped) -->
+    <div class="flex flex-wrap gap-2 justify-center" id="pp-aurora-filters">
+      {categories.map((cat, i) => (
+        <button
+          class:list={[
+            'pp-aurora__filter',
+            i === 0 ? 'is-active' : ''
+          ]}
+          data-filter={cat.id}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,183 @@
+---
+/**
+ * CodeTabs Component
+ * 
+ * Tabbed code blocks for showing the same code in multiple languages
+ * or different implementation approaches.
+ * 
+ * Usage in MDX:
+ * <CodeTabs labels={['npm', 'pnpm', 'yarn']}>
+ *   ```bash
+ *   npm install @astrojs/tailwind
+ *   ```
+ *   ```bash
+ *   pnpm add @astrojs/tailwind
+ *   ```
+ *   ```bash
+ *   yarn add @astrojs/tailwind
+ *   ```
+ * </CodeTabs>
+ */
+
+import '../../styles/components/mdx/CodeTabs.css';
+
+export interface Props {
+  labels: string[];
+  defaultTab?: number;
+}
+
+const { labels = [], defaultTab = 0 } = Astro.props;
+const tabId = `codetabs-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<div class="c-code-tabs" data-code-tabs id={tabId}>
+  <div class="c-code-tabs__header" role="tablist">
+    {labels.map((label, index) => (
+      <button
+        type="button"
+        role="tab"
+        class:list={['c-code-tabs__tab', index === defaultTab && 'is-active']}
+        aria-selected={index === defaultTab}
+        aria-controls={`${tabId}-panel-${index}`}
+        data-tab-index={index}
+      >
+        {label}
+      </button>
+    ))}
+  </div>
+  
+  <div class="c-code-tabs__panels">
+    <slot />
+  </div>
+</div>
+
+<script>
+  function initCodeTabs() {
+    const STORAGE_KEY = 'pref:code-tab';
+
+    // Helper: Get stored preference
+    const getPreference = () => {
+      try {
+        return localStorage.getItem(STORAGE_KEY);
+      } catch (e) {
+        return null;
+      }
+    };
+
+    // Helper: Set stored preference
+    const setPreference = (label: string) => {
+      try {
+        localStorage.setItem(STORAGE_KEY, label);
+      } catch (e) {
+        // ignore
+      }
+    };
+
+    document.querySelectorAll('[data-code-tabs]').forEach((container) => {
+      const tabs = container.querySelectorAll('.c-code-tabs__tab');
+      const panels = container.querySelectorAll('.c-code-tabs__panels > *');
+      
+      // Auto-select tab if preference exists
+      const preferredLabel = getPreference();
+      if (preferredLabel) {
+        let foundIndex = -1;
+        tabs.forEach((tab, index) => {
+          if (tab.textContent.trim() === preferredLabel) {
+            foundIndex = index;
+          }
+        });
+
+        if (foundIndex !== -1) {
+          // Update state immediately without animation
+          tabs.forEach((t, i) => {
+            t.classList.toggle('is-active', i === foundIndex);
+            t.setAttribute('aria-selected', String(i === foundIndex));
+          });
+          panels.forEach((p, i) => {
+            p.classList.toggle('is-active', i === foundIndex);
+          });
+        }
+      } else {
+         // Default state (first tab active) is handled by server-side rendering logic or CSS
+         // But let's ensure panels are correct
+          panels.forEach((panel, index) => {
+            if (index === 0 && !container.querySelector('.c-code-tabs__panels > .is-active')) {
+             panel.classList.add('is-active');
+            }
+          });
+      }
+
+      
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const index = parseInt((tab as HTMLElement).dataset.tabIndex || '0', 10);
+          const label = tab.textContent.trim();
+          
+          // Save preference
+          setPreference(label);
+
+          // Update this instance
+          updateTabsInContainer(container, index);
+
+          // Notify other instances
+          window.dispatchEvent(new CustomEvent('code-tab-change', { 
+            detail: { label } 
+          }));
+        });
+
+        // Keyboard navigation
+        tab.addEventListener('keydown', (e) => {
+          const index = parseInt((tab as HTMLElement).dataset.tabIndex || '0', 10);
+          let newIndex = -1;
+
+          if ((e as KeyboardEvent).key === 'ArrowRight') {
+            newIndex = (index + 1) % tabs.length;
+          } else if ((e as KeyboardEvent).key === 'ArrowLeft') {
+            newIndex = (index - 1 + tabs.length) % tabs.length;
+          } else if ((e as KeyboardEvent).key === 'Home') {
+            newIndex = 0;
+          } else if ((e as KeyboardEvent).key === 'End') {
+            newIndex = tabs.length - 1;
+          }
+
+          if (newIndex !== -1) {
+            e.preventDefault();
+            const targetTab = tabs[newIndex] as HTMLElement;
+            targetTab.focus();
+            targetTab.click(); // Trigger click logic (update + sync)
+          }
+        });
+      });
+    });
+
+    // Listen for global changes
+    window.addEventListener('code-tab-change', (e) => {
+       const label = (e as CustomEvent).detail.label;
+       document.querySelectorAll('[data-code-tabs]').forEach((container) => {
+          const tabs = Array.from(container.querySelectorAll('.c-code-tabs__tab'));
+          const targetIndex = tabs.findIndex(t => t.textContent.trim() === label);
+          
+          if (targetIndex !== -1) {
+             updateTabsInContainer(container, targetIndex);
+          }
+       });
+    });
+
+    function updateTabsInContainer(container: Element, index: number) {
+        const tabs = container.querySelectorAll('.c-code-tabs__tab');
+        const panels = container.querySelectorAll('.c-code-tabs__panels > *');
+
+        tabs.forEach((t, i) => {
+            t.classList.toggle('is-active', i === index);
+            t.setAttribute('aria-selected', String(i === index));
+        });
+        
+        panels.forEach((p, i) => {
+            p.classList.toggle('is-active', i === index);
+        });
+    }
+  }
+  
+  initCodeTabs();
+  document.addEventListener('astro:after-swap', initCodeTabs);
+</script>

@@ -1,0 +1,68 @@
+/* -------------------------------------------------------------------------- */
+/*                   FOOTER MINIMAL — MASTHEAD EDITORIAL                       */
+/* -------------------------------------------------------------------------- */
+
+/* ---- Wordmark reveal ---- */
+.footer-minimal__wordmark {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: footer-reveal var(--duration-minimal) var(--ease-minimal) 200ms forwards;
+}
+
+/* ---- Column stagger ---- */
+.footer-minimal__col {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: footer-reveal 700ms var(--ease-minimal) forwards;
+}
+
+.footer-minimal__col:nth-child(1) { animation-delay: 300ms; }
+.footer-minimal__col:nth-child(2) { animation-delay: 420ms; }
+.footer-minimal__col:nth-child(3) { animation-delay: 540ms; }
+
+@keyframes footer-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Link hover ---- */
+.footer-minimal__link {
+  transition: color 300ms ease, transform 300ms ease;
+}
+
+.footer-minimal__link:hover {
+  color: hsl(var(--a) / 0.7);
+  transform: translateX(6px);
+}
+
+/* ---- Social icon hover ---- */
+.footer-minimal__social {
+  transition: all var(--duration-minimal-fast) var(--ease-minimal);
+}
+
+.footer-minimal__social:hover {
+  border-color: hsl(var(--a) / 0.2);
+  background: hsl(var(--a) / 0.06);
+  color: hsl(var(--a) / 0.6);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px hsl(var(--a) / 0.08);
+}
+
+/* ---- Accent rule entrance ---- */
+.footer-minimal__rule-accent {
+  opacity: 0;
+  animation: footer-rule-expand 1200ms var(--ease-minimal) 100ms forwards;
+}
+
+@keyframes footer-rule-expand {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}

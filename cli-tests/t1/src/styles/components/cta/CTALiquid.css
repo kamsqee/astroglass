@@ -1,0 +1,165 @@
+/* CTALiquid.css — Pooling rise effect, blob button, liquid flows */
+
+/* ── Background ── */
+.cta-liquid-bg {
+  transition: opacity var(--duration-long) var(--ease-liquid);
+}
+
+/* ── Main Card — Rise/pool effect ── */
+.cta-liquid-card {
+  transition: all var(--duration-long) var(--ease-liquid);
+  transform: translateZ(0);
+}
+
+.cta-liquid-card:hover {
+  border-color: hsl(var(--a) / 0.2);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Card reflection (pool effect) */
+.cta-liquid-card::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: 10%;
+  right: 10%;
+  height: 40px;
+  background: linear-gradient(to bottom, hsl(var(--a) / 0.06), transparent);
+  filter: blur(8px);
+  border-radius: 0 0 50% 50%;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+.cta-liquid-card.revealed::after {
+  opacity: 1;
+}
+
+/* ── Reveal Animations (rise from pool) ── */
+.cta-liquid-eyebrow.revealed {
+  animation: cta-pool-rise var(--duration-slow) var(--ease-liquid) forwards;
+  animation-delay: 0ms;
+}
+
+.cta-liquid-message.revealed {
+  animation: cta-pool-rise var(--duration-slow) var(--ease-liquid) forwards;
+  animation-delay: 100ms;
+}
+
+.cta-liquid-proof.revealed {
+  animation: cta-pool-rise var(--duration-slow) var(--ease-liquid) forwards;
+  animation-delay: 200ms;
+}
+
+.cta-liquid-headline.revealed {
+  animation: cta-pool-rise var(--duration-slow) var(--ease-liquid) forwards;
+  animation-delay: 150ms;
+}
+
+.cta-liquid-subtext.revealed {
+  animation: cta-pool-rise var(--duration-slow) var(--ease-liquid) forwards;
+  animation-delay: 250ms;
+}
+
+.cta-liquid-buttons.revealed {
+  animation: cta-pool-rise var(--duration-slow) var(--ease-liquid) forwards;
+  animation-delay: 350ms;
+}
+
+.cta-liquid-trust.revealed {
+  animation: cta-pool-rise var(--duration-slow) var(--ease-liquid) forwards;
+  animation-delay: 450ms;
+}
+
+@keyframes cta-pool-rise {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scaleY(0.95);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    filter: blur(0px);
+  }
+}
+
+/* ── Handle Pulse (mobile) ── */
+.cta-liquid-handle {
+  animation: cta-handle-pulse 2s ease-in-out infinite;
+}
+
+@keyframes cta-handle-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+/* ── Primary Button — Ripple + Blob ── */
+.cta-liquid-primary {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  transition: all var(--duration-slow) var(--ease-liquid);
+}
+
+.cta-liquid-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translate(-50%, -50%);
+  transition: width 0.8s ease, height 0.8s ease;
+}
+
+.cta-liquid-primary:hover::before {
+  width: 300%;
+  height: 300%;
+}
+
+.cta-liquid-primary:hover {
+  border-radius: 1.5rem 0.75rem 1.5rem 0.75rem;
+}
+
+/* ── Liquid Social Proof Drops ── */
+.cta-liquid-proof-drop {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: ctaLiquidProofMorph 6s ease-in-out infinite;
+}
+
+.cta-liquid-proof-drop:nth-child(2) {
+  animation-delay: -2s;
+  border-radius: 50% 50% 30% 70% / 60% 40% 60% 40%;
+}
+
+.cta-liquid-proof-drop:nth-child(3) {
+  animation-delay: -4s;
+  border-radius: 70% 30% 50% 50% / 40% 60% 40% 60%;
+}
+
+@keyframes ctaLiquidProofMorph {
+  0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+  50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-liquid-eyebrow.revealed,
+  .cta-liquid-message.revealed,
+  .cta-liquid-proof.revealed,
+  .cta-liquid-headline.revealed,
+  .cta-liquid-subtext.revealed,
+  .cta-liquid-buttons.revealed,
+  .cta-liquid-trust.revealed {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  .cta-liquid-handle, .cta-liquid-proof-drop {
+    animation: none !important;
+  }
+}

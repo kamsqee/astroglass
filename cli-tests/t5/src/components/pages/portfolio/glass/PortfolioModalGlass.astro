@@ -1,0 +1,91 @@
+---
+/**
+ * Glass Portfolio — Modal Overlay
+ * 
+ * Full-screen frosted glass overlay with close button,
+ * dynamic content area, and pre-rendered <template> elements
+ * for each project (cloned into the panel on open).
+ */
+interface Project {
+  id: string;
+  title: string;
+  longDescription: string;
+  category: string;
+  categoryLabel: string;
+  challenge: string;
+  solution: string;
+  impact: string;
+  techStack: string[];
+  metric: string;
+  metricLabel: string;
+}
+
+interface Props {
+  projects: Project[];
+  challengeLabel: string;
+  solutionLabel: string;
+  impactLabel: string;
+  techStackLabel: string;
+}
+
+const { projects, challengeLabel, solutionLabel, impactLabel, techStackLabel } = Astro.props;
+---
+
+<!-- Overlay shell -->
+<div class="c-portfolio-page-glass__overlay" id="pp-glass-modal">
+  <div class="c-portfolio-page-glass__overlay-backdrop" data-close-modal></div>
+  <div class="c-portfolio-page-glass__overlay-panel">
+    <!-- Close button -->
+    <button class="absolute top-6 right-6 w-10 h-10 rounded-xl bg-base-content/5 border border-base-content/10 flex items-center justify-center text-base-content/75 hover:text-accent hover:border-accent/20 transition-colors duration-300 cursor-pointer z-20" data-close-modal>
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Dynamic content filled from <template> -->
+    <div id="pp-glass-modal-content"></div>
+  </div>
+</div>
+
+<!-- Pre-rendered modal content (safe Astro templates, no innerHTML) -->
+{projects.map((p, i) => (
+  <template data-modal-index={i}>
+    <div class="mb-8">
+      <span class="inline-flex items-center gap-2.5 font-black uppercase mb-4" style={`font-size: var(--text-tag-glass); letter-spacing: var(--tracking-tag-glass); color: hsl(var(--a));`}>
+        <span style="display:inline-block;width:1.25rem;height:2px;background:hsl(var(--a));border-radius:1px;flex-shrink:0;"></span>
+        {p.categoryLabel}
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-black text-base-content tracking-tight mb-3">{p.title}</h2>
+      <p class="text-base text-base-content/75 leading-relaxed">{p.longDescription}</p>
+    </div>
+
+    <div class="flex items-center gap-4 mb-8 p-4 rounded-2xl bg-base-content/[0.02] border border-base-content/5">
+      <span class="text-3xl font-black text-accent">{p.metric}</span>
+      <span class="text-xs text-base-content/75 font-bold uppercase tracking-wider">{p.metricLabel}</span>
+    </div>
+
+    <div class="c-portfolio-page-glass__narrative mb-8">
+      <div class="c-portfolio-page-glass__narrative-block">
+        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-accent mb-3">{challengeLabel}</h4>
+        <p class="text-sm text-base-content/75 leading-relaxed">{p.challenge}</p>
+      </div>
+      <div class="c-portfolio-page-glass__narrative-block">
+        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-accent mb-3">{solutionLabel}</h4>
+        <p class="text-sm text-base-content/75 leading-relaxed">{p.solution}</p>
+      </div>
+      <div class="c-portfolio-page-glass__narrative-block">
+        <h4 class="text-xs font-black uppercase tracking-[0.2em] text-accent mb-3">{impactLabel}</h4>
+        <p class="text-sm text-base-content/75 leading-relaxed">{p.impact}</p>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <h4 class="text-xs font-black uppercase tracking-[0.2em] text-base-content/75 mb-3">{techStackLabel}</h4>
+      <div class="flex flex-wrap gap-2">
+        {p.techStack.map((tech) => (
+          <span class="c-portfolio-page-glass__tech-pill">{tech}</span>
+        ))}
+      </div>
+    </div>
+  </template>
+))}

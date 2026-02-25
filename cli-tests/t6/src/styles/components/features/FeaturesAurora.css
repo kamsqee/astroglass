@@ -1,0 +1,415 @@
+/* -------------------------------------------------------------------------- */
+/*                       FEATURES AURORA — HORIZONTAL SCROLL                  */
+/* -------------------------------------------------------------------------- */
+
+.features-aurora {
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .features-aurora {
+    padding: 120px 0;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                HEADER                                      */
+/* -------------------------------------------------------------------------- */
+
+.features-aurora-header {
+  max-width: 700px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .features-aurora-header {
+    margin-bottom: 64px;
+    padding: 0 32px;
+  }
+}
+
+.features-aurora-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: hsl(var(--a));
+  margin-bottom: 20px;
+}
+
+.features-aurora-label-num {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: hsl(var(--a));
+  background: hsl(var(--a) / 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.features-aurora-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: hsl(var(--bc));
+  margin-bottom: 16px;
+}
+
+.features-aurora-title-pure {
+  display: block;
+  color: hsl(var(--bc) / 0.7);
+}
+
+.features-aurora-title-accent {
+  display: block;
+  background: linear-gradient(135deg, hsl(var(--bc)), hsl(var(--a)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.features-aurora-subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: hsl(var(--bc) / 0.75);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          SCROLL WRAPPER                                    */
+/* -------------------------------------------------------------------------- */
+
+.features-aurora-scroll-wrapper {
+  position: relative;
+  padding: 0 24px;
+}
+
+@media (min-width: 768px) {
+  .features-aurora-scroll-wrapper {
+    padding: 0 48px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                          NAVIGATION ARROWS                                 */
+/* -------------------------------------------------------------------------- */
+
+.features-aurora-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: hsl(var(--b1) / 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--bc) / 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  color: hsl(var(--bc) / 0.6);
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .features-aurora-arrow {
+    display: flex;
+  }
+}
+
+.features-aurora-arrow:hover {
+  color: hsl(var(--a));
+  border-color: hsl(var(--a) / 0.3);
+  background: hsl(var(--a) / 0.05);
+  box-shadow: 0 0 20px hsl(var(--a) / 0.1);
+}
+
+.features-aurora-arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.features-aurora-arrow--left {
+  left: 8px;
+}
+
+.features-aurora-arrow--right {
+  right: 8px;
+}
+
+.features-aurora-arrow.is-hidden {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             CARDS TRACK                                    */
+/* -------------------------------------------------------------------------- */
+
+.features-aurora-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 24px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 20px 0;
+}
+
+.features-aurora-track::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .features-aurora-track {
+    gap: 24px;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/*                              CARD                                          */
+/* -------------------------------------------------------------------------- */
+
+.features-aurora-card {
+  position: relative;
+  flex: 0 0 280px;
+  min-height: 380px;
+  background: hsl(var(--b1));
+  border: 1px solid hsl(var(--bc) / 0.06);
+  border-radius: 20px;
+  padding: 32px 28px;
+  scroll-snap-align: start;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Staggered height — every 3rd card is taller */
+.features-aurora-card--tall {
+  min-height: 420px;
+}
+
+@media (min-width: 640px) {
+  .features-aurora-card {
+    flex: 0 0 320px;
+    min-height: 400px;
+  }
+  .features-aurora-card--tall {
+    min-height: 450px;
+  }
+}
+
+/* Per-card aurora hue colors */
+.features-aurora-card[data-aurora-hue="0"] { --card-hue: var(--a); }
+.features-aurora-card[data-aurora-hue="1"] { --card-hue: 280 80% 65%; }
+.features-aurora-card[data-aurora-hue="2"] { --card-hue: 200 90% 60%; }
+.features-aurora-card[data-aurora-hue="3"] { --card-hue: 340 85% 65%; }
+.features-aurora-card[data-aurora-hue="4"] { --card-hue: 160 70% 55%; }
+
+.features-aurora-card:hover {
+  border-color: hsl(var(--a) / 0.15);
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 24px hsl(var(--bc) / 0.02),
+    0 0 12px hsl(var(--card-hue, var(--a)) / 0.03);
+}
+
+/* Card grid overlay */
+.features-aurora-card-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(hsl(var(--bc) / 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--bc) / 0.02) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.features-aurora-card:hover .features-aurora-card-grid {
+  opacity: 1;
+}
+
+/* Number — large watermark */
+.features-aurora-card-num {
+  position: absolute;
+  top: -8px;
+  right: 16px;
+  font-size: 5rem;
+  font-weight: 900;
+  font-family: monospace;
+  background: linear-gradient(135deg, hsl(var(--card-hue, var(--a)) / 0.06), transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: none;
+  line-height: 1;
+  z-index: 0;
+}
+
+/* Icon with rotating conic-gradient border */
+.features-aurora-card-icon {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: hsl(var(--card-hue, var(--a)) / 0.08);
+  border: 1px solid hsl(var(--card-hue, var(--a)) / 0.12);
+  border-radius: 14px;
+  color: hsl(var(--card-hue, var(--a)));
+  margin-bottom: 24px;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.features-aurora-card:hover .features-aurora-card-icon {
+  background: hsl(var(--card-hue, var(--a)) / 0.12);
+  border-color: hsl(var(--card-hue, var(--a)) / 0.2);
+  box-shadow: 0 0 16px hsl(var(--card-hue, var(--a)) / 0.1);
+  transform: scale(1.05);
+}
+
+.features-aurora-card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Title */
+.features-aurora-card-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: hsl(var(--bc));
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+/* Description */
+.features-aurora-card-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: hsl(var(--bc) / 0.7);
+  flex: 1;
+}
+
+/* Long description — revealed on hover */
+.features-aurora-card-long {
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: hsl(var(--bc) / 0.7);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid hsl(var(--bc) / 0.06);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.features-aurora-card:hover .features-aurora-card-long {
+  max-height: 120px;
+  opacity: 1;
+}
+
+/* Top accent line — per-card color */
+.features-aurora-card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    hsl(var(--card-hue, var(--a)) / 0.5),
+    hsl(var(--card-hue, var(--a))),
+    hsl(var(--card-hue, var(--a)) / 0.5)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.features-aurora-card:hover .features-aurora-card-accent {
+  opacity: 1;
+}
+
+/* Glow accent — per-card color */
+.features-aurora-card-glow {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 60px;
+  background: radial-gradient(ellipse, hsl(var(--card-hue, var(--a)) / 0.08) 0%, transparent 60%);
+  filter: blur(24px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.features-aurora-card:hover .features-aurora-card-glow {
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/*                             BOTTOM CTA                                     */
+/* -------------------------------------------------------------------------- */
+
+.features-aurora-bottom {
+  text-align: center;
+  padding: 48px 24px 0;
+}
+
+.features-aurora-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: hsl(var(--a));
+  background: hsl(var(--a) / 0.08);
+  border: 1px solid hsl(var(--a) / 0.15);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.4s ease;
+}
+
+.features-aurora-cta:hover {
+  background: hsl(var(--a) / 0.15);
+  border-color: hsl(var(--a) / 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px hsl(var(--a) / 0.1);
+}
+
+.features-aurora-cta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.features-aurora-cta:hover svg {
+  transform: translateX(4px);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                         MONOCHROME THEME OVERRIDES                         */
+/* -------------------------------------------------------------------------- */
+[data-theme="monochrome"] .features-aurora-card[data-aurora-hue] {
+  --card-hue: var(--bc);
+}

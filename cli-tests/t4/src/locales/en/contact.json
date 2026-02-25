@@ -1,0 +1,165 @@
+{
+  "eyebrow": "Get in Touch",
+  "title": "Let's have a chat",
+  "subtitle": "We're here to help. Reach out anytime.",
+  "supportTeam": "Support Team",
+  "onlineNow": "Online now · Usually replies instantly",
+  "botWelcome": "Hey there! 👋 I'm here to help. What brings you in today?",
+  "messageSent": "Message sent! We'll be in touch soon.",
+  "secureInfo": "🔒 Your information is secure and never shared",
+  "intents": {
+    "sales": "Sales inquiry",
+    "salesDesc": "Pricing, demos, enterprise",
+    "support": "Support",
+    "supportDesc": "Technical help, bugs, issues",
+    "partnership": "Partnership",
+    "partnershipDesc": "Integrations, collaborations",
+    "other": "Other",
+    "otherDesc": "Everything else"
+  },
+  "form": {
+    "name": "Your name",
+    "email": "Work email",
+    "company": "Company",
+    "message": "How can we help?",
+    "topic": "Topic",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent! We'll get back to you within 24 hours.",
+    "privacy": "By clicking, you agree to our",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "placeholders": {
+    "typeMessage": "Type your message...",
+    "yourEmail": "your@email.com",
+    "emailAddress": "Email address",
+    "johnSmith": "John Smith",
+    "acmeInc": "Acme Inc.",
+    "tellUs": "Tell us about your project or question...",
+    "selectTopic": "Select a topic...",
+    "yourMessage": "Your message..."
+  },
+  "topics": {
+    "general": "General Inquiry",
+    "sales": "Sales",
+    "salesQuestion": "Sales Question",
+    "support": "Technical Support",
+    "partnership": "Partnership"
+  },
+  "chat": {
+    "askName": "Nice! What's your name?",
+    "askEmail": "Great to meet you, {name}! What's the best email to reach you?",
+    "askMessage": "Perfect! Now tell me a bit about what you need help with.",
+    "thanks": "Thanks so much! 🎉 We've received your message and will get back to you within a few hours."
+  },
+  "wizard": {
+    "step1": "Topic",
+    "step2": "Details",
+    "step3": "Contact",
+    "continue": "Continue →",
+    "back": "← Back",
+    "steps": {
+      "topic": "Choose Topic",
+      "details": "Details",
+      "send": "Send"
+    },
+    "actions": {
+      "change": "Change",
+      "continue": "Continue",
+      "back": "← Back to details",
+      "restart": "Send another message"
+    },
+    "fields": {
+      "companyName": "Company Name",
+      "teamSize": "Team Size",
+      "budget": "Budget Range",
+      "issueType": "Issue Type",
+      "severity": "Severity",
+      "accountEmail": "Account Email",
+      "yourRole": "Your Role",
+      "partnershipType": "Partnership Type",
+      "topic": "Topic"
+    },
+    "placeholders": {
+      "acme": "Acme Inc.",
+      "partnerCorp": "Partner Corp.",
+      "role": "e.g., BD Manager",
+      "topic": "What is this about?",
+      "accountEmail": "Your account email",
+      "teamSize": "1-10|11-50|51-200|200+",
+      "budget": "Under $1k|$1k-$5k|$5k-$20k|$20k+",
+      "issueType": "Bug|Feature Request|Question|Other",
+      "severity": "Low|Medium|High|Critical",
+      "partnershipType": "Integration|Reseller|Affiliate|Other",
+      "select": "Select..."
+    },
+    "teams": {
+      "sales": "sales team",
+      "support": "support team",
+      "partnership": "partnerships team",
+      "default": "team"
+    },
+    "successMsg": "Thanks for reaching out. Our {team} will get back to you soon."
+  },
+  "contactUs": "Contact Us",
+  "howCanWeHelp": "How can we help?",
+  "card": {
+    "swipeHint": "Swipe or use arrows",
+    "prev": "Previous",
+    "next": "Next",
+    "submit": "Submit",
+    "step": "Step"
+  },
+  "split": {
+    "whyTitle": "Why reach out?",
+    "reason1": "Get personalized demos",
+    "reason2": "Discuss enterprise solutions",
+    "reason3": "Technical support & guidance",
+    "reason4": "Partnership opportunities",
+    "trusted": "Trusted by 10,000+ teams",
+    "response": "Average response < 4 hours"
+  },
+  "salesEyebrow": "Contact Sales",
+  "salesTitle": "Let's build something great together",
+  "salesSubtitle": "Fill out the form and our team will get back to you within 24 hours. We're here to help you succeed.",
+  "subtitleLuxury": "We'd love to hear from you",
+  "benefits": {
+    "response24h": "Response within 24 hours",
+    "response24hDesc": "Our team monitors inquiries around the clock",
+    "dedicatedSupport": "Dedicated support team",
+    "dedicatedSupportDesc": "Get personalized help from our experts",
+    "security": "Enterprise-grade security",
+    "securityDesc": "SOC 2 Type II certified, GDPR compliant"
+  },
+  "trustedBy": "Trusted by industry leaders",
+  "successTitle": "Message Sent!",
+  "successTitleLuxury": "Thanks for reaching out!",
+  "successDesc": "We'll be in touch within 24 hours.",
+  "successDescLuxury": "We'll get back to you soon.",
+  "secure": "Secure",
+  "noSpam": "No spam",
+  "emailLabel": "Email",
+  "officeLabel": "Office",
+  "officeLocation": "San Francisco, CA",
+  "name": "Name",
+  "email": "Email",
+  "scaleLabel": "Project Scale",
+  "scale": {
+    "sm": "Small (< 1k users)",
+    "md": "Medium (1k-10k users)",
+    "lg": "Large (10k-100k users)",
+    "xl": "Global (100k+ users)"
+  },
+  "message": "Message",
+  "messagePlaceholder": "Tell us about your project...",
+  "send": "Send Message",
+  "validation": {
+    "nameShort": "Name must be at least 2 characters",
+    "nameLong": "Name is too long",
+    "emailInvalid": "Please enter a valid email address",
+    "messageShort": "Message must be at least 10 characters",
+    "messageLong": "Message is too long",
+    "required": "This field is required",
+    "submitError": "Something went wrong. Please try again."
+  }
+}

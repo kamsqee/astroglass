@@ -1,0 +1,125 @@
+---
+/**
+ * Theme Stack - Adapted from PortfolioNeo
+ * Showcasing the available themes as stacked cards.
+ */
+import '../../../styles/components/portfolio/PortfolioNeo.css';
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+import LocalizedLink from '../../ui/LocalizedLink.astro';
+import { themes } from '../../../config/themes';
+import { Image } from 'astro:assets';
+
+// Import all theme backgrounds eager-loaded
+const themeImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/themes/*CardBg.png', { eager: true });
+
+const getThemeImage = (id: string) => {
+  const name = id.charAt(0).toUpperCase() + id.slice(1);
+  return themeImages[`/src/assets/themes/${name}CardBg.png`]?.default;
+};
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Filter enabled themes and map to card format
+// Note: Theme descriptions from config are currently English-only. 
+// Ideally, themes config should probably support i18n or be mapped here.
+// For now, we'll keep the config descriptions but localize the UI around them.
+const themeCards = themes.filter(t => t.enabled).map((theme, i) => ({
+  id: i + 1,
+  title: theme.name,
+  desc: theme.description, 
+  category: theme.name === 'Luxury' || theme.name === 'Aurora' ? t('landing.themeStack.premium') : t('landing.themeStack.free'),
+  realId: theme.id,
+  color: theme.color
+}));
+
+---
+
+<section id="themes" class="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 overflow-hidden">
+  <!-- Background ambient -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px]"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <!-- Header -->
+    <div class="text-center mb-12 sm:mb-16 md:mb-20">
+      <span class="inline-block text-accent font-black uppercase text-[10px] tracking-[0.3em] mb-4">{t('landing.themeStack.eyebrow')}</span>
+      <h2 class="text-4xl sm:text-5xl md:text-7xl font-black text-base-content tracking-tight mb-4">
+        {t('landing.themeStack.title')}
+      </h2>
+      <p class="text-base sm:text-lg text-base-content/75 max-w-xl mx-auto">
+        {t('landing.themeStack.desc')}
+      </p>
+    </div>
+
+    <!-- Stacked Cards -->
+    <div class="c-portfolio-neo__container relative">
+      {themeCards.map((p, i) => (
+        <a 
+          href={`/${p.realId}`}
+          class="c-portfolio-neo__card group block"
+          style={`animation-delay: ${i * 100}ms`}
+          data-index={i}
+        >
+          <div class="c-portfolio-neo__inner relative rounded-2xl sm:rounded-3xl overflow-hidden border border-base-content/10 bg-base-100 backdrop-blur-xl shadow-2xl transition-transform duration-500 group-hover:-translate-y-2">
+            <!-- Gradient accent top -->
+            <div class={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${p.color}`}></div>
+            
+            <!-- Background Image -->
+            {getThemeImage(p.realId) && (
+              <Image 
+                src={getThemeImage(p.realId)} 
+                alt={`${p.title} theme background`} 
+                width={800}
+                class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-60 transition-opacity duration-700" 
+              />
+            )}
+            
+            <!-- Background gradient -->
+            <div class={`absolute inset-0 bg-gradient-to-br ${p.color} opacity-20 group-hover:opacity-40 transition-opacity duration-700 mix-blend-overlay`}></div>
+
+            <!-- Overlay text contrast -->
+            <div class="absolute inset-0 bg-base-100/60 group-hover:bg-base-100/40 transition-colors duration-700"></div>
+            
+            <div class="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12">
+              <div class="flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
+                <!-- Left: Number + Category -->
+                <div class="flex lg:flex-col items-center lg:items-start gap-4 lg:gap-2">
+                  <span class={`text-4xl sm:text-5xl lg:text-6xl font-black bg-gradient-to-br ${p.color} bg-clip-text text-transparent`}>
+                    0{p.id}
+                  </span>
+                  <span class={`px-3 py-1 rounded-lg bg-base-content/5 text-[10px] font-bold uppercase tracking-wider ${p.category === t('landing.themeStack.premium') ? 'text-amber-500' : 'text-base-content/75'}`}>
+                    {p.category}
+                  </span>
+                </div>
+                
+                <!-- Middle: Content -->
+                <div class="flex-1">
+                  <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-base-content mb-3 tracking-tight group-hover:text-accent transition-colors duration-500">
+                    {p.title}
+                  </h3>
+                  <p class="text-sm sm:text-base text-base-content/75 leading-relaxed max-w-xl">
+                    {p.desc}
+                  </p>
+                </div>
+                
+                <!-- Right: CTA -->
+                <div class="hidden sm:flex items-center gap-4">
+                  <span class={`inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r ${p.color} text-white font-bold text-sm shadow-lg hover:shadow-xl transition-all duration-300`}>
+                    {t('landing.themeStack.viewDemo')}
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </LocalizedLink>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+/* ============================================
+   Luxury Theme Tokens
+   Rich shadows, warm glow, refined motion
+   ============================================ */
+@theme {
+  --tracking-wide-luxury: 0.3em;
+  --tracking-wide-luxuryst: 0.5em;
+  
+  --shadow-main-luxury: 0 30px 60px -15px rgba(0, 0, 0, 0.2), 0 0 30px hsl(var(--a) / 0.08);
+  --shadow-hover-luxury: 0 40px 80px -20px rgba(0, 0, 0, 0.25), 0 0 40px hsl(var(--a) / 0.15);
+  
+  --blur-luxury-sm: 16px;
+  --blur-luxury-md: 24px;
+  --blur-luxury-lg: 40px;
+
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-luxury-slow: cubic-bezier(0.19, 1, 0.22, 1);
+}

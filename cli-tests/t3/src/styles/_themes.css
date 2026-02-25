@@ -1,0 +1,28 @@
+
+/* ============================================
+   Theme Definitions
+   Each palette has unique visual characteristics.
+   ============================================ */
+
+@import "./palettes/_root.css";
+
+@import "./palettes/azure.css";
+
+@import "./palettes/solaris.css";
+
+@import "./palettes/evergreen.css";
+
+@import "./palettes/rose.css";
+
+@import "./palettes/monochrome.css";
+
+@import "./palettes/nordic.css";
+
+@import "./palettes/aquatica.css";
+
+@import "./palettes/abyss.css";
+
+@import "./palettes/neonoir.css";
+
+@import "./palettes/synthwave.css";
+

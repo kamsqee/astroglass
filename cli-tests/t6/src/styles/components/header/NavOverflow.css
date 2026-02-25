@@ -1,0 +1,102 @@
+/* -------------------------------------------------------------------------- */
+/*                      NAV OVERFLOW "MORE" DROPDOWN                           */
+/* -------------------------------------------------------------------------- */
+/* Shared styles for the overflow "More" menu used across all header themes.   */
+/* Theme-specific trigger/menu styling inherits from the parent theme's CSS.   */
+
+/* More dropdown wrapper */
+[data-nav-more] {
+  position: relative;
+  display: none; /* Hidden by default, shown by JS when overflow detected */
+}
+
+/* Trigger button — inherits theme nav-item styles via additional class */
+.nav-more-trigger {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.nav-more-chevron {
+  width: 14px;
+  height: 14px;
+  opacity: 0.5;
+  transition: transform 0.3s ease;
+}
+
+[data-nav-more].is-open .nav-more-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 180px;
+  padding: 6px;
+  background: hsl(var(--b1) / 0.95);
+  backdrop-filter: blur(24px);
+  border: 1px solid hsl(var(--bc) / 0.1);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px -12px hsl(var(--shadow-color, 0 0% 0%) / 0.25);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+}
+
+[data-nav-more].is-open .nav-more-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* Menu items */
+.nav-more-menu-item {
+  display: block;
+  padding: 8px 14px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: hsl(var(--bc) / 0.7);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-more-menu-item:hover {
+  color: hsl(var(--a));
+  background: hsl(var(--a) / 0.08);
+}
+
+/* Sub-items (from collapsed dropdowns) */
+.nav-more-menu-subitem {
+  padding-left: 24px;
+  font-size: 0.825rem;
+}
+
+/* Divider (dropdown header label) */
+.nav-more-menu-divider {
+  padding: 6px 14px 2px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: hsl(var(--bc) / 0.4);
+  border-top: 1px solid hsl(var(--bc) / 0.08);
+  margin-top: 4px;
+}
+
+.nav-more-menu-divider:first-child {
+  border-top: none;
+  margin-top: 0;
+}

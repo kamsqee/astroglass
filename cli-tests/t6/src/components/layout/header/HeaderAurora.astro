@@ -1,0 +1,225 @@
+---
+/**
+ * HeaderAurora — Transparent Floating Bar with Gradient Accents
+ *
+ * Desktop: full-width transparent header with inline nav + dropdowns.
+ * Bottom gradient border fades in on scroll. 
+ * Mobile: fullscreen mesh overlay with expandable children.
+ */
+import { getLocaleFromUrl, useTranslations } from '../../../utils/i18n';
+import LocalizedLink from '../../ui/LocalizedLink.astro';
+import { buildThemeNavLinks } from '../../../config/navigation';
+import LanguageSwitcher from '../../ui/LanguageSwitcher.astro';
+import ThemeSwitcher from '../../ui/ThemeSwitcher.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+const navLinks = buildThemeNavLinks(t, 'aurora');
+import '../../../styles/components/header/HeaderAurora.css';
+import '../../../styles/components/header/NavOverflow.css';
+
+const moreLabel = t('nav.more', { silent: true }) || 'More';
+---
+
+<header class="header-aurora" id="header-aurora">
+  <div class="header-aurora-inner">
+    <!-- Logo -->
+    <LocalizedLink href="/" class="logo-aurora" aria-label={t('nav.home')}>
+      <div class="logo-aurora-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2.5C12 2.5 4 10 4 14.5C4 18.92 7.58 22.5 12 22.5C16.42 22.5 20 18.92 20 14.5C20 10 12 2.5 12 2.5Z"/>
+          <path d="M8.5 14L12 8L15.5 14L12 18Z"/>
+        </svg>
+      </div>
+      <span class="logo-aurora-text">{t('siteName')}</span>
+    </LocalizedLink>
+
+    <!-- Desktop Navigation -->
+    <nav class="nav-aurora">
+      {navLinks.map((link) => (
+        link.children ? (
+          <div class="dropdown-aurora" data-dropdown-aurora>
+            <button type="button" class="nav-aurora-link" aria-expanded="false">
+              {link.label}
+              <svg class="nav-aurora-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="dropdown-aurora-menu">
+              {link.children.map((child) => (
+                <LocalizedLink href={child.href} class="dropdown-aurora-item">{child.label}</LocalizedLink>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <LocalizedLink href={link.href} class="nav-aurora-link">{link.label}</LocalizedLink>
+        )
+      ))}
+
+      {/* Overflow "More" dropdown */}
+      <div class="dropdown-aurora" data-nav-more>
+        <button type="button" class="nav-aurora-link nav-more-trigger" aria-expanded="false">
+          {moreLabel}
+          <svg class="nav-aurora-chevron nav-more-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div class="dropdown-aurora-menu nav-more-menu" data-nav-more-menu></div>
+      </div>
+    </nav>
+
+    <!-- Desktop Actions -->
+    <div class="header-aurora-actions">
+      <ThemeSwitcher />
+      <div class="aurora-divider"></div>
+      <LanguageSwitcher />
+    </div>
+
+    <!-- Hamburger -->
+    <button type="button" class="burger-aurora" id="burger-aurora" aria-label={t('nav.menu')}>
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Gradient bottom border -->
+  <div class="header-aurora-border"></div>
+</header>
+
+<!-- Fullscreen Overlay Menu -->
+<div class="overlay-aurora" id="overlay-aurora">
+  <div class="overlay-aurora-mesh"></div>
+  <div class="overlay-aurora-content">
+    <nav class="overlay-aurora-nav">
+      {navLinks.map((link, i) => (
+        link.children ? (
+          <div class="overlay-aurora-group" data-aurora-group>
+            <button type="button" class="overlay-aurora-group-trigger" style={`animation-delay: ${i * 0.08}s`}>
+              <span class="overlay-aurora-num">0{i + 1}</span>
+              <span class="overlay-aurora-text">{link.label}</span>
+              <svg class="overlay-aurora-group-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="overlay-aurora-group-children">
+              <div class="overlay-aurora-group-children-inner">
+                {link.children.map((child) => (
+                  <LocalizedLink href={child.href} class="overlay-aurora-child-link">{child.label}</LocalizedLink>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <LocalizedLink href={link.href} class="overlay-aurora-link" style={`animation-delay: ${i * 0.08}s`}>
+            <span class="overlay-aurora-num">0{i + 1}</span>
+            <span class="overlay-aurora-text">{link.label}</span>
+          </LocalizedLink>
+        )
+      ))}
+    </nav>
+    <div class="overlay-aurora-footer">
+      <div class="w-full">
+         <ThemeSwitcher variant="mobile" />
+      </div>
+      <div class="w-full flex justify-center pt-6 border-t border-base-content/5">
+         <LanguageSwitcher variant="mobile" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initNavOverflow } from '../../../utils/navOverflow';
+  let auroraHeaderController: AbortController | null = null;
+
+  function initHeaderAurora() {
+    auroraHeaderController?.abort();
+    auroraHeaderController = new AbortController();
+    const { signal } = auroraHeaderController;
+
+    const header = document.getElementById('header-aurora');
+    const burger = document.getElementById('burger-aurora');
+    const overlay = document.getElementById('overlay-aurora');
+
+    if (!burger || !overlay || !header) return;
+
+    // Reset state
+    overlay.classList.remove('is-open');
+    burger.classList.remove('is-active');
+
+    // Scroll handler for frosted effect + border
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
+    onScroll();
+
+    const closeOverlay = () => {
+      overlay.classList.remove('is-open');
+      burger.classList.remove('is-active');
+      document.body.style.overflow = '';
+    };
+
+    burger.addEventListener('click', () => {
+      const isOpen = overlay.classList.toggle('is-open');
+      burger.classList.toggle('is-active');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }, { signal });
+
+    overlay.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeOverlay, { signal });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+        closeOverlay();
+        burger.focus();
+      }
+    }, { signal });
+
+    // Desktop dropdowns
+    document.querySelectorAll('[data-dropdown-aurora]').forEach(dropdown => {
+      const trigger = dropdown.querySelector('.nav-aurora-link');
+      if (!trigger) return;
+      
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('[data-dropdown-aurora].is-open').forEach(d => {
+          if (d !== dropdown) d.classList.remove('is-open');
+        });
+        dropdown.classList.toggle('is-open');
+      }, { signal });
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('[data-dropdown-aurora].is-open').forEach(d => d.classList.remove('is-open'));
+    }, { signal });
+
+    // Mobile overlay expandable groups
+    overlay.querySelectorAll('[data-aurora-group]').forEach(group => {
+      const groupTrigger = group.querySelector('.overlay-aurora-group-trigger');
+      if (!groupTrigger) return;
+
+      groupTrigger.addEventListener('click', () => {
+        group.classList.toggle('is-open');
+      }, { signal });
+    });
+
+    // Nav overflow "More" menu
+    initNavOverflow({
+      navSelector: '.nav-aurora',
+      itemSelector: ':scope > a, :scope > div:not([data-nav-more])',
+      moreSelector: '[data-nav-more]',
+      moreMenuSelector: '[data-nav-more-menu]',
+      signal,
+    });
+  }
+
+  initHeaderAurora();
+  document.addEventListener('astro:after-swap', initHeaderAurora);
+</script>

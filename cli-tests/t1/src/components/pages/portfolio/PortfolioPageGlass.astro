@@ -1,0 +1,252 @@
+---
+/**
+ * Portfolio Page — Glass Theme (Frosted Gallery)
+ * 
+ * Composition layer that wires data ↔ sub-components.
+ * All visual HTML lives in the glass/ sub-components:
+ *   - PortfolioHeroGlass  → hero + filters
+ *   - PortfolioGridGlass  → bento card grid
+ *   - PortfolioModalGlass → overlay + pre-rendered templates
+ *   - PortfolioCTAGlass   → bottom call-to-action
+ */
+import '../../../styles/components/portfolio/PortfolioPageGlass.css';
+import { useTranslations } from '../../../utils/i18n';
+import { getLocaleFromUrl } from '../../../utils/locale-utils';
+
+import PortfolioHeroGlass from './glass/PortfolioHeroGlass.astro';
+import PortfolioGridGlass from './glass/PortfolioGridGlass.astro';
+import PortfolioModalGlass from './glass/PortfolioModalGlass.astro';
+import PortfolioCTAGlass from './glass/PortfolioCTAGlass.astro';
+
+const locale = getLocaleFromUrl(Astro.url);
+const t = useTranslations(locale);
+
+// Locale-aware base path
+const localePrefix = locale === 'en' ? '' : `/${locale}`;
+const glassBase = `${localePrefix}/glass`;
+
+const categories = [
+  { id: 'all', label: t('portfolioPage.filterAll') },
+  { id: 'webapp', label: t('portfolio.categories.webapp') },
+  { id: 'dashboard', label: t('portfolio.categories.dashboard') },
+  { id: 'mobile', label: t('portfolio.categories.mobile') },
+  { id: 'branding', label: t('portfolio.categories.branding') },
+];
+
+const projects = [
+  {
+    id: 'p1',
+    title: t('portfolioPage.projects.p1.title'),
+    description: t('portfolioPage.projects.p1.description'),
+    longDescription: t('portfolioPage.projects.p1.longDescription'),
+    category: 'webapp',
+    categoryLabel: t('portfolioPage.projects.p1.category'),
+    challenge: t('portfolioPage.projects.p1.challenge'),
+    solution: t('portfolioPage.projects.p1.solution'),
+    impact: t('portfolioPage.projects.p1.impact'),
+    techStack: ['React', 'Node.js', 'GraphQL', 'Redis', 'AWS'],
+    metric: t('portfolioPage.projects.p1.metric'),
+    metricLabel: t('portfolioPage.projects.p1.metricLabel'),
+    color: 'from-violet-500/20 to-fuchsia-500/20',
+    glowColor: 'hsl(270 80% 60%)',
+    num: '01',
+  },
+  {
+    id: 'p2',
+    title: t('portfolioPage.projects.p2.title'),
+    description: t('portfolioPage.projects.p2.description'),
+    longDescription: t('portfolioPage.projects.p2.longDescription'),
+    category: 'dashboard',
+    categoryLabel: t('portfolioPage.projects.p2.category'),
+    challenge: t('portfolioPage.projects.p2.challenge'),
+    solution: t('portfolioPage.projects.p2.solution'),
+    impact: t('portfolioPage.projects.p2.impact'),
+    techStack: ['Vue.js', 'D3.js', 'Python', 'PostgreSQL', 'Docker'],
+    metric: t('portfolioPage.projects.p2.metric'),
+    metricLabel: t('portfolioPage.projects.p2.metricLabel'),
+    color: 'from-cyan-500/20 to-blue-500/20',
+    glowColor: 'hsl(200 80% 55%)',
+    num: '02',
+  },
+  {
+    id: 'p3',
+    title: t('portfolioPage.projects.p3.title'),
+    description: t('portfolioPage.projects.p3.description'),
+    longDescription: t('portfolioPage.projects.p3.longDescription'),
+    category: 'mobile',
+    categoryLabel: t('portfolioPage.projects.p3.category'),
+    challenge: t('portfolioPage.projects.p3.challenge'),
+    solution: t('portfolioPage.projects.p3.solution'),
+    impact: t('portfolioPage.projects.p3.impact'),
+    techStack: ['Swift', 'SwiftUI', 'Firebase', 'Lottie', 'CoreData'],
+    metric: t('portfolioPage.projects.p3.metric'),
+    metricLabel: t('portfolioPage.projects.p3.metricLabel'),
+    color: 'from-emerald-500/20 to-teal-500/20',
+    glowColor: 'hsl(160 70% 50%)',
+    num: '03',
+  },
+  {
+    id: 'p4',
+    title: t('portfolioPage.projects.p4.title'),
+    description: t('portfolioPage.projects.p4.description'),
+    longDescription: t('portfolioPage.projects.p4.longDescription'),
+    category: 'branding',
+    categoryLabel: t('portfolioPage.projects.p4.category'),
+    challenge: t('portfolioPage.projects.p4.challenge'),
+    solution: t('portfolioPage.projects.p4.solution'),
+    impact: t('portfolioPage.projects.p4.impact'),
+    techStack: ['Three.js', 'GSAP', 'WebGL', 'Astro', 'Cloudflare'],
+    metric: t('portfolioPage.projects.p4.metric'),
+    metricLabel: t('portfolioPage.projects.p4.metricLabel'),
+    color: 'from-amber-500/20 to-orange-500/20',
+    glowColor: 'hsl(35 90% 55%)',
+    num: '04',
+  },
+  {
+    id: 'p5',
+    title: t('portfolioPage.projects.p5.title'),
+    description: t('portfolioPage.projects.p5.description'),
+    longDescription: t('portfolioPage.projects.p5.longDescription'),
+    category: 'webapp',
+    categoryLabel: t('portfolioPage.projects.p5.category'),
+    challenge: t('portfolioPage.projects.p5.challenge'),
+    solution: t('portfolioPage.projects.p5.solution'),
+    impact: t('portfolioPage.projects.p5.impact'),
+    techStack: ['Next.js', 'OpenAI', 'Prisma', 'Supabase', 'Vercel'],
+    metric: t('portfolioPage.projects.p5.metric'),
+    metricLabel: t('portfolioPage.projects.p5.metricLabel'),
+    color: 'from-rose-500/20 to-pink-500/20',
+    glowColor: 'hsl(340 80% 55%)',
+    num: '05',
+  },
+  {
+    id: 'p6',
+    title: t('portfolioPage.projects.p6.title'),
+    description: t('portfolioPage.projects.p6.description'),
+    longDescription: t('portfolioPage.projects.p6.longDescription'),
+    category: 'dashboard',
+    categoryLabel: t('portfolioPage.projects.p6.category'),
+    challenge: t('portfolioPage.projects.p6.challenge'),
+    solution: t('portfolioPage.projects.p6.solution'),
+    impact: t('portfolioPage.projects.p6.impact'),
+    techStack: ['Remix', 'Shopify Hydrogen', 'Three.js', 'Stripe', 'Edge Functions'],
+    metric: t('portfolioPage.projects.p6.metric'),
+    metricLabel: t('portfolioPage.projects.p6.metricLabel'),
+    color: 'from-indigo-500/20 to-violet-500/20',
+    glowColor: 'hsl(250 80% 60%)',
+    num: '06',
+  },
+];
+---
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- HERO                                        -->
+<!-- ═══════════════════════════════════════════ -->
+<PortfolioHeroGlass
+  categories={categories}
+  galleryLabel={t('portfolio.gallery')}
+  pageTitle={t('portfolioPage.pageTitle')}
+  pageSubtitle={t('portfolioPage.pageSubtitle')}
+/>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BENTO GRID                                  -->
+<!-- ═══════════════════════════════════════════ -->
+<PortfolioGridGlass
+  projects={projects}
+  viewDetailsLabel={t('portfolioPage.viewDetails')}
+/>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- OVERLAY MODAL                               -->
+<!-- ═══════════════════════════════════════════ -->
+<PortfolioModalGlass
+  projects={projects}
+  challengeLabel={t('portfolioPage.theChallenge')}
+  solutionLabel={t('portfolioPage.theSolution')}
+  impactLabel={t('portfolioPage.theImpact')}
+  techStackLabel={t('portfolioPage.techStackLabel')}
+/>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- BOTTOM CTA                                  -->
+<!-- ═══════════════════════════════════════════ -->
+<PortfolioCTAGlass
+  startProjectLabel={t('portfolioPage.startProject')}
+  startProjectSubLabel={t('portfolioPage.startProjectSub')}
+  backToHomeLabel={t('portfolioPage.backToHome')}
+  contactHref={`${glassBase}#contact`}
+  homeHref={glassBase}
+/>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CLIENT SCRIPTS                              -->
+<!-- ═══════════════════════════════════════════ -->
+<script>
+  import { registerAstroPage } from '../../../utils/lifecycle';
+  import { initScrollReveal } from '../../../utils/animations';
+  import { initCategoryFilter } from '../../../utils/portfolio';
+
+  function initPortfolioPageGlass(signal?: AbortSignal) {
+    if (!document.querySelector('.c-portfolio-page-glass__card')) return;
+
+    // ── Scroll-based card reveal (shared util) ──
+    initScrollReveal('.c-portfolio-page-glass__card', {
+      threshold: 0.08,
+      staggerMs: 80,
+      signal,
+    });
+
+    // ── Category filter (shared util) ──
+    initCategoryFilter({
+      filtersId: 'pp-glass-filters',
+      cardSelector: '.c-portfolio-page-glass__card',
+      activeClasses: ['bg-accent/10', 'border-accent/20', 'text-accent'],
+      inactiveClasses: ['bg-base-content/[0.02]', 'border-base-content/8', 'text-base-content/75'],
+      twoStepAnimation: true,
+      hideTransform: 'translateY(20px) scale(0.98)',
+      signal,
+    });
+
+    // ── Modal (Glass-specific) ──
+    const modal = document.getElementById('pp-glass-modal');
+    const modalContent = document.getElementById('pp-glass-modal-content');
+
+    function openModal(index: number) {
+      if (!modal || !modalContent) return;
+      const tpl = document.querySelector<HTMLTemplateElement>(
+        `template[data-modal-index="${index}"]`
+      );
+      if (!tpl) return;
+
+      modalContent.innerHTML = '';
+      modalContent.appendChild(tpl.content.cloneNode(true));
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      if (modalContent) modalContent.innerHTML = '';
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll<HTMLElement>('[data-open-modal]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const index = parseInt(btn.getAttribute('data-open-modal') || '0', 10);
+        openModal(index);
+      }, { signal });
+    });
+
+    document.querySelectorAll('[data-close-modal]').forEach((btn) => {
+      btn.addEventListener('click', closeModal, { signal });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    }, { signal });
+  }
+
+  registerAstroPage(initPortfolioPageGlass);
+</script>

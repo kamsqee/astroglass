@@ -1,0 +1,31 @@
+{
+  "title": "The Starter You'll Ship.",
+  "subtitle": "6 themes, 66+ components, 7 languages, docs. Free & Open Source.",
+  "cta": "Explore Themes",
+  "secondaryCta": "Read the Docs",
+  "liveBadge": "Free & Open Source · Astro 5.0",
+  "digitalExperience": "Digital Experience",
+  "watchReel": "See It In Action",
+  "glassCard": {
+    "title": "Liquid Components",
+    "desc": "Beautifully crafted blocks designed for high-end digital experiences."
+  },
+  "visionary": "Visionary Design",
+  "trustedBy": "Built with",
+  "scrollToExplore": "Scroll to explore",
+  "tryItNow": "Try it now",
+  "dontTakeOurWord": "Don't take our word for it.",
+  "startBuilding": "Start Building",
+  "viewFullDemo": "View Full Demo",
+  "interactivePreview": "Interactive Preview",
+  "faster": "FASTER.",
+  "buildFaster": "Build faster.",
+  "shippingVelocity": "10x shipping velocity",
+  "readyToBuild": "Ready to build?",
+  "askLeaders": "Ask Stripe, Linear, Vercel.",
+  "cloneCommand": "npx degit kamsqee/astroglass my-site",
+  "readyIn": "Ready in 2 minutes",
+  "terminal": {
+    "label": "Terminal"
+  }
+}
