@@ -28,7 +28,10 @@
     "@astrojs/mdx": "^4.1.0"<% } %><% if (features.includes('docs')) { %>,
     "astro-expressive-code": "^0.40.2",
     "fuse.js": "^7.0.0"<% } %><% if (features.includes('dashboard')) { %>,
-    "recharts": "^2.15.0"<% } %>
+    "recharts": "^2.15.0"<% } %><% if (deployTarget === 'cloudflare') { %>,
+    "@astrojs/cloudflare": "^12.0.0"<% } %><% if (deployTarget === 'vercel') { %>,
+    "@astrojs/vercel": "^9.0.0"<% } %><% if (deployTarget === 'netlify') { %>,
+    "@astrojs/netlify": "^6.0.0"<% } %>
   },
   "devDependencies": {
     "eslint": "^9.0.0",
