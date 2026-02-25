@@ -12,6 +12,8 @@ export default [
       ".netlify/",
       "public/search/",
       "scripts/",
+      "packages/",
+      "cli-tests/",
     ],
   },
 
