@@ -1,0 +1,54 @@
+name: CLI Tests
+
+on:
+  workflow_dispatch: # Manual trigger from GitHub UI
+  push:
+    branches: [main]
+    paths:
+      - 'packages/create-astroglass/**'
+
+jobs:
+  cli-test:
+    name: CLI Test Suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CLI
+        working-directory: packages/create-astroglass
+        run: pnpm build
+
+      - name: Generate test matrix
+        working-directory: packages/create-astroglass
+        run: pnpm test:generate
+
+      - name: Run CLI tests
+        working-directory: packages/create-astroglass
+        run: pnpm test:run
+
+      - name: Generate report
+        if: always()
+        working-directory: packages/create-astroglass
+        run: pnpm test:report
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cli-test-report
+          path: packages/create-astroglass/test/results/
