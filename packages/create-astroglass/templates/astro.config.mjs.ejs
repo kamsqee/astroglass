@@ -26,9 +26,9 @@ export default defineConfig({
       themes: ['dracula', 'github-light'],
       themeCssSelector: (theme, context) => {
         if (theme.name === 'dracula') {
-          return '<%= darkPalettes.map(p => `[data-theme="${p}"]`).join(", ") %>';
+          return '<%- darkPalettes.map(p => `[data-theme="${p}"]`).join(", ") %>';
         }
-        return '<%= lightPalettes.map(p => `[data-theme="${p}"]`).join(", ") %>';
+        return '<%- lightPalettes.map(p => `[data-theme="${p}"]`).join(", ") %>';
       },
       styleOverrides: {
         borderColor: 'hsl(var(--bc) / 0.1)',
