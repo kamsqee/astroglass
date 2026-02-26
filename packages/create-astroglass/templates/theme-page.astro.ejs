@@ -76,7 +76,7 @@ const mainSections = preset.landingSections
   title={`${theme?.name} Theme - ${t('title')}`}
   description={t('description')}
   showHeader={false}
-  headerVersion={themeHeaderVersions[themeId] ?? <%= themes[0].version %>}
+  headerVersion={(themeHeaderVersions[themeId] ?? <%= themes[0].version %>) as any}
 >
   <Header />
   <main>

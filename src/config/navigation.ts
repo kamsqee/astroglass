@@ -23,7 +23,7 @@ export interface NavIcon {
 
 /** Check if a feature is enabled in the project config */
 function hasFeature(feature: string): boolean {
-  return siteConfig.features?.includes(feature) ?? false;
+  return (siteConfig.features as string[])?.includes(feature) ?? false;
 }
 
 /** Whether the project has multiple themes (show Home dropdown) */

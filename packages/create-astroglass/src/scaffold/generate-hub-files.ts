@@ -2,7 +2,8 @@
  * Generate Hub Files — render EJS templates into the scaffolded project
  */
 import { join, dirname } from 'node:path';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, rm } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import ejs from 'ejs';
 import type { UserChoices } from '../index.js';
@@ -118,6 +119,18 @@ export async function generateHubFiles(
   if (!isSingleTheme) {
     TEMPLATE_MAP['theme-page.astro.ejs'] = 'src/pages/[...lang]/[theme].astro';
     TEMPLATE_MAP['portfolio.astro.ejs'] = 'src/pages/[...lang]/[theme]/portfolio.astro';
+  }
+
+  // Single-theme: delete the original [theme].astro and [theme]/ dir from the git template
+  if (isSingleTheme && !dryRun) {
+    const themePagePath = join(projectPath, 'src/pages/[...lang]/[theme].astro');
+    const themeDirPath = join(projectPath, 'src/pages/[...lang]/[theme]');
+    if (existsSync(themePagePath)) {
+      await rm(themePagePath, { force: true });
+    }
+    if (existsSync(themeDirPath)) {
+      await rm(themeDirPath, { recursive: true, force: true });
+    }
   }
 
   for (const [template, output] of Object.entries(TEMPLATE_MAP)) {
