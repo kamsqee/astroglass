@@ -8,29 +8,37 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { primaryTheme } from '../../config/config-loader';
-import { getHeaderVersion } from '../../config/themes';
 import { useTranslations } from '../../utils/i18n';
 import { getLocaleFromUrl } from '../../utils/locale-utils';
 
-// Header components — resolved dynamically based on primary theme
-import HeaderLiquid from '../layout/header/HeaderLiquid.astro';
-import HeaderGlass from '../layout/header/HeaderGlass.astro';
+// Fallback header for when the primary theme's barrel doesn't export one
 import HeaderDefault from '../layout/header/HeaderDefault.astro';
-import HeaderLuxury from '../layout/header/HeaderLuxury.astro';
-import HeaderMinimal from '../layout/header/HeaderMinimal.astro';
+
+// Theme barrel imports — pruned themes are stubbed to `export {}` by the CLI,
+// so these imports always resolve. The primary theme's Header is extracted below.
+import * as LiquidSections  from '../sections/themes/liquid';
+import * as GlassSections   from '../sections/themes/glass';
+import * as NeoSections     from '../sections/themes/neo';
+import * as LuxurySections  from '../sections/themes/luxury';
+import * as MinimalSections from '../sections/themes/minimal';
+import * as AuroraSections  from '../sections/themes/aurora';
+
+type ThemeModuleMap = Record<string, Record<string, unknown>>;
+const themeModules: ThemeModuleMap = {
+  liquid: LiquidSections, glass: GlassSections, neo: NeoSections,
+  luxury: LuxurySections, minimal: MinimalSections, aurora: AuroraSections,
+};
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const homeHref = locale === 'en' ? '/' : `/${locale}/`;
-const headerVersion = getHeaderVersion(primaryTheme);
+
+const sections = themeModules[primaryTheme] ?? LiquidSections;
+const Header = sections['Header'] as ((_props: Record<string, unknown>) => unknown) | null;
 ---
 
 <BaseLayout title={t('notFound.title')} description={t('notFound.message')} showHeader={false}>
-  {headerVersion === 1 ? <HeaderLiquid /> :
-   headerVersion === 2 ? <HeaderGlass /> :
-   headerVersion === 4 ? <HeaderLuxury /> :
-   headerVersion === 5 ? <HeaderMinimal /> :
-   <HeaderDefault />}
+  {Header ? <Header /> : <HeaderDefault />}
 
   <section class="not-found" aria-label={t('notFound.heading')}>
     <!-- Animated background layers -->

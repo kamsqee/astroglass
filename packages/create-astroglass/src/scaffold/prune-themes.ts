@@ -9,9 +9,24 @@
  * CSS tree-shaking happens at build time anyway.
  */
 import { join } from 'node:path';
-import { rm, readFile } from 'node:fs/promises';
+import { rm, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import fg from 'fast-glob';
+
+/**
+ * Barrel files that must be STUBBED (replaced with empty re-exports)
+ * rather than deleted. Pages like [theme].astro, index.astro, and
+ * NotFoundPage.astro import all barrel files statically — deleting
+ * them causes "Cannot find module" errors at build time.
+ */
+const BARREL_FILES: Record<string, string> = {
+  liquid:  'src/components/sections/themes/liquid.ts',
+  glass:   'src/components/sections/themes/glass.ts',
+  neo:     'src/components/sections/themes/neo.ts',
+  luxury:  'src/components/sections/themes/luxury.ts',
+  minimal: 'src/components/sections/themes/minimal.ts',
+  aurora:  'src/components/sections/themes/aurora.ts',
+};
 
 // Theme → file manifest (hardcoded to avoid importing from the template at build time)
 const THEME_FILES: Record<string, string[]> = {
@@ -138,18 +153,26 @@ export async function pruneThemes(
 
   for (const theme of unselected) {
     const files = THEME_FILES[theme] || [];
+    const barrelFile = BARREL_FILES[theme];
+
     for (const file of files) {
       const fullPath = join(projectPath, file);
 
       if (dryRun) {
-        console.log(`  [dry-run] Would remove: ${file}`);
+        console.log(`  [dry-run] Would ${file === barrelFile ? 'stub' : 'remove'}: ${file}`);
         removed++;
         continue;
       }
 
       try {
         if (existsSync(fullPath)) {
-          await rm(fullPath, { recursive: true, force: true });
+          if (file === barrelFile) {
+            // Stub barrel files so static imports resolve — the module
+            // exports nothing, causing section lookups to return undefined.
+            await writeFile(fullPath, '// Pruned theme — empty stub\nexport {};\n');
+          } else {
+            await rm(fullPath, { recursive: true, force: true });
+          }
           removed++;
         }
       } catch {
