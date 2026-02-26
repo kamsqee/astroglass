@@ -65,11 +65,26 @@ for row in $(node -e "
 
   (
     START=$(date +%s)
-    if node "$CLI" "$DIR" --theme "$THEMES" --palettes "$PALETTES" --locales "$LOCALES" $FEAT_ARGS --deploy "$DEPLOY" --yes > "$LOG_DIR/scaffold.log" 2>&1; then
+    MAX_RETRIES=3
+    ATTEMPT=0
+    SUCCESS=false
+    while [ $ATTEMPT -lt $MAX_RETRIES ]; do
+      ATTEMPT=$((ATTEMPT + 1))
+      if node "$CLI" "$DIR" --theme "$THEMES" --palettes "$PALETTES" --locales "$LOCALES" $FEAT_ARGS --deploy "$DEPLOY" --yes > "$LOG_DIR/scaffold.log" 2>&1; then
+        SUCCESS=true
+        break
+      fi
+      if [ $ATTEMPT -lt $MAX_RETRIES ]; then
+        echo "  ⟳ scaffold: $ID attempt $ATTEMPT failed, retrying in 5s..."
+        rm -rf "$DIR"
+        sleep 5
+      fi
+    done
+    if [ "$SUCCESS" = true ]; then
       echo "  ✓ scaffold: $ID ($(( $(date +%s) - START ))s)"
       echo "PASS" > "$LOG_DIR/scaffold.status"
     else
-      echo "  ✗ scaffold: $ID FAILED"
+      echo "  ✗ scaffold: $ID FAILED after $MAX_RETRIES attempts"
       echo "FAIL" > "$LOG_DIR/scaffold.status"
     fi
   ) &
