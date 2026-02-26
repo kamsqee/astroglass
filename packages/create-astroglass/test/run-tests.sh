@@ -6,10 +6,15 @@ set -uo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PKG_DIR="$(dirname "$SCRIPT_DIR")"
+REPO_ROOT="$(cd "$PKG_DIR/../.." && pwd)"
 CLI="$PKG_DIR/dist/index.js"
 MATRIX="$SCRIPT_DIR/matrix.json"
 RESULTS_DIR="$SCRIPT_DIR/results"
 TEST_WORKSPACE="$SCRIPT_DIR/.workspace"
+
+# Use the local repo checkout as the template source so tests always
+# build against the current commit, not a potentially stale GitHub cache.
+export ASTROGLASS_TEMPLATE_DIR="$REPO_ROOT"
 
 # Parallelism limits
 SCAFFOLD_PARALLEL=3

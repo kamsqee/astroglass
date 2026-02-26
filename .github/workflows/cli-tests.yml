@@ -6,6 +6,9 @@ on:
     branches: [main]
     paths:
       - 'packages/create-astroglass/**'
+      - 'src/**'
+      - 'astro.config.mjs'
+      - 'tsconfig.json'
 
 jobs:
   cli-test:
