@@ -1,21 +1,34 @@
 /**
  * Navigation Configuration
  * 
- * This file contains the navigation structure for the site.
+ * Feature-aware navigation — reads enabled features from astroglass.config.json
+ * to conditionally include/exclude nav links (Blog, Docs, etc.).
+ * 
+ * When only 1 theme is selected, the Home dropdown is hidden since
+ * there are no other landing pages to navigate to.
  * 
  * All theme pages use scroll-to-section links (#about, #services, etc.)
- * for on-page sections, plus page links for Blog and Docs.
- * 
- * Neo, Liquid, Glass, and Aurora additionally get a "Home" dropdown
- * listing all landing pages. Liquid also gets a nested "Portfolio"
- * dropdown under Home (for future per-theme portfolio pages).
+ * for on-page sections, plus conditional page links for Blog and Docs.
  */
 
 import { getThemeIds } from './themeRegistry';
+import siteConfig from '../../astroglass.config.json';
 
 export interface NavIcon {
   readonly paths: string[] | readonly string[];
   strokeWidth?: number;
+}
+
+// ─── Feature helpers ─────────────────────────────────────────────
+
+/** Check if a feature is enabled in the project config */
+function hasFeature(feature: string): boolean {
+  return siteConfig.features?.includes(feature) ?? false;
+}
+
+/** Whether the project has multiple themes (show Home dropdown) */
+function isMultiTheme(): boolean {
+  return (siteConfig.themes?.length ?? 0) > 1;
 }
 
 // Default icons for common nav items
@@ -77,6 +90,54 @@ function getLandingPages() {
   }));
 }
 
+// ─── Feature-conditional page links ─────────────────────────────
+
+/** Build page links (Blog, Docs) based on enabled features */
+function buildPageLinks(t: (key: string) => string): ResolvedNavLink[] {
+  const links: ResolvedNavLink[] = [];
+
+  if (hasFeature('blog')) {
+    links.push({
+      href: `/blog`,
+      label: t('nav.blog'),
+      icon: navIcons.resources,
+    });
+  }
+
+  if (hasFeature('docs')) {
+    links.push({
+      href: `/docs`,
+      label: t('nav.docs'),
+      icon: navIcons.resources,
+    });
+  }
+
+  return links;
+}
+
+/** Build page links for Luxury nav (different interface) */
+function buildLuxuryPageLinks(t: (key: string) => string): LuxuryNavLink[] {
+  const links: LuxuryNavLink[] = [];
+
+  if (hasFeature('blog')) {
+    links.push({
+      label: t('nav.blog'),
+      href: `/blog`,
+      type: 'page',
+    });
+  }
+
+  if (hasFeature('docs')) {
+    links.push({
+      label: t('nav.docs'),
+      href: `/docs`,
+      type: 'page',
+    });
+  }
+
+  return links;
+}
+
 // ─── Resolved types (returned from build functions) ─────────────
 
 export interface ResolvedNavChild {
@@ -95,9 +156,8 @@ export interface ResolvedNavLink {
 /**
  * Build nav links for themes with a Home dropdown (Neo, Liquid, Glass, Aurora).
  * 
- * @param locale - Current locale ('en' | 'ru')
- * @param t - Translation function
- * @param theme - Current theme id (used for special handling, e.g. Liquid gets Portfolio nested dropdown)
+ * Home dropdown is only shown when multiple themes are enabled.
+ * Blog/Docs links are only shown when those features are enabled.
  */
 export function buildThemeNavLinks(
   t: (key: string) => string,
@@ -105,82 +165,55 @@ export function buildThemeNavLinks(
 ): ResolvedNavLink[] {
   
   const themeBase = `/${theme}`;
+  const links: ResolvedNavLink[] = [];
 
-  // Build landing page children for the Home dropdown
-  const homeChildren: ResolvedNavChild[] = getLandingPages().map((page) => {
-    const child: ResolvedNavChild = {
-      href: `/${page.id}`,
-      label: t(page.labelKey) || page.id.charAt(0).toUpperCase() + page.id.slice(1),
-    };
+  // Home dropdown — only when multiple themes
+  if (isMultiTheme()) {
+    const homeChildren: ResolvedNavChild[] = getLandingPages().map((page) => {
+      const child: ResolvedNavChild = {
+        href: `/${page.id}`,
+        label: t(page.labelKey) || page.id.charAt(0).toUpperCase() + page.id.slice(1),
+      };
 
-    // For Liquid theme: add portfolio sub-pages under each landing page
-    if (theme === 'liquid') {
-      child.children = [
-        {
-          href: `/${page.id}/portfolio`,
-          label: t('nav.portfolio'),
-        }
-      ];
-    }
+      // For Liquid theme: add portfolio sub-pages under each landing page
+      if (theme === 'liquid') {
+        child.children = [
+          {
+            href: `/${page.id}/portfolio`,
+            label: t('nav.portfolio'),
+          }
+        ];
+      }
 
-    return child;
-  });
+      return child;
+    });
 
-  return [
-    // Home dropdown with all landing pages
-    {
+    links.push({
       label: t('nav.home'),
       icon: navIcons.home,
       children: homeChildren,
-    },
-    // Section scroll links (absolute paths so they work from child pages)
-    {
-      href: `${themeBase}#about`,
-      label: t('nav.about'),
-      icon: navIcons.about,
-    },
-    {
-      href: `${themeBase}#services`,
-      label: t('nav.services'),
-      icon: navIcons.services,
-    },
-    {
-      href: `${themeBase}#portfolio`,
-      label: t('nav.portfolio'),
-      icon: navIcons.portfolio,
-    },
-    {
-      href: `${themeBase}#pricing`,
-      label: t('nav.pricing'),
-      icon: navIcons.pricing,
-    },
-    {
-      href: `${themeBase}#faq`,
-      label: t('nav.faq'),
-      icon: navIcons.faq,
-    },
-    {
-      href: `${themeBase}#contact`,
-      label: t('nav.contact'),
-      icon: navIcons.contact,
-    },
-    // Page links
-    {
-      href: `/blog`,
-      label: t('nav.blog'),
-      icon: navIcons.resources,
-    },
-    {
-      href: `/docs`,
-      label: t('nav.docs'),
-      icon: navIcons.resources,
-    },
-  ];
+    });
+  }
+
+  // Section scroll links
+  links.push(
+    { href: `${themeBase}#about`, label: t('nav.about'), icon: navIcons.about },
+    { href: `${themeBase}#services`, label: t('nav.services'), icon: navIcons.services },
+    { href: `${themeBase}#portfolio`, label: t('nav.portfolio'), icon: navIcons.portfolio },
+    { href: `${themeBase}#pricing`, label: t('nav.pricing'), icon: navIcons.pricing },
+    { href: `${themeBase}#faq`, label: t('nav.faq'), icon: navIcons.faq },
+    { href: `${themeBase}#contact`, label: t('nav.contact'), icon: navIcons.contact },
+  );
+
+  // Feature-conditional page links
+  links.push(...buildPageLinks(t));
+
+  return links;
 }
 
 /**
  * Build simple nav links for Minimal theme (no Home dropdown).
- * Just scroll-to-section links + Blog/Docs.
+ * Just scroll-to-section links + conditional Blog/Docs.
  */
 export function buildMinimalNavLinks(
   t: (key: string) => string
@@ -195,63 +228,47 @@ export function buildMinimalNavLinks(
     { href: `${themeBase}#pricing`, label: t('nav.pricing'), icon: navIcons.pricing },
     { href: `${themeBase}#faq`, label: t('nav.faq'), icon: navIcons.faq },
     { href: `${themeBase}#contact`, label: t('nav.contact'), icon: navIcons.contact },
-    { href: `/blog`, label: t('nav.blog'), icon: navIcons.resources },
-    { href: `/docs`, label: t('nav.docs'), icon: navIcons.resources },
+    ...buildPageLinks(t),
   ];
 }
 
 /**
  * Build nav links for default / non-theme pages (index, blog, docs, etc.).
- * Uses a "Home" dropdown listing all 6 landing pages,
- * scroll-to-section links for index page sections,
- * and page links for Blog and Docs.
+ * 
+ * Home dropdown is only shown when multiple themes are enabled.
+ * Blog/Docs links are only shown when those features are enabled.
  */
 export function buildDefaultNavLinks(
   t: (key: string) => string
 ): ResolvedNavLink[] {
   
+  const links: ResolvedNavLink[] = [];
 
-  // Build landing page children for the Home dropdown
-  const homeChildren: ResolvedNavChild[] = getLandingPages().map((page) => ({
-    href: `/${page.id}`,
-    label: t(page.labelKey) || page.id.charAt(0).toUpperCase() + page.id.slice(1),
-  }));
+  // Home dropdown — only when multiple themes
+  if (isMultiTheme()) {
+    const homeChildren: ResolvedNavChild[] = getLandingPages().map((page) => ({
+      href: `/${page.id}`,
+      label: t(page.labelKey) || page.id.charAt(0).toUpperCase() + page.id.slice(1),
+    }));
 
-  return [
-    // Home dropdown with all landing pages
-    {
+    links.push({
       label: t('nav.home'),
       icon: navIcons.home,
       children: homeChildren,
-    },
-    // Index page scroll sections (absolute paths so they work from any page)
-    {
-      href: `/#showcase`,
-      label: t('nav.features'),
-      icon: navIcons.services,
-    },
-    {
-      href: `/#get-started`,
-      label: t('nav.getStarted'),
-      icon: navIcons.contact,
-    },
-    {
-      href: `/#faq-home`,
-      label: t('nav.faq'),
-      icon: navIcons.faq,
-    },
-    // Page links
-    {
-      href: `/blog`,
-      label: t('nav.blog'),
-      icon: navIcons.resources,
-    },
-    {
-      href: `/docs`,
-      label: t('nav.docs'),
-      icon: navIcons.resources,
-    },
-  ];
+    });
+  }
+
+  // Index page scroll sections
+  links.push(
+    { href: `/#showcase`, label: t('nav.features'), icon: navIcons.services },
+    { href: `/#get-started`, label: t('nav.getStarted'), icon: navIcons.contact },
+    { href: `/#faq-home`, label: t('nav.faq'), icon: navIcons.faq },
+  );
+
+  // Feature-conditional page links
+  links.push(...buildPageLinks(t));
+
+  return links;
 }
 
 // ─── Luxury theme navigation (merged from luxuryNavigation.ts) ──
@@ -270,46 +287,12 @@ export function buildLuxuryNavLinks(
   const themeBase = `/luxury`;
 
   return [
-    {
-      label: t('nav.about'),
-      href: `${themeBase}#about`,
-      type: 'section',
-    },
-    {
-      label: t('nav.services'),
-      href: `${themeBase}#services`,
-      type: 'section',
-    },
-    {
-      label: t('nav.portfolio'),
-      href: `${themeBase}#portfolio`,
-      type: 'section',
-    },
-    {
-      label: t('nav.pricing'),
-      href: `${themeBase}#pricing`,
-      type: 'section',
-    },
-    {
-      label: t('nav.faq'),
-      href: `${themeBase}#faq`,
-      type: 'section',
-    },
-    {
-      label: t('nav.contact'),
-      href: `${themeBase}#contact`,
-      type: 'section',
-    },
-    // Pages
-    {
-      label: t('nav.blog'),
-      href: `/blog`,
-      type: 'page',
-    },
-    {
-      label: t('nav.docs'),
-      href: `/docs`,
-      type: 'page',
-    },
+    { label: t('nav.about'), href: `${themeBase}#about`, type: 'section' },
+    { label: t('nav.services'), href: `${themeBase}#services`, type: 'section' },
+    { label: t('nav.portfolio'), href: `${themeBase}#portfolio`, type: 'section' },
+    { label: t('nav.pricing'), href: `${themeBase}#pricing`, type: 'section' },
+    { label: t('nav.faq'), href: `${themeBase}#faq`, type: 'section' },
+    { label: t('nav.contact'), href: `${themeBase}#contact`, type: 'section' },
+    ...buildLuxuryPageLinks(t),
   ];
 }

@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "themes": ["liquid", "glass", "neo", "luxury", "minimal", "aurora"],
+  "palettes": ["azure", "solaris", "evergreen", "rose", "monochrome", "nordic", "aquatica", "abyss", "neonoir", "synthwave"],
+  "locales": ["en", "ru"],
+  "features": ["blog", "docs", "dashboard", "react"],
+  "deployTarget": "cloudflare",
+  "defaultPalette": "azure"
+}
