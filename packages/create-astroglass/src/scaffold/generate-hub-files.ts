@@ -92,16 +92,18 @@ export async function generateHubFiles(
     defaultPalette: choices.defaultPalette,
     defaultHeaderVersion: HEADER_MAP[choices.themes[0]]?.version ?? 1,
     hasGlass: choices.themes.includes('glass'),
+    isSingleTheme: choices.themes.length === 1,
     darkPalettes,
     lightPalettes,
     projectName: projectPath.split('/').pop() || 'my-astroglass',
   };
 
+  const isSingleTheme = choices.themes.length === 1;
+
   // Templates to render
   const TEMPLATE_MAP: Record<string, string> = {
     'BaseLayout.astro.ejs':    'src/layouts/BaseLayout.astro',
-    'theme-page.astro.ejs':    'src/pages/[...lang]/[theme].astro',
-    'portfolio.astro.ejs':     'src/pages/[...lang]/[theme]/portfolio.astro',
+    'index.astro.ejs':         'src/pages/[...lang]/index.astro',
     'global.css.ejs':          'src/styles/global.css',
     '_themes.css.ejs':         'src/styles/_themes.css',
     'astro.config.mjs.ejs':    'astro.config.mjs',
@@ -110,6 +112,13 @@ export async function generateHubFiles(
     'palettes.ts.ejs':         'src/config/palettes.ts',
     'README.md.ejs':           'README.md',
   };
+
+  // Multi-theme: generate [theme].astro and portfolio routes
+  // Single-theme: skip these (the theme renders at / via index.astro)
+  if (!isSingleTheme) {
+    TEMPLATE_MAP['theme-page.astro.ejs'] = 'src/pages/[...lang]/[theme].astro';
+    TEMPLATE_MAP['portfolio.astro.ejs'] = 'src/pages/[...lang]/[theme]/portfolio.astro';
+  }
 
   for (const [template, output] of Object.entries(TEMPLATE_MAP)) {
     const templatePath = join(TEMPLATES_DIR, template);
