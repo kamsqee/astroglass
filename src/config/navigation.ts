@@ -11,24 +11,12 @@
  * for on-page sections, plus conditional page links for Blog and Docs.
  */
 
-import { getThemeIds } from './themeRegistry';
-import siteConfig from '../../astroglass.config.json';
+import { hasFeature, isMultiTheme, isSingleTheme } from './config-loader';
+import { getEnabledThemeIds } from './themes';
 
 export interface NavIcon {
   readonly paths: string[] | readonly string[];
   strokeWidth?: number;
-}
-
-// ─── Feature helpers ─────────────────────────────────────────────
-
-/** Check if a feature is enabled in the project config */
-function hasFeature(feature: string): boolean {
-  return (siteConfig.features as string[])?.includes(feature) ?? false;
-}
-
-/** Whether the project has multiple themes (show Home dropdown) */
-function isMultiTheme(): boolean {
-  return (siteConfig.themes?.length ?? 0) > 1;
 }
 
 // Default icons for common nav items
@@ -78,12 +66,10 @@ const themeIcons: Record<string, string> = {
 };
 
 /**
- * Build landing pages list dynamically from theme registry.
- * The CLI modifies themeRegistry when themes are added/removed,
- * and this list auto-adapts.
+ * Build landing pages list from config-gated enabled themes.
  */
 function getLandingPages() {
-  return getThemeIds().map(id => ({
+  return getEnabledThemeIds().map(id => ({
     id,
     labelKey: `nav.theme${id.charAt(0).toUpperCase() + id.slice(1)}`,
     icon: themeIcons[id] || '🎨',
@@ -163,12 +149,13 @@ export function buildThemeNavLinks(
   t: (key: string) => string,
   theme: string
 ): ResolvedNavLink[] {
-  
-  const themeBase = `/${theme}`;
+
+  // Mode-aware base: in single-theme mode, sections live at /#section
+  const themeBase = isSingleTheme ? '' : `/${theme}`;
   const links: ResolvedNavLink[] = [];
 
   // Home dropdown — only when multiple themes
-  if (isMultiTheme()) {
+  if (isMultiTheme) {
     const homeChildren: ResolvedNavChild[] = getLandingPages().map((page) => {
       const child: ResolvedNavChild = {
         href: `/${page.id}`,
@@ -218,8 +205,9 @@ export function buildThemeNavLinks(
 export function buildMinimalNavLinks(
   t: (key: string) => string
 ): ResolvedNavLink[] {
-  
-  const themeBase = `/minimal`;
+
+  // Mode-aware base: in single-theme mode, sections live at /#section
+  const themeBase = isSingleTheme ? '' : '/minimal';
 
   return [
     { href: `${themeBase}#about`, label: t('nav.about'), icon: navIcons.about },
@@ -245,7 +233,7 @@ export function buildDefaultNavLinks(
   const links: ResolvedNavLink[] = [];
 
   // Home dropdown — only when multiple themes
-  if (isMultiTheme()) {
+  if (isMultiTheme) {
     const homeChildren: ResolvedNavChild[] = getLandingPages().map((page) => ({
       href: `/${page.id}`,
       label: t(page.labelKey) || page.id.charAt(0).toUpperCase() + page.id.slice(1),
@@ -283,8 +271,9 @@ export interface LuxuryNavLink {
 export function buildLuxuryNavLinks(
   t: (key: string) => string
 ): LuxuryNavLink[] {
-  
-  const themeBase = `/luxury`;
+
+  // Mode-aware base: in single-theme mode, sections live at /#section
+  const themeBase = isSingleTheme ? '' : '/luxury';
 
   return [
     { label: t('nav.about'), href: `${themeBase}#about`, type: 'section' },

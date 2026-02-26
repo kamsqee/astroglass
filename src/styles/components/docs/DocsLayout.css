@@ -307,6 +307,6 @@ mark, .search-highlight {
 
 /* ===== MONOCHROME THEME SEARCH OVERRIDE ===== */
 /* Ensure highlights are visible in the dark search modal for Mono theme */
-[data-theme='monochrome'] .search-dialog-root {
+[data-palette='monochrome'] .search-dialog-root {
   --a: 0 0% 100%; /* Pure white accent for search */
 }

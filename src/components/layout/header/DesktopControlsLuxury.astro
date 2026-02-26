@@ -234,14 +234,14 @@ const themes = palettes.map(p => ({
         e.stopPropagation(); // Prevent closing accordion immediately
         const theme = (e.currentTarget as HTMLElement).dataset.setThemeDesktop;
         if (theme) {
-          document.documentElement.setAttribute('data-theme', theme);
-          localStorage.setItem('theme', theme);
-          
+          document.documentElement.setAttribute('data-palette', theme);
+          localStorage.setItem('palette', theme);
+
           // Visual feedback
           document.querySelectorAll('[data-set-theme-desktop]').forEach(b => b.classList.remove('is-active'));
           (e.currentTarget as HTMLElement).classList.add('is-active');
-          
-          window.dispatchEvent(new Event('theme-changed'));
+
+          window.dispatchEvent(new Event('palette-changed'));
         }
       });
     });

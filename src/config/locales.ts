@@ -1,14 +1,16 @@
 /**
  * Locale Configuration
- * 
- * Central configuration for all supported locales.
- * This is the single source of truth for locale metadata.
- * 
+ *
+ * Metadata for all supported locales. Which locales are *enabled*
+ * is determined by `astroglass.config.json` via config-loader.
+ *
  * To add a new locale:
  * 1. Add an entry to the `localesConfig` array
  * 2. Create the corresponding JSON files in `src/locales/{code}/`
- * 3. The locale will be automatically available throughout the app
+ * 3. Add the locale code to `astroglass.config.json` → locales[]
  */
+
+import { config } from './config-loader';
 
 export interface LocaleConfig {
   /** ISO 639-1 language code (e.g., 'en', 'ru', 'kk') */
@@ -93,9 +95,9 @@ export const localesConfig: LocaleConfig[] = [
 /** Default locale code */
 export const defaultLocale = 'en';
 
-/** Get all enabled locales */
+/** Get all enabled locales (gated by astroglass.config.json) */
 export function getEnabledLocales(): LocaleConfig[] {
-  return localesConfig.filter((locale) => locale.enabled);
+  return localesConfig.filter((locale) => config.locales.includes(locale.code));
 }
 
 /** Get locale codes for enabled locales (for Astro config) */

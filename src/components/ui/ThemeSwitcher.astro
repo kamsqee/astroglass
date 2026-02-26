@@ -170,10 +170,14 @@ const paletteIconMap = JSON.stringify(getPaletteIconMap());
   const themes = Object.keys(themeIcons);
   type Theme = keyof typeof themeIcons;
 
-  function getStoredTheme(): Theme {
+  function getStoredPalette(): Theme {
     if (typeof localStorage !== 'undefined') {
-      const stored = localStorage.getItem('theme');
+      const stored = localStorage.getItem('palette') || localStorage.getItem('theme');
       if (stored && themes.includes(stored)) {
+        // Migrate legacy key
+        if (!localStorage.getItem('palette') && localStorage.getItem('theme')) {
+          localStorage.setItem('palette', stored);
+        }
         return stored as Theme;
       }
     }
@@ -198,8 +202,8 @@ const paletteIconMap = JSON.stringify(getPaletteIconMap());
   }
 
   function setTheme(theme: Theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute('data-palette', theme);
+    localStorage.setItem('palette', theme);
     updateActiveStates(theme);
   }
 
@@ -210,7 +214,7 @@ const paletteIconMap = JSON.stringify(getPaletteIconMap());
     themeSwitcherController = new AbortController();
     const { signal } = themeSwitcherController;
 
-    const currentTheme = getStoredTheme();
+    const currentTheme = getStoredPalette();
     setTheme(currentTheme);
 
     // Desktop dropdown switchers
@@ -276,11 +280,11 @@ const paletteIconMap = JSON.stringify(getPaletteIconMap());
     });
 
     // Reapply active states after setup
-    updateActiveStates(getStoredTheme());
+    updateActiveStates(getStoredPalette());
 
-    // Listen for external theme changes
-    window.addEventListener('theme-changed', (e: any) => {
-      updateActiveStates(e.detail.theme);
+    // Listen for external palette changes
+    window.addEventListener('palette-changed', (e: any) => {
+      updateActiveStates(e.detail.palette);
     }, { signal });
 
     // Close on outside click

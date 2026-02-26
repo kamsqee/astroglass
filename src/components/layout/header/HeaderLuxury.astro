@@ -164,7 +164,7 @@ import '../../../styles/components/header/HeaderLuxury.css';
 
     // Initialize current label
     const html = document.documentElement;
-    const currentTheme = html.getAttribute('data-theme') || 'azure';
+    const currentTheme = html.getAttribute('data-palette') || 'azure';
     updateControlLabel(currentTheme);
 
     // --- Core Open/Close Logic ---
@@ -238,8 +238,8 @@ import '../../../styles/components/header/HeaderLuxury.css';
          const theme = (e.currentTarget as HTMLElement).dataset.setTheme;
          if (theme) {
             const html = document.documentElement;
-            html.setAttribute('data-theme', theme);
-            localStorage.setItem('theme', theme);
+            html.setAttribute('data-palette', theme);
+            localStorage.setItem('palette', theme);
             updateControlLabel(theme);
          }
        }, { signal });

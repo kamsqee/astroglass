@@ -19,11 +19,11 @@ export default defineConfig({
       themeCssSelector: (theme, context) => {
         // Dark themes - High contrast Dracula
         if (theme.name === 'dracula') {
-          return '[data-theme="abyss"], [data-theme="neonoir"], [data-theme="synthwave"]';
+          return '[data-palette="abyss"], [data-palette="neonoir"], [data-palette="synthwave"]';
         }
         // Light themes - Default Github Light
         // Explicitly listing them ensures no specificity conflicts with the dark theme
-        return '[data-theme="azure"], [data-theme="solaris"], [data-theme="nordic"], [data-theme="evergreen"], [data-theme="rose"], [data-theme="aquatica"], [data-theme="monochrome"]';
+        return '[data-palette="azure"], [data-palette="solaris"], [data-palette="nordic"], [data-palette="evergreen"], [data-palette="rose"], [data-palette="aquatica"], [data-palette="monochrome"]';
       },
       styleOverrides: {
         borderColor: 'hsl(var(--bc) / 0.1)',

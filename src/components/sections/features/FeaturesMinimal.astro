@@ -193,15 +193,15 @@ const features = [
   }
 
   /* Monochrome visual overrides */
-  :global([data-theme="monochrome"]) .feature-section [data-feature-bg],
-  :global([data-theme="monochrome"]) .feature-section [data-feature-orb],
-  :global([data-theme="monochrome"]) .feature-section [data-feature-icon-bg],
-  :global([data-theme="monochrome"]) .feature-section [data-feature-glow] {
+  :global([data-palette="monochrome"]) .feature-section [data-feature-bg],
+  :global([data-palette="monochrome"]) .feature-section [data-feature-orb],
+  :global([data-palette="monochrome"]) .feature-section [data-feature-icon-bg],
+  :global([data-palette="monochrome"]) .feature-section [data-feature-glow] {
     background: none;
     background-color: hsl(var(--bc) / 0.05);
   }
 
-  :global([data-theme="monochrome"]) .feature-section [data-feature-cta] {
+  :global([data-palette="monochrome"]) .feature-section [data-feature-cta] {
     background: none;
     background-color: hsl(var(--bc));
   }

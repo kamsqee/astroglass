@@ -1,15 +1,18 @@
 /**
  * Palette Configuration
- * 
- * Central registry of all color palettes. Components import from here
- * instead of hardcoding palette lists. The CLI modifies this file
- * when palettes are added or removed.
+ *
+ * Central registry of all color palettes. Which palettes are *enabled*
+ * is determined by `astroglass.config.json` via config-loader.
+ * Components should use the config-gated helpers (getEnabledPalettes,
+ * getEnabledPaletteIds, etc.) rather than reading the raw `palettes` array.
  */
+
+import { config } from './config-loader';
 
 export type PaletteCategory = 'light' | 'dark' | 'colorful';
 
 export interface Palette {
-  /** Unique palette identifier (matches data-theme attribute and CSS file name) */
+  /** Unique palette identifier (matches data-palette attribute and CSS file name) */
   id: string;
   /** Emoji icon displayed in switchers */
   icon: string;
@@ -45,25 +48,30 @@ export const palettes: Palette[] = [
 export const defaultPalette = 'azure';
 
 // ============================================
-// Helper Functions
+// Helper Functions (config-gated)
 // ============================================
 
-/** Get all palette IDs */
+/** Get all enabled palettes (gated by astroglass.config.json) */
+export function getEnabledPalettes(): Palette[] {
+  return palettes.filter(p => config.palettes.includes(p.id));
+}
+
+/** Get enabled palette IDs */
 export function getPaletteIds(): string[] {
-  return palettes.map(p => p.id);
+  return getEnabledPalettes().map(p => p.id);
 }
 
-/** Get palettes by category */
+/** Get enabled palettes by category */
 export function getPalettesByCategory(category: PaletteCategory): Palette[] {
-  return palettes.filter(p => p.category === category);
+  return getEnabledPalettes().filter(p => p.category === category);
 }
 
-/** Get a single palette by ID */
+/** Get a single palette by ID (looks up from all palettes, not just enabled) */
 export function getPaletteById(id: string): Palette | undefined {
   return palettes.find(p => p.id === id);
 }
 
 /** Build a Record<id, icon> for client-side JS (ThemeSwitcher, headers) */
 export function getPaletteIconMap(): Record<string, string> {
-  return Object.fromEntries(palettes.map(p => [p.id, p.icon]));
+  return Object.fromEntries(getEnabledPalettes().map(p => [p.id, p.icon]));
 }

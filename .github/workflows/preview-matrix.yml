@@ -1,0 +1,283 @@
+# ─── Preview Matrix ──────────────────────────────────────────────
+# Builds representative config combinations, captures Playwright
+# screenshots, diffs against baseline, and deploys previews
+# to GitHub Pages.  Posts a PR comment with visual diffs.
+# ─────────────────────────────────────────────────────────────────
+name: Preview Matrix
+
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
+  workflow_dispatch:
+    inputs:
+      update_baselines:
+        description: 'Update baseline screenshots'
+        type: boolean
+        default: false
+
+concurrency:
+  group: preview-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_OPTIONS: '--max-old-space-size=4096'
+
+jobs:
+  # ─── Build matrix of representative configs ─────────────────
+  matrix:
+    name: Build (${{ matrix.id }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # 1. Single theme — liquid (minimal footprint)
+          - id: single-liquid
+            themes: liquid
+            palettes: azure
+            locales: en
+            features: __NONE__
+            deploy: static
+
+          # 2. Single theme — luxury + blog/docs
+          - id: single-luxury-full
+            themes: luxury
+            palettes: abyss,rose
+            locales: en
+            features: blog,docs,react
+            deploy: cloudflare
+
+          # 3. Multi-theme — 3 themes (standard preset)
+          - id: multi-standard
+            themes: liquid,glass,neo
+            palettes: azure,abyss,solaris
+            locales: en
+            features: blog,docs,react
+            deploy: cloudflare
+
+          # 4. Multi-theme — all 6 themes (full preset)
+          - id: multi-full
+            themes: liquid,glass,neo,luxury,minimal,aurora
+            palettes: azure,abyss,neonoir,synthwave
+            locales: en,ru
+            features: blog,docs,dashboard,react
+            deploy: cloudflare
+
+          # 5. Single theme — minimal (typography-focused)
+          - id: single-minimal
+            themes: minimal
+            palettes: monochrome
+            locales: en
+            features: react
+            deploy: vercel
+
+          # 6. Single theme — aurora dark palette
+          - id: single-aurora-dark
+            themes: aurora
+            palettes: neonoir,synthwave
+            locales: en
+            features: blog,react
+            deploy: netlify
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build CLI
+        working-directory: packages/create-astroglass
+        run: pnpm build
+
+      - name: Scaffold project
+        run: |
+          FEAT_ARGS=""
+          if [ "${{ matrix.features }}" = "__NONE__" ]; then
+            FEAT_ARGS="--no-features"
+          else
+            FEAT_ARGS="--features ${{ matrix.features }}"
+          fi
+
+          node packages/create-astroglass/dist/index.js \
+            "/tmp/preview-${{ matrix.id }}" \
+            --theme "${{ matrix.themes }}" \
+            --palettes "${{ matrix.palettes }}" \
+            --locales "${{ matrix.locales }}" \
+            $FEAT_ARGS \
+            --deploy "${{ matrix.deploy }}" \
+            --yes
+
+      - name: Install scaffolded project
+        working-directory: /tmp/preview-${{ matrix.id }}
+        run: npm install --loglevel=error
+
+      - name: Build scaffolded project
+        working-directory: /tmp/preview-${{ matrix.id }}
+        run: npm run build
+
+      - name: Install Playwright
+        run: npx playwright install chromium --with-deps
+
+      - name: Capture screenshots
+        run: |
+          npx tsx ci/screenshot-capture.ts \
+            --project "/tmp/preview-${{ matrix.id }}" \
+            --output "/tmp/screenshots/${{ matrix.id }}" \
+            --id "${{ matrix.id }}"
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-${{ matrix.id }}
+          path: /tmp/screenshots/${{ matrix.id }}/
+          retention-days: 14
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-${{ matrix.id }}
+          path: /tmp/preview-${{ matrix.id }}/dist/
+          retention-days: 7
+
+  # ─── Compare screenshots against baseline ───────────────────
+  compare:
+    name: Visual Diff
+    runs-on: ubuntu-latest
+    needs: matrix
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Download all screenshots
+        uses: actions/download-artifact@v4
+        with:
+          pattern: screenshots-*
+          path: /tmp/current-screenshots/
+          merge-multiple: false
+
+      - name: Download baseline screenshots
+        uses: actions/cache/restore@v4
+        id: baseline-cache
+        with:
+          path: /tmp/baseline-screenshots/
+          key: preview-baselines-${{ github.base_ref }}
+
+      - name: Install diff dependencies
+        run: npm install pixelmatch pngjs
+
+      - name: Run visual diff
+        id: diff
+        run: |
+          node ci/compare-screenshots.js \
+            --current /tmp/current-screenshots/ \
+            --baseline /tmp/baseline-screenshots/ \
+            --output /tmp/diff-output/
+        continue-on-error: true
+
+      - name: Upload diff results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diffs
+          path: /tmp/diff-output/
+          retention-days: 14
+
+      - name: Comment on PR
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const reportPath = '/tmp/diff-output/report.json';
+
+            let body = '## 🖼️ Preview Matrix — Visual Diff\n\n';
+
+            if (fs.existsSync(reportPath)) {
+              const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+              body += `| Config | Pages | Status | Changed px |\n`;
+              body += `|--------|-------|--------|------------|\n`;
+
+              for (const entry of report.results) {
+                const status = entry.diffPixels === 0 ? '✅ Match' :
+                              entry.diffPixels === -1 ? '🆕 New' :
+                              `⚠️ ${entry.diffPercent}%`;
+                body += `| ${entry.id} | ${entry.pages} | ${status} | ${entry.diffPixels >= 0 ? entry.diffPixels : '—'} |\n`;
+              }
+
+              body += `\n**Total configs: ${report.results.length}**\n`;
+            } else {
+              body += '> No baseline found — first run will establish baselines.\n';
+            }
+
+            body += '\n---\n📸 Screenshots uploaded as workflow artifacts.';
+
+            // Find and update existing comment, or create new one
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const marker = '## 🖼️ Preview Matrix';
+            const existing = comments.find(c => c.body?.startsWith(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+  # ─── Update baseline cache (main branch only) ──────────────
+  update-baselines:
+    name: Update Baselines
+    runs-on: ubuntu-latest
+    needs: matrix
+    if: >
+      github.ref == 'refs/heads/main' ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.update_baselines == 'true')
+
+    steps:
+      - name: Download all screenshots
+        uses: actions/download-artifact@v4
+        with:
+          pattern: screenshots-*
+          path: /tmp/baseline-screenshots/
+          merge-multiple: false
+
+      - name: Save baseline cache
+        uses: actions/cache/save@v4
+        with:
+          path: /tmp/baseline-screenshots/
+          key: preview-baselines-main

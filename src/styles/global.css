@@ -205,43 +205,43 @@ html {
    ============================================ */
 
 /* --- Dark themes: tinted backgrounds from --b2 --- */
-[data-theme="abyss"] .expressive-code .frame,
-[data-theme="neonoir"] .expressive-code .frame,
-[data-theme="synthwave"] .expressive-code .frame {
+[data-palette="abyss"] .expressive-code .frame,
+[data-palette="neonoir"] .expressive-code .frame,
+[data-palette="synthwave"] .expressive-code .frame {
   background-color: hsl(var(--b2)) !important;
 }
 
-[data-theme="abyss"] .expressive-code pre,
-[data-theme="neonoir"] .expressive-code pre,
-[data-theme="synthwave"] .expressive-code pre {
+[data-palette="abyss"] .expressive-code pre,
+[data-palette="neonoir"] .expressive-code pre,
+[data-palette="synthwave"] .expressive-code pre {
   background-color: hsl(var(--b2)) !important;
 }
 
-[data-theme="abyss"] .expressive-code .header,
-[data-theme="neonoir"] .expressive-code .header,
-[data-theme="synthwave"] .expressive-code .header {
+[data-palette="abyss"] .expressive-code .header,
+[data-palette="neonoir"] .expressive-code .header,
+[data-palette="synthwave"] .expressive-code .header {
   background-color: hsl(var(--b2)) !important;
 }
 
-[data-theme="abyss"] .expressive-code .ec-line .code,
-[data-theme="neonoir"] .expressive-code .ec-line .code,
-[data-theme="synthwave"] .expressive-code .ec-line .code {
+[data-palette="abyss"] .expressive-code .ec-line .code,
+[data-palette="neonoir"] .expressive-code .ec-line .code,
+[data-palette="synthwave"] .expressive-code .ec-line .code {
   background-color: transparent !important;
 }
 
-[data-theme="abyss"] .expressive-code .ec-line .gutter,
-[data-theme="neonoir"] .expressive-code .ec-line .gutter,
-[data-theme="synthwave"] .expressive-code .ec-line .gutter {
+[data-palette="abyss"] .expressive-code .ec-line .gutter,
+[data-palette="neonoir"] .expressive-code .ec-line .gutter,
+[data-palette="synthwave"] .expressive-code .ec-line .gutter {
   background-color: transparent !important;
 }
 
 /* --- Light themes: ensure code blocks blend nicely --- */
-[data-theme="azure"] .expressive-code .frame,
-[data-theme="solaris"] .expressive-code .frame,
-[data-theme="nordic"] .expressive-code .frame,
-[data-theme="evergreen"] .expressive-code .frame,
-[data-theme="rose"] .expressive-code .frame,
-[data-theme="aquatica"] .expressive-code .frame,
-[data-theme="monochrome"] .expressive-code .frame {
+[data-palette="azure"] .expressive-code .frame,
+[data-palette="solaris"] .expressive-code .frame,
+[data-palette="nordic"] .expressive-code .frame,
+[data-palette="evergreen"] .expressive-code .frame,
+[data-palette="rose"] .expressive-code .frame,
+[data-palette="aquatica"] .expressive-code .frame,
+[data-palette="monochrome"] .expressive-code .frame {
   /* Border handled by config to prevent double borders */
 }

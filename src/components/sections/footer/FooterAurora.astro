@@ -9,6 +9,7 @@ import LocalizedLink from '../../ui/LocalizedLink.astro';
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 import '../../../styles/components/footer/FooterAurora.css';
+import { hasFeature } from '../../../config/config-loader';
 ---
 
 <footer class="footer-aurora">
@@ -39,12 +40,12 @@ import '../../../styles/components/footer/FooterAurora.css';
           <h3>{t('footer.links.company')}</h3>
           <LocalizedLink href="#about">{t('footer.links.about')}</LocalizedLink>
           <LocalizedLink href="#contact">{t('footer.links.contact')}</LocalizedLink>
-          <LocalizedLink href="/privacy">{t('footer.links.privacy')}</a>
-          <LocalizedLink href="/terms">{t('footer.links.terms')}</a>
+          <LocalizedLink href="/privacy">{t('footer.links.privacy')}</LocalizedLink>
+          <LocalizedLink href="/terms">{t('footer.links.terms')}</LocalizedLink>
         </div>
         <div class="footer-aurora-col">
           <h3>{t('footer.links.resources')}</h3>
-          <LocalizedLink href="/docs">{t('footer.links.docs')}</a>
+          {hasFeature('docs') && (<LocalizedLink href="/docs">{t('footer.links.docs')}</LocalizedLink>)}
           <LocalizedLink href="#faq">{t('footer.links.faq')}</LocalizedLink>
           <LocalizedLink href="#contact">{t('footer.links.support')}</LocalizedLink>
         </div>

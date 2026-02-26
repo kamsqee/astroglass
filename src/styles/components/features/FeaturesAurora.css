@@ -410,6 +410,6 @@
 /* -------------------------------------------------------------------------- */
 /*                         MONOCHROME THEME OVERRIDES                         */
 /* -------------------------------------------------------------------------- */
-[data-theme="monochrome"] .features-aurora-card[data-aurora-hue] {
+[data-palette="monochrome"] .features-aurora-card[data-aurora-hue] {
   --card-hue: var(--bc);
 }

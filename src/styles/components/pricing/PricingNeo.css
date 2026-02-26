@@ -89,17 +89,17 @@
 /* -------------------------------------------------------------------------- */
 /*                         MONOCHROME THEME OVERRIDES                         */
 /* -------------------------------------------------------------------------- */
-[data-theme="monochrome"] .c-pricing-neo__bg-layer {
+[data-palette="monochrome"] .c-pricing-neo__bg-layer {
   background: radial-gradient(ellipse at center, hsl(var(--bc) / 0.05) 0%, transparent 70%);
 }
 
-[data-theme="monochrome"] .c-pricing-neo__glow--emerald::before,
-[data-theme="monochrome"] .c-pricing-neo__glow--violet::before,
-[data-theme="monochrome"] .c-pricing-neo__glow--amber::before {
+[data-palette="monochrome"] .c-pricing-neo__glow--emerald::before,
+[data-palette="monochrome"] .c-pricing-neo__glow--violet::before,
+[data-palette="monochrome"] .c-pricing-neo__glow--amber::before {
   background: linear-gradient(135deg, hsl(var(--bc) / 0.05) 0%, transparent 60%);
 }
 
-[data-theme="monochrome"] .c-pricing-neo__mobile-card .bg-gradient-to-br {
+[data-palette="monochrome"] .c-pricing-neo__mobile-card .bg-gradient-to-br {
   background: none;
   background-color: hsl(var(--bc) / 0.05);
 }

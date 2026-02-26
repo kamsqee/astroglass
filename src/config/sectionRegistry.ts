@@ -8,12 +8,12 @@
  * ADDING A NEW SECTION TYPE:
  *   1. Add its key to SectionKey below.
  *   2. Export it from each theme barrel file that implements it.
- *   3. Add it to the relevant preset in themePresets.ts.
+ *   3. Add it to the manifest's landingSections[] in src/config/manifests/{theme}.ts.
  *
  * ADDING A NEW THEME:
- *   1. Create src/components/sections/themes/{theme}.ts
- *   2. Add a preset in themePresets.ts
- *   3. Add the theme to src/config/themes.ts
+ *   1. Create src/config/manifests/{theme}.ts (theme manifest)
+ *   2. Register it in src/config/themes.ts → allThemes[]
+ *   3. Create src/components/sections/themes/{theme}.ts (barrel file)
  */
 
 /** Keys for section slots that appear inside <main> on the landing page. */

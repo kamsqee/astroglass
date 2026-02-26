@@ -14,6 +14,7 @@ const currentYear = new Date().getFullYear();
 
 import '../../../styles/components/footer/FooterNeo.css';
 import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
+import { hasFeature } from '../../../config/config-loader';
 ---
 
 <footer class="footer-neo relative py-16 lg:py-20 px-4 sm:px-6 bg-base-100 border-t border-base-content/5">
@@ -29,9 +30,9 @@ import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
           <LocalizedLink href="/neo" class="px-5 py-2.5 rounded-xl bg-accent text-base-100 text-sm font-bold hover:scale-105 active:scale-95 transition-transform">
             {t('footer.links.demos')}
           </LocalizedLink>
-          <LocalizedLink href="/docs" class="px-5 py-2.5 rounded-xl border border-base-content/10 text-sm font-medium text-base-content/75 hover:bg-base-content/5 transition-colors">
+          {hasFeature('docs') && (<LocalizedLink href="/docs" class="px-5 py-2.5 rounded-xl border border-base-content/10 text-sm font-medium text-base-content/75 hover:bg-base-content/5 transition-colors">
             {t('footer.links.docs')}
-          </a>
+          </LocalizedLink>)}
         </div>
       </div>
     </div>
@@ -53,7 +54,7 @@ import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
         <h3 class="text-xs font-black uppercase tracking-[0.2em] text-accent/80 mb-4">{t('footer.links.company')}</h3>
         <ul class="space-y-3">
           <li><LocalizedLink href="#about" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.about')}</LocalizedLink></li>
-          <li><LocalizedLink href="/blog" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.blog')}</LocalizedLink></li>
+          {hasFeature('blog') && (<li><LocalizedLink href="/blog" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.blog')}</LocalizedLink></li>)}
           <li><LocalizedLink href="#contact" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.contact')}</LocalizedLink></li>
           <li><LocalizedLink href="/privacy" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.privacy')}</LocalizedLink></li>
           <li><LocalizedLink href="/terms" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.terms')}</LocalizedLink></li>
@@ -64,7 +65,7 @@ import NeoSectionTag from '../../ui/neo/NeoSectionTag.astro';
       <div>
         <h3 class="text-xs font-black uppercase tracking-[0.2em] text-accent/80 mb-4">{t('footer.links.resources')}</h3>
         <ul class="space-y-3">
-          <li><LocalizedLink href="/docs" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.docs')}</LocalizedLink></li>
+          {hasFeature('docs') && (<li><LocalizedLink href="/docs" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.docs')}</LocalizedLink></li>)}
           <li><LocalizedLink href="#faq" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.faq')}</LocalizedLink></li>
           <li><LocalizedLink href="#contact" class="footer-neo-link text-sm text-base-content/55">{t('footer.links.support')}</LocalizedLink></li>
         </ul>

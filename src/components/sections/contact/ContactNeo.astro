@@ -255,7 +255,7 @@ function initContactNeoParticles() {
       p.hue = accentHue + (Math.random() - 0.5) * 25;
     });
   });
-  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-palette'] });
   
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 2);

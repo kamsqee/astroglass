@@ -99,20 +99,20 @@
 /* -------------------------------------------------------------------------- */
 /*                         MONOCHROME THEME OVERRIDES                         */
 /* -------------------------------------------------------------------------- */
-[data-theme="monochrome"] .c-about-luxury__node-inner.bg-gradient-to-br,
-[data-theme="monochrome"] .c-about-luxury__node-outer > .bg-gradient-to-br.animate-ping,
-[data-theme="monochrome"] .c-about-luxury__card-inner > .bg-gradient-to-b {
+[data-palette="monochrome"] .c-about-luxury__node-inner.bg-gradient-to-br,
+[data-palette="monochrome"] .c-about-luxury__node-outer > .bg-gradient-to-br.animate-ping,
+[data-palette="monochrome"] .c-about-luxury__card-inner > .bg-gradient-to-b {
   background: none;
   background-color: hsl(var(--bc) / 0.15);
 }
 
-[data-theme="monochrome"] .c-about-luxury__node span.bg-gradient-to-r {
+[data-palette="monochrome"] .c-about-luxury__node span.bg-gradient-to-r {
   background: none;
   background-color: hsl(var(--bc));
   color: hsl(var(--b1));
 }
 
-[data-theme="monochrome"] .c-about-luxury__card a.bg-gradient-to-r {
+[data-palette="monochrome"] .c-about-luxury__card a.bg-gradient-to-r {
   background: none;
   background-color: hsl(var(--bc));
   color: hsl(var(--b1));

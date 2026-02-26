@@ -106,7 +106,7 @@
   );
 }
 
-[data-theme="monochrome"] .pp-aurora__card[data-category="webapp"] .pp-aurora__visual-mesh {
+[data-palette="monochrome"] .pp-aurora__card[data-category="webapp"] .pp-aurora__visual-mesh {
   background: radial-gradient(
     ellipse at 25% 35%,
     hsl(var(--a) / 0.1) 0%,
@@ -124,7 +124,7 @@
   );
 }
 
-[data-theme="monochrome"] .pp-aurora__card[data-category="dashboard"] .pp-aurora__visual-mesh {
+[data-palette="monochrome"] .pp-aurora__card[data-category="dashboard"] .pp-aurora__visual-mesh {
   background: radial-gradient(
     ellipse at 60% 30%,
     hsl(var(--a) / 0.08) 0%,
@@ -142,7 +142,7 @@
   );
 }
 
-[data-theme="monochrome"] .pp-aurora__card[data-category="mobile"] .pp-aurora__visual-mesh {
+[data-palette="monochrome"] .pp-aurora__card[data-category="mobile"] .pp-aurora__visual-mesh {
   background: radial-gradient(
     ellipse at 40% 60%,
     hsl(var(--a) / 0.09) 0%,
@@ -160,7 +160,7 @@
   );
 }
 
-[data-theme="monochrome"] .pp-aurora__card[data-category="branding"] .pp-aurora__visual-mesh {
+[data-palette="monochrome"] .pp-aurora__card[data-category="branding"] .pp-aurora__visual-mesh {
   background: radial-gradient(
     ellipse at 55% 45%,
     hsl(var(--a) / 0.1) 0%,

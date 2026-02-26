@@ -126,6 +126,11 @@ if (firstArg && SUB_COMMANDS.includes(firstArg as any)) {
         description: 'Skip confirmation prompts',
         default: false,
       },
+      'non-interactive': {
+        type: 'boolean',
+        description: 'CI mode: skip all prompts, use flags + defaults',
+        default: false,
+      },
       'dry-run': {
         type: 'boolean',
         description: 'Show what would be done',
@@ -133,19 +138,27 @@ if (firstArg && SUB_COMMANDS.includes(firstArg as any)) {
       },
     },
     async run({ args }) {
+      const nonInteractive = args['non-interactive'] ?? false;
+      const skipConfirm = args.yes || nonInteractive;
+
       showBanner();
 
       let choices: UserChoices;
 
       if (args.preset) {
         choices = await runPresetFlow(args.dir, args.preset, args);
-      } else if (args.theme) {
+      } else if (args.theme || nonInteractive) {
+        // Flag-driven or non-interactive mode — build choices from flags + defaults
         choices = {
           projectDir: args.dir || './my-astroglass',
-          themes: args.theme.split(',').map(s => s.trim()),
+          themes: args.theme?.split(',').map(s => s.trim()) ?? ['liquid'],
           palettes: args.palettes?.split(',') ?? ['azure'],
           locales: args.locales?.split(',') ?? ['en'],
-          features: (typeof args.features === 'string') ? args.features.split(',').map(s => s.trim()) : [],
+          features: args['no-features']
+            ? []
+            : (typeof args.features === 'string')
+              ? args.features.split(',').map(s => s.trim())
+              : [],
           deployTarget: args.deploy ?? 'cloudflare',
           defaultPalette: args.palettes?.split(',')[0] ?? 'azure',
         };
@@ -181,7 +194,7 @@ if (firstArg && SUB_COMMANDS.includes(firstArg as any)) {
         }
       }
 
-      if (!args.yes && !args['dry-run']) {
+      if (!skipConfirm && !args['dry-run']) {
         const confirmed = await p.confirm({
           message: 'Ready to scaffold your project?',
         });
@@ -194,6 +207,7 @@ if (firstArg && SUB_COMMANDS.includes(firstArg as any)) {
 
       const result = await scaffold(choices, {
         dryRun: args['dry-run'] ?? false,
+        runPostCheck: !nonInteractive ? false : true,
       });
 
       showSummary(choices, result);

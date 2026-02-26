@@ -1,5 +1,14 @@
 ---
+/**
+ * Index Page — Mode-Aware Landing
+ *
+ * Routing mode is derived from config at build time:
+ *   - single-theme:  Renders the primary theme's sections directly at /
+ *   - multi-theme:   Renders the theme-picker showcase (HeroHome, TemplateShowcase, etc.)
+ */
 import { getEnabledLocaleCodes, defaultLocale } from '../../config/locales';
+import { isSingleTheme, primaryTheme } from '../../config/config-loader';
+import { getLandingSections, getThemeById } from '../../config/themes';
 
 export async function getStaticPaths() {
   return getEnabledLocaleCodes().map(lang => {
@@ -8,12 +17,12 @@ export async function getStaticPaths() {
 }
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import HeaderDefault from '../../components/layout/header/HeaderDefault.astro';
-import FooterIndex from '../../components/sections/footer/FooterIndex.astro';
 import { useTranslations } from '../../utils/i18n';
 import { getLocaleFromUrl } from '../../utils/locale-utils';
 
-// Home page sections
+// ── Multi-theme showcase imports ──────────────────────────────
+import HeaderDefault from '../../components/layout/header/HeaderDefault.astro';
+import FooterIndex from '../../components/sections/footer/FooterIndex.astro';
 import HeroHome from '../../components/sections/hero/HeroHome.astro';
 import StatsStrip from '../../components/sections/landing/StatsStrip.astro';
 import TemplateShowcase from '../../components/sections/landing/TemplateShowcase.astro';
@@ -24,24 +33,65 @@ import TestimonialHome from '../../components/sections/testimonial/TestimonialHo
 import FAQHome from '../../components/sections/landing/FAQHome.astro';
 import CTAHome from '../../components/sections/cta/CTAHome.astro';
 
-const locale = Astro.params.lang || 'en'; // getLocaleFromUrl(Astro.url);
+// ── Single-theme barrel imports (for rendering at /) ──────────
+import * as LiquidSections  from '../../components/sections/themes/liquid';
+import * as GlassSections   from '../../components/sections/themes/glass';
+import * as NeoSections     from '../../components/sections/themes/neo';
+import * as LuxurySections  from '../../components/sections/themes/luxury';
+import * as MinimalSections from '../../components/sections/themes/minimal';
+import * as AuroraSections  from '../../components/sections/themes/aurora';
+
+const locale = Astro.params.lang || 'en';
 const t = useTranslations(locale);
+
+// ── Single-theme mode setup ───────────────────────────────────
+type ThemeModuleMap = Record<string, Record<string, unknown>>;
+const themeModules: ThemeModuleMap = {
+  liquid: LiquidSections, glass: GlassSections, neo: NeoSections,
+  luxury: LuxurySections, minimal: MinimalSections, aurora: AuroraSections,
+};
+
+const theme = isSingleTheme ? getThemeById(primaryTheme) : null;
+const sections = isSingleTheme ? (themeModules[primaryTheme] ?? LiquidSections) : null;
+const Header = sections?.['Header'] as ((_props: Record<string, unknown>) => unknown) | null;
+const Footer = sections?.['Footer'] as ((_props: Record<string, unknown>) => unknown) | null;
+const mainSections = isSingleTheme
+  ? getLandingSections(primaryTheme)
+      .map((key) => sections?.[key] ?? null)
+      .filter((C): C is NonNullable<typeof C> => C !== null)
+  : [];
 ---
 
-<BaseLayout title={t('title')} description={t('description')} showHeader={false}>
-  <HeaderDefault />
-  
-  <main class="min-h-screen">
-    <HeroHome />
-    <StatsStrip />
-    <TemplateShowcase />
-    <HowItWorks />
-    <FeaturesHome />
-    <ThemeGallery />
-    <TestimonialHome />
-    <FAQHome />
-    <CTAHome />
-  </main>
-  
-  <FooterIndex />
-</BaseLayout>
+{isSingleTheme ? (
+  <!-- Single-theme mode: render the theme directly at / -->
+  <BaseLayout
+    title={`${theme?.name} - ${t('title')}`}
+    description={t('description')}
+    showHeader={false}
+  >
+    {Header && <Header />}
+    <main>
+      {mainSections.map((Section: any) => <Section />)}
+    </main>
+    {Footer && <Footer />}
+  </BaseLayout>
+) : (
+  <!-- Multi-theme mode: render the theme-picker showcase -->
+  <BaseLayout title={t('title')} description={t('description')} showHeader={false}>
+    <HeaderDefault />
+
+    <main class="min-h-screen">
+      <HeroHome />
+      <StatsStrip />
+      <TemplateShowcase />
+      <HowItWorks />
+      <FeaturesHome />
+      <ThemeGallery />
+      <TestimonialHome />
+      <FAQHome />
+      <CTAHome />
+    </main>
+
+    <FooterIndex />
+  </BaseLayout>
+)}

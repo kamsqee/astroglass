@@ -1,6 +1,7 @@
 /**
  * Scaffolding Engine — orchestrates the full scaffold flow
  */
+import { execSync } from 'node:child_process';
 import * as p from '@clack/prompts';
 import type { UserChoices } from '../index.js';
 import { downloadTemplate } from './download.js';
@@ -15,6 +16,8 @@ import { cleanup } from './cleanup.js';
 
 export interface ScaffoldOptions {
   dryRun: boolean;
+  /** Run `astro check` after scaffolding to validate the output (CI mode). */
+  runPostCheck?: boolean;
 }
 
 export interface ScaffoldResult {
@@ -22,6 +25,8 @@ export interface ScaffoldResult {
   filesGenerated: number;
   totalFiles: number;
   duration: number;
+  /** True if the post-scaffold `astro check` passed (or was not run). */
+  checkPassed: boolean;
 }
 
 export async function scaffold(
@@ -77,16 +82,37 @@ export async function scaffold(
   filesGenerated += hubResult.generated;
   s.stop(`Generated ${hubResult.generated} config files ✓`);
 
-  // Step 7: Write astroglass.config.json
+  // Step 8: Write astroglass.config.json
   s.start('Writing project config...');
   await generateConfig(projectPath, choices, options.dryRun);
   filesGenerated += 1;
   s.stop('Project config written ✓');
 
-  // Step 8: Cleanup
+  // Step 9: Cleanup
   s.start('Cleaning up...');
   await cleanup(projectPath, options.dryRun);
   s.stop('Cleanup complete ✓');
+
+  // Step 10: Post-scaffold validation (optional, primarily for CI)
+  let checkPassed = true;
+  if (options.runPostCheck && !options.dryRun) {
+    s.start('Running astro check...');
+    try {
+      execSync('npx astro check', {
+        cwd: projectPath,
+        stdio: 'pipe',
+        timeout: 120_000,
+      });
+      s.stop('Type-check passed ✓');
+    } catch (err) {
+      s.stop('Type-check failed ✗');
+      checkPassed = false;
+      const stderr = (err as any)?.stderr?.toString() || '';
+      if (stderr) {
+        p.note(stderr.slice(0, 500), 'astro check errors');
+      }
+    }
+  }
 
   const duration = Date.now() - start;
 
@@ -95,5 +121,6 @@ export async function scaffold(
     filesGenerated,
     totalFiles: 0, // Will be counted post-scaffold
     duration,
+    checkPassed,
   };
 }

@@ -122,8 +122,8 @@ import '../../../styles/components/header/HeaderMinimal.css';
       btn.addEventListener('click', () => {
         const theme = btn.getAttribute('data-theme-minimal');
         if (theme) {
-          document.documentElement.setAttribute('data-theme', theme);
-          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-palette', theme);
+          localStorage.setItem('palette', theme);
         }
       });
     });

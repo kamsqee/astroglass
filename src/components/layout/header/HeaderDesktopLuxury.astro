@@ -98,7 +98,7 @@ const themes = palettes.map(p => ({
   }
 
   /* Dark mode adjustment */
-  :global([data-theme="abyss"] .luxury-desktop-header) {
+  :global([data-palette="abyss"] .luxury-desktop-header) {
     background: rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   }
@@ -198,12 +198,12 @@ const themes = palettes.map(p => ({
     const themes = Array.from(spineButtons).map(b => (b as HTMLElement).dataset.setThemeSpine).filter(Boolean) as string[];
     if (themes.length === 0) return;
 
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'azure';
+    const currentTheme = document.documentElement.getAttribute('data-palette') || 'azure';
     const currentIndex = themes.indexOf(currentTheme);
     const nextTheme = themes[(currentIndex + 1) % themes.length];
-    
-    document.documentElement.setAttribute('data-theme', nextTheme);
-    localStorage.setItem('theme', nextTheme);
-    window.dispatchEvent(new Event('theme-changed'));
+
+    document.documentElement.setAttribute('data-palette', nextTheme);
+    localStorage.setItem('palette', nextTheme);
+    window.dispatchEvent(new Event('palette-changed'));
   });
 </script>

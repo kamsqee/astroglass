@@ -1,7 +1,10 @@
 ---
 import { getEnabledLocaleCodes, defaultLocale } from '../../../config/locales';
+import { hasFeature } from '../../../config/config-loader';
 
 export async function getStaticPaths() {
+  if (!hasFeature('blog')) return [];
+
   return getEnabledLocaleCodes().map(lang => ({
     params: { lang: lang === defaultLocale ? undefined : lang },
     props: { locale: lang }

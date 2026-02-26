@@ -41,7 +41,7 @@
   text-shadow: 0 0 8px hsl(45 100% 60% / 0.3);
 }
 
-[data-theme="monochrome"] .testimonial-aurora-stars {
+[data-palette="monochrome"] .testimonial-aurora-stars {
   color: hsl(var(--bc));
   text-shadow: 0 0 8px hsl(var(--bc) / 0.3);
 }

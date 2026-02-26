@@ -1,6 +1,6 @@
 /* Synthwave - Retro, vibrant, energetic
    80s arcade, neon lights, and chrome */
-[data-theme="synthwave"] {
+[data-palette="synthwave"] {
   --p: 270 55% 12%;
   --s: 280 50% 18%;
   --a: 320 100% 60%;

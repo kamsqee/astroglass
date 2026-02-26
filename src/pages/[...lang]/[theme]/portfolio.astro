@@ -29,7 +29,12 @@ import * as AuroraSections  from '../../../components/sections/themes/aurora';
 
 export async function getStaticPaths() {
   const { getEnabledThemes } = await import('../../../config/themes');
+  const { isSingleTheme } = await import('../../../config/config-loader');
   const { getEnabledLocaleCodes, defaultLocale } = await import('../../../config/locales');
+
+  // In single-theme mode, /{theme}/portfolio doesn't exist as a named route
+  if (isSingleTheme) return [];
+
   const themes = getEnabledThemes();
   const langs = getEnabledLocaleCodes();
   const paths = [];

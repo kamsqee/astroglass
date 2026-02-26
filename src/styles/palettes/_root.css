@@ -4,6 +4,28 @@
    ============================================ */
 
 :root {
+  /* ============================================
+     Palette Fallbacks (Azure defaults)
+     Ensures no palette variable is ever undefined,
+     even if data-palette attribute is missing.
+     ============================================ */
+  --p: 215 30% 96%;
+  --s: 215 25% 91%;
+  --a: 215 90% 43%;
+  --n: 215 15% 45%;
+  --b1: 220 20% 99%;
+  --b2: 215 25% 95%;
+  --bc: 220 35% 20%;
+  --glass-blur: 20px;
+  --glass-opacity: 0.7;
+  --glass-border: 255 255 255 / 0.3;
+  --glow-color: 215 90% 43%;
+  --glow-intensity: 0.15;
+  --shadow-color: 220 50% 15%;
+  --selection-bg: 215 90% 55% / 0.25;
+  --scrollbar-thumb: 215 30% 75%;
+  --scrollbar-track: 215 20% 92%;
+
   /* Global Defaults (Fallback) */
   --er: 0 72% 51%;   /* Red */
   --su: 142 71% 45%; /* Green */

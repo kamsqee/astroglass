@@ -13,6 +13,7 @@ const t = useTranslations(locale);
 const currentYear = new Date().getFullYear();
 
 import '../../../styles/components/footer/FooterLuxury.css';
+import { hasFeature } from '../../../config/config-loader';
 ---
 
 <footer class="footer-luxury relative py-20 lg:py-28 px-4 sm:px-6 bg-base-100">
@@ -52,7 +53,7 @@ import '../../../styles/components/footer/FooterLuxury.css';
         <h3 class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent/70 mb-5">{t('footer.links.company')}</h3>
         <ul class="space-y-3">
           <li><LocalizedLink href="#about" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.about')}</LocalizedLink></li>
-          <li><LocalizedLink href="/blog" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.blog')}</LocalizedLink></li>
+          {hasFeature('blog') && (<li><LocalizedLink href="/blog" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.blog')}</LocalizedLink></li>)}
           <li><LocalizedLink href="#contact" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.contact')}</LocalizedLink></li>
           <li><LocalizedLink href="/privacy" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.privacy')}</LocalizedLink></li>
           <li><LocalizedLink href="/terms" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.terms')}</LocalizedLink></li>
@@ -63,7 +64,7 @@ import '../../../styles/components/footer/FooterLuxury.css';
       <div class="col-span-2 sm:col-span-1">
         <h3 class="text-[10px] font-bold uppercase tracking-[0.3em] text-accent/70 mb-5">{t('footer.links.resources')}</h3>
         <ul class="space-y-3">
-          <li><LocalizedLink href="/docs" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.docs')}</LocalizedLink></li>
+          {hasFeature('docs') && (<li><LocalizedLink href="/docs" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.docs')}</LocalizedLink></li>)}
           <li><LocalizedLink href="#faq" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.faq')}</LocalizedLink></li>
           <li><LocalizedLink href="#contact" class="footer-luxury-link text-sm text-base-content/75">{t('footer.links.support')}</LocalizedLink></li>
         </ul>

@@ -5,24 +5,23 @@
  * Generates /{theme} for each enabled theme via getStaticPaths().
  *
  * HOW SECTION ORDER IS CONTROLLED:
- *   Edit src/config/themePresets.ts → {themeId}.landingSections[]
+ *   Edit src/config/manifests/{theme}.ts → landingSections[]
  *
  * HOW TO ADD A SECTION TO ONE THEME:
  *   1. Create the section component (e.g. NewSectionLiquid.astro)
  *   2. Export it from the theme barrel: src/components/sections/themes/{theme}.ts
- *   3. Add its key to themePresets.ts → {theme}.landingSections[]
+ *   3. Add its key to src/config/manifests/{theme}.ts → landingSections[]
  *
  * HOW TO ADD A NEW THEME:
- *   1. Create src/components/sections/themes/{theme}.ts barrel file
- *   2. Add a preset in src/config/themePresets.ts
- *   3. Register the theme in src/config/themes.ts
+ *   1. Create a manifest at src/config/manifests/{theme}.ts
+ *   2. Register it in src/config/themes.ts → allThemes[]
+ *   3. Create src/components/sections/themes/{theme}.ts barrel file
  *   4. Add the theme module to the themeModules map below
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations } from '../../utils/i18n';
 import { getLocaleFromUrl } from '../../utils/locale-utils';
-import { getThemeById } from '../../config/themes';
-import { themePresets } from '../../config/themePresets';
+import { getThemeById, getLandingSections } from '../../config/themes';
 
 // Theme barrel files (typed via src/types/theme-sections.d.ts)
 import * as LiquidSections  from '../../components/sections/themes/liquid';
@@ -37,7 +36,12 @@ type ThemeModuleMap = Record<string, Record<string, unknown>>;
 
 export async function getStaticPaths() {
   const { getEnabledThemes } = await import('../../config/themes');
+  const { isSingleTheme } = await import('../../config/config-loader');
   const { getEnabledLocaleCodes, defaultLocale } = await import('../../config/locales');
+
+  // In single-theme mode, the theme renders at index — no /{theme} routes
+  if (isSingleTheme) return [];
+
   const themes = getEnabledThemes();
   const langs = getEnabledLocaleCodes();
   const paths = [];
@@ -64,7 +68,7 @@ const { themeId } = Astro.props;
 const theme = getThemeById(themeId);
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
-const preset = themePresets[themeId] ?? themePresets['liquid'];
+const landingSections = getLandingSections(themeId);
 
 // Map of all theme section modules — add a new entry here when adding a new theme.
 const themeModules: ThemeModuleMap = {
@@ -82,10 +86,10 @@ const sections = themeModules[themeId] ?? LiquidSections;
 const Header = sections['Header'] as (_props: Record<string, unknown>) => unknown;
 const Footer = sections['Footer'] as (_props: Record<string, unknown>) => unknown;
 
-// Resolve main content sections in preset order.
-// If a section key is listed in the preset but not exported by the barrel file,
+// Resolve main content sections in manifest order.
+// If a section key is listed in the manifest but not exported by the barrel file,
 // it is silently skipped — no runtime error.
-const mainSections = preset.landingSections
+const mainSections = landingSections
   .map((key) => sections[key] ?? null)
   .filter((C): C is NonNullable<typeof C> => C !== null);
 ---

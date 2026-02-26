@@ -9,7 +9,7 @@
  * To add a new section to Liquid:
  *   1. Create the component (e.g. NewSectionLiquid.astro)
  *   2. Add the export below
- *   3. Add the key to themePresets.ts → liquid.landingSections
+ *   3. Add the key to src/config/manifests/liquid.ts → landingSections[]
  */
 
 export { default as Header }       from '../../layout/header/HeaderLiquid.astro';

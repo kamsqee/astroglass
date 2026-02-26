@@ -5,6 +5,9 @@ import { getEnabledLocaleCodes, defaultLocale } from '../../../config/locales';
 export const prerender = true;
 
 export async function getStaticPaths() {
+  const { hasFeature } = await import('../../../config/config-loader');
+  if (!hasFeature('blog')) return [];
+
   const langs = getEnabledLocaleCodes();
   return langs.map(lang => ({
     params: { lang: lang === defaultLocale ? undefined : lang },

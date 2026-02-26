@@ -295,7 +295,7 @@ const themes = palettes.map(p => ({
   function initLuxurySpine() {
     // 1. Theme Logic
     const updateSpineActive = () => {
-      const current = document.documentElement.getAttribute('data-theme') || 'azure';
+      const current = document.documentElement.getAttribute('data-palette') || 'azure';
       document.querySelectorAll('[data-set-theme-spine]').forEach(btn => {
         btn.classList.toggle('is-active', (btn as HTMLElement).dataset.setThemeSpine === current);
       });
@@ -307,15 +307,15 @@ const themes = palettes.map(p => ({
       btn.addEventListener('click', (e) => {
         const theme = (e.currentTarget as HTMLElement).dataset.setThemeSpine;
         if (theme) {
-          document.documentElement.setAttribute('data-theme', theme);
-          localStorage.setItem('theme', theme);
+          document.documentElement.setAttribute('data-palette', theme);
+          localStorage.setItem('palette', theme);
           updateSpineActive();
-          window.dispatchEvent(new Event('theme-changed'));
+          window.dispatchEvent(new Event('palette-changed'));
         }
       });
     });
 
-    window.addEventListener('theme-changed', updateSpineActive);
+    window.addEventListener('palette-changed', updateSpineActive);
 
     // 2. ScrollSpy (IntersectionObserver)
     const sectionLinks = document.querySelectorAll('a[data-nav-type="section"]');

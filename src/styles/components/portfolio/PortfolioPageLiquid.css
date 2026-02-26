@@ -382,33 +382,33 @@
 /* -------------------------------------------------------------------------- */
 /*                         MONOCHROME THEME OVERRIDES                         */
 /* -------------------------------------------------------------------------- */
-[data-theme="monochrome"] .c-portfolio-page-liquid__visual > div.bg-gradient-to-br {
+[data-palette="monochrome"] .c-portfolio-page-liquid__visual > div.bg-gradient-to-br {
   background: linear-gradient(to bottom right, hsl(var(--bc) / 0.05), hsl(var(--bc) / 0.1));
 }
 
-[data-theme="monochrome"] .c-portfolio-page-liquid__metric > span.bg-gradient-to-r,
-[data-theme="monochrome"] .c-portfolio-page-liquid__card-inner h2.text-2xl {
+[data-palette="monochrome"] .c-portfolio-page-liquid__metric > span.bg-gradient-to-r,
+[data-palette="monochrome"] .c-portfolio-page-liquid__card-inner h2.text-2xl {
   background: none;
   color: hsl(var(--bc));
   -webkit-text-fill-color: hsl(var(--bc));
 }
 
-[data-theme="monochrome"] .c-portfolio-page-liquid__card-inner span.text-accent,
-[data-theme="monochrome"] .c-portfolio-page-liquid__narrative-block h4.text-accent {
+[data-palette="monochrome"] .c-portfolio-page-liquid__card-inner span.text-accent,
+[data-palette="monochrome"] .c-portfolio-page-liquid__narrative-block h4.text-accent {
   color: hsl(var(--bc));
 }
 
-[data-theme="monochrome"] .c-portfolio-page-liquid__card-inner button.bg-accent {
+[data-palette="monochrome"] .c-portfolio-page-liquid__card-inner button.bg-accent {
   background-color: hsl(var(--bc));
   color: hsl(var(--b1));
 }
 
-[data-theme="monochrome"] .c-portfolio-page-liquid__tech-pill {
+[data-palette="monochrome"] .c-portfolio-page-liquid__tech-pill {
   background: hsl(var(--bc) / 0.05);
   border-color: hsl(var(--bc) / 0.1);
   color: hsl(var(--bc) / 0.8);
 }
 
-[data-theme="monochrome"] .c-portfolio-page-liquid__tech-pill:hover {
+[data-palette="monochrome"] .c-portfolio-page-liquid__tech-pill:hover {
   background: hsl(var(--bc) / 0.1);
 }

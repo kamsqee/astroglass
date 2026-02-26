@@ -1,6 +1,6 @@
 /* Azure (Default Light) - Crisp, clean, modern
    Clear blue sky clarity and depth */
-[data-theme="azure"] {
+[data-palette="azure"] {
   /* Core palette */
   --p: 215 30% 96%;
   --s: 215 25% 91%;

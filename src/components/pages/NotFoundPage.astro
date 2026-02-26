@@ -1,23 +1,36 @@
 ---
 /**
  * 404 — Page Not Found
- * 
+ *
  * Theme-adaptive error page. Uses CSS custom properties from _themes.css
  * so it automatically matches whichever color theme the user has active.
- * Works with all 6 landing-page design families.
+ * Resolves the correct header from the primary theme's manifest.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import HeaderDefault from '../layout/header/HeaderDefault.astro';
+import { primaryTheme } from '../../config/config-loader';
+import { getHeaderVersion } from '../../config/themes';
 import { useTranslations } from '../../utils/i18n';
 import { getLocaleFromUrl } from '../../utils/locale-utils';
+
+// Header components — resolved dynamically based on primary theme
+import HeaderLiquid from '../layout/header/HeaderLiquid.astro';
+import HeaderGlass from '../layout/header/HeaderGlass.astro';
+import HeaderDefault from '../layout/header/HeaderDefault.astro';
+import HeaderLuxury from '../layout/header/HeaderLuxury.astro';
+import HeaderMinimal from '../layout/header/HeaderMinimal.astro';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const homeHref = locale === 'en' ? '/' : `/${locale}/`;
+const headerVersion = getHeaderVersion(primaryTheme);
 ---
 
 <BaseLayout title={t('notFound.title')} description={t('notFound.message')} showHeader={false}>
-  <HeaderDefault />
+  {headerVersion === 1 ? <HeaderLiquid /> :
+   headerVersion === 2 ? <HeaderGlass /> :
+   headerVersion === 4 ? <HeaderLuxury /> :
+   headerVersion === 5 ? <HeaderMinimal /> :
+   <HeaderDefault />}
 
   <section class="not-found" aria-label={t('notFound.heading')}>
     <!-- Animated background layers -->

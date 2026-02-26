@@ -148,11 +148,11 @@ const themeItems = themes.filter(t => t.enabled).map((theme, i) => ({
 
 <style>
   /* Monochrome visual overrides */
-  :global([data-theme="monochrome"]) .c-portfolio-glass__item [data-theme-gradient] {
+  :global([data-palette="monochrome"]) .c-portfolio-glass__item [data-theme-gradient] {
     background-image: none;
   }
 
-  :global([data-theme="monochrome"]) .group:hover .group-hover\:border-accent\/20 {
+  :global([data-palette="monochrome"]) .group:hover .group-hover\:border-accent\/20 {
     border-color: hsl(var(--bc) / 0.2);
   }
 </style>

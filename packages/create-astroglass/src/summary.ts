@@ -39,6 +39,12 @@ export function showSummary(
   }
   console.log(pc.dim(bottom));
 
+  // Post-scaffold check warning
+  if (result.checkPassed === false) {
+    console.log('');
+    console.log(pc.yellow('  ⚠ astro check reported errors. Run `npx astro check` after install to investigate.'));
+  }
+
   // Next steps
   console.log('');
   console.log(pc.bold('  Next steps:'));

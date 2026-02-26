@@ -24,12 +24,12 @@
 }
 
 /* Monochrome visual overrides */
-[data-theme="monochrome"] .showcase-card [data-showcase-bg] {
+[data-palette="monochrome"] .showcase-card [data-showcase-bg] {
   background-image: none;
   background-color: hsl(var(--bc) / 0.05);
 }
 
-[data-theme="monochrome"] .showcase-card:hover {
+[data-palette="monochrome"] .showcase-card:hover {
   border-color: hsl(var(--bc) / 0.2);
 }
 

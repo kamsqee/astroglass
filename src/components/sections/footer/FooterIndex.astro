@@ -12,6 +12,7 @@ const t = useTranslations(locale);
 const currentYear = new Date().getFullYear();
 
 import '../../../styles/components/footer/FooterLiquid.css';
+import { hasFeature } from '../../../config/config-loader';
 ---
 
 <footer class="footer-liquid relative py-16 lg:py-20 px-4 sm:px-6 bg-base-100">
@@ -65,7 +66,7 @@ import '../../../styles/components/footer/FooterLiquid.css';
         <h3 class="text-xs font-black uppercase tracking-[0.2em] text-base-content/75 mb-4">{t('footer.links.company')}</h3>
         <ul class="space-y-3">
           <li><LocalizedLink href="#showcase" class="text-sm text-base-content/75 hover:text-accent transition-colors">{t('footer.links.about')}</LocalizedLink></li>
-          <li><LocalizedLink href="/blog" class="text-sm text-base-content/75 hover:text-accent transition-colors">{t('footer.links.blog')}</LocalizedLink></li>
+          {hasFeature('blog') && (<li><LocalizedLink href="/blog" class="text-sm text-base-content/75 hover:text-accent transition-colors">{t('footer.links.blog')}</LocalizedLink></li>)}
           <li><LocalizedLink href="/privacy" class="text-sm text-base-content/75 hover:text-accent transition-colors">{t('footer.links.privacy')}</LocalizedLink></li>
           <li><LocalizedLink href="/terms" class="text-sm text-base-content/75 hover:text-accent transition-colors">{t('footer.links.terms')}</LocalizedLink></li>
         </ul>
@@ -75,7 +76,7 @@ import '../../../styles/components/footer/FooterLiquid.css';
       <div>
         <h3 class="text-xs font-black uppercase tracking-[0.2em] text-base-content/75 mb-4">{t('footer.links.resources')}</h3>
         <ul class="space-y-3">
-          <li><LocalizedLink href="/docs" class="text-sm text-base-content/75 hover:text-accent transition-colors">{t('footer.links.docs')}</LocalizedLink></li>
+          {hasFeature('docs') && (<li><LocalizedLink href="/docs" class="text-sm text-base-content/75 hover:text-accent transition-colors">{t('footer.links.docs')}</LocalizedLink></li>)}
           <li><LocalizedLink href="#faq-home" class="text-sm text-base-content/75 hover:text-accent transition-colors">{t('footer.links.faq')}</LocalizedLink></li>
         </ul>
       </div>

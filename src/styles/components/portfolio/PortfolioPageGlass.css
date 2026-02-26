@@ -163,11 +163,11 @@
 }
 
 /* Monochrome theme overrides for inline card colors */
-[data-theme="monochrome"] .c-portfolio-page-glass__visual > div.bg-gradient-to-br {
+[data-palette="monochrome"] .c-portfolio-page-glass__visual > div.bg-gradient-to-br {
   background: linear-gradient(to bottom right, hsl(var(--bc) / 0.05), hsl(var(--bc) / 0.1));
 }
 
-[data-theme="monochrome"] .c-portfolio-page-glass__inner-glow {
+[data-palette="monochrome"] .c-portfolio-page-glass__inner-glow {
   background: hsl(var(--bc) / 0.15);
 }
 

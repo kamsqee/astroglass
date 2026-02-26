@@ -96,8 +96,8 @@ select:-webkit-autofill:active {
 /* 5. Theme-Specific Overrides */
 
 /* "Glowing" Themes (Neonoir, Synthwave) */
-[data-theme="neonoir"] .input-error,
-[data-theme="synthwave"] .input-error {
+[data-palette="neonoir"] .input-error,
+[data-palette="synthwave"] .input-error {
   --_tw-border-color: hsl(var(--er));
   box-shadow: 0 0 15px hsl(var(--er) / 0.4), inset 0 0 10px hsl(var(--er) / 0.1);
   text-shadow: 0 0 5px hsl(var(--er) / 0.3);
@@ -106,16 +106,16 @@ select:-webkit-autofill:active {
 }
 
 /* "Corporate" Themes (Minimal, Azure, Nordic) */
-[data-theme="minimal"] .input-error,
-[data-theme="azure"] .input-error,
-[data-theme="nordic"] .input-error {
+[data-palette="minimal"] .input-error,
+[data-palette="azure"] .input-error,
+[data-palette="nordic"] .input-error {
   border-width: 2px;
   background-color: transparent;
   box-shadow: none;
 }
 
 /* "Organic/Liquid" Themes */
-[data-theme="liquid"] .input-error {
+[data-palette="liquid"] .input-error {
   background-color: hsl(var(--er) / 0.08);
   border-color: transparent;
 }

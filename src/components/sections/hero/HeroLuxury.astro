@@ -51,7 +51,7 @@ const themes = palettes.slice(0, 4).map(p => ({
                     <button 
                       class={`c-hero-luxury__theme-btn w-10 h-10 border transition-luxury rounded-xl ${i === 0 ? 'scale-110 border-base-content' : 'border-transparent opacity-60 hover:opacity-100 hover:border-base-content/20'}`}
                       style={`background: ${theme.color}`}
-                      data-theme={theme.id}
+                      data-palette={theme.id}
                       data-color={theme.color}
                       aria-label={theme.name}
                     ></button>
@@ -145,7 +145,7 @@ const themes = palettes.slice(0, 4).map(p => ({
                         <button 
                           class={`c-hero-luxury__theme-btn w-12 h-12 border transition-luxury hover:scale-105 rounded-xl ${i === 0 ? 'scale-110 border-base-content' : 'border-transparent opacity-60 hover:opacity-100 hover:border-base-content/20'}`}
                           style={`background: ${theme.color}`}
-                          data-theme={theme.id}
+                          data-palette={theme.id}
                           data-color={theme.color}
                           aria-label={theme.name}
                         ></button>
