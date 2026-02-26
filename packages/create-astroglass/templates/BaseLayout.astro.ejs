@@ -37,7 +37,7 @@ const locale = getLocaleFromUrl(Astro.url);
 const enabledLocales = getEnabledLocaleCodes();
 
 const currentHeader = headerVersion;
-const activeTheme = <%= hasGlass ? "currentHeader === 2 ? 'nordic' : " : "" %>'<%= defaultPalette %>';
+const activeTheme = <%- hasGlass ? "currentHeader === 2 ? 'nordic' : '" + defaultPalette + "'" : "'" + defaultPalette + "'" %>;
 ---
 
 <!doctype html>

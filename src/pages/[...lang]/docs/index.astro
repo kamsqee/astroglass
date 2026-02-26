@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { buildDocsNav } from '../../../utils/docs-nav';
-import FooterLiquid from '../../../components/sections/footer/FooterLiquid.astro';
+import FooterIndex from '../../../components/sections/footer/FooterIndex.astro';
 import { useTranslations } from '../../../utils/i18n';
 
 type DocsLocale = Parameters<typeof buildDocsNav>[0];
@@ -56,5 +56,5 @@ const t = useTranslations(locale as DocsLocale);
       ))}
     </div>
   </main>
-  <FooterLiquid />
+  <FooterIndex />
 </BaseLayout>

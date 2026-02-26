@@ -8,7 +8,7 @@ import ShareBar from '../../../components/blog/ShareBar.astro';
 import PostNavigation from '../../../components/blog/PostNavigation.astro';
 import RelatedPosts from '../../../components/blog/RelatedPosts.astro';
 import NewsletterCTA from '../../../components/blog/NewsletterCTA.astro';
-import FooterLiquid from '../../../components/sections/footer/FooterLiquid.astro';
+import FooterIndex from '../../../components/sections/footer/FooterIndex.astro';
 
 export const prerender = true;
 
@@ -105,7 +105,7 @@ const postUrl = new URL(Astro.url.pathname, Astro.site || 'https://astroglass.pa
     </div>
   </div>
 
-  <FooterLiquid />
+  <FooterIndex />
 </BaseLayout>
 
 <style>

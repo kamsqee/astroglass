@@ -8,7 +8,7 @@ export async function getStaticPaths() {
 }
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FooterLiquid from '../../components/sections/footer/FooterLiquid.astro';
+import FooterIndex from '../../components/sections/footer/FooterIndex.astro';
 import ArticleProse from '../../components/blog/ArticleProse.astro';
 import { useTranslations } from '../../utils/i18n';
 import { getLocaleFromUrl } from '../../utils/locale-utils';
@@ -53,5 +53,5 @@ const sections = [
     </div>
   </main>
   
-  <FooterLiquid />
+  <FooterIndex />
 </BaseLayout>

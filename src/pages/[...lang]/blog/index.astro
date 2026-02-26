@@ -14,7 +14,7 @@ import BlogHero from '../../../components/blog/BlogHero.astro';
 import BlogCard from '../../../components/blog/BlogCard.astro';
 import TagFilter from '../../../components/blog/TagFilter.astro';
 import NewsletterCTA from '../../../components/blog/NewsletterCTA.astro';
-import FooterLiquid from '../../../components/sections/footer/FooterLiquid.astro';
+import FooterIndex from '../../../components/sections/footer/FooterIndex.astro';
 import { useTranslations } from '../../../utils/i18n';
 
 const { locale } = Astro.props;
@@ -76,7 +76,7 @@ const allTags = [...new Set(sortedPosts.flatMap(p => p.data.tags))].sort();
       <NewsletterCTA />
     </section>
   </main>
-  <FooterLiquid />
+  <FooterIndex />
 </BaseLayout>
 
 <style>

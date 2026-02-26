@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import BlogCard from '../../../../components/blog/BlogCard.astro';
 import TagFilter from '../../../../components/blog/TagFilter.astro';
-import FooterLiquid from '../../../../components/sections/footer/FooterLiquid.astro';
+import FooterIndex from '../../../../components/sections/footer/FooterIndex.astro';
 import { useTranslations } from '../../../../utils/i18n';
 
 export const prerender = true;
@@ -61,5 +61,5 @@ const allTags = [...new Set(allPosts.flatMap(p => p.data.tags))].sort();
       {posts.map(post => <BlogCard post={post} />)}
     </div>
   </div>
-  <FooterLiquid />
+  <FooterIndex />
 </BaseLayout>

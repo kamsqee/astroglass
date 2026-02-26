@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { AnalyticsDashboard } from '../components/ui/dashboard/AnalyticsDashboard';
-import FooterLiquid from '../components/sections/footer/FooterLiquid.astro';
+import FooterIndex from '../components/sections/footer/FooterIndex.astro';
 import { useTranslations } from '../utils/i18n';
 import { getLocaleFromUrl } from '../utils/locale-utils';
 
@@ -31,5 +31,5 @@ const t = useTranslations(locale);
       </div>
     </div>
   </div>
-  <FooterLiquid />
+  <FooterIndex />
 </BaseLayout>
