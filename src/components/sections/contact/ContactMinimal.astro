@@ -7,11 +7,18 @@
 import { useTranslations } from '../../../utils/i18n';
 import { getLocaleFromUrl } from '../../../utils/locale-utils';
 import enContact from '../../../locales/en/contact.json';
-import ruContact from '../../../locales/ru/contact.json';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
-const contactData = locale === 'ru' ? ruContact : enContact;
+let contactData = enContact;
+try {
+  if (locale !== 'en') {
+    const mod = await import(`../../../locales/${locale}/contact.json`);
+    contactData = mod.default;
+  }
+} catch {
+  // Locale file doesn't exist, fall back to en
+}
 
 const intents = [
   { id: 'sales', icon: '💼', label: t('contact.intents.sales'), desc: t('contact.intents.salesDesc') },
