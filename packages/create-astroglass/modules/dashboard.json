@@ -4,7 +4,9 @@
   "files": [
     "src/components/ui/dashboard/AnalyticsDashboard.tsx",
     "src/components/ui/charts/",
-    "src/pages/dashboard-demo.astro"
+    "src/components/ui/diagrams/",
+    "src/pages/dashboard-demo.astro",
+    "src/content/blog/en/visualization-showcase.mdx"
   ],
   "localeFiles": [
     "src/locales/*/dashboard.json"
