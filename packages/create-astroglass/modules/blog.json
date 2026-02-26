@@ -5,13 +5,7 @@
     "src/content/blog/",
     "src/pages/[...lang]/blog/index.astro",
     "src/pages/[...lang]/blog/[slug].astro",
-    "src/pages/[...lang]/blog/rss.xml.js",
-    "src/styles/components/blog/BlogCard.css",
-    "src/styles/components/blog/BlogHero.css",
-    "src/styles/components/blog/NewsletterCTA.css",
-    "src/styles/components/blog/PostHero.css",
-    "src/styles/components/blog/ShareBar.css",
-    "src/styles/components/blog/TableOfContents.css"
+    "src/pages/[...lang]/blog/rss.xml.js"
   ],
   "packages": [
     "@astrojs/mdx"
