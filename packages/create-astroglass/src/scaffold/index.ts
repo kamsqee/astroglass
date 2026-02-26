@@ -8,6 +8,7 @@ import { pruneThemes } from './prune-themes.js';
 import { prunePalettes } from './prune-palettes.js';
 import { pruneLocales } from './prune-locales.js';
 import { pruneFeatures } from './prune-features.js';
+import { pruneDeploy } from './prune-deploy.js';
 import { generateHubFiles } from './generate-hub-files.js';
 import { generateConfig } from './generate-config.js';
 import { cleanup } from './cleanup.js';
@@ -64,7 +65,13 @@ export async function scaffold(
   filesRemoved += featureResult.removed;
   s.stop(`Pruned ${featureResult.removed} feature files ✓`);
 
-  // Step 6: Generate hub files from EJS templates
+  // Step 6: Prune deploy-target files
+  s.start('Removing unused deploy files...');
+  const deployResult = await pruneDeploy(projectPath, choices.deployTarget, options.dryRun);
+  filesRemoved += deployResult.removed;
+  s.stop(`Pruned ${deployResult.removed} deploy files ✓`);
+
+  // Step 7: Generate hub files from EJS templates
   s.start('Generating configuration files...');
   const hubResult = await generateHubFiles(projectPath, choices, options.dryRun);
   filesGenerated += hubResult.generated;

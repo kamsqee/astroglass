@@ -49,6 +49,13 @@ const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
 const preset = themePresets[themeId] ?? themePresets['<%= themes[0].id %>'];
 
+// Map theme IDs to their header version numbers for correct --nav-offset
+const themeHeaderVersions: Record<string, number> = {
+<% themes.forEach(theme => { %>
+  <%= theme.id %>: <%= theme.version %>,
+<% }) %>
+};
+
 const themeModules: ThemeModuleMap = {
 <% themes.forEach(theme => { %>
   <%= theme.id %>: <%= theme.id.charAt(0).toUpperCase() + theme.id.slice(1) %>Sections,
@@ -69,6 +76,7 @@ const mainSections = preset.landingSections
   title={`${theme?.name} Theme - ${t('title')}`}
   description={t('description')}
   showHeader={false}
+  headerVersion={themeHeaderVersions[themeId] ?? <%= themes[0].version %>}
 >
   <Header />
   <main>
@@ -76,3 +84,4 @@ const mainSections = preset.landingSections
   </main>
   <Footer />
 </BaseLayout>
+
