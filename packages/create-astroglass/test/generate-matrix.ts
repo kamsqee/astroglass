@@ -46,16 +46,19 @@ function generateMatrix(): TestCase[] {
     });
   }
 
-  // ─── 2. Every theme solo (no features, rotating deploy targets) ───
+  // Themes that import React UI components (ui/button, ui/card, etc.)
+  const REACT_REQUIRED_THEMES = ['glass', 'minimal'];
+
   AVAILABLE_THEMES.forEach((theme, i) => {
     const deploy = DEPLOY_TARGETS[i % DEPLOY_TARGETS.length].value;
+    const features = REACT_REQUIRED_THEMES.includes(theme.id) ? ['react'] : [];
     tests.push({
       id: `solo-${theme.id}`,
       category: 'solo-theme',
       themes: [theme.id],
       palettes: ['azure'],
       locales: ['en'],
-      features: [],
+      features,
       deployTarget: deploy,
     });
   });
