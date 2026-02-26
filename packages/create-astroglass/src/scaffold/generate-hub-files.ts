@@ -100,6 +100,8 @@ export async function generateHubFiles(
   // Templates to render
   const TEMPLATE_MAP: Record<string, string> = {
     'BaseLayout.astro.ejs':    'src/layouts/BaseLayout.astro',
+    'theme-page.astro.ejs':    'src/pages/[...lang]/[theme].astro',
+    'portfolio.astro.ejs':     'src/pages/[...lang]/[theme]/portfolio.astro',
     'global.css.ejs':          'src/styles/global.css',
     '_themes.css.ejs':         'src/styles/_themes.css',
     'astro.config.mjs.ejs':    'astro.config.mjs',
