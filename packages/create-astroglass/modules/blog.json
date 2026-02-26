@@ -6,7 +6,6 @@
     "src/pages/[...lang]/blog/index.astro",
     "src/pages/[...lang]/blog/[slug].astro",
     "src/pages/[...lang]/blog/rss.xml.js",
-    "src/styles/components/blog/ArticleProse.css",
     "src/styles/components/blog/BlogCard.css",
     "src/styles/components/blog/BlogHero.css",
     "src/styles/components/blog/NewsletterCTA.css",

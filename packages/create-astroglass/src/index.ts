@@ -97,7 +97,16 @@ if (firstArg && SUB_COMMANDS.includes(firstArg as any)) {
       },
       theme: {
         type: 'string',
-        description: 'Select a single theme',
+        description: 'Comma-separated theme ids',
+      },
+      features: {
+        type: 'string',
+        description: 'Comma-separated feature ids',
+      },
+      'no-features': {
+        type: 'boolean',
+        description: 'Disable all optional features',
+        default: false,
       },
       locales: {
         type: 'string',
@@ -133,10 +142,10 @@ if (firstArg && SUB_COMMANDS.includes(firstArg as any)) {
       } else if (args.theme) {
         choices = {
           projectDir: args.dir || './my-astroglass',
-          themes: [args.theme],
+          themes: args.theme.split(',').map(s => s.trim()),
           palettes: args.palettes?.split(',') ?? ['azure'],
           locales: args.locales?.split(',') ?? ['en'],
-          features: [],
+          features: args['no-features'] ? [] : (args.features?.split(',').map(s => s.trim()) ?? []),
           deployTarget: args.deploy ?? 'cloudflare',
           defaultPalette: args.palettes?.split(',')[0] ?? 'azure',
         };
