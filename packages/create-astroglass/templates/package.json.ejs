@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "<%= features.includes('docs') ? 'node scripts/generate-search-index.mjs && ' : '' %>astro check && astro build<%= features.includes('docs') ? ' && node scripts/generate-search-index.mjs' : '' %>",
+    "build": "<%- features.includes('docs') ? 'node scripts/generate-search-index.mjs && ' : '' %>astro check && astro build<%- features.includes('docs') ? ' && node scripts/generate-search-index.mjs' : '' %>",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint .",

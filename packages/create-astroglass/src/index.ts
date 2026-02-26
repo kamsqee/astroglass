@@ -145,7 +145,7 @@ if (firstArg && SUB_COMMANDS.includes(firstArg as any)) {
           themes: args.theme.split(',').map(s => s.trim()),
           palettes: args.palettes?.split(',') ?? ['azure'],
           locales: args.locales?.split(',') ?? ['en'],
-          features: args['no-features'] ? [] : (args.features?.split(',').map(s => s.trim()) ?? []),
+          features: (typeof args.features === 'string') ? args.features.split(',').map(s => s.trim()) : [],
           deployTarget: args.deploy ?? 'cloudflare',
           defaultPalette: args.palettes?.split(',')[0] ?? 'azure',
         };
