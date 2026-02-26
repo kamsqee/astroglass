@@ -1,0 +1,320 @@
+[
+  {
+    "id": "preset-minimal",
+    "category": "preset",
+    "themes": [
+      "liquid"
+    ],
+    "palettes": [
+      "azure"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [],
+    "deployTarget": "static"
+  },
+  {
+    "id": "preset-standard",
+    "category": "preset",
+    "themes": [
+      "liquid",
+      "glass",
+      "neo"
+    ],
+    "palettes": [
+      "azure",
+      "abyss",
+      "solaris",
+      "neonoir",
+      "rose"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "blog",
+      "docs",
+      "react"
+    ],
+    "deployTarget": "cloudflare"
+  },
+  {
+    "id": "preset-full",
+    "category": "preset",
+    "themes": [
+      "liquid",
+      "glass",
+      "neo",
+      "luxury",
+      "minimal",
+      "aurora"
+    ],
+    "palettes": [
+      "azure",
+      "solaris",
+      "evergreen",
+      "rose",
+      "monochrome",
+      "nordic",
+      "aquatica",
+      "abyss",
+      "neonoir",
+      "synthwave"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "blog",
+      "docs",
+      "dashboard",
+      "react"
+    ],
+    "deployTarget": "cloudflare"
+  },
+  {
+    "id": "solo-liquid",
+    "category": "solo-theme",
+    "themes": [
+      "liquid"
+    ],
+    "palettes": [
+      "azure"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [],
+    "deployTarget": "cloudflare"
+  },
+  {
+    "id": "solo-glass",
+    "category": "solo-theme",
+    "themes": [
+      "glass"
+    ],
+    "palettes": [
+      "azure"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": ["react"],
+    "deployTarget": "vercel"
+  },
+  {
+    "id": "solo-neo",
+    "category": "solo-theme",
+    "themes": [
+      "neo"
+    ],
+    "palettes": [
+      "azure"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [],
+    "deployTarget": "netlify"
+  },
+  {
+    "id": "solo-luxury",
+    "category": "solo-theme",
+    "themes": [
+      "luxury"
+    ],
+    "palettes": [
+      "azure"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [],
+    "deployTarget": "static"
+  },
+  {
+    "id": "solo-minimal",
+    "category": "solo-theme",
+    "themes": [
+      "minimal"
+    ],
+    "palettes": [
+      "azure"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": ["react"],
+    "deployTarget": "cloudflare"
+  },
+  {
+    "id": "solo-aurora",
+    "category": "solo-theme",
+    "themes": [
+      "aurora"
+    ],
+    "palettes": [
+      "azure"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [],
+    "deployTarget": "vercel"
+  },
+  {
+    "id": "feat-blog",
+    "category": "feature-isolation",
+    "themes": [
+      "liquid"
+    ],
+    "palettes": [
+      "abyss"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "blog"
+    ],
+    "deployTarget": "cloudflare"
+  },
+  {
+    "id": "feat-docs",
+    "category": "feature-isolation",
+    "themes": [
+      "glass"
+    ],
+    "palettes": [
+      "abyss"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "docs",
+      "react"
+    ],
+    "deployTarget": "vercel"
+  },
+  {
+    "id": "feat-dashboard",
+    "category": "feature-isolation",
+    "themes": [
+      "neo"
+    ],
+    "palettes": [
+      "abyss"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "dashboard",
+      "react"
+    ],
+    "deployTarget": "netlify"
+  },
+  {
+    "id": "feat-react",
+    "category": "feature-isolation",
+    "themes": [
+      "luxury"
+    ],
+    "palettes": [
+      "abyss"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "react"
+    ],
+    "deployTarget": "static"
+  },
+  {
+    "id": "deploy-cloudflare",
+    "category": "deploy-target",
+    "themes": [
+      "liquid",
+      "glass"
+    ],
+    "palettes": [
+      "azure",
+      "abyss"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "blog",
+      "docs",
+      "react"
+    ],
+    "deployTarget": "cloudflare"
+  },
+  {
+    "id": "deploy-vercel",
+    "category": "deploy-target",
+    "themes": [
+      "liquid",
+      "glass"
+    ],
+    "palettes": [
+      "azure",
+      "abyss"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "blog",
+      "docs",
+      "react"
+    ],
+    "deployTarget": "vercel"
+  },
+  {
+    "id": "deploy-netlify",
+    "category": "deploy-target",
+    "themes": [
+      "liquid",
+      "glass"
+    ],
+    "palettes": [
+      "azure",
+      "abyss"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "blog",
+      "docs",
+      "react"
+    ],
+    "deployTarget": "netlify"
+  },
+  {
+    "id": "deploy-static",
+    "category": "deploy-target",
+    "themes": [
+      "liquid",
+      "glass"
+    ],
+    "palettes": [
+      "azure",
+      "abyss"
+    ],
+    "locales": [
+      "en"
+    ],
+    "features": [
+      "blog",
+      "docs",
+      "react"
+    ],
+    "deployTarget": "static"
+  }
+]
