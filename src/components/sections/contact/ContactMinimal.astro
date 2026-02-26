@@ -10,15 +10,7 @@ import enContact from '../../../locales/en/contact.json';
 
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
-let contactData = enContact;
-try {
-  if (locale !== 'en') {
-    const mod = await import(`../../../locales/${locale}/contact.json`);
-    contactData = mod.default;
-  }
-} catch {
-  // Locale file doesn't exist, fall back to en
-}
+const contactData = enContact;
 
 const intents = [
   { id: 'sales', icon: '💼', label: t('contact.intents.sales'), desc: t('contact.intents.salesDesc') },
