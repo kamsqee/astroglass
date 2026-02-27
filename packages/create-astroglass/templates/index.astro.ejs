@@ -24,20 +24,19 @@ import { getLocaleFromUrl } from '../../utils/locale-utils';
 <% if (themes.length === 1) { %>
 <%   const theme = themes[0]; %>
 <%   const ThemeName = theme.id.charAt(0).toUpperCase() + theme.id.slice(1); %>
-import { getThemeById } from '../../config/themes';
-import { themePresets } from '../../config/themePresets';
+import { getThemeById, getLandingSections } from '../../config/themes';
 import * as ThemeSections from '../../components/sections/themes/<%= theme.id %>';
 
 const locale = Astro.params.lang || 'en';
 const t = useTranslations(locale);
 const theme = getThemeById('<%= theme.id %>');
-const preset = themePresets['<%= theme.id %>'];
+const landingSections = getLandingSections('<%= theme.id %>');
 
 const Header = ThemeSections['Header'] as (_props: Record<string, unknown>) => unknown;
 const Footer = ThemeSections['Footer'] as (_props: Record<string, unknown>) => unknown;
 
-const mainSections = preset.landingSections
-  .map((key) => ThemeSections[key as keyof typeof ThemeSections] ?? null)
+const mainSections = landingSections
+  .map((key: string) => (ThemeSections as Record<string, unknown>)[key] ?? null)
   .filter((C): C is NonNullable<typeof C> => C !== null);
 ---
 

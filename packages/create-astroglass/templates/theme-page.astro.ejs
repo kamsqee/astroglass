@@ -8,8 +8,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { useTranslations } from '../../utils/i18n';
 import { getLocaleFromUrl } from '../../utils/locale-utils';
-import { getThemeById } from '../../config/themes';
-import { themePresets } from '../../config/themePresets';
+import { getThemeById, getLandingSections } from '../../config/themes';
 
 // Theme barrel files
 <% themes.forEach(theme => { %>
@@ -47,7 +46,7 @@ const { themeId } = Astro.props;
 const theme = getThemeById(themeId);
 const locale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(locale);
-const preset = themePresets[themeId] ?? themePresets['<%= themes[0].id %>'];
+const landingSections = getLandingSections(themeId);
 
 // Map theme IDs to their header version numbers for correct --nav-offset
 const themeHeaderVersions: Record<string, number> = {
@@ -67,8 +66,8 @@ const sections = themeModules[themeId] ?? <%= themes[0].id.charAt(0).toUpperCase
 const Header = sections['Header'] as (_props: Record<string, unknown>) => unknown;
 const Footer = sections['Footer'] as (_props: Record<string, unknown>) => unknown;
 
-const mainSections = preset.landingSections
-  .map((key) => sections[key] ?? null)
+const mainSections = landingSections
+  .map((key: string) => sections[key] ?? null)
   .filter((C): C is NonNullable<typeof C> => C !== null);
 ---
 
