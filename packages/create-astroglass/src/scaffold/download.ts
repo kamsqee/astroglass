@@ -7,8 +7,23 @@
  * the current commit rather than a potentially stale remote cache.
  */
 import { downloadTemplate as gigetDownload } from 'giget';
-import { resolve } from 'node:path';
-import { cp, mkdir } from 'node:fs/promises';
+import { resolve, join } from 'node:path';
+import { cp, mkdir, rename, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+
+/** Paths to exclude when copying a local checkout as a template. */
+const EXCLUDE_PREFIXES = [
+  '/node_modules',
+  '/.git',
+  '/dist',
+  '/packages',
+  '/cli-tests',
+  '/cli-test-report',
+  '/ci',
+  '/.claude',
+  '/current problems and audits',
+  '/RFC-',
+];
 
 export async function downloadTemplate(
   projectDir: string,
@@ -23,25 +38,30 @@ export async function downloadTemplate(
   }
 
   if (localTemplate) {
-    // Local mode — copy from the checkout directory (CI / tests)
+    // Local mode — copy from the checkout directory (CI / tests).
+    // We copy to a temp directory first, then rename into place, because
+    // the target may be a subdirectory of the source (e.g. test workspace
+    // inside the repo root) and Node's cp() rejects that with EINVAL.
     const srcPath = resolve(localTemplate);
-    await mkdir(targetPath, { recursive: true });
-    await cp(srcPath, targetPath, {
-      recursive: true,
-      filter: (src) => {
-        // Skip directories that shouldn't be copied into scaffolded projects
-        const rel = src.slice(srcPath.length);
-        if (rel.startsWith('/node_modules')) return false;
-        if (rel.startsWith('/.git')) return false;
-        if (rel.startsWith('/dist')) return false;
-        if (rel.startsWith('/packages')) return false;
-        if (rel.startsWith('/cli-tests')) return false;
-        if (rel.startsWith('/cli-test-report')) return false;
-        if (rel.startsWith('/ci')) return false;
-        if (rel.startsWith('/.claude')) return false;
-        return true;
-      },
-    });
+    const tmpDir = await mkdtemp(join(tmpdir(), 'astroglass-'));
+
+    try {
+      await cp(srcPath, tmpDir, {
+        recursive: true,
+        filter: (src) => {
+          const rel = src.slice(srcPath.length);
+          return !EXCLUDE_PREFIXES.some((p) => rel.startsWith(p));
+        },
+      });
+
+      await mkdir(resolve(targetPath, '..'), { recursive: true });
+      await rename(tmpDir, targetPath);
+    } catch (err) {
+      // Clean up temp dir on failure
+      await rm(tmpDir, { recursive: true, force: true }).catch(() => {});
+      throw err;
+    }
+
     return targetPath;
   }
 
